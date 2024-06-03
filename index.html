@@ -1,100 +1,90 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOSCHIAT</title>
-    <style>
-        body {
-            background-color: #000;
-            color: #FFF;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header, footer {
-            text-align: center;
-            padding: 20px;
-        }
-        nav a {
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            font-size: 17px;
-            display: inline-block;
-        }
-        .content {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-        }
-        .description, .soundcloud {
-            width: 48%; /* Ajuste para que fiquem lado a lado */
-        }
-        .description {
-            text-align: left;
-        }
-        .soundcloud iframe {
-            width: 100%;
-        }
-        .adesivos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-        }
-        .adesivos img {
-            width: 100px; /* Tamanho menor para as imagens dos adesivos */
-            margin: 10px;
-        }
-        article {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .mySlides {
-            display: none;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOSCHIAT - Estilo de Vida</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #FFF;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header, footer {
+      text-align: center;
+      padding: 20px;
+    }
+
+    header img {
+      width: 100px; /* Ajuste o tamanho da imagem do logotipo */
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    nav a {
+      color: white;
+      padding: 10px 15px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    .description {
+      text-align: left;
+    }
+
+    .soundcloud {
+      width: 100%;
+    }
+
+    .soundcloud iframe {
+      width: 100%;
+      height: 300px;
+    }
+
+    footer {
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="https://1.bp.blogspot.com/-7dOxTmshjp8/XkrYD1xd8rI/AAAAAAABCI4/iZnnnSu43p8zdRvTbbcZZ0_ZB36_NTp7wCK4BGAYYCw/s792/chiat%2B2.png" alt="Logotipo MOSCHIAT">
-    </header>
-<div style="display: grid; place-items: center; height: 100px;">
-   <nav>
- <center></center>
-</nav></div>
+  <header>
+    <img src="https://1.bp.blogspot.com/-7dOxTmshjp8/XkrYD1xd8rI/AAAAAAABCI4/iZnnnSu43p8zdRvTbbcZZ0_ZB36_NTp7wCK4BGAYYCw/s792/chiat%2B2.png" alt="Logotipo MOSCHIAT">
+  </header>
 
-    <article>
-        <p>"A arte é o que eu faço você ver".</p>
-<p>好奇心旺盛な人は誰でも何かを得る</p>
+  <nav>
+    <a href="#">Fotografia</a>
+    <a href="#">OnlyF</a>
+    <a href="#">Músicas</a>
+    <a href="#">Playlist</a>
+  </nav>
 
-    </article>
+  <div class="content">
+    <div class="description">
+      <h2>MOSCHIAT</h2>
+      <p>"A arte é o que eu faço você ver".</p>
+      <p>好奇心旺盛な人は誰でも何かを得る</p>
+      </div>
 
-    
-    <footer>
-        <p>© 2024 MOSCHIAT. Todos os direitos reservados.</p>
-    </footer>
+    <div class="soundcloud">
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1758841359&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+    </div>
+  </div>
 
-    <script>
-        let slideIndex = 0;
-        showSlides();
-
-        function showSlides() {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}
-            slides[slideIndex-1].style.display = "block";
-            setTimeout(showSlides, 3000); // Muda a imagem a cada 3 segundos
-        }
-    </script>
+  <footer>
+    <p>&copy; 2024 MOSCHIAT. Todos os direitos reservados.</p>
+  </footer>
 </body>
 </html>
