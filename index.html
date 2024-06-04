@@ -12,14 +12,51 @@
       margin: 0;
       padding: 0;
     }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    #slideshow {
+        position: relative;
+        width: 500px;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    #slideshow img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+    }
+
+    #slideshow img.active {
+        opacity: 1;
+    }
 
     header, footer {
       text-align: center;
       padding: 20px;
+      display: flex;
+      justify-content: center;
     }
 
     header img {
-      width: 100px; /* Ajuste o tamanho da imagem */
+      width: 600px; /* Ajuste o tamanho da imagem */
+      
+      img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto; /* Isso centraliza a imagem na página */
+}
+
     }
 
     nav {
@@ -38,11 +75,14 @@
     .content {
       display: flex;
       justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
       padding: 20px;
     }
 
     .description {
-      text-align: left;
+      text-align: center;
+      margin-bottom: 20px;
     }
 
     .soundcloud {
@@ -56,139 +96,188 @@
 
     footer {
       padding: 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin-top: 20px;
+    }
+
+    .product {
+      background: #fff;
+      color: #000;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin: 10px;
+      padding: 20px;
+      width: 250px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .product img {
+      max-width: 100%;
+      height: auto;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+
+    .product h2 {
+      font-size: 1.5em;
+      margin: 0 0 10px;
+    }
+
+    .product p {
+      margin: 0 0 10px;
+      font-size: 1em;
+      color: #555;
+    }
+
+    .product .price {
+      font-size: 1.2em;
+      margin: 10px 0;
+      color: #333;
+    }
+
+    .product .whatsapp-btn {
+      display: inline-block;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-size: 1em;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="https://1.bp.blogspot.com/-7dOxTmshjp8/XkrYD1xd8rI/AAAAAAABCI4/iZnnnSu43p8zdRvTbbcZZ0_ZB36_NTp7wCK4BGAYYCw/s792/chiat%2B2.png" alt="">
+   <header>
+        <img src="https://1.bp.blogspot.com/-7dOxTmshjp8/XkrYD1xd8rI/AAAAAAABCI4/iZnnnSu43p8zdRvTbbcZZ0_ZB36_NTp7wCK4BGAYYCw/s792/chiat%2B2.png" alt="Logo do site">
+    </header>
   </header>
 
   <nav>
-    <a href="#">Fotografia</a>
-    <a href="#">OnlyF</a>
-    <a href="#">Músicas</a>
+    <a href="#">MOSCHIAT</a>
+    <a href="#">Curadoria musical</a>
     <a href="#">Playlist</a>
+    <a href="#">Serviços</a>
   </nav>
-
-  <div class="content">
-    <div class="description">
-      <h2>MOSCHIAT</h2>
-      <p>"A arte é o que eu faço você ver".</p>
-      <p>好奇心旺盛な人は誰でも何かを得る</p>
-      </div>
-
-    <div class="soundcloud">
-     Até 60% off no Next Pro para brasileiros. Uploads ilimitados, distribuição global e muito mais por apenas R$25 mensais. Assinar o Next Pro.
-
-No file chosen
-MOSCHIAT SET 2024
-inicudrave 
-há 9 segundoshá 9 segundos
-Quer que esta faixa alcance mais ouvintes?
-Estamos analisando sua faixa para ver se ela é elegível para ser recomendada aos ouvintes com maior probabilidade de adorá-la. A análise leva de vinte minutos a duas horas. Volte em breve para ver se sua faixa é elegível!
-Veja como funciona
-Escreva um comentário
-
-inicudrave
- 1 seguidor1
- 2 faixas2
-Tag:Electronic
-Tag:Trip Hop
-Adicionar tags
-Aqui estão algumas tags para ajudá-lo a começar.
-Adicione etiquetas para ajudar as pessoas a encontrarem a sua faixa.
+  
+  <center>
+    <p>"A arte é o que eu faço você ver".</p>
+    <p>好奇心旺盛な人は誰でも何かを得る</p>
+  </center>
+ <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjd3WPt-FigMOQFbODtg6CIuFKVK9IHYut04YIaYABhV_GNu-BOLcwjQeagS5_jiln9PlJpLQlAMGfwiTfqlwB5pI4bj08IzFGPTW4sRPBWijeHeaxhyphenhyphenre2oGgP4kQT0VpMuPo1jqCOLcjOP8LfBRBZv8LACkGI7iZ95znnQQoTSD1N8szJAO5Id9hR0QTc/s1600/image_2024-06-03_202345377.png" alt=""> 
+ 
+ <center>Sou apaixonado por criatividade e inovação em todas as formas.Este site é um reflexo da minha jornada criativa, um lugar onde compartilho minhas experiências, projetos e insights. Seja bem-vindo e explore comigo as infinitas possibilidades da arte e da tecnologia.</center>
 
  
-Parece que está um pouco quieto por aqui
-Seja o primeiro a comentar esta faixa
-Faixas relacionadas
-Exibir tudo
-Raymundo Salgado
-Gta Online (After Hours) The Black Madonna Full Liveset
- 21.029 reproduções21K
- Ver todas as curtidas580
- Ver todas as republicações12
- Ver todos os comentários14
-Baby Mario
-Beyoncé - BLACK IS KING (Full Album - Fanmade Version)
- 65.203 reproduções65,2K
- Ver todas as curtidas1.367
- Ver todas as republicações25
- Ver todos os comentários23
-Lindsey Carter
-BEYONCÉ (Full Album)
- 2.578 reproduções2.578
- Ver todas as curtidas109
- Ver todas as republicações4
- Ver todos os comentários6
-Baixe o app
-Baixar na AppStoreBaixar no Google Play
-Aviso Legal ⁃ Privacidade ⁃ Política de Cookies ⁃ Gerenciador de cookie ⁃ SoundCloud Ltd. ⁃ Recursos de Artista ⁃ Blog ⁃ Paradas ⁃
-Idioma: Português (Brasil)
-Ir para a anterior
-Reproduzir atual
-Ir para a próxima
-Shuffle
-Repetir faixa
-Tempo atual: 0 segundo0:00
-Duração: 1 hora 48 minutos 52 segundos1:48:52
-Volume
-Alternar mudo
-Little Miss Sunshine
-Faixa atual: Beyoncé - HOMECOMING THE LIVE ALBUM [Full Album]Beyoncé - HOMECOMING THE LIVE ALBUM [Full Album]
-
-Fechar
-Compartilhar
-Incorporado
-Mensagem
-Personalize seu player
-Código
-<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1836544659&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/inicudrave" title="inicudrave" target="_blank" style="color: #cccccc; text-decoration: none;">inicudrave</a> · <a href="https://soundcloud.com/inicudrave/moschiat-set-2024" title="MOSCHIAT SET 2024" target="_blank" style="color: #cccccc; text-decoration: none;">MOSCHIAT SET 2024</a></div>
-WordPress code
-Opções
-Cor:
-#ff5500
-#85706b
-#ecdee6
-#d0b094
-#bcb4ac
-#ff5500
-Toggle color chooser
- Permitir reprodução automática
- Exibir comentários
- Exibir recomendações
- Exibir sobreposições da SoundCloud
-
-inicudrave · MOSCHIAT SET 2024
-Este reprodutor usa cookies em conformidade com a nossa Política de Cookies. Podemos coletar dados sobre uso para efeitos de análise. É sua responsabilidade divulgar essa informação para os visitantes de qualquer website em que você incorpore o reprodutor.
+  <div class="container">
+    <div class="product">
+      <img src="https://lnb.com.br/wp-content/uploads/2016/10/logo-brasilia-1-150x150.png" alt="Produto 1">
+      <h2>Pacote Essencial</h2>
+      <small><p>45 minutos de sessão</p>
+<p>2 trocas de roupas</p>
+<p>10 fotos digitais 2 impressas</p> 
+<p>Fotos externas e espontâneas</p> 
+<p>Pós-edição nas fotos</p>
+<p>Todas fotos para download em alta resolução</p></small>
+      <div class="price">R$ 150,00</div>
+      <a class="whatsapp-btn" href="https://wa.me/5521999999999?text=Tenho%20interesse%20no%20Produto%201" target="_blank">WhatsApp</a>
     </div>
-    
-    
+    <div class="product">
+      <img src="https://lnb.com.br/wp-content/uploads/2016/10/logo-brasilia-1-150x150.png" alt="Produto 2">
+      <h2>Pacote Premium</h2>
+    <small>  <p><p>1h de sessão</p>
+<p>Galeria online privada</p>
+<p>20 fotos digitais e 3 impressas</p>
+<p>3 trocas de roupas</p>
+<p>Consultoria de imagem com coloração Pessoal</p>
+<p>Fotos externas e espontâneas</p>
+<p>Pós edição nas fotos</p>
+<p>Todas fotos para download em alta resolução</p></small>
+      <div class="price">R$ 320,00</div>
+      <a class="whatsapp-btn" href="https://wa.me/5521999999999?text=Tenho%20interesse%20no%20Produto%202" target="_blank">WhatsApp</a>
+    </div>
+    <div class="product">
+      <img src="https://lnb.com.br/wp-content/uploads/2016/10/logo-brasilia-1-150x150.png" alt="Produto 3">
+      <h2>Pacote Deluxe</h2>
+      <small> <p><p>1h30m minutos de sessão</p>
+<p>Galeria online privada</p>
+<p>30 fotos digitais e 3 impressas</p>
+<p>Consultoria de imagem com coloração pessoal</p>
+<p>Fotos Internas, externas e espontâneas</p>
+<p>3 videos curtos estilos prontos para ser postados</p>
+<p>Todas fotos para download em alta resolução</p></small>
+      <div class="price">R$ 500,00</div>
+      <a class="whatsapp-btn" href="https://wa.me/5521999999999?text=Tenho%20interesse%20no%20Produto%203" target="_blank">WhatsApp</a>
+    </div>
   </div>
+  
+  <h2>Serviços</h2>
+
+<table>
+  <tr>
+    <th>Serviço</th>
+    <th>Descrição</th>
+    <th>Investimento</th>
+  </tr>
+  <tr>
+    <td>Ensaios fotográficos</td>
+    <td>Ideal para você que precisa de material visual para futuros flyers e material promocional</td>
+    <td>R$ 120</td>
+  </tr>
+  <tr>
+    <td>Criação de filtros para instagram</td>
+    <td>Filtro exclusivo para seu instagram, com seu nome ou logo</td>
+    <td>R$ 90</td>
+  </tr>
+  <tr>
+    <td>Gravação de músicas demos</td>
+    <td>Gravação de vocais, lipsync, adlibs</td>
+    <td>A definir</td>
+  </tr>
+  <tr>
+    <td>Design de capas álbum/singles</td>
+    <td>Criação de artes 2D e 3D</td>
+    <td>A definir</td>
+  </tr>
+  <tr>
+    <td>Videos Lyrics</td>
+    <td>Destaque sua música e ganhe mais visibilidade com vídeos lyrics em formatos  para  Youtube, Instagram e reels</td>
+    <td>R$ 90</td>
+  </tr>
+  <tr>
+    <td>Criação de conteúdo para mídias sociais</td>
+    <td>Tenha 3 post por semana nas suas redes sociais ganhando visibilidade e gerando qualidade para sua página</td>
+    <td>R$ 30</td>
+  </tr>
+  <tr>
+    <td>Distribua sua músicas em todas plataformas digitais</td>
+    <td>Apple Music, Tidal, Amazon Music, TikTok, Spotify, Deezer, SoundCloud, Youtube...</td>
+    <td>R$ 350</td>
+  </tr>
+</table>
+
+
+  <center>
+    <h1>MOSCHIAT SET 2024</h1>
+    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1836544659&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+    <div>
+     
+    </div>
+  </center>
 
   <footer>
-      <section class="section">
-  <h3>Acessórios Personalizados</h3>
-  <div class="itens-container">
-    <div class="item">
-      <img src="imagem-acessorio-1.jpg" alt="Acessório 1">
-      <p><b>Pulseira Nome Personalizada</b> - R$ 29,90</p>
-      <a href="https://api.whatsapp.com/send?phone=NUMERODESEUTELEFONE&text=Oi, quero saber mais sobre a Pulseira Nome Personalizada" class="whatsapp-button">Chamar no WhatsApp</a>
-    </div>
-    <div class="item">
-      <img src="imagem-acessorio-2.jpg" alt="Acessório 2">
-      <p><b>Colar Signo</b> - R$ 34,90</p>
-      <a href="https://api.whatsapp.com/send?phone=NUMERODESEUTELEFONE&text=Oi, quero saber mais sobre o Colar Signo" class="whatsapp-button">Chamar no WhatsApp</a>
-    </div>
-    <div class="item">
-      <img src="imagem-acessorio-3.jpg" alt="Acessório 3">
-      <p><b>Chaveiro Divertido</b> - R$ 19,90</p>
-      <a href="https://api.whatsapp.com/send?phone=NUMERODESEUTELEFONE&text=Oi, quero saber mais sobre o Chaveiro Divertido" class="whatsapp-button">Chamar no WhatsApp</a>
-    </div>
-  </div>
-</section>
-
     <p>&copy; 2024 MOSCHIAT. Todos os direitos reservados.</p>
   </footer>
 </body>
