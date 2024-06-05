@@ -12,26 +12,14 @@
       margin: 0;
       padding: 0;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 8px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
     header, footer {
       text-align: center;
       padding: 20px;
-      display: flex;
-      justify-content: center;
     }
     header img {
       width: 80%;
       max-width: 600px;
       height: auto;
-      display: block;
       margin: 0 auto;
     }
     nav {
@@ -46,34 +34,15 @@
       font-size: 16px;
     }
     .content {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
-    .description {
       text-align: center;
-      margin-bottom: 20px;
-    }
-    .soundcloud {
-      width: 100%;
-    }
-    .soundcloud iframe {
-      width: 100%;
-      height: 300px;
-    }
-    footer {
-      padding: 10px;
-      display: flex;
-      justify-content: center;
+      padding: 20px;
     }
     .container {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: center;
       max-width: 1200px;
-      margin-top: 20px;
+      margin: 20px auto;
     }
     .product {
       background: #fff;
@@ -119,21 +88,6 @@
       font-size: 1em;
       margin-top: 10px;
     }
-    @media only screen and (max-width: 768px) {
-      header img {
-        width: 90%;
-      }
-      .container {
-        flex-direction: column;
-        align-items: center;
-      }
-      .product {
-        width: 80%;
-        margin: 10px 0;
-      }
-    }
-
-    /* Slideshow styles */
     .slideshow-container {
       position: relative;
       max-width: 100%;
@@ -142,8 +96,7 @@
     .mySlides {
       display: none;
     }
-    .prev,
-    .next {
+    .prev, .next {
       cursor: pointer;
       position: absolute;
       top: 50%;
@@ -161,8 +114,7 @@
       right: 0;
       border-radius: 3px 0 0 3px;
     }
-    .prev:hover,
-    .next:hover {
+    .prev:hover, .next:hover {
       background-color: rgba(0,0,0,0.8);
     }
     .text {
@@ -191,8 +143,7 @@
       display: inline-block;
       transition: background-color 0.6s ease;
     }
-    .active,
-    .dot:hover {
+    .active, .dot:hover {
       background-color: #717171;
     }
     .fade {
@@ -209,6 +160,28 @@
       from {opacity: .4}
       to {opacity: 1}
     }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    @media only screen and (max-width: 768px) {
+      header img {
+        width: 90%;
+      }
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .product {
+        width: 80%;
+        margin: 10px 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -223,17 +196,16 @@
     <a href="#">Serviços</a>
   </nav>
   
-  <p style="text-align: center;">"A arte é o que eu faço você ver".<br>好奇心旺盛な人は誰でも何かを得る</p>
+  <div class="content">
+    <p>"A arte é o que eu faço você ver".<br>好奇心旺盛な人は誰でも何かを得る</p>
+    <p>Sou apaixonado por criatividade e inovação em todas as formas. Este site é um reflexo da minha jornada criativa, um lugar onde compartilho minhas experiências, projetos e insights. Seja bem-vindo e explore comigo as infinitas possibilidades da arte e da tecnologia.</p>
+  </div>
 
-  <img src="" alt=""> 
-
-  <p style="text-align: center;">Sou apaixonado por criatividade e inovação em todas as formas. Este site é um reflexo da minha jornada criativa, um lugar onde compartilho minhas experiências, projetos e insights. Seja bem-vindo e explore comigo as infinitas possibilidades da arte e da tecnologia.</p>
-  
   <!-- Slideshow start -->
   <div class="slideshow-container">
     <div class="mySlides fade">
       <div class="numbertext">1 / 3</div>
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG style="width:100%">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" style="width:100%">
       <div class="text">Caption Text</div>
     </div>
     <div class="mySlides fade">
@@ -347,9 +319,14 @@
     </tr>
   </table>
 
-  <h1>MOSCHIAT SET 2024</h1>
-  <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1836544659&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
-<iframe src="https://open.spotify.com/embed/user/inicud/playlist/5dC7zk3GEWPE8HT6e7KKdB" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></div>
+  <div class="content">
+    <h1>MOSCHIAT SET 2024</h1>
+    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1836544659&color=%23000000&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+    <iframe src="https://open.spotify.com/embed/user/inicud/playlist/5dC7zk3GEWPE8HT6e7KKdB" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <iframe src="https://open.spotify.com/embed/user/inicud/playlist/5dC7zk3GEWPE8HT6e7KKdB" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+    <iframe src="https://open.spotify.com/embed/user/inicud/playlist/5dC7zk3GEWPE8HT6e7KKdB" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+  </div>
+
   <footer>
     <p>&copy; 2024 MOSCHIAT. Todos os direitos reservados.</p>
   </footer>
