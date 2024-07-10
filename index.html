@@ -12,6 +12,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
+      display: none; /* Esconder o corpo inicialmente */
     }
     .navbar-nav .nav-item .nav-link {
       color: white !important;
@@ -331,5 +332,18 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // Script para solicitar senha
+    document.addEventListener("DOMContentLoaded", function() {
+      const senhaCorreta = "moschiat2024";
+      let senha = prompt("Digite a senha para acessar o site:");
+      if (senha === senhaCorreta) {
+        document.body.style.display = "block"; // Mostrar o corpo se a senha estiver correta
+      } else {
+        alert("Senha incorreta. Você não tem permissão para acessar este site.");
+      }
+    });
+  </script>
 </body>
 </html>
