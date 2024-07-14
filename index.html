@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -12,7 +13,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      display: none; /* Esconder o corpo inicialmente */
+      display: block;
     }
     .navbar-nav .nav-item .nav-link {
       color: white !important;
@@ -146,9 +147,16 @@
       background: rgba(0, 0, 0, 0.7);
       z-index: 1000;
     }
-    .password-overlay input {
+    .password-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .password-box input {
       padding: 10px;
       font-size: 16px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -192,7 +200,9 @@
     </div>
     <div class="mySlides fade">
       <div class="numbertext">3 / 3</div>
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" style="width:100%">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq
+
+0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" style="width:100%">
       <div class="text">Caption Three</div>
     </div>
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -320,7 +330,7 @@
     <p>&copy; 2024 MOSCHIAT. Todos os direitos reservados.</p>
   </footer>
 
-  <div class="password-overlay">
+  <div class="password-overlay" id="passwordOverlay">
     <div class="password-box">
       <input type="password" id="password-input" placeholder="Digite a senha para acessar o site">
       <button onclick="checkPassword()">Entrar</button>
@@ -331,6 +341,7 @@
     // Script para solicitar senha
     document.addEventListener("DOMContentLoaded", function() {
       document.body.classList.add('blur-background');
+      document.getElementById("passwordOverlay").style.display = 'flex';
     });
 
     function checkPassword() {
@@ -338,8 +349,7 @@
       const senha = document.getElementById("password-input").value;
       if (senha === senhaCorreta) {
         document.body.classList.remove('blur-background');
-        document.querySelector('.password-overlay').style.display = 'none';
-        document.body.style.display = 'block'; // Mostrar o corpo se a senha estiver correta
+        document.getElementById("passwordOverlay").style.display = 'none';
       } else {
         alert("Senha incorreta. Você não tem permissão para acessar este site.");
       }
