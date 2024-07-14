@@ -1,4 +1,3 @@
-html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,7 +12,8 @@ html
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      display: block;
+      opacity: 0.5;
+      transition: opacity 0.5s;
     }
     .navbar-nav .nav-item .nav-link {
       color: white !important;
@@ -131,10 +131,6 @@ html
         padding: 10px;
       }
     }
-    .blur-background {
-      filter: blur(5px);
-      opacity: 0.5;
-    }
     .password-overlay {
       position: fixed;
       top: 0;
@@ -157,6 +153,7 @@ html
       padding: 10px;
       font-size: 16px;
       margin-bottom: 10px;
+      width: 100%;
     }
   </style>
 </head>
@@ -200,9 +197,7 @@ html
     </div>
     <div class="mySlides fade">
       <div class="numbertext">3 / 3</div>
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq
-
-0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" style="width:100%">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" style="width:100%">
       <div class="text">Caption Three</div>
     </div>
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -340,7 +335,7 @@ html
   <script>
     // Script para solicitar senha
     document.addEventListener("DOMContentLoaded", function() {
-      document.body.classList.add('blur-background');
+      document.body.style.opacity = '0.5';
       document.getElementById("passwordOverlay").style.display = 'flex';
     });
 
@@ -348,7 +343,7 @@ html
       const senhaCorreta = "20242024";
       const senha = document.getElementById("password-input").value;
       if (senha === senhaCorreta) {
-        document.body.classList.remove('blur-background');
+        document.body.style.opacity = '1';
         document.getElementById("passwordOverlay").style.display = 'none';
       } else {
         alert("Senha incorreta. Você não tem permissão para acessar este site.");
