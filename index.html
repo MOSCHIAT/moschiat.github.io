@@ -130,6 +130,26 @@
         padding: 10px;
       }
     }
+    .blur-background {
+      filter: blur(5px);
+      opacity: 0.5;
+    }
+    .password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+    }
+    .password-overlay input {
+      padding: 10px;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -300,32 +320,29 @@
     <p>&copy; 2024 MOSCHIAT. Todos os direitos reservados.</p>
   </footer>
 
+  <div class="password-overlay">
+    <div class="password-box">
+      <input type="password" id="password-input" placeholder="Digite a senha para acessar o site">
+      <button onclick="checkPassword()">Entrar</button>
+    </div>
+  </div>
+
   <script>
-    let slideIndex = 1;
-    showSlides(slideIndex);
+    // Script para solicitar senha
+    document.addEventListener("DOMContentLoaded", function() {
+      document.body.classList.add('blur-background');
+    });
 
-    function plusSlides(n) {
-      showSlides(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-      showSlides(slideIndex = n);
-    }
-
-    function showSlides(n) {
-      let i;
-      let slides = document.getElementsByClassName("mySlides");
-      let dots = document.getElementsByClassName("dot");
-      if (n > slides.length) {slideIndex = 1}
-      if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+    function checkPassword() {
+      const senhaCorreta = "20242024";
+      const senha = document.getElementById("password-input").value;
+      if (senha === senhaCorreta) {
+        document.body.classList.remove('blur-background');
+        document.querySelector('.password-overlay').style.display = 'none';
+        document.body.style.display = 'block'; // Mostrar o corpo se a senha estiver correta
+      } else {
+        alert("Senha incorreta. Você não tem permissão para acessar este site.");
       }
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " active";
     }
   </script>
 
@@ -333,17 +350,5 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <script>
-    // Script para solicitar senha
-    document.addEventListener("DOMContentLoaded", function() {
-      const senhaCorreta = "moschiat2024";
-      let senha = prompt("Digite a senha para acessar o site:");
-      if (senha === senhaCorreta) {
-        document.body.style.display = "block"; // Mostrar o corpo se a senha estiver correta
-      } else {
-        alert("Senha incorreta. Você não tem permissão para acessar este site.");
-      }
-    });
-  </script>
 </body>
 </html>
