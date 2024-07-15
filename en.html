@@ -9,7 +9,9 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(120deg, #84fab0, #8fd3f4);
+            color: #444;
         }
         #main-content {
             filter: blur(10px);
@@ -22,33 +24,34 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.95);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
         }
         .card {
-            max-width: 800px; /* Ajustato per ospitare l'immagine più grande e il contenuto */
+            max-width: 800px;
             margin: auto;
             padding: 20px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: none;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
             background-color: #fff;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
+            border-radius: 15px;
         }
         .card-header {
-            font-size: 1.2rem; /* Ridotto */
+            font-size: 1.4rem;
             font-weight: bold;
-            color: #0066cc;
-            margin-left: 10px; /* Aggiunto per spostare a sinistra */
+            color: #007bff;
+            text-align: center;
         }
         .card-body {
             color: #666;
-            font-size: 0.9rem; /* Ridotto */
+            font-size: 1rem;
             flex: 1;
         }
         .btn-whatsapp {
@@ -56,31 +59,19 @@
             color: white;
             font-weight: bold;
             margin-bottom: 10px;
-            font-size: 0.9rem; /* Ridotto */
+            font-size: 1rem;
+            transition: background-color 0.3s;
         }
         .btn-whatsapp:hover {
             background-color: #1ebe5b;
         }
         .footer-links {
             margin-top: 20px;
+            text-align: center;
         }
         .footer-links a {
             margin: 0 10px;
-            color: #0066cc;
-        }
-        .content-links {
-            text-align: center; /* Allineato al centro */
-            margin: 10px 0;
-        }
-        .footer-content-links {
-            font-size: 0.8rem; /* Ridotto il testo */
-            text-align: left; /* Allinea il testo a sinistra */
-            margin-left: 20px; /* Sposta il testo a sinistra */
-        }
-        .content-links a {
-            margin: 0 10px;
-            color: #333;
-            font-weight: bold;
+            color: #007bff;
         }
         .img-container {
             text-align: center;
@@ -90,12 +81,13 @@
         }
         .img-container img {
             width: 100%;
-            max-width: 400px; /* Aumentato a 400px */
+            max-width: 400px;
             height: auto;
-            display: none;
+            opacity: 0;
+            transition: opacity 1s;
         }
         .img-container img.active {
-            display: block;
+            opacity: 1;
         }
         .icon-image {
             height: 24px;
@@ -116,7 +108,7 @@
             justify-content: center;
         }
         .small-text {
-            font-size: 0.9rem; /* Ridotto */
+            font-size: 0.9rem;
             text-align: center;
         }
         .card-body-wrapper {
@@ -152,7 +144,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="content-links footer-content-links">
+                <div class="footer-links">
                     <a href="#">Fotografia</a>
                     <a href="#">Contenuti +18</a>
                     <a href="#">Curazione Musicale</a>
