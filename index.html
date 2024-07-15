@@ -12,7 +12,7 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      opacity: 0.5;
+      /* Removida a opacidade */
       transition: opacity 0.5s;
     }
     .navbar-nav .nav-item .nav-link {
@@ -130,30 +130,6 @@
       .product {
         padding: 10px;
       }
-    }
-    .password-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 1000;
-    }
-    .password-box {
-      background: #fff;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-    }
-    .password-box input {
-      padding: 10px;
-      font-size: 16px;
-      margin-bottom: 10px;
-      width: 100%;
     }
   </style>
 </head>
@@ -318,39 +294,14 @@
 
   <div class="container text-center my-4">
     <h1>__________________</h1>
-    
   </div>
 
   <footer class="text-center py-4">
     <p>&copy; 2024 MOSCHIAT. Todos os direitos reservados.</p>
   </footer>
 
-  <div class="password-overlay" id="passwordOverlay">
-    <div class="password-box">
-      <input type="password" id="password-input" placeholder="Digite a senha para acessar o site">
-      <button onclick="checkPassword()">Entrar</button>
-    </div>
-  </div>
-
-  <script>
-    // Script para solicitar senha
-    document.addEventListener("DOMContentLoaded", function() {
-      document.body.style.opacity = '0.5';
-      document.getElementById("passwordOverlay").style.display = 'flex';
-    });
-
-    function checkPassword() {
-      const senhaCorreta = "20242024";
-      const senha = document.getElementById("password-input").value;
-      if (senha === senhaCorreta) {
-        document.body.style.opacity = '1';
-        document.getElementById("passwordOverlay").style.display = 'none';
-      } else {
-        alert("Senha incorreta. Você não tem permissão para acessar este site.");
-      }
-    }
-  </script>
-
+  <!-- Removido o código da caixa de senha -->
+  
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
