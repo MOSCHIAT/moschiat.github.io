@@ -1,310 +1,321 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOSCHIAT - Estilo de Vida</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    body {
-      background-color: #000;
-      color: #FFF;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      /* Removida a opacidade */
-      transition: opacity 0.5s;
-    }
-    .navbar-nav .nav-item .nav-link {
-      color: white !important;
-    }
-    .product {
-      background: #fff;
-      color: #000;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      margin: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    .product img {
-      max-width: 100%;
-      height: auto;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 15px;
-      margin-bottom: 15px;
-    }
-    .whatsapp-btn {
-      display: inline-block;
-      background-color: #25D366;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 1em;
-      margin-top: 10px;
-    }
-    .slideshow-container {
-      position: relative;
-      max-width: 100%;
-      margin: auto;
-    }
-    .mySlides {
-      display: none;
-    }
-    .prev, .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 16px;
-      margin-top: -22px;
-      color: white;
-      font-weight: bold;
-      font-size: 18px;
-      transition: 0.6s ease;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-    }
-    .next {
-      right: 0;
-      border-radius: 3px 0 0 3px;
-    }
-    .prev:hover, .next:hover {
-      background-color: rgba(0,0,0,0.8);
-    }
-    .text {
-      color: #f2f2f2;
-      font-size: 15px;
-      padding: 8px 12px;
-      position: absolute;
-      bottom: 8px;
-      width: 100%;
-      text-align: center;
-    }
-    .numbertext {
-      color: #f2f2f2;
-      font-size: 12px;
-      padding: 8px 12px;
-      position: absolute;
-      top: 0;
-    }
-    .dot {
-      cursor: pointer;
-      height: 15px;
-      width: 15px;
-      margin: 0 2px;
-      background-color: #bbb;
-      border-radius: 50%;
-      display: inline-block;
-      transition: background-color 0.6s ease;
-    }
-    .active, .dot:hover {
-      background-color: #717171;
-    }
-    .fade {
-      animation-name: fade;
-      animation-duration: 1.5s;
-    }
-    @keyframes fade {
-      from {opacity: .4}
-      to {opacity: 1}
-    }
-    @media (max-width: 768px) {
-      .prev, .next {
-        font-size: 12px;
-        padding: 10px;
-      }
-      .whatsapp-btn {
-        font-size: 0.8em;
-        padding: 8px 16px;
-      }
-      .product {
-        margin: 5px;
-        padding: 15px;
-      }
-    }
-    @media (max-width: 576px) {
-      .product {
-        padding: 10px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Janela de Senha e Meu Site</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #main-content {
+            filter: blur(10px);
+            opacity: 0.5;
+            transition: filter 0.5s, opacity 0.5s;
+        }
+        #password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .card {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            background-color: #fff;
+        }
+        .card-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0066cc;
+        }
+        .card-body p {
+            color: #666;
+            font-size: 1rem;
+        }
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .btn-whatsapp:hover {
+            background-color: #1ebe5b;
+        }
+        .footer-links {
+            margin-top: 20px;
+        }
+        .footer-links a {
+            margin: 0 10px;
+            color: #0066cc;
+        }
+        .content-links {
+            text-align: left;
+            margin: 10px 0;
+        }
+        .content-links a {
+            margin: 0 10px;
+            color: #333;
+            font-weight: bold;
+        }
+        .img-container {
+            text-align: center;
+        }
+        .img-container img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+        }
+        .icon-image {
+            height: 24px;
+            margin-right: 8px;
+        }
+        .buy-access-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .buy-access-container img {
+            margin-right: 10px;
+            height: 30px;
+        }
+        .align-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
-  <header class="text-center py-4">
-    <img src="https://1.bp.blogspot.com/-7dOxTmshjp8/XkrYD1xd8rI/AAAAAAABCI4/iZnnnSu43p8zdRvTbbcZZ0_ZB36_NTp7wCK4BGAYYCw/s792/chiat%2B2.png" alt="Logo do site" class="img-fluid">
-  </header>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">MOSCHIAT</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="#">Curadoria musical</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Playlist</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">Serviços</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container text-center my-4">
-    <p>"A arte é o que eu faço você ver".<br>好奇心旺盛な人は誰でも何かを得る</p>
-    <p>Sou apaixonado por criatividade e inovação em todas as formas. Este site é um reflexo da minha jornada criativa, um lugar onde compartilho minhas experiências, projetos e insights. Seja bem-vindo e explore comigo as infinitas possibilidades da arte e da tecnologia.</p>
-  </div>
-
-  <!-- Slideshow start -->
-  <div class="slideshow-container">
-    <div class="mySlides fade">
-      <div class="numbertext">1 / 3</div>
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" style="width:100%">
-      <div class="text">Caption Text</div>
-    </div>
-    <div class="mySlides fade">
-      <div class="numbertext">2 / 3</div>
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" style="width:100%">
-      <div class="text">Caption Two</div>
-    </div>
-    <div class="mySlides fade">
-      <div class="numbertext">3 / 3</div>
-      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" style="width:100%">
-      <div class="text">Caption Three</div>
-    </div>
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-  </div>
-  <br>
-  <div class="text-center">
-    <span class="dot" onclick="currentSlide(1)"></span> 
-    <span class="dot" onclick="currentSlide(2)"></span> 
-    <span class="dot" onclick="currentSlide(3)"></span> 
-  </div>
-  <!-- Slideshow end -->
-
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4 col-sm-6">
-        <div class="product">
-          <h2>Pacote Essencial</h2>
-          <small>
-            <p>45 minutos de sessão</p>
-            <p>2 trocas de roupas</p>
-            <p>10 fotos digitais 2 impressas</p> 
-            <p>Fotos externas e espontâneas</p> 
-            <p>Pós-edição nas fotos</p>
-            <p>Todas fotos para download em alta resolução</p>
-          </small>
-          <div class="price">R$ 150,00</div>
-          <a class="whatsapp-btn" href="https://wa.me/5531992380630?text=Tenho%20interesse%20no%20Produto%201" target="_blank">WhatsApp</a>
+    <div id="password-overlay">
+        <div class="card">
+            <div class="card-header">Área Exclusiva para Membros</div>
+            <div class="card-body">
+                <p>Tenha acesso a Fotografias, PDFs, Vídeos e Insights</p>
+                <p>Desbloqueie um universo de conteúdos únicos</p>
+                <form>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" placeholder="Senha de acesso">
+                    </div>
+                    <button type="button" class="btn btn-whatsapp btn-block" onclick="checkPassword()">
+                        Comprar o acesso e converse comigo no WhatsApp
+                    </button>
+                    <div class="buy-access-container">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjDGXYrRe5vPe6Wfu-eVgRlq7oxebCR3RuzXKOb_0we9ytZxMaVpmFWJ3eWUBZNNpT5YRHBX2gbtCNvyfLBcQDSGnAd5n_ff7u5dq56K37go3mMiXo3StJDDf7SUP0ziN8L6cxSkhFeDVd52V2NPmWOrxn0pZtBJaUiGQ3iLmutvg6vzAYR9-Lro1SzMLXX/s1600/image_2024-07-14_223838502.png" alt="Ícone">
+                        <button type="submit" class="btn btn-primary">Comprar acesso</button>
+                    </div>
+                </form>
+                <div class="content-links">
+                    <a href="#">Fotografia</a>
+                    <a href="#">Conteudo +18</a>
+                    <a href="#">Curadoria Musical</a>
+                    <a href="#">AudioVisual</a>
+                </div>
+                <div class="footer-links">
+                    <a href="#">Instagram</a>
+                    <a href="#">YouTube</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4 col-sm-6">
-        <div class="product">
-          <h2>Pacote Premium</h2>
-          <small>
-            <p>1h de sessão</p>
-            <p>Galeria online privada</p>
-            <p>20 fotos digitais e 3 impressas</p>
-            <p>3 trocas de roupas</p>
-            <p>Consultoria de imagem com coloração Pessoal</p>
-            <p>Fotos externas e espontâneas</p>
-            <p>Pós edição nas fotos</p>
-            <p>Todas fotos para download em alta resolução</p>
-          </small>
-          <div class="price">R$ 320,00</div>
-          <a class="whatsapp-btn" href="https://wa.me/5531992380630?text=Tenho%20interesse%20no%20Produto%202" target="_blank">WhatsApp</a>
-        </div>
-      </div>
-      <div class="col-md-4 col-sm-12">
-        <div class="product">
-          <h2>Pacote Deluxe</h2>
-          <small>
-            <p>1h30m minutos de sessão</p>
-            <p>Galeria online privada</p>
-            <p>30 fotos digitais e 3 impressas</p>
-            <p>Consultoria de imagem com coloração pessoal</p>
-            <p>Fotos Internas, externas e espontâneas</p>
-            <p>3 videos curtos estilos prontos para ser postados</p>
-            <p>Todas fotos para download em alta resolução</p>
-          </small>
-          <div class="price">R$ 500,00</div>
-          <a class="whatsapp-btn" href="https://wa.me/5531992380630?text=Tenho%20interesse%20no%20Produto%203" target="_blank">WhatsApp</a>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <div class="container my-4">
-    <h2 class="text-center">Serviços</h2>
-    <div class="table-responsive">
-      <table class="table table-dark table-striped">
-        <thead>
-          <tr>
-            <th>Serviço</th>
-            <th>Descrição</th>
-            <th>Investimento</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Ensaios fotográficos</td>
-            <td>Ideal para você que precisa de material visual para futuros flyers e material promocional</td>
-            <td>R$ 120</td>
-          </tr>
-          <tr>
-            <td>Criação de filtros para instagram</td>
-            <td>Filtro exclusivo para seu instagram, com seu nome ou logo</td>
-            <td>R$ 90</td>
-          </tr>
-          <tr>
-            <td>Gravação de músicas demos</td>
-            <td>Gravação de vocais, lipsync, adlibs</td>
-            <td>A definir</td>
-          </tr>
-          <tr>
-            <td>Design de capas álbum/singles</td>
-            <td>Criação de artes 2D e 3D</td>
-            <td>A definir</td>
-          </tr>
-          <tr>
-            <td>Videos Lyrics</td>
-            <td>Destaque sua música e ganhe mais visibilidade com vídeos lyrics em formatos para Youtube, Instagram e reels</td>
-            <td>R$ 90</td>
-          </tr>
-          <tr>
-            <td>Criação de conteúdo para mídias sociais</td>
-            <td>Tenha 3 post por semana nas suas redes sociais ganhando visibilidade e gerando qualidade para sua página</td>
-            <td>R$ 30</td>
-          </tr>
-          <tr>
-            <td>Distribua sua músicas em todas plataformas digitais</td>
-            <td>Apple Music, Tidal, Amazon Music, TikTok, Spotify, Deezer, SoundCloud, Youtube...</td>
-            <td>R$ 350</td>
-          </tr>
-        </tbody>
-      </table>
+    <div id="main-content">
+        <!-- Meu Site HTML content starts here -->
+        <header class="text-center py-4">
+            <img src="https://1.bp.blogspot.com/-7dOxTmshjp8/XkrYD1xd8rI/AAAAAAABCI4/iZnnnSu43p8zdRvTbbcZZ0_ZB36_NTp7wCK4BGAYYCw/s792/chiat%2B2.png" alt="Logo do site" class="img-fluid">
+        </header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">MOSCHIAT</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="#">Curadoria musical</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Playlist</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Serviços</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container text-center my-4">
+            <p>"A arte é o que eu faço você ver".<br>好奇心旺盛な人は誰でも何かを得る</p>
+            <p>Sou apaixonado por criatividade e inovação em todas as formas. Este site é um reflexo da minha jornada criativa, um lugar onde compartilho minhas experiências, projetos e insights. Seja bem-vindo e explore comigo as infinitas possibilidades da arte e da tecnologia.</p>
+        </div>
+
+        <!-- Slideshow start -->
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" style="width:100%">
+                <div class="text">Caption Text</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" style="width:100%">
+                <div class="text">Caption Two</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" style="width:100%">
+                <div class="text">Caption Three</div>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <br>
+        <div class="text-center">
+            <span class="dot" onclick="currentSlide(1)"></span> 
+            <span class="dot" onclick="currentSlide(2)"></span> 
+            <span class="dot" onclick="currentSlide(3)"></span> 
+        </div>
+        <!-- Slideshow end -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="product">
+                        <h2>Pacote Essencial</h2>
+                        <small>
+                            <p>45 minutos de sessão</p>
+                            <p>2 trocas de roupas</p>
+                            <p>10 fotos digitais 2 impressas</p> 
+                            <p>Fotos externas e espontâneas</p> 
+                            <p>Pós-edição nas fotos</p>
+                            <p>Todas fotos para download em alta resolução</p>
+                        </small>
+                        <div class="price">R$ 150,00</div>
+                        <a class="whatsapp-btn" href="https://wa.me/5531992380630?text=Tenho%20interesse%20no%20Produto%201" target="_blank">WhatsApp</a>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="product">
+                        <h2>Pacote Premium</h2>
+                        <small>
+                            <p>1h de sessão</p>
+                            <p>Galeria online privada</p>
+                            <p>20 fotos digitais e 3 impressas</p>
+                            <p>3 trocas de roupas</p>
+                            <p>Consultoria de imagem com coloração Pessoal</p>
+                            <p>Fotos externas e espontâneas</p>
+                            <p>Pós edição nas fotos</p>
+                            <p>Todas fotos para download em alta resolução</p>
+                        </small>
+                        <div class="price">R$ 320,00</div>
+                        <a class="whatsapp-btn" href="https://wa.me/5531992380630?text=Tenho%20interesse%20no%20Produto%202" target="_blank">WhatsApp</a>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <div class="product">
+                        <h2>Pacote Deluxe</h2>
+                        <small>
+                            <p>1h30m minutos de sessão</p>
+                            <p>Galeria online privada</p>
+                            <p>30 fotos digitais e 3 impressas</p>
+                            <p>Consultoria de imagem com coloração pessoal</p>
+                            <p>Fotos Internas, externas e espontâneas</p>
+                            <p>3 videos curtos estilos prontos para ser postados</p>
+                            <p>Todas fotos para download em alta resolução</p>
+                        </small>
+                        <div class="price">R$ 500,00</div>
+                        <a class="whatsapp-btn" href="https://wa.me/5531992380630?text=Tenho%20interesse%20no%20Produto%203" target="_blank">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container my-4">
+            <h2 class="text-center">Serviços</h2>
+            <div class="table-responsive">
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>Serviço</th>
+                            <th>Descrição</th>
+                            <th>Investimento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ensaios fotográficos</td>
+                            <td>Ideal para você que precisa de material visual para futuros flyers e material promocional</td>
+                            <td>R$ 120</td>
+                        </tr>
+                        <tr>
+                            <td>Criação de filtros para instagram</td>
+                            <td>Filtro exclusivo para seu instagram, com seu nome ou logo</td>
+                            <td>R$ 90</td>
+                        </tr>
+                        <tr>
+                            <td>Gravação de músicas demos</td>
+                            <td>Gravação de vocais, lipsync, adlibs</td>
+                            <td>A definir</td>
+                        </tr>
+                        <tr>
+                            <td>Design de capas álbum/singles</td>
+                            <td>Criação de artes 2D e 3D</td>
+                            <td>A definir</td>
+                        </tr>
+                        <tr>
+                            <td>Videos Lyrics</td>
+                            <td>Destaque sua música e ganhe mais visibilidade com vídeos lyrics em formatos para Youtube, Instagram e reels</td>
+                            <td>R$ 90</td>
+                        </tr>
+                        <tr>
+                            <td>Criação de conteúdo para mídias sociais</td>
+                            <td>Tenha 3 post por semana nas suas redes sociais ganhando visibilidade e gerando qualidade para sua página</td>
+                            <td>R$ 30</td>
+                        </tr>
+                        <tr>
+                            <td>Distribua sua músicas em todas plataformas digitais</td>
+                            <td>Apple Music, Tidal, Amazon Music, TikTok, Spotify, Deezer, SoundCloud, Youtube...</td>
+                            <td>R$ 350</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container text-center my-4">
+            <h1>__________________</h1>
+        </div>
+
+        <footer class="text-center py-4">
+            <p>&copy; 2024 MOSCHIAT. Todos os direitos reservados.</p>
+        </footer>
     </div>
-  </div>
 
-  <div class="container text-center my-4">
-    <h1>__________________</h1>
-  </div>
-
-  <footer class="text-center py-4">
-    <p>&copy; 2024 MOSCHIAT. Todos os direitos reservados.</p>
-  </footer>
-
-  <!-- Removido o código da caixa de senha -->
-  
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function checkPassword() {
+            var password = document.getElementById('password').value;
+            if (password === 'unapologetic') {
+                document.getElementById('password-overlay').style.display = 'none';
+                document.getElementById('main-content').style.filter = 'none';
+                document.getElementById('main-content').style.opacity = '1';
+            } else {
+                alert('Senha incorreta!');
+            }
+        }
+    </script>
 </body>
 </html>
