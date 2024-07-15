@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finestra della Password</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        #main-content {
+            filter: blur(10px);
+            opacity: 0.5;
+            transition: filter 0.5s, opacity 0.5s;
+        }
+        #password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .card {
+            max-width: 800px; /* Ajustato per ospitare l'immagine più grande e il contenuto */
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-header {
+            font-size: 1.2rem; /* Ridotto */
+            font-weight: bold;
+            color: #0066cc;
+            margin-left: 10px; /* Aggiunto per spostare a sinistra */
+        }
+        .card-body {
+            color: #666;
+            font-size: 0.9rem; /* Ridotto */
+            flex: 1;
+        }
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9rem; /* Ridotto */
+        }
+        .btn-whatsapp:hover {
+            background-color: #1ebe5b;
+        }
+        .footer-links {
+            margin-top: 20px;
+        }
+        .footer-links a {
+            margin: 0 10px;
+            color: #0066cc;
+        }
+        .content-links {
+            text-align: center; /* Allineato al centro */
+            margin: 10px 0;
+        }
+        .footer-content-links {
+            font-size: 0.8rem; /* Ridotto il testo */
+            text-align: left; /* Allinea il testo a sinistra */
+            margin-left: 20px; /* Sposta il testo a sinistra */
+        }
+        .content-links a {
+            margin: 0 10px;
+            color: #333;
+            font-weight: bold;
+        }
+        .img-container {
+            text-align: center;
+            flex: 1;
+            padding: 10px;
+            position: relative;
+        }
+        .img-container img {
+            width: 100%;
+            max-width: 400px; /* Aumentato a 400px */
+            height: auto;
+            display: none;
+        }
+        .img-container img.active {
+            display: block;
+        }
+        .icon-image {
+            height: 24px;
+            margin-right: 8px;
+        }
+        .buy-access-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .buy-access-container img {
+            margin-right: 10px;
+            height: 30px;
+        }
+        .align-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .small-text {
+            font-size: 0.9rem; /* Ridotto */
+            text-align: center;
+        }
+        .card-body-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    </style>
+</head>
+<body>
+    <div id="password-overlay">
+        <div class="card">
+            <div class="card-body-wrapper">
+                <div class="card-body">
+                    <div class="card-header">
+                        Area Riservata ai Membri
+                    </div>
+                    <p class="small-text">Un luogo dove condivido le mie esperienze, progetti.<br>
+                    Accedi a Fotografie, PDF, Video e Approfondimenti<br>
+                    "L'arte è ciò che ti faccio vedere".</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" placeholder="Password di accesso">
+                        </div>
+                        <button type="button" class="btn btn-whatsapp btn-block" onclick="checkPassword()">
+                            Accedi
+                        </button>
+                        <div class="buy-access-container">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjDGXYrRe5vPe6Wfu-eVgRlq7oxebCR3RuzXKOb_0we9ytZxMaVpmFWJ3eWUBZNNpT5YRHBX2gbtCNvyfLBcQDSGnAd5n_ff7u5dq56K37go3mMiXo3StJDDf7SUP0ziN8L6cxSkhFeDVd52V2NPmWOrxn0pZtBJaUiGQ3iLmutvg6vzAYR9-Lro1SzMLXX/s1600/image_2024-07-14_223838502.png" alt="Icona" style="height: 20px; margin-right: 5px;">
+                                Acquista accesso
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="content-links footer-content-links">
+                    <a href="#">Fotografia</a>
+                    <a href="#">Contenuti +18</a>
+                    <a href="#">Curazione Musicale</a>
+                    <a href="#">Audiovisivo</a>
+                </div>
+            </div>
+            <div class="img-container">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEimkxmf-Aqpgs6ErnQoBdGg_5fV2rFwTxeQ5_amRB7mmp8dYXtvUcFxR-CsSVoEFwmx5f1YphhXhw661L_Zjkzmqyr_gQft1Xqb7JpCakjKPoobOpocm1D1kU-82x3AkhihO3-hGdBs06LOsZzfRHhSXYT1kt-DdtAqm03B-EKcWcqyvG8TtAq9wVTjxJ4U/s1600/Captura%20de%20tela%202022-10-11%20145757.png" alt="Immagine" class="active">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmqcv2_V7cjaRm4Zov_H6KGjf6j85EUTzyVeP29puEs700E4hNjOFmcwj6Ib0iqi_9P7Wu2KsGTMEi7ga7H8CI6JZ-aTElp9KPc3iUr874rz3iBLIuL-9Cw3R7mxz5u4Dcdqiktz5U2_kOtkS7Niun2Kd7AbAM2eZE9vF8SNc-qOHi4rfbOVpvtUWp_0qL/s831/imagem2.png" alt="Immagine">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiE7RqJn24xTEbPJ_EfbWTTbv8R55oFxMgI8SXYTFKaPkyk55qTpm0V43VenW6CtwQYbtQTNcV4XmG446q-WKrFEnRWdHYb9YKLr6FmL6RM3nsDNhyYz3q0egDo2QQlICjgRV7zVPw2aZWEyXWjb-VKVJ023W2RYLLwIYdnqZpQ_891wxh8XKPDW-QiVpM9/s831/imagem3.png" alt="Immagine">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function checkPassword() {
+            var password = document.getElementById('password').value;
+            if (password === '123') {
+                document.getElementById('password-overlay').style.display = 'none';
+                document.getElementById('main-content').style.filter = 'none';
+                document.getElementById('main-content').style.opacity = '1';
+            } else if (password === '321') {
+                window.location.href = 'https://moschiat.com/it';
+            } else {
+                alert('Password errata!');
+            }
+        }
+
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            var slides = document.querySelectorAll('.img-container img');
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].classList.add('active');
+            setTimeout(showSlides, 3000); // Cambia immagine ogni 3 secondi
+        }
+    </script>
+</body>
+</html>
