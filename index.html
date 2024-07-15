@@ -44,6 +44,7 @@
             font-size: 1.2rem; /* Reduzido */
             font-weight: bold;
             color: #0066cc;
+            margin-left: 10px; /* Adicionado para mover para a esquerda */
         }
         .card-body {
             color: #666;
@@ -85,11 +86,16 @@
             text-align: center;
             flex: 1;
             padding: 10px;
+            position: relative;
         }
         .img-container img {
             width: 100%;
             max-width: 400px; /* Aumentado para 400px */
             height: auto;
+            display: none;
+        }
+        .img-container img.active {
+            display: block;
         }
         .icon-image {
             height: 24px;
@@ -154,7 +160,9 @@
                 </div>
             </div>
             <div class="img-container">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEimkxmf-Aqpgs6ErnQoBdGg_5fV2rFwTxeQ5_amRB7mmp8dYXtvUcFxR-CsSVoEFwmx5f1YphhXhw661L_Zjkzmqyr_gQft1Xqb7JpCakjKPoobOpocm1D1kU-82x3AkhihO3-hGdBs06LOsZzfRHhSXYT1kt-DdtAqm03B-EKcWcqyvG8TtAq9wVTjxJ4U/s1600/Captura%20de%20tela%202022-10-11%20145757.png" alt="Imagem">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEimkxmf-Aqpgs6ErnQoBdGg_5fV2rFwTxeQ5_amRB7mmp8dYXtvUcFxR-CsSVoEFwmx5f1YphhXhw661L_Zjkzmqyr_gQft1Xqb7JpCakjKPoobOpocm1D1kU-82x3AkhihO3-hGdBs06LOsZzfRHhSXYT1kt-DdtAqm03B-EKcWcqyvG8TtAq9wVTjxJ4U/s1600/Captura%20de%20tela%202022-10-11%20145757.png" alt="Imagem" class="active">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmqcv2_V7cjaRm4Zov_H6KGjf6j85EUTzyVeP29puEs700E4hNjOFmcwj6Ib0iqi_9P7Wu2KsGTMEi7ga7H8CI6JZ-aTElp9KPc3iUr874rz3iBLIuL-9Cw3R7mxz5u4Dcdqiktz5U2_kOtkS7Niun2Kd7AbAM2eZE9vF8SNc-qOHi4rfbOVpvtUWp_0qL/s831/imagem2.png" alt="Imagem">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiE7RqJn24xTEbPJ_EfbWTTbv8R55oFxMgI8SXYTFKaPkyk55qTpm0V43VenW6CtwQYbtQTNcV4XmG446q-WKrFEnRWdHYb9YKLr6FmL6RM3nsDNhyYz3q0egDo2QQlICjgRV7zVPw2aZWEyXWjb-VKVJ023W2RYLLwIYdnqZpQ_891wxh8XKPDW-QiVpM9/s831/imagem3.png" alt="Imagem">
             </div>
         </div>
     </div>
@@ -341,6 +349,22 @@
             } else {
                 alert('Senha incorreta!');
             }
+        }
+
+        // Slideshow automático
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("img-container")[0].getElementsByTagName("img");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].classList.add("active");
+            setTimeout(showSlides, 3000); // Troca de imagem a cada 3 segundos
         }
     </script>
 </body>
