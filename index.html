@@ -29,7 +29,7 @@
             z-index: 1000;
         }
         .card {
-            max-width: 800px; /* Ajustado para acomodar a imagem maior e o conteúdo */
+            max-width: 800px;
             margin: auto;
             padding: 20px;
             border: 1px solid #e0e0e0;
@@ -41,14 +41,14 @@
             justify-content: center;
         }
         .card-header {
-            font-size: 1.2rem; /* Reduzido */
+            font-size: 1.2rem;
             font-weight: bold;
             color: #0066cc;
-            margin-left: 10px; /* Adicionado para mover para a esquerda */
+            margin-left: 10px;
         }
         .card-body {
             color: #666;
-            font-size: 0.9rem; /* Reduzido */
+            font-size: 0.9rem;
             flex: 1;
         }
         .btn-whatsapp {
@@ -56,7 +56,7 @@
             color: white;
             font-weight: bold;
             margin-bottom: 10px;
-            font-size: 0.9rem; /* Reduzido */
+            font-size: 0.9rem;
         }
         .btn-whatsapp:hover {
             background-color: #1ebe5b;
@@ -69,13 +69,13 @@
             color: #0066cc;
         }
         .content-links {
-            text-align: center; /* Alinhado ao centro */
+            text-align: center;
             margin: 10px 0;
         }
         .footer-content-links {
-            font-size: 0.8rem; /* Diminui o tamanho do texto */
-            text-align: left; /* Alinha o texto à esquerda */
-            margin-left: 20px; /* Move o texto para a esquerda */
+            font-size: 0.8rem;
+            text-align: left;
+            margin-left: 20px;
         }
         .content-links a {
             margin: 0 10px;
@@ -90,7 +90,7 @@
         }
         .img-container img {
             width: 100%;
-            max-width: 400px; /* Aumentado para 400px */
+            max-width: 400px;
             height: auto;
             display: none;
         }
@@ -116,13 +116,36 @@
             justify-content: center;
         }
         .small-text {
-            font-size: 0.9rem; /* Reduzido */
+            font-size: 0.9rem;
             text-align: center;
         }
         .card-body-wrapper {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+        }
+        .product {
+            margin-bottom: 20px;
+        }
+        .whatsapp-btn {
+            background-color: #25d366;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        .whatsapp-btn:hover {
+            background-color: #1ebe5b;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .card {
+                flex-direction: column;
+            }
+            .img-container img {
+                max-width: 300px;
+            }
         }
     </style>
 </head>
