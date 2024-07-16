@@ -39,6 +39,16 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
         .card-header {
             font-size: 1.2rem;
@@ -152,6 +162,7 @@
 <body>
     <div id="password-overlay">
         <div class="card">
+            <button class="close-btn" onclick="closeOverlay()">×</button>
             <div class="card-body-wrapper">
                 <div class="card-body">
                     <div class="card-header">
@@ -374,6 +385,17 @@
             } else {
                 alert('Senha incorreta!');
             }
+        }
+
+        function closeOverlay() {
+            document.getElementById('password-overlay').style.display = 'none';
+            document.getElementById('main-content').style.filter = 'none';
+            document.getElementById('main-content').style.opacity = '1';
+            setTimeout(() => {
+                document.getElementById('password-overlay').style.display = 'flex';
+                document.getElementById('main-content').style.filter = 'blur(10px)';
+                document.getElementById('main-content').style.opacity = '0.5';
+            }, 3000);
         }
 
         var slideIndex = 0;
