@@ -32,6 +32,7 @@
         }
         .card {
             max-width: 500px;
+            width: 100%;
             margin: auto;
             padding: 20px;
             border: 1px solid #e0e0e0;
@@ -49,10 +50,16 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-        .card-header img {
-            width: 100%;
-            height: auto;
+        .card-header {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0066cc;
             margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 10px;
         }
         .card-body {
             color: #666;
@@ -181,6 +188,12 @@
             padding: 1rem 0;
             text-align: center;
         }
+        @media (max-width: 768px) {
+            .card {
+                width: 90%;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -189,7 +202,7 @@
             <button class="close-btn" onclick="closeOverlay()">×</button>
             <div class="card-body-wrapper">
                 <div class="card-header">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiE7RqJn24xTEbPJ_EfbWTTbv8R55oFxMgI8SXYTFKaPkyk55qTpm0V43VenW6CtwQYbtQTNcV4XmG446q-WKrFEnRWdHYb9YKLr6FmL6RM3nsDNhyYz3q0egDo2QQlICjgRV7zVPw2aZWEyXWjb-VKVJ023W2RYLLwIYdnqZpQ_891wxh8XKPDW-QiVpM9/s320/imagem3.png" alt="Área Exclusiva para Membros">
+                    Área Exclusiva para Membros
                 </div>
                 <div class="card-body">
                     <p class="small-text">Um lugar onde compartilho minhas experiências, projetos.<br>
