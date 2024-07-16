@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Janela de Senha e Meu Site</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
         }
         #main-content {
             filter: blur(10px);
@@ -22,24 +24,21 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.7); /* Ajustado para transparência */
+            background-color: rgba(255, 255, 255, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
         }
         .card {
-            max-width: 800px;
+            max-width: 500px;
             margin: auto;
             padding: 20px;
             border: 1px solid #e0e0e0;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             background-color: #fff;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
             position: relative;
+            animation: fadeInDown 0.5s;
         }
         .close-btn {
             position: absolute;
@@ -51,22 +50,21 @@
             cursor: pointer;
         }
         .card-header {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #0066cc;
-            margin-left: 10px;
+            margin-bottom: 20px;
         }
         .card-body {
             color: #666;
-            font-size: 0.9rem;
-            flex: 1;
+            font-size: 1rem;
         }
         .btn-whatsapp {
             background-color: #25d366;
             color: white;
             font-weight: bold;
             margin-bottom: 10px;
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
         .btn-whatsapp:hover {
             background-color: #1ebe5b;
@@ -78,26 +76,6 @@
             margin: 0 10px;
             color: #0066cc;
         }
-        .content-links {
-            text-align: center;
-            margin: 10px 0;
-        }
-        .footer-content-links {
-            font-size: 0.8rem;
-            text-align: left;
-            margin-left: 20px;
-        }
-        .content-links a {
-            margin: 0 10px;
-            color: #333;
-            font-weight: bold;
-        }
-        .img-container {
-            text-align: center;
-            flex: 1;
-            padding: 10px;
-            position: relative;
-        }
         .img-container img {
             width: 100%;
             max-width: 400px;
@@ -106,36 +84,7 @@
         }
         .img-container img.active {
             display: block;
-        }
-        .icon-image {
-            height: 24px;
-            margin-right: 8px;
-        }
-        .buy-access-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .buy-access-container img {
-            margin-right: 10px;
-            height: 30px;
-        }
-        .align-center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .small-text {
-            font-size: 0.9rem;
-            text-align: center;
-        }
-        .card-body-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .product {
-            margin-bottom: 20px;
+            animation: fadeIn 1s;
         }
         .whatsapp-btn {
             background-color: #25d366;
@@ -144,23 +93,99 @@
             text-decoration: none;
             display: inline-block;
             border-radius: 5px;
+            margin-top: 10px;
         }
         .whatsapp-btn:hover {
             background-color: #1ebe5b;
             color: white;
         }
-        @media (max-width: 768px) {
-            .card {
-                flex-direction: column;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translate3d(0, -100%, 0);
             }
-            .img-container img {
-                max-width: 300px;
+            to {
+                opacity: 1;
+                transform: none;
             }
+        }
+        .navbar {
+            background-color: #343a40;
+            padding: 1rem;
+        }
+        .navbar-nav .nav-item .nav-link {
+            color: #ffffff;
+            margin: 0 0.5rem;
+        }
+        .navbar-toggler {
+            border: none;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+        .content-section {
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .content-section p {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+        .product-section {
+            padding: 2rem 0;
+        }
+        .product {
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .product h2 {
+            font-size: 1.5rem;
+            color: #0066cc;
+            margin-bottom: 10px;
+        }
+        .product .price {
+            font-size: 1.2rem;
+            color: #28a745;
+            margin-top: 10px;
+        }
+        .services-section {
+            padding: 2rem 0;
+        }
+        .services-section h2 {
+            font-size: 2rem;
+            color: #0066cc;
+            margin-bottom: 2rem;
+        }
+        .table-dark {
+            background-color: #343a40;
+        }
+        .table-dark th,
+        .table-dark td {
+            color: #ffffff;
+        }
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 1rem 0;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <div id="password-overlay">
+    <div id="password-overlay" class="animate__animated animate__fadeIn">
         <div class="card">
             <button class="close-btn" onclick="closeOverlay()">×</button>
             <div class="card-body-wrapper">
@@ -193,21 +218,16 @@
                     <a href="#">AudioVisual</a>
                 </div>
             </div>
-            <div class="img-container">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEimkxmf-Aqpgs6ErnQoBdGg_5fV2rFwTxeQ5_amRB7mmp8dYXtvUcFxR-CsSVoEFwmx5f1YphhXhw661L_Zjkzmqyr_gQft1Xqb7JpCakjKPoobOpocm1D1kU-82x3AkhihO3-hGdBs06LOsZzfRHhSXYT1kt-DdtAqm03B-EKcWcqyvG8TtAq9wVTjxJ4U/s1600/Captura%20de%20tela%202022-10-11%20145757.png" alt="Imagem" class="active">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhmqcv2_V7cjaRm4Zov_H6KGjf6j85EUTzyVeP29puEs700E4hNjOFmcwj6Ib0iqi_9P7Wu2KsGTMEi7ga7H8CI6JZ-aTElp9KPc3iUr874rz3iBLIuL-9Cw3R7mxz5u4Dcdqiktz5U2_kOtkS7Niun2Kd7AbAM2eZE9vF8SNc-qOHi4rfbOVpvtUWp_0qL/s831/imagem2.png" alt="Imagem">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiE7RqJn24xTEbPJ_EfbWTTbv8R55oFxMgI8SXYTFKaPkyk55qTpm0V43VenW6CtwQYbtQTNcV4XmG446q-WKrFEnRWdHYb9YKLr6FmL6RM3nsDNhyYz3q0egDo2QQlICjgRV7zVPw2aZWEyXWjb-VKVJ023W2RYLLwIYdnqZpQ_891wxh8XKPDW-QiVpM9/s831/imagem3.png" alt="Imagem">
-            </div>
         </div>
     </div>
 
-    <div id="main-content">
+    <div id="main-content" class="animate__animated animate__fadeIn">
         <!-- Meu Site HTML content starts aqui -->
         <header class="text-center py-4">
-            <img src="https://1.bp.blogspot.com/-7dOxTmshjp8/XkrYD1xd8rI/AAAAAAABCI4/iZnnnSu43p8zdRvTbbcZZ0_ZB36_NTp7wCK4BGAYYCw/s792/chiat%2B2.png" alt="Logo do site" class="img-fluid">
+            <img src="https://1.bp.blogspot.com/-7dOxTmshjp8/XkrYD1xd8rI/AAAAAAABCI4/iZnnnSu43p8zdRvTbbcZZ0_ZB36_NTp7wCK4BGAYYCw/s792/chiat%2B2.png" alt="Logo do site" class="img-fluid animate__animated animate__zoomIn">
         </header>
 
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="#">MOSCHIAT</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -223,7 +243,7 @@
             </div>
         </nav>
 
-        <div class="container text-center my-4">
+        <div class="container content-section">
             <p>"A arte é o que eu faço você ver".<br>好奇心旺盛な人は誰でも何かを得る</p>
             <p>Sou apaixonado por criatividade e inovação em todas as formas. Este site é um reflexo da minha jornada criativa, um lugar onde compartilho minhas experiências, projetos e insights. Seja bem-vindo e explore comigo as infinitas possibilidades da arte e da tecnologia.</p>
         </div>
@@ -256,10 +276,10 @@
         </div>
         <!-- Slideshow end -->
 
-        <div class="container">
+        <div class="container product-section">
             <div class="row">
                 <div class="col-md-4 col-sm-6">
-                    <div class="product">
+                    <div class="product animate__animated animate__zoomIn">
                         <h2>Pacote Essencial</h2>
                         <small>
                             <p>45 minutos de sessão</p>
@@ -274,7 +294,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-6">
-                    <div class="product">
+                    <div class="product animate__animated animate__zoomIn">
                         <h2>Pacote Premium</h2>
                         <small>
                             <p>1h de sessão</p>
@@ -291,7 +311,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
-                    <div class="product">
+                    <div class="product animate__animated animate__zoomIn">
                         <h2>Pacote Deluxe</h2>
                         <small>
                             <p>1h30m minutos de sessão</p>
@@ -309,10 +329,10 @@
             </div>
         </div>
 
-        <div class="container my-4">
+        <div class="container services-section">
             <h2 class="text-center">Serviços</h2>
             <div class="table-responsive">
-                <table class="table table-dark table-striped">
+                <table class="table table-dark table-striped animate__animated animate__fadeInUp">
                     <thead>
                         <tr>
                             <th>Serviço</th>
@@ -361,10 +381,6 @@
             </div>
         </div>
 
-        <div class="container text-center my-4">
-            <h1>__________________</h1>
-        </div>
-
         <footer class="text-center py-4">
             <p>&copy; 2024 MOSCHIAT. Todos os direitos reservados.</p>
         </footer>
@@ -377,9 +393,12 @@
         function checkPassword() {
             var password = document.getElementById('password').value;
             if (password === '123') {
-                document.getElementById('password-overlay').style.display = 'none';
-                document.getElementById('main-content').style.filter = 'none';
-                document.getElementById('main-content').style.opacity = '1';
+                document.getElementById('password-overlay').classList.add('animate__fadeOut');
+                setTimeout(() => {
+                    document.getElementById('password-overlay').style.display = 'none';
+                    document.getElementById('main-content').style.filter = 'none';
+                    document.getElementById('main-content').style.opacity = '1';
+                }, 500);
             } else if (password === '321') {
                 window.location.href = 'https://moschiat.com/it';
             } else {
@@ -388,14 +407,18 @@
         }
 
         function closeOverlay() {
-            document.getElementById('password-overlay').style.display = 'none';
-            document.getElementById('main-content').style.filter = 'none';
-            document.getElementById('main-content').style.opacity = '1';
+            document.getElementById('password-overlay').classList.add('animate__fadeOut');
             setTimeout(() => {
-                document.getElementById('password-overlay').style.display = 'flex';
-                document.getElementById('main-content').style.filter = 'blur(10px)';
-                document.getElementById('main-content').style.opacity = '0.5';
-            }, 3000);
+                document.getElementById('password-overlay').style.display = 'none';
+                document.getElementById('main-content').style.filter = 'none';
+                document.getElementById('main-content').style.opacity = '1';
+                setTimeout(() => {
+                    document.getElementById('password-overlay').classList.remove('animate__fadeOut');
+                    document.getElementById('password-overlay').style.display = 'flex';
+                    document.getElementById('main-content').style.filter = 'blur(10px)';
+                    document.getElementById('main-content').style.opacity = '0.5';
+                }, 3000);
+            }, 500);
         }
 
         var slideIndex = 0;
