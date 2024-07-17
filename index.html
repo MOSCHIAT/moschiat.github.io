@@ -18,6 +18,7 @@
             filter: blur(10px);
             opacity: 0.5;
             transition: filter 0.5s, opacity 0.5s;
+            pointer-events: none; /* Desativa interação com o conteúdo até a senha ser verificada */
         }
         #password-overlay {
             position: fixed;
@@ -125,7 +126,7 @@
             border: none;
         }
         .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%28255, 255, 255, 255, 0.5%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
         }
         .content-section {
             padding: 2rem 0;
@@ -199,7 +200,6 @@
 <body>
     <div id="password-overlay" class="animate__animated animate__fadeIn">
         <div class="card">
-            <button class="close-btn" onclick="closeOverlay()">×</button>
             <div class="card-body-wrapper">
                 <div class="card-header">
                     Área Exclusiva para Membros
@@ -403,6 +403,7 @@
             var password = document.getElementById('password').value;
             if (password === '123') {
                 document.body.style.overflow = 'auto'; // Ativa a rolagem
+                document.getElementById('main-content').style.pointerEvents = 'auto'; // Permite interação com o conteúdo
                 document.getElementById('password-overlay').classList.add('animate__fadeOut');
                 setTimeout(() => {
                     document.getElementById('password-overlay').style.display = 'none';
@@ -421,12 +422,14 @@
             setTimeout(() => {
                 document.getElementById('password-overlay').style.display = 'none';
                 document.body.style.overflow = 'auto'; // Ativa a rolagem
+                document.getElementById('main-content').style.pointerEvents = 'auto'; // Permite interação com o conteúdo
                 document.getElementById('main-content').style.filter = 'none';
                 document.getElementById('main-content').style.opacity = '1';
                 setTimeout(() => {
                     document.getElementById('password-overlay').classList.remove('animate__fadeOut');
                     document.getElementById('password-overlay').style.display = 'flex';
                     document.body.style.overflow = 'hidden'; // Desativa a rolagem
+                    document.getElementById('main-content').style.pointerEvents = 'none'; // Desativa interação com o conteúdo
                     document.getElementById('main-content').style.filter = 'blur(10px)';
                     document.getElementById('main-content').style.opacity = '0.5';
                 }, 3000);
