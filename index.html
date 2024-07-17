@@ -12,6 +12,7 @@
             padding: 0;
             font-family: Arial, sans-serif;
             background-color: #f8f9fa;
+            overflow: hidden; /* Desativa a rolagem quando a página é carregada */
         }
         #main-content {
             filter: blur(10px);
@@ -401,6 +402,7 @@
         function checkPassword() {
             var password = document.getElementById('password').value;
             if (password === '123') {
+                document.body.style.overflow = 'auto'; // Ativa a rolagem
                 document.getElementById('password-overlay').classList.add('animate__fadeOut');
                 setTimeout(() => {
                     document.getElementById('password-overlay').style.display = 'none';
@@ -418,11 +420,13 @@
             document.getElementById('password-overlay').classList.add('animate__fadeOut');
             setTimeout(() => {
                 document.getElementById('password-overlay').style.display = 'none';
+                document.body.style.overflow = 'auto'; // Ativa a rolagem
                 document.getElementById('main-content').style.filter = 'none';
                 document.getElementById('main-content').style.opacity = '1';
                 setTimeout(() => {
                     document.getElementById('password-overlay').classList.remove('animate__fadeOut');
                     document.getElementById('password-overlay').style.display = 'flex';
+                    document.body.style.overflow = 'hidden'; // Desativa a rolagem
                     document.getElementById('main-content').style.filter = 'blur(10px)';
                     document.getElementById('main-content').style.opacity = '0.5';
                 }, 3000);
