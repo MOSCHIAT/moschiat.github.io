@@ -3,101 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOSCHIAT - Paulo Marques</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Paulo Marques | MOSCHIAT</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* General body styling */
         body {
-            background-color: black;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        .container {
-            text-align: center;
-            position: relative;
-            z-index: 10;
+
+        /* Intro section styling */
+        .intro h1, .intro h2 {
+            font-size: 3em;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
         }
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            animation: glow 2s ease-in-out infinite alternate;
-            z-index: 10;
-            position: relative;
+
+        #name {
+            animation-delay: 0s;
         }
+
+        #moschiat {
+            animation-delay: 2s;
+        }
+
+        /* Keyframe animation for fadeIn */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Styling for the main content that will appear after the animation */
+        .main-content {
+            display: none;
+            margin-top: 20px;
+        }
+
+        /* Show main content after animation */
+        .show-content .intro {
+            display: none;
+        }
+
+        .show-content .main-content {
+            display: block;
+        }
+
+        /* Bootstrap customization (optional) */
+        h1, h2 {
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
         p {
-            font-size: 2rem;
-            z-index: 10;
-            position: relative;
-        }
-        .animated-text {
-            position: absolute;
-            width: 100%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 3rem;
-            color: #fff;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-            white-space: nowrap;
-            animation: moveText 5s linear infinite;
-        }
-        @keyframes moveText {
-            from {
-                left: 100%;
-            }
-            to {
-                left: -100%;
-            }
-        }
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://example.com/chocolate-cake.jpg') repeat center center;
-            background-size: cover;
-            filter: blur(10px);
-            z-index: 5;
-            animation: scrollBackground 10s linear infinite;
-        }
-        @keyframes scrollBackground {
-            from {
-                background-position: 0 0;
-            }
-            to {
-                background-position: 100% 100%;
-            }
-        }
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            p {
-                font-size: 1.5rem;
-            }
-            .animated-text {
-                font-size: 2rem;
-            }
+            font-size: 1.2em;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="background"></div>
-    <div class="container">
-        <h1>Paulo Marques</h1>
-        <p>MOSCHIAT</p>
+
+    <!-- Section for the initial animation -->
+    <div class="intro">
+        <h1 id="name">Paulo Marques</h1>
+        <h2 id="moschiat">MOSCHIAT</h2>
     </div>
-    <div class="animated-text">v41 d4nd0 4 buc3t4d4 c0m v0nt4d3</div>
+
+    <!-- Main content of the site -->
+    <div class="container main-content">
+        <h1>Bem-vindo ao site de Paulo Marques</h1>
+        <p>Este é um site minimalista e sofisticado, refletindo a essência do MOSCHIAT.</p>
+        <!-- Você pode adicionar mais conteúdo aqui -->
+    </div>
 
     <script>
-        // Script for additional interactions or future enhancements
+        // JavaScript to handle the transition from the intro animation to the main content
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.body.classList.add('show-content');
+            }, 4000); // Ajuste o tempo se necessário
+        });
     </script>
 </body>
 </html>
