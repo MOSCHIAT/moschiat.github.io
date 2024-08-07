@@ -33,7 +33,7 @@
                 opacity: 1;
             }
         }
-        .info {
+        .poem {
             display: none;
         }
     </style>
@@ -45,17 +45,16 @@
     <div id="moschiat" class="content hidden">
         <h1>MOSCHIAT</h1>
     </div>
-    <div id="info" class="content hidden">
-        <h2>Informações sobre você:</h2>
-        <ul>
-            <li>Você quer aprender a remixar música no Djay Pro e procura explicações objetivas e práticas sobre os fundamentos e o que é necessário para um bom set.</li>
-            <li>Você gosta de criar descrições detalhadas para imagens geradas no DALL-E e de inventar cores e personagens para recriar obras de arte.</li>
-            <li>Você pediu para editar uma imagem adicionando a frase 'cuidado com as burras'.</li>
-            <li>Tudo que você postar deve ser traduzido para português.</li>
-            <li>Seu nome é Paulo Marques, mas você é conhecido como MOSCHIAT.</li>
-            <li>Você quer aprender sobre Metacognição, seguindo uma metodologia de ensino fundamental e avançado.</li>
-            <li>Você quer um site em HTML com CSS e Bootstrap, com fundo preto, fonte grande e um design sofisticado, minimalista e simples, contendo apenas seu nome 'Paulo Marques' e o site 'moschiat'.</li>
-        </ul>
+    <div id="poem" class="content hidden">
+        <h2>Poema:</h2>
+        <p>Em sombras onde a luz se perde,<br>
+        Entre o que é e o que poderia ser,<br>
+        Nascem sonhos, fracos e incertos,<br>
+        Em chamas que nunca chegam a aquecer.<br>
+        O destino sussurra em lamentos,<br>
+        E a vida dança em círculos quebrados,<br>
+        Enquanto o tempo esconde seus tormentos,<br>
+        No eco de passos não dados.</p>
     </div>
     <script>
         setTimeout(() => {
@@ -65,8 +64,8 @@
 
         setTimeout(() => {
             document.getElementById('moschiat').classList.add('hidden');
-            document.getElementById('info').classList.remove('hidden');
-            document.getElementById('info').classList.add('fade-in');
+            document.getElementById('poem').classList.remove('hidden');
+            document.getElementById('poem').classList.add('fade-in');
         }, 6000);
     </script>
 </body>
