@@ -1,96 +1,73 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paulo Marques | MOSCHIAT</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Paulo Marques / MOSCHIAT</title>
     <style>
-        /* General body styling */
         body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            height: 100vh;
             margin: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            text-align: center;
+            overflow: hidden;
         }
-
-        /* Intro section styling */
-        .intro h1, .intro h2 {
-            font-size: 3em;
+        .hidden {
+            display: none;
+        }
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 1s;
+        }
+        .fade-in {
             opacity: 0;
-            animation: fadeIn 2s ease-in-out forwards;
+            animation: fadeIn 3s forwards;
         }
-
-        #name {
-            animation-delay: 0s;
-        }
-
-        #moschiat {
-            animation-delay: 2s;
-        }
-
-        /* Keyframe animation for fadeIn */
         @keyframes fadeIn {
             to {
                 opacity: 1;
             }
         }
-
-        /* Styling for the main content that will appear after the animation */
-        .main-content {
+        .info {
             display: none;
-            margin-top: 20px;
-        }
-
-        /* Show main content after animation */
-        .show-content .intro {
-            display: none;
-        }
-
-        .show-content .main-content {
-            display: block;
-        }
-
-        /* Bootstrap customization (optional) */
-        h1, h2 {
-            font-weight: bold;
-            letter-spacing: 2px;
-        }
-
-        p {
-            font-size: 1.2em;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-
-    <!-- Section for the initial animation -->
-    <div class="intro">
-        <h1 id="name">Paulo Marques</h1>
-        <h2 id="moschiat">MOSCHIAT</h2>
+    <div id="name" class="content">
+        <h1>Paulo Marques</h1>
     </div>
-
-    <!-- Main content of the site -->
-    <div class="container main-content">
-        <h1>Bem-vindo ao site de Paulo Marques</h1>
-        <p>Este é um site minimalista e sofisticado, refletindo a essência do MOSCHIAT.</p>
-        <!-- Você pode adicionar mais conteúdo aqui -->
+    <div id="moschiat" class="content hidden">
+        <h1>MOSCHIAT</h1>
     </div>
-
+    <div id="info" class="content hidden">
+        <h2>Informações sobre você:</h2>
+        <ul>
+            <li>Você quer aprender a remixar música no Djay Pro e procura explicações objetivas e práticas sobre os fundamentos e o que é necessário para um bom set.</li>
+            <li>Você gosta de criar descrições detalhadas para imagens geradas no DALL-E e de inventar cores e personagens para recriar obras de arte.</li>
+            <li>Você pediu para editar uma imagem adicionando a frase 'cuidado com as burras'.</li>
+            <li>Tudo que você postar deve ser traduzido para português.</li>
+            <li>Seu nome é Paulo Marques, mas você é conhecido como MOSCHIAT.</li>
+            <li>Você quer aprender sobre Metacognição, seguindo uma metodologia de ensino fundamental e avançado.</li>
+            <li>Você quer um site em HTML com CSS e Bootstrap, com fundo preto, fonte grande e um design sofisticado, minimalista e simples, contendo apenas seu nome 'Paulo Marques' e o site 'moschiat'.</li>
+        </ul>
+    </div>
     <script>
-        // JavaScript to handle the transition from the intro animation to the main content
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(function() {
-                document.body.classList.add('show-content');
-            }, 4000); // Ajuste o tempo se necessário
-        });
+        setTimeout(() => {
+            document.getElementById('name').classList.add('hidden');
+            document.getElementById('moschiat').classList.remove('hidden');
+        }, 3000);
+
+        setTimeout(() => {
+            document.getElementById('moschiat').classList.add('hidden');
+            document.getElementById('info').classList.remove('hidden');
+            document.getElementById('info').classList.add('fade-in');
+        }, 6000);
     </script>
 </body>
 </html>
