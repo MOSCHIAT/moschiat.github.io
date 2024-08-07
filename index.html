@@ -15,63 +15,65 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
-            flex-direction: column;
+            overflow: hidden;
+            position: relative;
         }
         .container {
             text-align: center;
-            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
         }
         h1 {
             font-size: 4rem;
             margin-bottom: 1rem;
-            color: #ffffff;
+            animation: glow 2s ease-in-out infinite alternate;
+            z-index: 10;
             position: relative;
-            display: inline-block;
-            letter-spacing: 10px;
-            transform: perspective(500px) rotateX(20deg) rotateY(-30deg);
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-        }
-        h1::before, h1::after {
-            content: 'Paulo Marques';
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        h1::before {
-            color: #ff0000;
-            z-index: -2;
-            transform: translate3d(10px, 10px, -30px);
-        }
-        h1::after {
-            color: #00ff00;
-            z-index: -1;
-            transform: translate3d(5px, 5px, -15px);
         }
         p {
             font-size: 2rem;
+            z-index: 10;
+            position: relative;
         }
-        input[type="password"] {
-            padding: 10px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: white;
-            text-align: center;
+        .animated-text {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            white-space: nowrap;
+            animation: moveText 5s linear infinite;
         }
-        input[type="button"] {
-            margin-top: 10px;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            background-color: #555;
-            color: white;
-            cursor: pointer;
+        @keyframes moveText {
+            from {
+                left: 100%;
+            }
+            to {
+                left: -100%;
+            }
         }
-        input[type="button"]:hover {
-            background-color: #777;
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://example.com/chocolate-cake.jpg') repeat center center;
+            background-size: cover;
+            filter: blur(10px);
+            z-index: 5;
+            animation: scrollBackground 10s linear infinite;
+        }
+        @keyframes scrollBackground {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 100% 100%;
+            }
         }
         @media (max-width: 768px) {
             h1 {
@@ -80,28 +82,22 @@
             p {
                 font-size: 1.5rem;
             }
+            .animated-text {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="background"></div>
     <div class="container">
         <h1>Paulo Marques</h1>
-        <p>moschiat</p>
+        <p>MOSCHIAT</p>
     </div>
-    <div>
-        <input type="password" id="password" placeholder="Digite a senha">
-        <input type="button" value="Entrar" onclick="checkPassword()">
-    </div>
+    <div class="animated-text">v41 d4nd0 4 buc3t4d4 c0m v0nt4d3</div>
 
     <script>
-        function checkPassword() {
-            const password = document.getElementById('password').value;
-            if (password === 'alligatortears') {
-                window.location.href = 'https://moschiat.com/it';
-            } else {
-                alert('Senha incorreta. Tente novamente.');
-            }
-        }
+        // Script for additional interactions or future enhancements
     </script>
 </body>
 </html>
