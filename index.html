@@ -15,9 +15,11 @@
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+            flex-direction: column;
         }
         .container {
             text-align: center;
+            margin-bottom: 20px;
         }
         h1 {
             font-size: 4rem;
@@ -49,6 +51,28 @@
         p {
             font-size: 2rem;
         }
+        input[type="password"] {
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+        input[type="button"] {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #555;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #777;
+        }
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.5rem;
@@ -64,5 +88,20 @@
         <h1>Paulo Marques</h1>
         <p>moschiat</p>
     </div>
+    <div>
+        <input type="password" id="password" placeholder="Digite a senha">
+        <input type="button" value="Entrar" onclick="checkPassword()">
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === 'alligatortears') {
+                window.location.href = 'https://moschiat.com/it';
+            } else {
+                alert('Senha incorreta. Tente novamente.');
+            }
+        }
+    </script>
 </body>
 </html>
