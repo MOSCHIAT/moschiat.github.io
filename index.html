@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paulo Marques / MOSCHIAT</title>
+    <title>Who Am I - Paulo Marques | MOSCHIAT</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #f8f9fa; /* Cor de fundo suave */
+            background-color: #f8f9fa;
             color: #212529;
             text-align: center;
             overflow: hidden;
@@ -66,34 +66,88 @@
             color: #495057;
             margin-top: 20px;
         }
+
+        .short-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .container {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body>
 
-    <div id="name" class="content">
-        <h1 class="fw-bold">Paulo Marques</h1>
-    </div>
-    <div id="moschiat" class="content hidden">
-        <h1>MOSCHIAT</h1>
-    </div>
-    <div id="poem" class="poem hidden fade-in">
-        <p>Nos campos de luz e cor,<br>
-        A vida dança, brilha e canta,<br>
-        Cada dia um novo amor,<br>
-        A esperança é a nossa manta.</p>
+    <div class="container">
+        <div id="intro" class="content">
+            <h1 class="fw-bold">Paulo Marques</h1>
+            <p class="lead">Designer UX/UI & Desenvolvedor Python</p>
+        </div>
+
+        <div id="whoami" class="content hidden">
+            <p class="short-text">Eu sou apaixonado por criar experiências digitais.</p>
+        </div>
+
+        <div id="poem1" class="poem hidden">
+            <p>Nos campos de luz e cor,<br>
+            A vida dança, brilha e canta,<br>
+            Cada dia um novo amor,<br>
+            A esperança é a nossa manta.</p>
+        </div>
+
+        <div id="poem2" class="poem hidden">
+            <p>Em cada código, há um mundo,<br>
+            Um universo por desvendar,<br>
+            Com cada linha, eu me aprofundo,<br>
+            Para sempre inovar.</p>
+        </div>
+
+        <div id="poem3" class="poem hidden">
+            <p>A arte de criar e transformar,<br>
+            No design, encontramos o nosso ser,<br>
+            Cada pixel, uma história a contar,<br>
+            Com cada projeto, um novo amanhecer.</p>
+        </div>
+
+        <div id="button" class="content hidden">
+            <a href="#" class="btn btn-dark">Saiba mais</a>
+        </div>
     </div>
 
     <script>
         setTimeout(() => {
-            document.getElementById('name').classList.add('hidden');
-            document.getElementById('moschiat').classList.remove('hidden');
+            document.getElementById('intro').classList.add('hidden');
+            document.getElementById('whoami').classList.remove('hidden');
         }, 3000);
 
         setTimeout(() => {
-            document.getElementById('moschiat').classList.add('hidden');
-            document.getElementById('poem').classList.remove('hidden');
-            document.getElementById('poem').classList.add('fade-in');
+            document.getElementById('whoami').classList.add('hidden');
+            document.getElementById('poem1').classList.remove('hidden');
+            document.getElementById('poem1').classList.add('fade-in');
         }, 6000);
+
+        setTimeout(() => {
+            document.getElementById('poem1').classList.add('hidden');
+            document.getElementById('poem2').classList.remove('hidden');
+            document.getElementById('poem2').classList.add('fade-in');
+        }, 9000);
+
+        setTimeout(() => {
+            document.getElementById('poem2').classList.add('hidden');
+            document.getElementById('poem3').classList.remove('hidden');
+            document.getElementById('poem3').classList.add('fade-in');
+        }, 12000);
+
+        setTimeout(() => {
+            document.getElementById('poem3').classList.add('hidden');
+            document.getElementById('button').classList.remove('hidden');
+        }, 15000);
     </script>
 
 </body>
