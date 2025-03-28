@@ -1,141 +1,75 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Who Am I - Paulo Marques | MOSCHIAT</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <style>
-    /* Reset e configuração básica */
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      color: #212529;
-    }
-    main {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      text-align: center;
-    }
-    .hidden {
-      display: none;
-    }
-    .content {
-      transition: opacity 1s;
-    }
-    .fade-in {
-      opacity: 0;
-      animation: fadeIn 3s forwards;
-    }
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-    h1 {
-      font-size: 3rem;
-    }
-    .lead {
-      font-size: 1.25rem;
-    }
-    .short-text {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    .btn-dark {
-      padding: 10px 20px;
-      font-size: 1rem;
-      border-radius: 5px;
-    }
-    .poem {
-      font-size: 1.25rem;
-      margin-top: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSCHIAT</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+        h1 {
+            font-size: 5rem;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        .floating-text {
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0.7;
+            animation: float 5s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .btn-container {
+            position: absolute;
+            bottom: 20px;
+        }
+        .btn-dark {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-  <main>
-    <section id="intro" class="content">
-      <h1 class="fw-bold">Paulo Marques</h1>
-      <p class="lead">Designer UX/UI & Desenvolvedor Python</p>
-    </section>
-
-    <section id="whoami" class="content hidden">
-      <p class="short-text">Eu sou apaixonado por criar experiências digitais.</p>
-    </section>
-
-    <section id="poem1" class="poem hidden">
-      <p>
-        Nos campos de luz e cor,<br>
-        A vida dança, brilha e canta,<br>
-        Cada dia um novo amor,<br>
-        A esperança é a nossa manta.
-      </p>
-    </section>
-
-    <section id="poem2" class="poem hidden">
-      <p>
-        Em cada código, há um mundo,<br>
-        Um universo por desvendar,<br>
-        Com cada linha, eu me aprofundo,<br>
-        Para sempre inovar.
-      </p>
-    </section>
-
-    <section id="poem3" class="poem hidden">
-      <p>
-        A arte de criar e transformar,<br>
-        No design, encontramos o nosso ser,<br>
-        Cada pixel, uma história a contar,<br>
-        Com cada projeto, um novo amanhecer.
-      </p>
-    </section>
-
-    <section id="button" class="content hidden">
-      <a href="#" class="btn btn-dark">Saiba mais</a>
-    </section>
-  </main>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const sequence = [
-        { id: 'intro', delay: 3000, next: 'whoami' },
-        { id: 'whoami', delay: 3000, next: 'poem1' },
-        { id: 'poem1', delay: 3000, next: 'poem2' },
-        { id: 'poem2', delay: 3000, next: 'poem3' },
-        { id: 'poem3', delay: 3000, next: 'button' },
-      ];
-
-      let index = 0;
-      const runSequence = () => {
-        if (index < sequence.length) {
-          const current = sequence[index];
-          // Esconde o elemento atual
-          document.getElementById(current.id).classList.add('hidden');
-          // Exibe o próximo elemento, se existir
-          if (current.next) {
-            const nextElement = document.getElementById(current.next);
-            nextElement.classList.remove('hidden');
-            // Aplica efeito de fade-in para elementos de transição
-            if (current.next.startsWith('poem') || current.next === 'whoami') {
-              nextElement.classList.add('fade-in');
-            }
-          }
-          index++;
-          if (index < sequence.length) {
-            setTimeout(runSequence, sequence[index - 1].delay);
-          }
-        }
-      };
-
-      setTimeout(runSequence, sequence[0].delay);
-    });
-  </script>
+    <h1>MOSCHIAT</h1>
+    <div class="btn-container">
+        <a href="https://moschiat.github.io" class="btn btn-dark">Saiba mais</a>
+    </div>
+    <script>
+        const services = ["Design 3D", "Fotografia", "VFX", "Edição", "DJing", "Arte Digital"];
+        
+        services.forEach((service, index) => {
+            let span = document.createElement("span");
+            span.className = "floating-text";
+            span.innerText = service;
+            document.body.appendChild(span);
+            
+            let x = Math.random() * window.innerWidth * 0.8;
+            let y = Math.random() * window.innerHeight * 0.8;
+            
+            span.style.left = `${x}px`;
+            span.style.top = `${y}px`;
+        });
+    </script>
 </body>
 </html>
