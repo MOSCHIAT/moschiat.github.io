@@ -18,6 +18,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
             overflow: hidden;
             position: relative;
@@ -40,8 +41,7 @@
             50% { transform: translateY(-10px); }
         }
         .btn-container {
-            position: absolute;
-            bottom: 20px;
+            margin-top: 20px;
         }
         .btn-dark {
             padding: 10px 20px;
@@ -53,15 +53,15 @@
 <body>
     <h1>MOSCHIAT</h1>
     <div class="btn-container">
-        <a href="https://moschiat.github.io" class="btn btn-dark">Saiba mais</a>
+        <a href="https://moschiat.github.io/home" class="btn btn-dark">Entrar</a>
     </div>
     <script>
-        const services = ["Design 3D", "Fotografia", "VFX", "Edição", "DJing", "Arte Digital"];
+        const keywords = ["AI", "UX", "Design", "Fotografia", "Audiovisual"];
         
-        services.forEach((service, index) => {
+        keywords.forEach(keyword => {
             let span = document.createElement("span");
             span.className = "floating-text";
-            span.innerText = service;
+            span.innerText = keyword;
             document.body.appendChild(span);
             
             let x = Math.random() * window.innerWidth * 0.8;
