@@ -1,197 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Janela de Senha e Meu Site</title>
+    <title>Área Exclusiva | MOSCHIAT</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        #main-content {
-            filter: blur(10px);
-            opacity: 0.5;
-            transition: filter 0.5s, opacity 0.5s;
-        }
-
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        #main-content { filter: blur(10px); opacity: 0.5; transition: filter 0.5s, opacity 0.5s; }
         #password-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.9); display: flex;
+            align-items: center; justify-content: center; z-index: 1000;
         }
-
-        .card {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #0066cc;
-        }
-
-        .card-body {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .btn-whatsapp {
-            background-color: #25d366;
-            color: white;
-            font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #1ebe5b;
-        }
-
-        .footer-links {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .footer-links a {
-            margin: 0 10px;
-            color: #0066cc;
-        }
-
-        .img-container {
-            text-align: center;
-            flex: 1;
-            padding: 10px;
-            position: relative;
-        }
-
-        .img-container img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            display: none;
-        }
-
-        .img-container img.active {
-            display: block;
-        }
-
-        .small-text {
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        .buy-access-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .buy-access-container img {
-            margin-right: 10px;
-            height: 30px;
-        }
+        .card { max-width: 400px; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; }
+        .btn-whatsapp { background: #25d366; color: white; font-weight: bold; }
+        .btn-whatsapp:hover { background: #1ebe5b; }
+        .footer-links a { margin: 0 10px; color: #0066cc; }
     </style>
 </head>
-
 <body>
-    <div id="password-overlay" aria-labelledby="password-overlay">
+    <div id="password-overlay">
         <div class="card">
-            <div class="card-body">
-                <div class="card-header">
-                    Área Exclusiva para Membros
+            <h4>Área Exclusiva</h4>
+            <p>Tenha acesso a Fotografias, PDFs, Vídeos e Insights.<br>"A arte é o que eu faço você ver".</p>
+            <form id="password-form">
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" placeholder="Senha de acesso" required>
                 </div>
-                <p class="small-text">Um lugar onde compartilho minhas experiências, projetos.<br>
-                    Tenha acesso a Fotografias, PDFs, Vídeos e Insights<br>
-                    "A arte é o que eu faço você ver".</p>
-                <form id="password-form" aria-label="Formulário de senha">
-                    <div class="form-group">
-                        <label for="password" class="sr-only">Senha de acesso</label>
-                        <input type="password" class="form-control" id="password" placeholder="Senha de acesso" required>
-                    </div>
-                    <button type="button" class="btn btn-whatsapp btn-block" onclick="checkPassword()">
-                        Entrar
-                    </button>
-                    <div class="buy-access-container">
-                        <button type="submit" class="btn btn-primary btn-sm">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjDGXYrRe5vPe6Wfu-eVgRlq7oxebCR3RuzXKOb_0we9ytZxMaVpmFWJ3eWUBZNNpT5YRHBX2gbtCNvyfLBcQDSGnAd5n_ff7u5dq56K37go3mMiXo3StJDDf7SUP0ziN8L6cxSkhFeDVd52V2NPmWOrxn0pZtBJaUiGQ3iLmutvg6vzAYR9-Lro1SzMLXX/s1600/image_2024-07-14_223838502.png" alt="Ícone" style="height: 20px; margin-right: 5px;">
-                            Comprar acesso
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <div class="footer-links">
-                <a href="#">Fotografia</a>
-                <a href="#">Conteúdo +18</a>
-                <a href="#">Curadoria Musical</a>
-                <a href="#">AudioVisual</a>
-            </div>
+                <button type="button" class="btn btn-whatsapp btn-block" onclick="checkPassword()">Entrar</button>
+            </form>
+            <a href="#" class="btn btn-primary btn-sm mt-3">Comprar acesso</a>
         </div>
     </div>
-
-    <div id="main-content" aria-labelledby="main-content">
-        <!-- Meu Site HTML content starts aqui -->
-        <header class="text-center py-4">
-            <img src="https://1.bp.blogspot.com/-7dOxTmshjp8/XkrYD1xd8rI/AAAAAAABCI4/iZnnnSu43p8zdRvTbbcZZ0_ZB36_NTp7wCK4BGAYYCw/s792/chiat%2B2.png" alt="Logo do site" class="img-fluid">
-        </header>
-
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navegação principal">
+    
+    <div id="main-content">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="#">MOSCHIAT</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item"><a class="nav-link" href="#">Curadoria musical</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Curadoria Musical</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Playlist</a></li>
                         <li class="nav-item"><a class="nav-link" href="#">Serviços</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
-
+        
         <div class="container text-center my-4">
-            <p>"A arte é o que eu faço você ver".<br>好奇心旺盛な人は誰でも何かを得る</p>
-            <p>Sou apaixonado por criatividade e inovação em todas as formas. Este site é um reflexo da minha jornada criativa, um lugar onde compartilho minhas experiências, projetos e insights. Seja bem-vindo e explore comigo as infinitas possibilidades da arte e da tecnologia.</p>
+            <h2>Bem-vindo!</h2>
+            <p>Sou apaixonado por criatividade e inovação. Este espaço é um reflexo da minha jornada criativa.</p>
         </div>
-
-        <div class="slideshow-container">
-            <div class="mySlides fade">
-                <div class="numbertext">1 / 3</div>
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlM8THVsOfGhOQZoGFqwBL9TCp5WFKP--CYLgXgorq_6jxqgoUbUQiSH7YIGEuO6owKH-zMjV6HqnJHUYdve3hbuj1O6_uTjAWTb12faOqDtwIq0UPWgLfQbYt6zvErthZ5hVHs9dCrSQwZmV2uL0VcfZ0I-spBTUX-wPv6TTGg9iR2EFR_IPmnJHnLnna/s320/IMG_8501.JPG" alt="Imagem 1" style="width:100%">
-                <div class="text">Caption Text</div>
-            </div>
-            <!-- Slideshow continua... -->
-        </div>
-
+        
         <footer class="text-center py-4">
-            <p>&copy; 2024 MOSCHIAT. Todos os direitos reservados.</p>
+            <p>&copy; 2025 MOSCHIAT. Todos os direitos reservados.</p>
         </footer>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         function checkPassword() {
             var password = document.getElementById('password').value;
@@ -204,7 +73,6 @@
                 alert('Senha incorreta!');
             }
         }
-
         window.onload = function() {
             if (localStorage.getItem('accessGranted') === 'true') {
                 document.getElementById('password-overlay').style.display = 'none';
@@ -213,6 +81,8 @@
             }
         };
     </script>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>
