@@ -15,6 +15,7 @@
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            overflow: hidden;
         }
         #authContainer {
             display: none;
@@ -28,7 +29,8 @@
             box-shadow: 0 0 10px white;
         }
         #mainContent {
-            display: none;
+            filter: blur(10px);
+            transition: filter 0.5s;
         }
         img {
             width: 100px;
@@ -41,14 +43,17 @@
 <body>
     <h1>MOSCHIAT</h1>
     <div id="authContainer">
-        <img src="https://via.placeholder.com/100" alt="Imagem de autenticação">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Cat03.jpg" alt="Imagem de autenticação">
         <p>Digite a senha para acessar:</p>
         <input type="password" id="passwordInput">
         <button onclick="checkPassword()">Entrar</button>
     </div>
     <div id="mainContent">
         <h2>Bem-vindo ao site!</h2>
-        <p>Conteúdo principal aqui.</p>
+        <p>Este site é dedicado ao universo do Blender! Aqui você encontrará dicas, tutoriais e projetos envolvendo modelagem 3D, texturização e animação. Explore técnicas avançadas, descubra novos workflows e aprimore suas habilidades com a poderosa ferramenta de criação 3D.</p>
+     <p>Este site é dedicado ao universo do Blender! Aqui você encontrará dicas, tutoriais e projetos envolvendo modelagem 3D, texturização e animação. Explore técnicas avançadas, descubra novos workflows e aprimore suas habilidades com a poderosa ferramenta de criação 3D.</p>
+     <p>Este site é dedicado ao universo do Blender! Aqui você encontrará dicas, tutoriais e projetos envolvendo modelagem 3D, texturização e animação. Explore técnicas avançadas, descubra novos workflows e aprimore suas habilidades com a poderosa ferramenta de criação 3D.</p>
+     <p>Este site é dedicado ao universo do Blender! Aqui você encontrará dicas, tutoriais e projetos envolvendo modelagem 3D, texturização e animação. Explore técnicas avançadas, descubra novos workflows e aprimore suas habilidades com a poderosa ferramenta de criação 3D.</p>
     </div>
     <script>
         setTimeout(() => {
@@ -59,7 +64,7 @@
             const password = document.getElementById('passwordInput').value;
             if (password === "123") {
                 document.getElementById('authContainer').style.display = 'none';
-                document.getElementById('mainContent').style.display = 'block';
+                document.getElementById('mainContent').style.filter = 'blur(0)';
             } else {
                 alert('Senha incorreta!');
             }
