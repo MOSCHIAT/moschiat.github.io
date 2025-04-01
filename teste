@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSCHIAT</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        #authContainer {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px white;
+        }
+        #mainContent {
+            display: none;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+            display: block;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>MOSCHIAT</h1>
+    <div id="authContainer">
+        <img src="https://via.placeholder.com/100" alt="Imagem de autenticação">
+        <p>Digite a senha para acessar:</p>
+        <input type="password" id="passwordInput">
+        <button onclick="checkPassword()">Entrar</button>
+    </div>
+    <div id="mainContent">
+        <h2>Bem-vindo ao site!</h2>
+        <p>Conteúdo principal aqui.</p>
+    </div>
+    <script>
+        setTimeout(() => {
+            document.getElementById('authContainer').style.display = 'block';
+        }, 3000);
+
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === "123") {
+                document.getElementById('authContainer').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            } else {
+                alert('Senha incorreta!');
+            }
+        }
+    </script>
+</body>
+</html>
