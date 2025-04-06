@@ -32,7 +32,6 @@
     .btn-whatsapp:hover { background: #1ebe5b; }
     .footer-links a { margin: 0 10px; color: #0066cc; }
 
-    /* Animação das palavras */
     .word-cloud {
       display: flex;
       flex-wrap: wrap;
@@ -54,7 +53,12 @@
       100% { transform: translateY(0px); opacity: 1; }
     }
 
-    .poem { margin: 40px auto; max-width: 700px; font-style: italic; font-size: 1.1rem; }
+    .poem {
+      margin: 40px auto;
+      max-width: 700px;
+      font-style: italic;
+      font-size: 1.1rem;
+    }
   </style>
 </head>
 <body>
@@ -95,7 +99,6 @@
     </div>
 
     <div class="word-cloud">
-      <!-- 27 palavras aleatórias -->
       <span class="word">imaginário</span><span class="word">nômade</span><span class="word">sintético</span>
       <span class="word">fluido</span><span class="word">metaverso</span><span class="word">ressonância</span>
       <span class="word">intuição</span><span class="word">vórtice</span><span class="word">colapso</span>
@@ -108,36 +111,11 @@
     </div>
 
     <div class="container">
-      <div class="poem">🌌<br>
-        Em cada traço, um universo escondido,<br>
-        A arte revela o que está contido.<br>
-        Num piscar, nasce o infinito,<br>
-        Onde o silêncio é também um grito.
-      </div>
-      <div class="poem">
-        As cores dançam no espaço do ser,<br>
-        Fragmentos de um sonho a florescer.<br>
-        Real e irreal se entrelaçam,<br>
-        E os limites se desfazem — passam.
-      </div>
-      <div class="poem">
-        Vibração que pulsa dentro do som,<br>
-        Como ondas do mar em tom.<br>
-        O ritmo é um portal,<br>
-        Para um mundo imaterial.
-      </div>
-      <div class="poem">
-        Crio para lembrar quem sou,<br>
-        No traço imperfeito onde vou.<br>
-        Não é destino nem fim,<br>
-        É o agora, dentro de mim.
-      </div>
-      <div class="poem">
-        No caos, encontro beleza,<br>
-        Na falha, uma fortaleza.<br>
-        O estranho é meu lugar,<br>
-        E nele aprendo a voar.
-      </div>
+      <div class="poem">🌌<br>Em cada traço, um universo escondido,<br>A arte revela o que está contido.<br>Num piscar, nasce o infinito,<br>Onde o silêncio é também um grito.</div>
+      <div class="poem">As cores dançam no espaço do ser,<br>Fragmentos de um sonho a florescer.<br>Real e irreal se entrelaçam,<br>E os limites se desfazem — passam.</div>
+      <div class="poem">Vibração que pulsa dentro do som,<br>Como ondas do mar em tom.<br>O ritmo é um portal,<br>Para um mundo imaterial.</div>
+      <div class="poem">Crio para lembrar quem sou,<br>No traço imperfeito onde vou.<br>Não é destino nem fim,<br>É o agora, dentro de mim.</div>
+      <div class="poem">No caos, encontro beleza,<br>Na falha, uma fortaleza.<br>O estranho é meu lugar,<br>E nele aprendo a voar.</div>
     </div>
 
     <footer class="text-center py-4">
@@ -157,7 +135,7 @@
 
     function checkPassword() {
       var password = document.getElementById('password').value;
-      if (hashCode(password) === 1826857162) { // hash para "123amor"
+      if (hashCode(password) === 1826857162) {
         document.getElementById('password-overlay').style.display = 'none';
         document.getElementById('main-content').style.filter = 'none';
         document.getElementById('main-content').style.opacity = '1';
