@@ -2,124 +2,198 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Área Exclusiva | MOSCHIAT</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    #main-content {
-      filter: blur(10px);
-      opacity: 0.5;
-      transition: filter 0.5s, opacity 0.5s;
+    :root {
+      --grad1: #0f0c29;
+      --grad2: #302b63;
+      --grad3: #24243e;
+      --highlight: #25d366;
+      --text-glow: 0 0 10px #fff, 0 0 20px #00f, 0 0 30px #0ff;
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, var(--grad1), var(--grad2), var(--grad3));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     #password-overlay {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      background: rgba(0, 0, 0, 0.7);
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 1000;
     }
+
     .card {
-      max-width: 400px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      background: #111;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
       text-align: center;
     }
-    .btn-whatsapp { background: #25d366; color: white; font-weight: bold; }
-    .btn-whatsapp:hover { background: #1ebe5b; }
-    .footer-links a { margin: 0 10px; color: #0066cc; }
+
+    input[type="password"] {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      background: #333;
+      color: #fff;
+    }
+
+    .btn {
+      background: var(--highlight);
+      border: none;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #1ebe5b;
+    }
+
+    #main-content {
+      opacity: 0;
+      filter: blur(20px);
+      transition: all 1s ease;
+    }
+
+    nav {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--highlight);
+    }
+
+    .intro {
+      text-align: center;
+      padding: 4rem 2rem;
+      font-size: 1.2rem;
+    }
 
     .word-cloud {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
-      padding: 30px;
+      gap: 12px;
+      padding: 2rem;
     }
+
     .word {
-      font-size: 1.2rem;
-      font-weight: bold;
-      animation: float 6s ease-in-out infinite;
-      background: linear-gradient(to right, #0099ff, #ff66cc);
+      font-size: 1.3rem;
+      background: linear-gradient(45deg, #00f0ff, #ff00f0);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      animation: float 5s ease-in-out infinite;
     }
+
     @keyframes float {
-      0%   { transform: translateY(0px); opacity: 1; }
-      50%  { transform: translateY(-10px); opacity: 0.7; }
-      100% { transform: translateY(0px); opacity: 1; }
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
     }
 
     .poem {
-      margin: 40px auto;
       max-width: 700px;
+      margin: 30px auto;
       font-style: italic;
+      text-align: center;
       font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.4);
+      font-size: 0.9rem;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
   <div id="password-overlay">
     <div class="card">
-      <h4>Área Exclusiva</h4>
-      <p>Tenha acesso a Fotografias, PDFs, Vídeos e Insights.<br>"A arte é o que eu faço você ver".</p>
-      <form id="password-form">
-        <div class="form-group">
-          <input type="password" class="form-control" id="password" placeholder="Senha de acesso" required>
-        </div>
-        <button type="button" class="btn btn-whatsapp btn-block" onclick="checkPassword()">Entrar</button>
-      </form>
-      <a href="#" class="btn btn-primary btn-sm mt-3">Comprar acesso</a>
+      <h2>🧿 MOSCHIAT AREA</h2>
+      <p>"A arte é o que eu faço você ver."</p>
+      <input type="password" id="password" placeholder="Digite a senha secreta">
+      <button class="btn" onclick="checkPassword()">Entrar</button>
+      <p style="margin-top:1rem;"><a href="#" style="color:#aaa; font-size: 0.9rem;">Comprar acesso 🔐</a></p>
     </div>
   </div>
 
   <div id="main-content">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="#">MOSCHIAT</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="#">Curadoria Musical</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Playlist</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Serviços</a></li>
-          </ul>
-        </div>
+    <nav>
+      <div><strong>MOSCHIAT</strong></div>
+      <div>
+        <a href="#">Curadoria Musical</a>
+        <a href="#">Playlist</a>
+        <a href="#">Serviços</a>
       </div>
     </nav>
 
-    <div class="container text-center my-4">
-      <h2>Bem-vindo!</h2>
-      <p>Sou apaixonado por criatividade e inovação. Este espaço é um reflexo da minha jornada criativa.</p>
-    </div>
+    <section class="intro">
+      <h2>Seja bem-vindo ao universo criativo do MOSCHIAT.</h2>
+      <p>Arte, caos, propósito, pulsação. Este espaço é um portal entre o real e o imaterial.</p>
+    </section>
 
     <div class="word-cloud">
-      <span class="word">imaginário</span><span class="word">nômade</span><span class="word">sintético</span>
-      <span class="word">fluido</span><span class="word">metaverso</span><span class="word">ressonância</span>
-      <span class="word">intuição</span><span class="word">vórtice</span><span class="word">colapso</span>
-      <span class="word">origem</span><span class="word">luz</span><span class="word">espiral</span>
-      <span class="word">frequência</span><span class="word">transcender</span><span class="word">realidade</span>
-      <span class="word">código</span><span class="word">fluxo</span><span class="word">infinito</span>
-      <span class="word">criar</span><span class="word">despertar</span><span class="word">analógico</span>
-      <span class="word">visão</span><span class="word">desconhecido</span><span class="word">onda</span>
-      <span class="word">etéreo</span><span class="word">pulsar</span><span class="word">moschiat</span>
+      <span class="word">nômade</span><span class="word">etéreo</span><span class="word">intuição</span>
+      <span class="word">realidade</span><span class="word">fluxo</span><span class="word">moschiat</span>
+      <span class="word">código</span><span class="word">origem</span><span class="word">espiral</span>
+      <span class="word">ressonância</span><span class="word">despertar</span><span class="word">vórtice</span>
     </div>
 
-    <div class="container">
-      <div class="poem">🌌<br>Em cada traço, um universo escondido,<br>A arte revela o que está contido.<br>Num piscar, nasce o infinito,<br>Onde o silêncio é também um grito.</div>
-      <div class="poem">As cores dançam no espaço do ser,<br>Fragmentos de um sonho a florescer.<br>Real e irreal se entrelaçam,<br>E os limites se desfazem — passam.</div>
-      <div class="poem">Vibração que pulsa dentro do som,<br>Como ondas do mar em tom.<br>O ritmo é um portal,<br>Para um mundo imaterial.</div>
-      <div class="poem">Crio para lembrar quem sou,<br>No traço imperfeito onde vou.<br>Não é destino nem fim,<br>É o agora, dentro de mim.</div>
-      <div class="poem">No caos, encontro beleza,<br>Na falha, uma fortaleza.<br>O estranho é meu lugar,<br>E nele aprendo a voar.</div>
-    </div>
+    <div class="poem">🌌<br>Em cada traço, um universo escondido,<br>A arte revela o que está contido.<br>Num piscar, nasce o infinito,<br>Onde o silêncio é também um grito.</div>
+    <div class="poem">As cores dançam no espaço do ser,<br>Fragmentos de um sonho a florescer.<br>Real e irreal se entrelaçam,<br>E os limites se desfazem — passam.</div>
+    <div class="poem">No caos, encontro beleza,<br>Na falha, uma fortaleza.<br>O estranho é meu lugar,<br>E nele aprendo a voar.</div>
 
-    <footer class="text-center py-4">
-      <p>&copy; 2025 MOSCHIAT. Todos os direitos reservados.</p>
+    <footer>
+      &copy; 2025 MOSCHIAT • Arte. Código. Liberdade.
     </footer>
   </div>
 
@@ -134,27 +208,26 @@
     }
 
     function checkPassword() {
-      var password = document.getElementById('password').value;
+      const password = document.getElementById("password").value;
       if (hashCode(password) === 1826857162) {
-        document.getElementById('password-overlay').style.display = 'none';
-        document.getElementById('main-content').style.filter = 'none';
-        document.getElementById('main-content').style.opacity = '1';
-        localStorage.setItem('accessGranted', 'true');
+        document.getElementById("password-overlay").style.display = "none";
+        const main = document.getElementById("main-content");
+        main.style.opacity = "1";
+        main.style.filter = "none";
+        localStorage.setItem("accessGranted", "true");
       } else {
-        alert('Senha incorreta!');
+        alert("Senha incorreta.");
       }
     }
 
-    window.onload = function() {
-      if (localStorage.getItem('accessGranted') === 'true') {
-        document.getElementById('password-overlay').style.display = 'none';
-        document.getElementById('main-content').style.filter = 'none';
-        document.getElementById('main-content').style.opacity = '1';
+    window.onload = () => {
+      if (localStorage.getItem("accessGranted") === "true") {
+        document.getElementById("password-overlay").style.display = "none";
+        const main = document.getElementById("main-content");
+        main.style.opacity = "1";
+        main.style.filter = "none";
       }
     };
   </script>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
