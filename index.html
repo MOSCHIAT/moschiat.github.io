@@ -37,33 +37,93 @@
       align-items: center;
       justify-content: center;
       z-index: 1000;
+      transition: all 0.5s ease;
     }
     .card {
-      background: #111;
+      background: rgba(17, 17, 17, 0.8);
       border-radius: 16px;
       padding: 30px;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1),
+                  0 0 50px rgba(37, 211, 102, 0.3);
       text-align: center;
+      transform-style: preserve-3d;
+      transition: all 0.5s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.1) 20%,
+        rgba(255, 255, 255, 0) 40%
+      );
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
+    @keyframes shine {
+      0% { transform: rotate(30deg) translate(-30%, -30%); }
+      100% { transform: rotate(30deg) translate(30%, 30%); }
     }
     input[type="password"] {
-      padding: 10px;
+      padding: 15px;
       width: 100%;
-      margin: 10px 0;
+      margin: 20px 0;
       border-radius: 8px;
-      border: none;
-      background: #333;
+      border: 2px solid #333;
+      background: rgba(51, 51, 51, 0.5);
       color: #fff;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    input[type="password"]:focus {
+      outline: none;
+      border-color: var(--highlight);
+      box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
     }
     .btn {
       background: var(--highlight);
       border: none;
-      padding: 10px 20px;
+      padding: 12px 25px;
       font-weight: bold;
       border-radius: 6px;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 15px;
+      color: #111;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
     }
-    .btn:hover { background: #1ebe5b; }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+      z-index: -1;
+    }
+    .btn:hover {
+      background: #1ebe5b;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .btn:hover::before {
+      left: 100%;
+    }
+    .btn:active {
+      transform: translateY(0);
+    }
 
     canvas {
       display: block;
@@ -73,12 +133,124 @@
       height: 100%;
       z-index: 0;
     }
+    
+    .hidden {
+      display: none;
+    }
+    
+    /* Efeito de partículas */
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    /* Efeito de glitch */
+    .glitch {
+      position: relative;
+    }
+    .glitch::before, .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(17, 17, 17, 0.8);
+    }
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 #ff00ff;
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim 5s infinite linear alternate-reverse;
+    }
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 #00ffff;
+      clip: rect(44px, 450px, 56px, 0);
+      animation: glitch-anim2 5s infinite linear alternate-reverse;
+    }
+    @keyframes glitch-anim {
+      0% { clip: rect(31px, 9999px, 94px, 0); }
+      20% { clip: rect(112px, 9999px, 76px, 0); }
+      40% { clip: rect(75px, 9999px, 107px, 0); }
+      60% { clip: rect(98px, 9999px, 109px, 0); }
+      80% { clip: rect(95px, 9999px, 52px, 0); }
+      100% { clip: rect(31px, 9999px, 113px, 0); }
+    }
+    @keyframes glitch-anim2 {
+      0% { clip: rect(112px, 9999px, 76px, 0); }
+      20% { clip: rect(85px, 9999px, 66px, 0); }
+      40% { clip: rect(66px, 9999px, 103px, 0); }
+      60% { clip: rect(106px, 9999px, 73px, 0); }
+      80% { clip: rect(48px, 9999px, 119px, 0); }
+      100% { clip: rect(30px, 9999px, 113px, 0); }
+    }
+    
+    /* Botão secreto */
+    .secret-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 1001;
+    }
+    .secret-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.1);
+    }
+    
+    /* Área secreta */
+    #secret-area {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1002;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.5s ease;
+    }
+    #secret-area.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    #secret-content {
+      max-width: 600px;
+      padding: 30px;
+      background: #111;
+      border-radius: 16px;
+      text-align: center;
+    }
+    .close-secret {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff3366;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <div id="password-overlay">
     <div class="card">
-      <h2>🧿 MOSCHIAT AREA</h2>
+      <h2 class="glitch" data-text="🧿 MOSCHIAT AREA">🧿 MOSCHIAT AREA</h2>
       <p>"A arte é o que eu faço você ver."</p>
       <input type="password" id="password" placeholder="Digite a senha secreta">
       <button class="btn" onclick="checkPassword()">Entrar</button>
@@ -86,11 +258,49 @@
     </div>
   </div>
 
+  <div id="particles-js"></div>
+  
   <canvas id="webgl" class="hidden"></canvas>
+  
+  <button class="secret-btn" id="secret-btn" title="Área secreta"></button>
+  
+  <div id="secret-area">
+    <div id="secret-content">
+      <h2>Área Secreta Desbloqueada</h2>
+      <p>Parabéns por encontrar este easter egg!</p>
+      <p>Aqui está um código especial: <strong>MOSCHIAT-X2023</strong></p>
+      <button class="close-secret" onclick="closeSecretArea()">Fechar</button>
+    </div>
+  </div>
 
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script type="module">
     import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
     import { SVGLoader } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/SVGLoader.js';
+    import { EffectComposer } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/RenderPass.js';
+    import { GlitchPass } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/GlitchPass.js';
+    import { UnrealBloomPass } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/postprocessing/UnrealBloomPass.js';
+
+    // Configuração das partículas
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+        move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        }
+      }
+    });
 
     const canvas = document.getElementById('webgl');
     const scene = new THREE.Scene();
@@ -99,6 +309,24 @@
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x000000, 0);
+
+    // Configuração do pós-processamento
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      1.5, 0.4, 0.85
+    );
+    bloomPass.threshold = 0;
+    bloomPass.strength = 1.5;
+    bloomPass.radius = 0.5;
+    composer.addPass(bloomPass);
+    
+    const glitchPass = new GlitchPass();
+    glitchPass.goWild = false;
+    composer.addPass(glitchPass);
 
     const loader = new SVGLoader();
     const svgData = `
@@ -117,7 +345,12 @@
         const shapes = SVGLoader.createShapes(path);
         shapes.forEach((shape) => {
           const geometry = new THREE.ShapeGeometry(shape);
-          const material = new THREE.MeshBasicMaterial({ color: 0xffffff, side: THREE.DoubleSide });
+          const material = new THREE.MeshBasicMaterial({ 
+            color: 0xffffff,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.9
+          });
           const mesh = new THREE.Mesh(geometry, material);
           group.add(mesh);
         });
@@ -125,31 +358,111 @@
       group.scale.set(0.25, -0.25, 0.25);
       group.position.x = -50;
       scene.add(group);
+      
+      // Adicionar luzes
+      const ambientLight = new THREE.AmbientLight(0x404040);
+      scene.add(ambientLight);
+      
+      const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+      directionalLight.position.set(1, 1, 1);
+      scene.add(directionalLight);
+      
+      const pointLight = new THREE.PointLight(0x25d366, 1, 100);
+      pointLight.position.set(0, 0, 50);
+      scene.add(pointLight);
     });
 
     window.addEventListener('resize', () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+      bloomPass.setSize(window.innerWidth, window.innerHeight);
     });
 
     function animate() {
       requestAnimationFrame(animate);
-      if (group) group.rotation.y += 0.005;
-      renderer.render(scene, camera);
+      if (group) {
+        group.rotation.y += 0.005;
+        group.rotation.x += 0.001;
+      }
+      composer.render();
     }
     animate();
 
     // Função de senha
     function checkPassword() {
       const input = document.getElementById('password').value;
-      if (input === 'moschiat123') {
-        document.getElementById('password-overlay').style.display = 'none';
-        canvas.classList.remove('hidden');
+      if (input === '123') {
+        document.getElementById('password-overlay').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('password-overlay').style.display = 'none';
+          canvas.classList.remove('hidden');
+          
+          // Efeito de confetti ao entrar
+          for(let i = 0; i < 150; i++) {
+            createConfetti();
+          }
+        }, 500);
       } else {
-        alert("Senha incorreta, tente 'moschiat123'.");
+        // Efeito de erro na senha
+        const card = document.querySelector('.card');
+        card.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+          card.style.animation = '';
+        }, 500);
       }
     }
+    
+    // Botão secreto
+    let secretClickCount = 0;
+    document.getElementById('secret-btn').addEventListener('click', () => {
+      secretClickCount++;
+      if (secretClickCount >= 5) {
+        document.getElementById('secret-area').classList.add('active');
+        secretClickCount = 0;
+      }
+    });
+    
+    function closeSecretArea() {
+      document.getElementById('secret-area').classList.remove('active');
+    }
+    
+    // Efeito de confetti
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+      confetti.style.width = Math.random() * 10 + 5 + 'px';
+      confetti.style.height = Math.random() * 10 + 5 + 'px';
+      document.body.appendChild(confetti);
+      
+      setTimeout(() => {
+        confetti.style.opacity = '0';
+        confetti.style.transform = `translateY(${Math.random() * 500 + 500}px) rotate(${Math.random() * 360}deg)`;
+        setTimeout(() => {
+          confetti.remove();
+        }, 1000);
+      }, 10);
+    }
   </script>
+  
+  <style>
+    .confetti {
+      position: fixed;
+      top: -10px;
+      z-index: 9999;
+      opacity: 1;
+      transition: all 1s ease;
+      pointer-events: none;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+      20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+  </style>
 </body>
 </html>
