@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Área Exclusiva | MOSCHIAT</title>
+  <style>
+    :root {
+      --grad1: #0f0c29;
+      --grad2: #302b63;
+      --grad3: #24243e;
+      --highlight: #25d366;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    #splash {
+      background: #000;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      animation: fadeOut 1s ease 5s forwards;
+    }
+
+    svg {
+      width: 80%;
+      height: auto;
+    }
+
+    .path {
+      fill: none;
+      stroke: #00ffae;
+      stroke-width: 3;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw 4s ease forwards;
+    }
+
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    #main-content {
+      background: linear-gradient(-45deg, var(--grad1), var(--grad2), var(--grad3));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #fff;
+      width: 100%;
+      height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .card {
+      background: rgba(17, 17, 17, 0.8);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1),
+                  0 0 50px rgba(37, 211, 102, 0.3);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 20%, rgba(255,255,255,0) 40%);
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: rotate(30deg) translate(-30%, -30%); }
+      100% { transform: rotate(30deg) translate(30%, 30%); }
+    }
+
+    input[type="password"] {
+      padding: 15px;
+      width: 100%;
+      margin: 20px 0;
+      border-radius: 8px;
+      border: 2px solid #333;
+      background: rgba(51, 51, 51, 0.5);
+      color: #fff;
+      font-size: 16px;
+    }
+
+    input[type="password"]:focus {
+      outline: none;
+      border-color: var(--highlight);
+      box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
+    }
+
+    .btn {
+      background: var(--highlight);
+      border: none;
+      padding: 12px 25px;
+      font-weight: bold;
+      border-radius: 6px;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Splash screen -->
+<div id="splash">
+  <svg viewBox="0 0 800 200">
+    <text x="50" y="140" font-size="120" font-family="Arial Black, sans-serif" class="path">MOSCHIAT</text>
+  </svg>
+</div>
+
+<!-- Conteúdo principal -->
+<div id="main-content">
+  <div class="card">
+    <h2>Área Exclusiva</h2>
+    <p>Digite a senha para continuar:</p>
+    <input type="password" id="senha" placeholder="Senha..." />
+    <button class="btn" onclick="verificarSenha()">Entrar</button>
+    <div class="error" id="erroSenha"></div>
+  </div>
+</div>
+
+<script>
+  // Mostrar conteúdo após splash
+  setTimeout(() => {
+    document.getElementById("main-content").style.display = "flex";
+  }, 5000);
+
+  function verificarSenha() {
+    const senhaCorreta = "moschiat123"; // Altere para a senha desejada
+    const senhaDigitada = document.getElementById("senha").value;
+
+    if (senhaDigitada === senhaCorreta) {
+      window.location.href = "pagina-secreta.html"; // Página de destino após senha correta
+    } else {
+      document.getElementById("erroSenha").textContent = "Senha incorreta. Tente novamente.";
+    }
+  }
+</script>
+
+</body>
+</html>
