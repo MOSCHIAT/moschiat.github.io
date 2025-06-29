@@ -1,836 +1,241 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>MOSCHIAT | Paulo Marques - Desenvolvedor & Designer</title>
-    <link rel="shortcut icon" href="http://moschiat.com/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="http://moschiat.com/favicon.ico" type="image/x-icon">
-
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSCHIAT | Área Exclusiva</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
     <style>
+        /* --- Variáveis CSS para Cores e Reusabilidade --- */
         :root {
-            --primary: #00ffae;
-            --primary-dark: #00b377;
-            --secondary: #1a1a1a;
-            --background: #0a0a0a;
-            --card-bg: rgba(26, 26, 26, 0.95);
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-muted: #808080;
-            --border: rgba(255, 255, 255, 0.1);
-            --shadow: rgba(0, 0, 0, 0.3);
-            --accent: #2a2a2a;
+            --color-dark-bg: #0A0A0F; /* Fundo principal bem escuro */
+            --color-gradient-start: #1A1A2E; /* Início do gradiente suave */
+            --color-gradient-mid: #0F0C29;   /* Meio do gradiente */
+            --color-gradient-end: #01010A;   /* Fim do gradiente */
+            --color-primary-accent: #00BCD4; /* Ciano/Turquesa moderno para destaque */
+            --color-secondary-accent: #8BC34A; /* Verde suave para complementar */
+            --color-text-light: #E0E0E0; /* Texto claro para contraste */
+            --color-text-muted: #B0B0B0; /* Texto mais suave para descrições */
+            --color-card-bg: rgba(25, 25, 35, 0.9); /* Fundo do card translúcido escuro */
+            --color-input-border: #444;
+            --color-input-focus: var(--color-primary-accent);
+            --color-button-hover: #00A3B5;
         }
 
+        /* --- Reset Básico e Configurações Globais --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* Transições suaves para todas as propriedades */
+            transition: all 0.3s ease-in-out;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: var(--background);
-            color: var(--text-primary);
-            line-height: 1.6;
+        html, body {
+            height: 100%;
+            font-family: 'Inter', sans-serif; /* Aplica a fonte Inter */
+            color: var(--color-text-light);
+            background-color: var(--color-dark-bg);
+            /* Suaviza a renderização de fontes */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-            z-index: 1000;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
+        /* --- Conteúdo Principal e Fundo Animado --- */
+        #main-content {
+            background: linear-gradient(-45deg, var(--color-gradient-start), var(--color-gradient-mid), var(--color-gradient-end));
+            background-size: 400% 400%;
+            animation: gradientAnimation 18s ease infinite; /* Animação mais longa e suave */
+            width: 100%;
+            height: 100vh;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--primary);
-        }
-
-        /* Main Layout */
-        .main-container {
-            margin-top: 80px;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 3rem;
-            min-height: calc(100vh - 80px);
-        }
-
-        /* Sidebar */
-        .sidebar {
-            position: sticky;
-            top: 100px;
-            height: fit-content;
-        }
-
-        .profile-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid var(--border);
+        /* --- Card de Acesso Sofisticado --- */
+        .access-card {
+            background: var(--color-card-bg);
+            backdrop-filter: blur(15px); /* Efeito de vidro fosco moderno */
+            border-radius: 20px; /* Bordas mais arredondadas */
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), /* Sombra mais profunda */
+                        0 0 60px rgba(0, 188, 212, 0.2); /* Brilho sutil do accent */
             text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .profile-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 1rem;
+            position: relative;
             overflow: hidden;
-            border: 2px solid var(--primary);
+            max-width: 400px; /* Largura otimizada para o conteúdo */
+            width: 90%; /* Responsividade */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
         }
 
-        .profile-name {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+        /* Efeito de brilho sutil ao passar o mouse */
+        .access-card:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7),
+                        0 0 80px rgba(0, 188, 212, 0.3);
+            transform: translateY(-5px); /* Leve elevação */
         }
 
-        .profile-title {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+        /* --- Títulos e Parágrafos --- */
+        h1 {
+            font-size: 1.8em; /* Título menor */
+            margin-bottom: 15px;
+            color: var(--color-primary-accent);
+            font-weight: 500;
         }
 
-        .profile-description {
-            color: var(--text-muted);
-            font-size: 0.85rem;
+        p {
+            font-size: 1em;
+            margin-bottom: 20px;
+            color: var(--color-text-muted);
             line-height: 1.5;
         }
 
-        .sidebar-nav {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 1.5rem;
-            border: 1px solid var(--border);
-        }
-
-        .sidebar-nav ul {
-            list-style: none;
-        }
-
-        .sidebar-nav li {
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-
-        .sidebar-nav a.active,
-        .sidebar-nav a:hover {
-            background: rgba(0, 255, 174, 0.1);
-            color: var(--primary);
-        }
-
-        .sidebar-nav i {
-            width: 16px;
-            text-align: center;
-        }
-
-        /* Custom Icon Styles */
-        .custom-icon {
-            width: 16px;
-            height: 16px;
-            object-fit: contain;
-            filter: brightness(0.7);
-            transition: all 0.3s ease;
-        }
-
-        .sidebar-nav a:hover .custom-icon,
-        .sidebar-nav a.active .custom-icon {
-            filter: brightness(1) saturate(1.2);
-        }
-
-        .card-icon .custom-icon {
-            width: 24px;
-            height: 24px;
-            filter: brightness(1.2) saturate(1.1);
-        }
-
-        /* Content Area */
-        .content {
-            padding-bottom: 2rem;
-        }
-
-        .hero {
-            margin-bottom: 3rem;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-        }
-
-        .section {
-            margin-bottom: 4rem;
-        }
-
-        .section-header {
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 24px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-
-        .section-description {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(0, 255, 174, 0.3);
-            box-shadow: 0 8px 32px rgba(0, 255, 174, 0.1);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            background: rgba(0, 255, 174, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .card-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-        }
-
-        .status {
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-weight: 500;
-        }
-
-        .status.in-progress {
-            background: rgba(245, 166, 35, 0.2);
-            color: #f5a623;
-        }
-
-        .status.completed {
-            background: rgba(0, 255, 174, 0.2);
-            color: var(--primary);
-        }
-
-        .status.concept {
-            background: rgba(93, 173, 226, 0.2);
-            color: #5dade2;
-        }
-
-        /* Tools Grid */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1rem;
-        }
-
-        .tool-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.5rem 1rem;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .tool-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        .tool-card h3 {
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        /* Icon Gallery */
-        .icon-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .icon-showcase {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            border: 1px solid var(--border);
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .icon-showcase:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary);
-            box-shadow: 0 4px 16px rgba(0, 255, 174, 0.2);
-        }
-
-        .icon-showcase img {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
-            margin-bottom: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .icon-showcase:hover img {
-            transform: scale(1.1);
-            filter: brightness(1.2) saturate(1.2);
-        }
-
-        .icon-showcase span {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
+        /* Imagem centralizada */
+        .access-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
             display: block;
+            border: 3px solid var(--color-primary-accent);
         }
 
-        /* Contact Section */
-        .contact-section {
+        /* --- Campo de Senha --- */
+        .password-input {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 2px solid var(--color-input-border);
+            background: rgba(40, 40, 55, 0.7);
+            color: var(--color-text-light);
+            font-size: 0.95em;
+            font-weight: 500;
             text-align: center;
-            padding: 3rem;
-            background: var(--card-bg);
-            border-radius: 16px;
-            border: 1px solid var(--border);
+            -webkit-appearance: none;
         }
 
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
+        .password-input::placeholder {
+            color: var(--color-text-muted);
+            opacity: 0.7;
         }
 
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
+        .password-input:focus {
+            outline: none;
+            border-color: var(--color-input-focus);
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.3);
+            background: rgba(50, 50, 65, 0.8);
         }
 
-        .contact-link:hover {
-            color: var(--primary);
-            border-color: var(--primary);
-            background: rgba(0, 255, 174, 0.05);
+        /* --- Botão de Ação --- */
+        .btn-enter {
+            background: var(--color-primary-accent);
+            border: none;
+            padding: 12px 25px;
+            font-weight: 600;
+            border-radius: 10px;
+            color: var(--color-dark-bg);
+            cursor: pointer;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
         }
 
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .main-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                padding: 1rem;
-            }
-
-            .sidebar {
-                position: static;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 1rem;
-            }
-
-            .cards-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
+        .btn-enter:hover {
+            background: var(--color-button-hover);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 188, 212, 0.6);
         }
 
+        .btn-enter:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 188, 212, 0.4);
+        }
+
+        /* --- Media Queries para Responsividade --- */
         @media (max-width: 768px) {
-            .header-content {
-                padding: 0 1rem;
+            .access-card {
+                padding: 25px;
+                max-width: 90%;
             }
-
-            .nav-links {
-                gap: 1rem;
+            
+            h1 {
+                font-size: 1.6em;
             }
-
-            .sidebar {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .icon-gallery {
-                grid-template-columns: repeat(3, 1fr);
+            
+            .access-image {
+                width: 100px;
+                height: 100px;
             }
         }
 
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--background);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 3px;
+        @media (max-width: 480px) {
+            .access-card {
+                padding: 20px;
+                border-radius: 15px;
+            }
+            
+            h1 {
+                font-size: 1.4em;
+            }
+            
+            .password-input, .btn-enter {
+                padding: 12px 14px;
+                font-size: 0.9em;
+            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <a href="#" class="logo">MOSCHIAT</a>
-            <p>the yesterday price is not today price</p>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="#projetos" class="nav-link">Projetos</a></li>
-                    <li><a href="#estudos" class="nav-link">Estudos</a></li>
-                    <li><a href="#ferramentas" class="nav-link">Ferramentas</a></li>
-                    <li><a href="#icons" class="nav-link">Ícones</a></li>
-                    <li><a href="#contato" class="nav-link">Contato</a></li>
-                </ul>
-            </nav>
+
+    <main id="main-content">
+        <div class="access-card">
+            <h1>MOSCHIAT</h1>
+            <p>the yesterday price is not today prince</p>
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgsgyBKHOEJXsqqUNvvG0evhMynW35Ata7d3PIVeUNccG_eIsPU2EQ8Bvc9iPyr_0Q0Cwe15M6KQUzxRyDtyCD-dHWdguIE371NAPKqp_4pqunFzirjYAjO6bfCeN1q7XabkZiOZ0VcxMyZSUGrxFmQ7_F4Jo5mkokdxfna-8-rkk59TICOrEzjhijrG000/s1600/00566.png" alt="Imagem de acesso" class="access-image">
+            <p>Só os atentos encontram o que não é dito.</p>
+            <input type="password" id="passwordInput" class="password-input" placeholder="Digite a senha" autocomplete="off" aria-label="Campo para digitar a senha">
+            <button id="enterButton" class="btn-enter">Entrar</button>
         </div>
-    </header>
+    </main>
 
-    <div class="main-container">
-        <aside class="sidebar">
-            <div class="profile-card">
-                <div class="profile-avatar">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjf8NR7hoFIThPQpz_hKZ_l0fjiysP0-JRc2jqHtq54gf7ywCEVSWa9HD0EVD1b8i05xZpE1JmS-5mZZkCQCfEZd38GXTUtTYg2ezsSN94adgVoNAfbwkEv1qQnL03cGZQ7eMGiS4AzxUp6XmVLhyh6Z6XHghyphenhyphenx_0a9KTGxrZDQLIg223ddiUSNxjiD6N83/s1600/Screen%20Shot%202025-06-21%20at%2023.17.10.png" 
-                         alt="" 
-                         style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
-                </div>
-                <h2 class="profile-name">Paulo Marques</h2>
-                <p class="profile-title">VISIONARY</p>
-                <p class="profile-description">
-                    Especialista em desenvolvimento criativo, integrando tecnologia, arte e design para criar experiências únicas.
-                </p>
-            </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const passwordInput = document.getElementById("passwordInput");
+            const enterButton = document.getElementById("enterButton");
 
-            <nav class="sidebar-nav">
-                <ul>
-                    <li><a href="#projetos" class="sidebar-link active">
-                        <img src="10.png" alt="Projetos" class="custom-icon">
-                        Projetos
-                    </a></li>
-                    <li><a href="#estudos" class="sidebar-link">
-                        <img src="12.png" alt="Estudos" class="custom-icon">
-                        Estudos
-                    </a></li>
-                    <li><a href="#ferramentas" class="sidebar-link">
-                        <img src="13.png" alt="Ferramentas" class="custom-icon">
-                        Ferramentas
-                    </a></li>
-                    <li><a href="#icons" class="sidebar-link">
-                        <img src="14.png" alt="Ícones" class="custom-icon">
-                        Ícones
-                    </a></li>
-                    <li><a href="#insights" class="sidebar-link">
-                        <img src="15.png" alt="Insights" class="custom-icon">
-                        Insights
-                    </a></li>
-                    <li><a href="#contato" class="sidebar-link">
-                        <img src="16.png" alt="Contato" class="custom-icon">
-                        Contato
-                    </a></li>
-                </ul>
-            </nav>
-        </aside>
+            // Dados de autenticação
+            const correctPassword = "MOSCHIAT2025";
+            const redirectURL = "http://moschiat.com/ooo.html";
 
-        <main class="content">
-            <section class="hero">
-                <h1>Desenvolvedor & Designer Criativo</h1>
-                <p>
-                    Transformo ideias em realidade através de código, design e arte digital. 
-                    Especializado em desenvolvimento Python, modelagem 3D, e criação de experiências interativas.
-                    Sou Fotógrafo, Autodidata, Multidisciplinar Procuro vagas de Auxiliar de Produção Gráfica, Operador de Impressora Offset, Designer Gráfico Júnior, Atendimento ao Cliente e semelhantes 
-                    Estou em busca de novas experiências com o intuito de aprender e adquirir experiencias profissionais podem que possa contribuir com o meu crescimento 
-                </p>
-            </section>
+            // Adiciona o evento de clique ao botão de "Entrar"
+            enterButton.addEventListener("click", () => {
+                if (passwordInput.value === correctPassword) {
+                    window.location.href = redirectURL;
+                } else {
+                    alert("Senha incorreta. Tente novamente");
+                    passwordInput.value = "";
+                    passwordInput.focus();
+                }
+            });
 
-            <section class="section" id="icons">
-                <div class="section-header">
-                    <h2 class="section-title">Ícones Personalizados</h2>
-                    <p class="section-description">Coleção de ícones criados para a identidade visual</p>
-                </div>
-                
-                <div class="icon-gallery">
-                    <div class="icon-showcase">
-                        <img src="10.png" alt="Ícone 10">
-                        <span>Projetos</span>
-                    </div>
-                    <div class="icon-showcase">
-                        <img src="12.png" alt="Ícone 12">
-                        <span>Estudos</span>
-                    </div>
-                    <div class="icon-showcase">
-                        <img src="13.png" alt="Ícone 13">
-                        <span>Ferramentas</span>
-                    </div>
-                    <div class="icon-showcase">
-                        <img src="14.png" alt="Ícone 14">
-                        <span>Ícones</span>
-                    </div>
-                    <div class="icon-showcase">
-                        <img src="15.png" alt="Ícone 15">
-                        <span>Insights</span>
-                    </div>
-                    <div class="icon-showcase">
-                        <img src="16.png" alt="Ícone 16">
-                        <span>Contato</span>
-                    </div>
-                </div>
-            </section>
-                        
-            <section class="section" id="ferramentas">
-                <div class="section-header">
-                    <h2 class="section-title">Stack Tecnológico</h2>
-                    <p class="section-description">Ferramentas e tecnologias que utilizo no meu workflow</p>
-                </div>
-                
-                <div class="tools-grid">
-                    <div class="tool-card"><h3>Blender</h3></div>
-                    <div class="tool-card"><h3>Python</h3></div>
-                    <div class="tool-card"><h3>FL Studio</h3></div>
-                    <div class="tool-card"><h3>Github</h3></div>
-                    <div class="tool-card"><h3>Adobe Photoshop</h3></div>
-                    <div class="tool-card"><h3>Canva Pro</h3></div>
-                    <div class="tool-card"><h3>OpenAI</h3></div>
-                    <div class="tool-card"><h3>Anthropic</h3></div>
-                    <div class="tool-card"><h3>Telegram</h3></div>
-                </div>
-            </section>
+            // Permite o envio da senha pressionando a tecla Enter
+            passwordInput.addEventListener("keypress", (event) => {
+                if (event.key === "Enter") {
+                    enterButton.click();
+                }
+            });
+        });
+    </script>
 
-            <section class="section" id="projetos">
-                <div class="section-header">
-                    <h2 class="section-title">Portfólio</h2>
-                    <p class="section-description">Trabalhos em desenvolvimento e conceitos em andamento</p>
-                </div>
-                
-                <div class="cards-grid">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <img src="10.png" alt="Museu 3D" class="custom-icon">
-                            </div>
-                            <h3 class="card-title">Museu Virtual 3D</h3>
-                        </div>
-                        <p class="card-description">
-                            Desenvolvimento de um espaço interativo no Blender para exibição de arte digital e conceitos visuais.
-                        </p>
-                        <div class="card-meta">
-                            <span class="status in-progress">Em Andamento</span>
-                            <span>1 mês</span>
-                        </div>
-                    </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-film"></i>
-                            </div>
-                            <h3 class="card-title">Animações Experimentais</h3>
-                        </div>
-                        <p class="card-description">
-                            Criação de curtas animações utilizando Blender, explorando técnicas avançadas de motion graphics.
-                        </p>
-                        <div class="card-meta">
-                            <span class="status concept">Planejamento</span>
-                            <span>3 meses</span>
-                        </div>
-                    </div>
 
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <img src="13.png" alt="Python" class="custom-icon">
-                            </div>
-                            <h3 class="card-title">Automações Python</h3>
-                        </div>
-                        <p class="card-description">
-                            Desenvolvimento de scripts e bibliotecas para automação de workflows criativos e manipulação de dados.
-                        </p>
-                        <div class="card-meta">
-                            <span class="status in-progress">Em Andamento</span>
-                            <span>1 mês</span>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-music"></i>
-                            </div>
-                            <h3 class="card-title">Sound Design</h3>
-                        </div>
-                        <p class="card-description">
-                            Produção de trilhas sonoras e efeitos audio para complementar projetos audiovisuais.
-                        </p>
-                        <div class="card-meta">
-                            <span class="status concept">Exploração</span>
-                            <span>6 meses</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            
-            <section class="section" id="estudos">
-                <div class="section-header">
-                    <h2 class="section-title">Desenvolvimento Contínuo</h2>
-                    <p class="section-description">Áreas de estudo e aperfeiçoamento técnico</p>
-                </div>
-                
-                <div class="cards-grid">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <img src="12.png" alt="Python" class="custom-icon">
-                            </div>
-                            <h3 class="card-title">Python Avançado</h3>
-                        </div>
-                        <p class="card-description">
-                            Automação de VFX, integração com Blender e implementação de soluções com IA.
-                        </p>
-                        <div class="card-meta">
-                            <span class="status in-progress">3 meses</span>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fab fa-blender"></i>
-                            </div>
-                            <h3 class="card-title">Blender VFX</h3>
-                        </div>
-                        <p class="card-description">
-                            Simulações de partículas, fluidos e técnicas avançadas de renderização.
-                        </p>
-                        <div class="card-meta">
-                            <span class="status in-progress">6 meses</span>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-language"></i>
-                            </div>
-                            <h3 class="card-title">Italiano</h3>
-                        </div>
-                        <p class="card-description">
-                            Desenvolvimento da fluência através de prática diária e imersão cultural.
-                        </p>
-                        <div class="card-meta">
-                            <span class="status in-progress">1 ano</span>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-comments"></i>
-                            </div>
-                            <h3 class="card-title">Storytelling</h3>
-                        </div>
-                        <p class="card-description">
-                            Aperfeiçoamento na comunicação e apresentação de projetos criativos.
-                        </p>
-                        <div class="card-meta">
-                            <span class="status in-progress">Contínuo</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section" id="insights">
-                <div class="section-header">
-                    <h2 class="section-title">Insights & Artigos</h2>
-                    <p class="section-description">Reflexões sobre criatividade, tecnologia e design</p>
-                </div>
-                
-                <div class="cards-grid">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <img src="15.png" alt="ENTP" class="custom-icon">
-                            </div>
-                            <h3 class="card-title">ENTP & Criatividade</h3>
-                        </div>
-                        <p class="card-description">
-                            Como canalizar a mente ENTP para inovação sistemática em design e desenvolvimento.
-                        </p>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <h3 class="card-title">IA na Pipeline 3D</h3>
-                        </div>
-                        <p class="card-description">
-                            Integração de ferramentas de IA para otimização de workflow e geração procedural.
-                        </p>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="card-icon">
-                                <i class="fas fa-volume-up"></i>
-                            </div>
-                            <h3 class="card-title">Sound Design</h3>
-                        </div>
-                        <p class="card-description">
-                            O impacto do áudio na experiência visual e narrativa em projetos multimedia.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section" id="contato">
-                <div class="contact-section">
-                    <h2 class="section-title" style="justify-content: center;">Vamos Conectar</h2>
-                    <p class="section-description" style="margin-bottom: 2rem;">
-                        Sempre aberto a novas oportunidades e colaborações criativas
-                    </p>
-                    
-                    <div class="contact-links">
-                        <a href="https://github.com/MOSCHIAT" target="_blank" class="contact-link">
-                            <i class="fab fa-github"></i>
-                            GitHub
-                        </a>
-                        <a href="mailto:paulo@moschiat.com" class="contact-link">
-                            <img src="16.png" alt="Email" class="custom-icon">
-                            Email
-                        </a>
-                        <a href="https://linkedin.com/in/moschiat" target="_blank" class="contact-link">
+</body></html>
