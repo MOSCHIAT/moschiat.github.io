@@ -1,187 +1,273 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Área Exclusiva | MOSCHIAT</title>
-  <style>
-    :root {
-      --grad1: #0f0c29;
-      --grad2: #302b63;
-      --grad3: #24243e;
-      --highlight: #25d366;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSCHIAT | Área Exclusiva</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Variáveis CSS para Cores e Reusabilidade --- */
+        :root {
+            --color-dark-bg: #0A0A0F; /* Fundo principal bem escuro, quase preto */
+            --color-gradient-start: #1A1A2E; /* Início do gradiente suave (ainda presente mas mais sutil) */
+            --color-gradient-mid: #0F0C29;   /* Meio do gradiente */
+            --color-gradient-end: #01010A;   /* Fim do gradiente */
+            --color-primary-accent: #00BCD4; /* Ciano/Turquesa moderno para destaque */
+            --color-secondary-accent: #8BC34A; /* Verde suave para complementar */
+            --color-text-light: #E0E0E0; /* Texto claro para contraste */
+            --color-text-muted: #B0B0B0; /* Texto mais suave para descrições */
+            --color-card-bg: rgba(25, 25, 35, 0.9); /* Fundo do card translúcido escuro */
+            --color-input-border: #444;
+            --color-input-focus: var(--color-primary-accent);
+            --color-button-hover: #00A3B5;
+        }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* --- Reset Básico e Configurações Globais --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease-in-out; /* Transições suaves para todas as propriedades */
+        }
 
-    html, body {
-      height: 100%;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
-    }
+        html, body {
+            height: 100%;
+            font-family: 'Inter', sans-serif; /* Aplica a fonte Inter */
+            overflow: hidden; /* Evita rolagem na página principal */
+            color: var(--color-text-light);
+            background-color: var(--color-dark-bg); /* Fundo inicial preto */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-    /* Splash screen */
-    #splash {
-      background: #000;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-      animation: fadeOut 1s ease 5s forwards;
-    }
+        /* --- Conteúdo Principal e Fundo Animado --- */
+        #main-content {
+            background: linear-gradient(-45deg, var(--color-gradient-start), var(--color-gradient-mid), var(--color-gradient-end));
+            background-size: 400% 400%;
+            animation: gradientAnimation 18s ease infinite; /* Animação de movimento do gradiente */
+            width: 100%;
+            height: 100vh;
+            display: flex; /* Já exibe por padrão, sem splash */
+            justify-content: center;
+            align-items: center;
+            opacity: 0; /* Inicia transparente para um fade-in suave na carga da página */
+            animation: fadeInMain 0.8s ease forwards; /* Fade-in suave ao carregar */
+        }
 
-    svg {
-      width: 80%;
-      height: auto;
-    }
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-    .path {
-      fill: none;
-      stroke: #00ffae;
-      stroke-width: 3;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: draw 4s ease forwards;
-    }
+        @keyframes fadeInMain {
+            to { opacity: 1; }
+        }
 
-    @keyframes draw {
-      to { stroke-dashoffset: 0; }
-    }
+        /* --- Card de Acesso Minimalista e Sofisticado --- */
+        .access-card {
+            background: var(--color-card-bg);
+            backdrop-filter: blur(15px); /* Efeito de vidro fosco moderno */
+            border-radius: 20px; /* Bordas mais arredondadas */
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), /* Sombra mais profunda */
+                        0 0 60px rgba(0, 188, 212, 0.2); /* Brilho sutil do accent */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            max-width: 420px; /* Largura otimizada para o conteúdo */
+            width: 90%; /* Responsividade */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
+            opacity: 0;
+            transform: translateY(20px); /* Começa um pouco abaixo para animar para cima */
+            animation: cardEntrance 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+            animation-delay: 0.5s; /* Atraso para aparecer depois do fade-in da página */
+        }
 
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
+        @keyframes cardEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    /* Conteúdo principal */
-    #main-content {
-      background: linear-gradient(-45deg, var(--grad1), var(--grad2), var(--grad3));
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: #fff;
-      width: 100%;
-      height: 100vh;
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
+        /* Efeito de brilho sutil ao passar o mouse */
+        .access-card:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7),
+                        0 0 80px rgba(0, 188, 212, 0.3);
+            transform: translateY(-5px); /* Leve elevação */
+        }
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        /* --- Título Principal --- */
+        h1 {
+            font-size: 2.2em; /* Tamanho ajustado para minimalismo */
+            margin-bottom: 20px; /* Mais espaço para a imagem abaixo */
+            color: var(--color-primary-accent);
+            font-weight: 700;
+            letter-spacing: 0.8px;
+        }
 
-    .card {
-      background: rgba(17, 17, 17, 0.8);
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1),
-                  0 0 50px rgba(37, 211, 102, 0.3);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+        /* --- Imagem Centralizada --- */
+        .moschiat-image {
+            max-width: 120px; /* Tamanho pequeno e minimalista */
+            height: auto;
+            margin-bottom: 25px; /* Espaço abaixo da imagem e acima do parágrafo */
+            display: block; /* Garante que a imagem seja um bloco para margin auto */
+            margin-left: auto; /* Centraliza a imagem */
+            margin-right: auto; /* Centraliza a imagem */
+            border-radius: 8px; /* Pequeno arredondamento para a imagem */
+            opacity: 0.9; /* Um pouco de transparência para um visual suave */
+        }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 20%, rgba(255,255,255,0) 40%);
-      transform: rotate(30deg);
-      animation: shine 3s infinite;
-    }
+        /* --- Parágrafo de Instrução --- */
+        p {
+            font-size: 1em; /* Tamanho um pouco menor para o parágrafo */
+            margin-bottom: 30px;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
 
-    @keyframes shine {
-      0% { transform: rotate(30deg) translate(-30%, -30%); }
-      100% { transform: rotate(30deg) translate(30%, 30%); }
-    }
+        /* --- Campo de Senha --- */
+        .password-input {
+            width: 100%;
+            padding: 16px 18px; /* Padding ajustado para ser mais compacto */
+            margin-bottom: 25px;
+            border-radius: 10px; /* Ligeiramente menos arredondado para minimalismo */
+            border: 1px solid var(--color-input-border); /* Borda mais fina */
+            background: rgba(40, 40, 55, 0.7);
+            color: var(--color-text-light);
+            font-size: 1em; /* Tamanho de fonte um pouco menor */
+            font-weight: 400;
+            text-align: center;
+            -webkit-appearance: none;
+        }
 
-    input[type="password"] {
-      padding: 15px;
-      width: 100%;
-      margin: 20px 0;
-      border-radius: 8px;
-      border: 2px solid #333;
-      background: rgba(51, 51, 51, 0.5);
-      color: #fff;
-      font-size: 16px;
-    }
+        .password-input::placeholder {
+            color: var(--color-text-muted);
+            opacity: 0.6;
+        }
 
-    input[type="password"]:focus {
-      outline: none;
-      border-color: var(--highlight);
-      box-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
-    }
+        .password-input:focus {
+            outline: none;
+            border-color: var(--color-input-focus);
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.25); /* Anel de foco mais sutil */
+            background: rgba(50, 50, 65, 0.8);
+        }
 
-    .btn {
-      background: var(--highlight);
-      border: none;
-      padding: 12px 25px;
-      font-weight: bold;
-      border-radius: 6px;
-      color: #000;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+        /* --- Botão de Ação --- */
+        .btn-enter {
+            background: var(--color-primary-accent);
+            border: none;
+            padding: 14px 30px; /* Padding mais compacto */
+            font-weight: 600; /* Um pouco menos negrito */
+            border-radius: 10px;
+            color: var(--color-dark-bg);
+            cursor: pointer;
+            font-size: 1.05em; /* Fonte um pouco menor */
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 3px 10px rgba(0, 188, 212, 0.3); /* Sombra mais sutil */
+        }
 
-    .btn:hover {
-        background: #1cb550; /* Um pouco mais escuro ao passar o mouse */
-    }
-  </style>
+        .btn-enter:hover {
+            background: var(--color-button-hover);
+            transform: translateY(-2px) scale(1.01); /* Efeito de elevação mais sutil */
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.5);
+        }
+
+        .btn-enter:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 188, 212, 0.2);
+        }
+
+        /* --- Media Queries para Responsividade (iPhone, Tablets, etc.) --- */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .moschiat-image {
+                max-width: 100px; /* Ajuste para telas menores */
+            }
+
+            p {
+                font-size: 0.95em;
+            }
+
+            .access-card {
+                padding: 30px;
+                max-width: 95%;
+            }
+
+            .password-input, .btn-enter {
+                font-size: 0.95em;
+                padding: 14px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .moschiat-image {
+                max-width: 80px; /* Ainda menor em celulares muito pequenos */
+            }
+
+            .access-card {
+                border-radius: 15px;
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<div id="splash">
-  <svg viewBox="0 0 800 200">
-    <text x="50" y="140" font-size="120" font-family="Arial Black, sans-serif" class="path">MOSCHIAT</text>
-  </svg>
-</div>
+    <main id="main-content">
+        <div class="access-card">
+            <h1>Acesso Exclusivo</h1>
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEMPwEi1sIZv-5HrT4b6bXmxcJzch9kl23AnBu6GtC8vz2-t0jaZEpNBcAgIRVv6OpGxWc_uoDIDykUNiykBeAKMME_XJlOil24y1oXkMhJZog02dHwgEPpaZcWK5aPM9WQE3vMSjtXGQeQP3jDpWZSVYPehxhXINf57BsZjFHdlyw8jDN-e_N4IXLN3lT/s1600/1.png" alt="Logo MOSCHIAT" class="moschiat-image">
+            <p>Para prosseguir e explorar meu universo criativo, por favor, digite a senha:</p>
+            <input type="password" id="passwordInput" class="password-input" placeholder="Sua Senha Secreta..." autocomplete="off" aria-label="Campo para digitar a senha">
+            <button id="enterButton" class="btn-enter">Entrar</button>
+        </div>
+    </main>
 
-<div id="main-content">
-  <div class="card">
-    <h2>Área Exclusiva</h2>
-    <p>Digite a senha para continuar:</p>
-    <input type="password" id="passwordInput" placeholder="Senha..." />
-    <button id="enterButton" class="btn">Entrar</button>
-  </div>
-</div>
+    <script>
+        // Garante que o script só seja executado após todo o HTML ser carregado
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainContent = document.getElementById("main-content");
+            const passwordInput = document.getElementById("passwordInput");
+            const enterButton = document.getElementById("enterButton");
 
-<script>
-  // Exibir conteúdo principal após splash
-  setTimeout(() => {
-    document.getElementById("main-content").style.display = "flex";
-  }, 5000); // corresponde ao tempo de animação + fadeOut
+            // Dados de autenticação
+            const correctPassword = "MOSCHIAT2025";
+            const redirectURL = "http://moschiat.com/ooo.html";
 
-  // Lógica de verificação de senha
-  const passwordInput = document.getElementById("passwordInput");
-  const enterButton = document.getElementById("enterButton");
-  const correctPassword = "MOSCHIAT2025";
-  const redirectURL = "http://moschiat.com/ooo.html";
+            // Removido o setTimeout da splash, o conteúdo principal já é exibido por padrão.
+            // O fade-in da página é gerenciado pela animação 'fadeInMain' no CSS.
 
-  enterButton.addEventListener("click", () => {
-    if (passwordInput.value === correctPassword) {
-      window.location.href = redirectURL;
-    } else {
-      alert("Senha incorreta. Tente novamente!");
-    }
-  });
+            // Adiciona o evento de clique ao botão de "Entrar"
+            enterButton.addEventListener("click", () => {
+                if (passwordInput.value === correctPassword) {
+                    window.location.href = redirectURL; // Redireciona em caso de sucesso
+                } else {
+                    // Mensagem de erro e feedback visual
+                    alert("Senha incorreta. Tente novamente, Paulo!"); // Mensagem personalizada
+                    passwordInput.value = ""; // Limpa o campo para nova tentativa
+                    passwordInput.focus(); // Coloca o foco de volta no input
+                }
+            });
 
-  // Opcional: Permitir que o usuário pressione Enter para submeter a senha
-  passwordInput.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-      enterButton.click(); // Simula um clique no botão "Entrar"
-    }
-  });
-</script>
+            // Permite o envio da senha pressionando a tecla Enter
+            passwordInput.addEventListener("keypress", (event) => {
+                if (event.key === "Enter") {
+                    enterButton.click(); // Simula o clique no botão
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
