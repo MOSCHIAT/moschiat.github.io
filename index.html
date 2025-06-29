@@ -130,25 +130,28 @@
       border-radius: 6px;
       color: #000;
       cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+        background: #1cb550; /* Um pouco mais escuro ao passar o mouse */
     }
   </style>
 </head>
 <body>
 
-<!-- Splash screen -->
 <div id="splash">
   <svg viewBox="0 0 800 200">
     <text x="50" y="140" font-size="120" font-family="Arial Black, sans-serif" class="path">MOSCHIAT</text>
   </svg>
 </div>
 
-<!-- Conteúdo principal -->
 <div id="main-content">
   <div class="card">
     <h2>Área Exclusiva</h2>
     <p>Digite a senha para continuar:</p>
-    <input type="password" placeholder="Senha..." />
-    <button class="btn">Entrar</button>
+    <input type="password" id="passwordInput" placeholder="Senha..." />
+    <button id="enterButton" class="btn">Entrar</button>
   </div>
 </div>
 
@@ -157,6 +160,27 @@
   setTimeout(() => {
     document.getElementById("main-content").style.display = "flex";
   }, 5000); // corresponde ao tempo de animação + fadeOut
+
+  // Lógica de verificação de senha
+  const passwordInput = document.getElementById("passwordInput");
+  const enterButton = document.getElementById("enterButton");
+  const correctPassword = "MOSCHIAT2025";
+  const redirectURL = "http://moschiat.com/ooo.html";
+
+  enterButton.addEventListener("click", () => {
+    if (passwordInput.value === correctPassword) {
+      window.location.href = redirectURL;
+    } else {
+      alert("Senha incorreta. Tente novamente!");
+    }
+  });
+
+  // Opcional: Permitir que o usuário pressione Enter para submeter a senha
+  passwordInput.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") {
+      enterButton.click(); // Simula um clique no botão "Entrar"
+    }
+  });
 </script>
 
 </body>
