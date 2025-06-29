@@ -9,8 +9,8 @@
     <style>
         /* --- Variáveis CSS para Cores e Reusabilidade --- */
         :root {
-            --color-dark-bg: #0A0A0F; /* Fundo principal bem escuro, quase preto */
-            --color-gradient-start: #1A1A2E; /* Início do gradiente suave (ainda presente mas mais sutil) */
+            --color-dark-bg: #0A0A0F; /* Fundo principal bem escuro */
+            --color-gradient-start: #1A1A2E; /* Início do gradiente suave */
             --color-gradient-mid: #0F0C29;   /* Meio do gradiente */
             --color-gradient-end: #01010A;   /* Fim do gradiente */
             --color-primary-accent: #00BCD4; /* Ciano/Turquesa moderno para destaque */
@@ -28,15 +28,16 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: all 0.3s ease-in-out; /* Transições suaves para todas as propriedades */
+            /* Transições suaves para todas as propriedades */
+            transition: all 0.3s ease-in-out;
         }
 
         html, body {
             height: 100%;
             font-family: 'Inter', sans-serif; /* Aplica a fonte Inter */
-            overflow: hidden; /* Evita rolagem na página principal */
             color: var(--color-text-light);
-            background-color: var(--color-dark-bg); /* Fundo inicial preto */
+            background-color: var(--color-dark-bg);
+            /* Suaviza a renderização de fontes */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -45,14 +46,12 @@
         #main-content {
             background: linear-gradient(-45deg, var(--color-gradient-start), var(--color-gradient-mid), var(--color-gradient-end));
             background-size: 400% 400%;
-            animation: gradientAnimation 18s ease infinite; /* Animação de movimento do gradiente */
+            animation: gradientAnimation 18s ease infinite; /* Animação mais longa e suave */
             width: 100%;
             height: 100vh;
-            display: flex; /* Já exibe por padrão, sem splash */
+            display: flex;
             justify-content: center;
             align-items: center;
-            opacity: 0; /* Inicia transparente para um fade-in suave na carga da página */
-            animation: fadeInMain 0.8s ease forwards; /* Fade-in suave ao carregar */
         }
 
         @keyframes gradientAnimation {
@@ -61,35 +60,20 @@
             100% { background-position: 0% 50%; }
         }
 
-        @keyframes fadeInMain {
-            to { opacity: 1; }
-        }
-
-        /* --- Card de Acesso Minimalista e Sofisticado --- */
+        /* --- Card de Acesso Sofisticado --- */
         .access-card {
             background: var(--color-card-bg);
             backdrop-filter: blur(15px); /* Efeito de vidro fosco moderno */
             border-radius: 20px; /* Bordas mais arredondadas */
-            padding: 40px;
+            padding: 30px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), /* Sombra mais profunda */
                         0 0 60px rgba(0, 188, 212, 0.2); /* Brilho sutil do accent */
             text-align: center;
             position: relative;
             overflow: hidden;
-            max-width: 420px; /* Largura otimizada para o conteúdo */
+            max-width: 400px; /* Largura otimizada para o conteúdo */
             width: 90%; /* Responsividade */
             border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
-            opacity: 0;
-            transform: translateY(20px); /* Começa um pouco abaixo para animar para cima */
-            animation: cardEntrance 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-            animation-delay: 0.5s; /* Atraso para aparecer depois do fade-in da página */
-        }
-
-        @keyframes cardEntrance {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         /* Efeito de brilho sutil ao passar o mouse */
@@ -99,59 +83,56 @@
             transform: translateY(-5px); /* Leve elevação */
         }
 
-        /* --- Título Principal --- */
+        /* --- Títulos e Parágrafos --- */
         h1 {
-            font-size: 2.2em; /* Tamanho ajustado para minimalismo */
-            margin-bottom: 20px; /* Mais espaço para a imagem abaixo */
+            font-size: 1.8em; /* Título menor */
+            margin-bottom: 15px;
             color: var(--color-primary-accent);
-            font-weight: 700;
-            letter-spacing: 0.8px;
+            font-weight: 500;
         }
 
-        /* --- Imagem Centralizada --- */
-        .moschiat-image {
-            max-width: 120px; /* Tamanho pequeno e minimalista */
-            height: auto;
-            margin-bottom: 25px; /* Espaço abaixo da imagem e acima do parágrafo */
-            display: block; /* Garante que a imagem seja um bloco para margin auto */
-            margin-left: auto; /* Centraliza a imagem */
-            margin-right: auto; /* Centraliza a imagem */
-            border-radius: 8px; /* Pequeno arredondamento para a imagem */
-            opacity: 0.9; /* Um pouco de transparência para um visual suave */
-        }
-
-        /* --- Parágrafo de Instrução --- */
         p {
-            font-size: 1em; /* Tamanho um pouco menor para o parágrafo */
-            margin-bottom: 30px;
+            font-size: 1em;
+            margin-bottom: 20px;
             color: var(--color-text-muted);
-            line-height: 1.6;
+            line-height: 1.5;
+        }
+
+        /* Imagem centralizada */
+        .access-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            display: block;
+            border: 3px solid var(--color-primary-accent);
         }
 
         /* --- Campo de Senha --- */
         .password-input {
             width: 100%;
-            padding: 16px 18px; /* Padding ajustado para ser mais compacto */
-            margin-bottom: 25px;
-            border-radius: 10px; /* Ligeiramente menos arredondado para minimalismo */
-            border: 1px solid var(--color-input-border); /* Borda mais fina */
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 2px solid var(--color-input-border);
             background: rgba(40, 40, 55, 0.7);
             color: var(--color-text-light);
-            font-size: 1em; /* Tamanho de fonte um pouco menor */
-            font-weight: 400;
+            font-size: 0.95em;
+            font-weight: 500;
             text-align: center;
             -webkit-appearance: none;
         }
 
         .password-input::placeholder {
             color: var(--color-text-muted);
-            opacity: 0.6;
+            opacity: 0.7;
         }
 
         .password-input:focus {
             outline: none;
             border-color: var(--color-input-focus);
-            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.25); /* Anel de foco mais sutil */
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.3);
             background: rgba(50, 50, 65, 0.8);
         }
 
@@ -159,65 +140,58 @@
         .btn-enter {
             background: var(--color-primary-accent);
             border: none;
-            padding: 14px 30px; /* Padding mais compacto */
-            font-weight: 600; /* Um pouco menos negrito */
+            padding: 12px 25px;
+            font-weight: 600;
             border-radius: 10px;
             color: var(--color-dark-bg);
             cursor: pointer;
-            font-size: 1.05em; /* Fonte um pouco menor */
+            font-size: 0.95em;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 3px 10px rgba(0, 188, 212, 0.3); /* Sombra mais sutil */
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
         }
 
         .btn-enter:hover {
             background: var(--color-button-hover);
-            transform: translateY(-2px) scale(1.01); /* Efeito de elevação mais sutil */
-            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.5);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 188, 212, 0.6);
         }
 
         .btn-enter:active {
             transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(0, 188, 212, 0.2);
+            box-shadow: 0 2px 5px rgba(0, 188, 212, 0.4);
         }
 
-        /* --- Media Queries para Responsividade (iPhone, Tablets, etc.) --- */
+        /* --- Media Queries para Responsividade --- */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
-            }
-
-            .moschiat-image {
-                max-width: 100px; /* Ajuste para telas menores */
-            }
-
-            p {
-                font-size: 0.95em;
-            }
-
             .access-card {
-                padding: 30px;
-                max-width: 95%;
+                padding: 25px;
+                max-width: 90%;
             }
-
-            .password-input, .btn-enter {
-                font-size: 0.95em;
-                padding: 14px 16px;
+            
+            h1 {
+                font-size: 1.6em;
+            }
+            
+            .access-image {
+                width: 100px;
+                height: 100px;
             }
         }
 
         @media (max-width: 480px) {
-            h1 {
-                font-size: 1.6em;
-            }
-
-            .moschiat-image {
-                max-width: 80px; /* Ainda menor em celulares muito pequenos */
-            }
-
             .access-card {
+                padding: 20px;
                 border-radius: 15px;
-                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 1.4em;
+            }
+            
+            .password-input, .btn-enter {
+                padding: 12px 14px;
+                font-size: 0.9em;
             }
         }
     </style>
@@ -227,7 +201,8 @@
     <main id="main-content">
         <div class="access-card">
             <h1>Acesso Exclusivo</h1>
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEMPwEi1sIZv-5HrT4b6bXmxcJzch9kl23AnBu6GtC8vz2-t0jaZEpNBcAgIRVv6OpGxWc_uoDIDykUNiykBeAKMME_XJlOil24y1oXkMhJZog02dHwgEPpaZcWK5aPM9WQE3vMSjtXGQeQP3jDpWZSVYPehxhXINf57BsZjFHdlyw8jDN-e_N4IXLN3lT/s1600/1.png" alt="Logo MOSCHIAT" class="moschiat-image">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEMPwEi1sIZv-5HrT4b6bXmxcJzch9kl23AnBu6GtC8vz2-t0jaZEpNBcAgIRVv6OpGxWc_uoDIDykUNiykBeAKMME_XJlOil24y1oXkMhJZog02dHwgEPpaZcWK5aPM9WQE3vMSjtXGQeQP3jDpWZSVYPehxhXINf57BsZjFHdlyw8jDN-e_N4IXLN3lT/s1600/1.png" 
+                 alt="Imagem de acesso" class="access-image">
             <p>Para prosseguir e explorar meu universo criativo, por favor, digite a senha:</p>
             <input type="password" id="passwordInput" class="password-input" placeholder="Sua Senha Secreta..." autocomplete="off" aria-label="Campo para digitar a senha">
             <button id="enterButton" class="btn-enter">Entrar</button>
@@ -235,9 +210,7 @@
     </main>
 
     <script>
-        // Garante que o script só seja executado após todo o HTML ser carregado
         document.addEventListener('DOMContentLoaded', () => {
-            const mainContent = document.getElementById("main-content");
             const passwordInput = document.getElementById("passwordInput");
             const enterButton = document.getElementById("enterButton");
 
@@ -245,25 +218,21 @@
             const correctPassword = "MOSCHIAT2025";
             const redirectURL = "http://moschiat.com/ooo.html";
 
-            // Removido o setTimeout da splash, o conteúdo principal já é exibido por padrão.
-            // O fade-in da página é gerenciado pela animação 'fadeInMain' no CSS.
-
             // Adiciona o evento de clique ao botão de "Entrar"
             enterButton.addEventListener("click", () => {
                 if (passwordInput.value === correctPassword) {
-                    window.location.href = redirectURL; // Redireciona em caso de sucesso
+                    window.location.href = redirectURL;
                 } else {
-                    // Mensagem de erro e feedback visual
-                    alert("Senha incorreta. Tente novamente, Paulo!"); // Mensagem personalizada
-                    passwordInput.value = ""; // Limpa o campo para nova tentativa
-                    passwordInput.focus(); // Coloca o foco de volta no input
+                    alert("Senha incorreta. Tente novamente");
+                    passwordInput.value = "";
+                    passwordInput.focus();
                 }
             });
 
             // Permite o envio da senha pressionando a tecla Enter
             passwordInput.addEventListener("keypress", (event) => {
                 if (event.key === "Enter") {
-                    enterButton.click(); // Simula o clique no botão
+                    enterButton.click();
                 }
             });
         });
