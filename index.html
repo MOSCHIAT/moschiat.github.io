@@ -1,241 +1,230 @@
-<html lang="pt-BR"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOSCHIAT | Área Exclusiva</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
-    <style>
-        /* --- Variáveis CSS para Cores e Reusabilidade --- */
-        :root {
-            --color-dark-bg: #0A0A0F; /* Fundo principal bem escuro */
-            --color-gradient-start: #1A1A2E; /* Início do gradiente suave */
-            --color-gradient-mid: #0F0C29;   /* Meio do gradiente */
-            --color-gradient-end: #01010A;   /* Fim do gradiente */
-            --color-primary-accent: #00BCD4; /* Ciano/Turquesa moderno para destaque */
-            --color-secondary-accent: #8BC34A; /* Verde suave para complementar */
-            --color-text-light: #E0E0E0; /* Texto claro para contraste */
-            --color-text-muted: #B0B0B0; /* Texto mais suave para descrições */
-            --color-card-bg: rgba(25, 25, 35, 0.9); /* Fundo do card translúcido escuro */
-            --color-input-border: #444;
-            --color-input-focus: var(--color-primary-accent);
-            --color-button-hover: #00A3B5;
-        }
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Área Exclusiva | MOSCHIAT</title>
+  <style>
+    :root {
+      --grad1: #0f0c29;
+      --grad2: #302b63;
+      --grad3: #24243e;
+      --highlight: #25d366;
+      --text: #e0e0e0;
+      --shadow: rgba(37, 211, 102, 0.25);
+    }
 
-        /* --- Reset Básico e Configurações Globais --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            /* Transições suaves para todas as propriedades */
-            transition: all 0.3s ease-in-out;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        html, body {
-            height: 100%;
-            font-family: 'Inter', sans-serif; /* Aplica a fonte Inter */
-            color: var(--color-text-light);
-            background-color: var(--color-dark-bg);
-            /* Suaviza a renderização de fontes */
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(-45deg, var(--grad1), var(--grad2), var(--grad3));
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: var(--text);
+    }
 
-        /* --- Conteúdo Principal e Fundo Animado --- */
-        #main-content {
-            background: linear-gradient(-45deg, var(--color-gradient-start), var(--color-gradient-mid), var(--color-gradient-end));
-            background-size: 400% 400%;
-            animation: gradientAnimation 18s ease infinite; /* Animação mais longa e suave */
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    /* Splash screen */
+    #splash {
+      background: #000;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      animation: fadeOut 1s ease 5s forwards;
+    }
 
-        /* --- Card de Acesso Sofisticado --- */
-        .access-card {
-            background: var(--color-card-bg);
-            backdrop-filter: blur(15px); /* Efeito de vidro fosco moderno */
-            border-radius: 20px; /* Bordas mais arredondadas */
-            padding: 30px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), /* Sombra mais profunda */
-                        0 0 60px rgba(0, 188, 212, 0.2); /* Brilho sutil do accent */
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            max-width: 400px; /* Largura otimizada para o conteúdo */
-            width: 90%; /* Responsividade */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Borda sutil */
-        }
+    svg {
+      width: 70%;
+      height: auto;
+    }
 
-        /* Efeito de brilho sutil ao passar o mouse */
-        .access-card:hover {
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7),
-                        0 0 80px rgba(0, 188, 212, 0.3);
-            transform: translateY(-5px); /* Leve elevação */
-        }
+    .path {
+      fill: none;
+      stroke: var(--highlight);
+      stroke-width: 3;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw 4s ease forwards;
+    }
 
-        /* --- Títulos e Parágrafos --- */
-        h1 {
-            font-size: 1.8em; /* Título menor */
-            margin-bottom: 15px;
-            color: var(--color-primary-accent);
-            font-weight: 500;
-        }
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
 
-        p {
-            font-size: 1em;
-            margin-bottom: 20px;
-            color: var(--color-text-muted);
-            line-height: 1.5;
-        }
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
 
-        /* Imagem centralizada */
-        .access-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 20px;
-            display: block;
-            border: 3px solid var(--color-primary-accent);
-        }
+    /* Layout landscape principal */
+    #main-content {
+      display: none;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      height: 100vh;
+      width: 100vw;
+      padding: 0 8vw;
+    }
 
-        /* --- Campo de Senha --- */
-        .password-input {
-            width: 100%;
-            padding: 14px 16px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            border: 2px solid var(--color-input-border);
-            background: rgba(40, 40, 55, 0.7);
-            color: var(--color-text-light);
-            font-size: 0.95em;
-            font-weight: 500;
-            text-align: center;
-            -webkit-appearance: none;
-        }
+    .left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
 
-        .password-input::placeholder {
-            color: var(--color-text-muted);
-            opacity: 0.7;
-        }
+    .left h1 {
+      font-size: 4vw;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-shadow: 0 0 25px var(--shadow);
+    }
 
-        .password-input:focus {
-            outline: none;
-            border-color: var(--color-input-focus);
-            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.3);
-            background: rgba(50, 50, 65, 0.8);
-        }
+    .left p {
+      max-width: 80%;
+      font-size: 1.3vw;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
 
-        /* --- Botão de Ação --- */
-        .btn-enter {
-            background: var(--color-primary-accent);
-            border: none;
-            padding: 12px 25px;
-            font-weight: 600;
-            border-radius: 10px;
-            color: var(--color-dark-bg);
-            cursor: pointer;
-            font-size: 0.95em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
-        }
+    .card {
+      background: rgba(17, 17, 17, 0.8);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1),
+                  0 0 50px var(--shadow);
+      width: 30%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .btn-enter:hover {
-            background: var(--color-button-hover);
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 6px 20px rgba(0, 188, 212, 0.6);
-        }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0) 40%);
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
 
-        .btn-enter:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(0, 188, 212, 0.4);
-        }
+    @keyframes shine {
+      0% { transform: rotate(30deg) translate(-30%, -30%); }
+      100% { transform: rotate(30deg) translate(30%, 30%); }
+    }
 
-        /* --- Media Queries para Responsividade --- */
-        @media (max-width: 768px) {
-            .access-card {
-                padding: 25px;
-                max-width: 90%;
-            }
-            
-            h1 {
-                font-size: 1.6em;
-            }
-            
-            .access-image {
-                width: 100px;
-                height: 100px;
-            }
-        }
+    input[type="password"] {
+      padding: 15px;
+      width: 100%;
+      margin: 20px 0;
+      border-radius: 8px;
+      border: 2px solid #333;
+      background: rgba(51, 51, 51, 0.5);
+      color: #fff;
+      font-size: 16px;
+    }
 
-        @media (max-width: 480px) {
-            .access-card {
-                padding: 20px;
-                border-radius: 15px;
-            }
-            
-            h1 {
-                font-size: 1.4em;
-            }
-            
-            .password-input, .btn-enter {
-                padding: 12px 14px;
-                font-size: 0.9em;
-            }
-        }
-    </style>
+    input[type="password"]:focus {
+      outline: none;
+      border-color: var(--highlight);
+      box-shadow: 0 0 10px var(--shadow);
+    }
+
+    .btn {
+      background: var(--highlight);
+      border: none;
+      padding: 12px 25px;
+      font-weight: bold;
+      border-radius: 6px;
+      color: #000;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #00ffae;
+      transform: scale(1.05);
+    }
+
+    /* Responsivo */
+    @media (max-width: 900px) {
+      #main-content {
+        flex-direction: column;
+        padding: 4vw;
+        text-align: center;
+      }
+
+      .left h1 {
+        font-size: 10vw;
+      }
+
+      .left p {
+        font-size: 4vw;
+      }
+
+      .card {
+        width: 90%;
+        margin-top: 30px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <main id="main-content">
-        <div class="access-card">
-            <h1>MOSCHIAT</h1>
-            <p>the yesterday price is not today price</p>
-            <p>Só os atentos encontram o que não é dito.</p>
-            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgsgyBKHOEJXsqqUNvvG0evhMynW35Ata7d3PIVeUNccG_eIsPU2EQ8Bvc9iPyr_0Q0Cwe15M6KQUzxRyDtyCD-dHWdguIE371NAPKqp_4pqunFzirjYAjO6bfCeN1q7XabkZiOZ0VcxMyZSUGrxFmQ7_F4Jo5mkokdxfna-8-rkk59TICOrEzjhijrG000/s1600/00566.png" alt="Imagem de acesso" class="access-image">
-            
-            <input type="password" id="passwordInput" class="password-input" placeholder="Digite a senha" autocomplete="off" aria-label="Campo para digitar a senha">
-            <button id="enterButton" class="btn-enter">Entrar</button>
-        </div>
-    </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const passwordInput = document.getElementById("passwordInput");
-            const enterButton = document.getElementById("enterButton");
+<!-- Splash screen -->
+<div id="splash">
+  <svg viewBox="0 0 800 200">
+    <text x="50" y="140" font-size="120" font-family="Arial Black, sans-serif" class="path">MOSCHIAT</text>
+  </svg>
+</div>
 
-            // Dados de autenticação
-            const correctPassword = "MOSCHIAT2025";
-            const redirectURL = "http://moschiat.com/ooo.html";
+<!-- Conteúdo principal -->
+<div id="main-content">
+  <div class="left">
+    <h1>MOSCHIAT</h1>
+    <p>
+      Bem-vindo à área exclusiva da <strong>MOSCHIAT</strong> — onde cultura, arte, 3D, fotografia e AI se fundem.
+      Um espaço reservado para mentes criativas e visionárias.
+    </p>
+  </div>
 
-            // Adiciona o evento de clique ao botão de "Entrar"
-            enterButton.addEventListener("click", () => {
-                if (passwordInput.value === correctPassword) {
-                    window.location.href = redirectURL;
-                } else {
-                    alert("Senha incorreta. Tente novamente");
-                    passwordInput.value = "";
-                    passwordInput.focus();
-                }
-            });
+  <div class="card">
+    <h2>Área Restrita</h2>
+    <p>Digite a senha para continuar:</p>
+    <input type="password" placeholder="Senha..." />
+    <button class="btn">Entrar</button>
+  </div>
+</div>
 
-            // Permite o envio da senha pressionando a tecla Enter
-            passwordInput.addEventListener("keypress", (event) => {
-                if (event.key === "Enter") {
-                    enterButton.click();
-                }
-            });
-        });
-    </script>
+<script>
+  setTimeout(() => {
+    document.getElementById("main-content").style.display = "flex";
+  }, 5000);
+</script>
 
-
-
-</body></html>
+</body>
+</html>
