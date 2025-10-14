@@ -1,190 +1,573 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Área Exclusiva | MOSCHIAT</title>
-  <style>
-    :root {
-      --grad1: #0f0c29;
-      --grad2: #302b63;
-      --grad3: #24243e;
-      --highlight: #25d366;
-      --shadow: rgba(37, 211, 102, 0.25);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body {
-      width: 100%;
-      height: 100%;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
-      background: linear-gradient(-45deg, var(--grad1), var(--grad2), var(--grad3));
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: #fff;
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    #splash {
-      background: #000;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
-      animation: fadeOut 1s ease 5s forwards;
-    }
-
-    svg {
-      width: 70%;
-      height: auto;
-    }
-
-    .path {
-      fill: none;
-      stroke: var(--highlight);
-      stroke-width: 3;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: draw 4s ease forwards;
-    }
-
-    @keyframes draw {
-      to { stroke-dashoffset: 0; }
-    }
-
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-
-    #main-content {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-
-    .card {
-      background: rgba(17, 17, 17, 0.8);
-      border-radius: 16px;
-      padding: 40px;
-      box-shadow: 0 0 50px var(--shadow);
-      text-align: center;
-      width: 320px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 20%, rgba(255,255,255,0) 40%);
-      transform: rotate(30deg);
-      animation: shine 3s infinite;
-    }
-
-    @keyframes shine {
-      0% { transform: rotate(30deg) translate(-30%, -30%); }
-      100% { transform: rotate(30deg) translate(30%, 30%); }
-    }
-
-    input[type="password"] {
-      padding: 15px;
-      width: 100%;
-      margin: 20px 0;
-      border-radius: 8px;
-      border: 2px solid #333;
-      background: rgba(51, 51, 51, 0.5);
-      color: #fff;
-      font-size: 16px;
-    }
-
-    input[type="password"]:focus {
-      outline: none;
-      border-color: var(--highlight);
-      box-shadow: 0 0 10px var(--shadow);
-    }
-
-    .btn {
-      background: var(--highlight);
-      border: none;
-      padding: 12px 25px;
-      font-weight: bold;
-      border-radius: 6px;
-      color: #000;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      background: #00ffae;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSCHIAT | 3D Dashboard</title>
+    <style>
+        /* === RESET E VARIÁVEIS === */
+        :root {
+            --neon-green: #25d366;
+            --neon-glow: 0 0 10px #25d366, 0 0 20px #25d366, 0 0 30px #25d366;
+            --dark-bg: #0f0c29;
+            --accent-purple: #302b63;
+            --accent-dark: #24243e;
+            --text-light: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        /* === LAYOUT PRINCIPAL === */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100vh;
+            position: relative;
+        }
+        
+        /* === COLUNA ESQUERDA - CONTEÚDO === */
+        .content-panel {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--dark-bg) 100%);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-light);
+            text-shadow: var(--neon-glow);
+            position: relative;
+        }
+        
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--neon-green);
+            box-shadow: var(--neon-glow);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--neon-green);
+            text-shadow: 0 0 8px var(--neon-green);
+        }
+        
+        /* === CARDS DE CONTEÚDO === */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .content-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.2);
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+        
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-desc {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+        
+        /* === BOTÃO ENTRAR === */
+        .enter-btn {
+            background: transparent;
+            border: 2px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 2rem;
+            align-self: flex-start;
+        }
+        
+        .enter-btn:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            box-shadow: var(--neon-glow);
+            transform: scale(1.05);
+        }
+        
+        /* === FOOTER === */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-tag {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-tag:hover {
+            opacity: 1;
+            color: var(--neon-green);
+            text-shadow: 0 0 8px var(--neon-green);
+        }
+        
+        /* === COLUNA DIREITA - 3D CANVAS === */
+        .canvas-panel {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #three-root {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
+        /* === FALLBACK UI (CSS PARALLAX) === */
+        .fallback-ui {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #0f0c29, #302b63);
+            overflow: hidden;
+        }
+        
+        .fallback-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--neon-green);
+            text-shadow: var(--neon-glow);
+            letter-spacing: -2px;
+        }
+        
+        .css-parallax {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .parallax-layer {
+            position: absolute;
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+        }
+        
+        .layer-1 {
+            background: radial-gradient(circle at 30% 70%, rgba(37, 211, 102, 0.1) 0%, transparent 50%);
+            animation: float-1 20s infinite ease-in-out;
+        }
+        
+        .layer-2 {
+            background: radial-gradient(circle at 70% 30%, rgba(48, 43, 99, 0.3) 0%, transparent 50%);
+            animation: float-2 15s infinite ease-in-out;
+        }
+        
+        .layer-3 {
+            background: conic-gradient(from 45deg, transparent, rgba(37, 211, 102, 0.05), transparent);
+            animation: rotate-3 30s infinite linear;
+        }
+        
+        @keyframes float-1 {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.02); }
+        }
+        
+        @keyframes float-2 {
+            0%, 100% { transform: translateX(0px) scale(1); }
+            50% { transform: translateX(20px) scale(1.01); }
+        }
+        
+        @keyframes rotate-3 {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* === MOBILE RESPONSIVE === */
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr 1fr;
+            }
+            
+            .content-panel {
+                padding: 1rem;
+                order: 2;
+            }
+            
+            .canvas-panel {
+                order: 1;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .footer {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+        }
+        
+        /* === UTILITY CLASSES === */
+        .no-webgl .fallback-ui {
+            display: block;
+        }
+        
+        .no-webgl #three-root {
+            display: none;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
+    <div class="dashboard-container">
+        <!-- Coluna Esquerda - Conteúdo -->
+        <div class="content-panel">
+            <div class="header">
+                <div class="logo">MOSCHIAT</div>
+                <div class="nav-links">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">Projetos</a>
+                    <a href="#" class="nav-link">Sobre</a>
+                    <a href="#" class="nav-link">Contato</a>
+                </div>
+            </div>
+            
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">📸</div>
+                    <div class="card-title">Fotografia</div>
+                    <div class="card-desc">Capturando momentos únicos com estilo urbano e autêntico.</div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">🎨</div>
+                    <div class="card-title">3D Blender</div>
+                    <div class="card-desc">Criação de modelos 3D com estética favela meets cyberpunk.</div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">🤖</div>
+                    <div class="card-title">AI & Python</div>
+                    <div class="card-desc">Desenvolvimento de soluções inteligentes e automações.</div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="card-icon">🎵</div>
+                    <div class="card-title">Música</div>
+                    <div class="card-desc">Produção musical com influências da cultura periférica.</div>
+                </div>
+            </div>
+            
+            <button class="enter-btn" id="enterBtn">
+                Explorar
+            </button>
+            
+            <div class="footer">
+                <div class="footer-tag">Favela Tech</div>
+                <div class="footer-tag">Arte Digital</div>
+                <div class="footer-tag">Inovação</div>
+                <div class="footer-tag">Cultura</div>
+            </div>
+        </div>
+        
+        <!-- Coluna Direita - Canvas 3D -->
+        <div class="canvas-panel">
+            <div id="three-root"></div>
+            
+            <!-- Fallback UI para quando WebGL não está disponível -->
+            <div class="fallback-ui">
+                <div class="css-parallax">
+                    <div class="parallax-layer layer-1"></div>
+                    <div class="parallax-layer layer-2"></div>
+                    <div class="parallax-layer layer-3"></div>
+                </div>
+                <div class="fallback-logo">MOSCHIAT</div>
+            </div>
+        </div>
+    </div>
 
-<!-- Splash screen -->
-<div id="splash">
-  <svg viewBox="0 0 800 200">
-    <text x="50" y="140" font-size="120" font-family="Arial Black, sans-serif" class="path">MOSCHIAT</text>
-  </svg>
-</div>
+    <script>
+        // === DETECÇÃO WEBGL ===
+        function webglAvailable() {
+            try {
+                const canvas = document.createElement('canvas');
+                return !!(window.WebGLRenderingContext && 
+                    (canvas.getContext('webgl') || canvas.getContext('experimental-webgl')));
+            } catch(e) {
+                return false;
+            }
+        }
 
-<!-- Conteúdo principal -->
-<div id="main-content">
-  <div class="card">
-    <h2>Área Restrita</h2>
-    <p>Digite a senha para continuar:</p>
-    <input type="password" id="password" placeholder="Senha..." />
-    <button class="btn" id="enterBtn">Entrar</button>
-  </div>
-</div>
+        // Aplicar classe no body se WebGL não estiver disponível
+        if (!webglAvailable() || window.innerWidth < 480) {
+            document.body.classList.add('no-webgl');
+        }
 
-<script>
-  // Exibir conteúdo após splash
-  setTimeout(() => {
-    document.getElementById("main-content").style.display = "flex";
-  }, 5000);
+        // === THREE.JS SCENE ===
+        function initThreeJS() {
+            // Verificar se WebGL está disponível
+            if (!webglAvailable() || window.innerWidth < 480) return;
+            
+            // Importar Three.js do CDN
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+            script.onload = () => {
+                // Scene setup
+                const scene = new THREE.Scene();
+                const canvas = document.getElementById('three-root');
+                
+                // Camera
+                const camera = new THREE.PerspectiveCamera(
+                    45, 
+                    canvas.clientWidth / canvas.clientHeight, 
+                    0.1, 
+                    1000
+                );
+                camera.position.set(0, 1.5, 6);
+                
+                // Renderer
+                const renderer = new THREE.WebGLRenderer({ 
+                    antialias: true, 
+                    alpha: true,
+                    powerPreference: "high-performance"
+                });
+                renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+                renderer.setClearColor(0x000000, 0);
+                renderer.outputEncoding = THREE.sRGBEncoding;
+                canvas.appendChild(renderer.domElement);
+                
+                // Adaptive pixel ratio para performance
+                const isMobile = window.innerWidth < 768;
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1 : 1.5));
+                
+                // Lights
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+                scene.add(ambientLight);
+                
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(5, 5, 5);
+                scene.add(directionalLight);
+                
+                // Neon text
+                const textGeometry = new THREE.BoxGeometry(3, 1, 0.2);
+                const textMaterial = new THREE.MeshPhongMaterial({ 
+                    color: 0x000000,
+                    emissive: 0x25d366,
+                    emissiveIntensity: 2,
+                    shininess: 100,
+                    specular: 0x25d366
+                });
+                
+                const neonText = new THREE.Mesh(textGeometry, textMaterial);
+                neonText.position.set(0, 0, 0);
+                scene.add(neonText);
+                
+                // Particle system (fog simulation)
+                const particleCount = isMobile ? 100 : 300;
+                const particles = new THREE.BufferGeometry();
+                const positions = new Float32Array(particleCount * 3);
+                const colors = new Float32Array(particleCount * 3);
+                
+                for (let i = 0; i < particleCount * 3; i += 3) {
+                    positions[i] = (Math.random() - 0.5) * 20;
+                    positions[i + 1] = (Math.random() - 0.5) * 10;
+                    positions[i + 2] = (Math.random() - 0.5) * 10;
+                    
+                    colors[i] = 0.14;     // R
+                    colors[i + 1] = 0.83; // G
+                    colors[i + 2] = 0.4;  // B
+                }
+                
+                particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                particles.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                
+                const particleMaterial = new THREE.PointsMaterial({
+                    size: 0.1,
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.6,
+                    blending: THREE.AdditiveBlending
+                });
+                
+                const particleSystem = new THREE.Points(particles, particleMaterial);
+                scene.add(particleSystem);
+                
+                // Animation loop
+                function animate() {
+                    requestAnimationFrame(animate);
+                    
+                    // Rotate neon text
+                    neonText.rotation.y += 0.005;
+                    neonText.rotation.x = Math.sin(Date.now() * 0.001) * 0.1;
+                    
+                    // Animate particles
+                    const positions = particleSystem.geometry.attributes.position.array;
+                    for (let i = 0; i < positions.length; i += 3) {
+                        positions[i + 1] += 0.005;
+                        if (positions[i + 1] > 5) {
+                            positions[i + 1] = -5;
+                        }
+                    }
+                    particleSystem.geometry.attributes.position.needsUpdate = true;
+                    
+                    renderer.render(scene, camera);
+                }
+                
+                animate();
+                
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+                    camera.updateProjectionMatrix();
+                    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+                });
+            };
+            document.head.appendChild(script);
+        }
 
-  // Autenticação com hash SHA-256
-  const PASSWORD_HASH = "6db04c67c3010a3a72b1fd04b9704a544260c51df93208e525abc9d0b9df4743"; // MOSCHIAT2025
-
-  async function sha256Hex(str) {
-    const enc = new TextEncoder();
-    const data = enc.encode(str);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-  }
-
-  document.getElementById('enterBtn').addEventListener('click', async () => {
-    const val = document.getElementById('password').value;
-    const h = await sha256Hex(val);
-    if (h === PASSWORD_HASH) {
-      window.location.href = "dashboard.html";
-    } else {
-      alert("Senha incorreta.");
-    }
-  });
-</script>
-
+        // === INTERAÇÕES E ANIMAÇÕES ===
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializar Three.js
+            initThreeJS();
+            
+            // Botão entrar com efeito
+            const enterBtn = document.getElementById('enterBtn');
+            enterBtn.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                this.style.boxShadow = '0 0 30px #25d366';
+                
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '0 0 20px #25d366';
+                    alert('Bem-vindo ao MOSCHIAT Dashboard!');
+                }, 150);
+            });
+            
+            // Efeito hover nos cards
+            const cards = document.querySelectorAll('.content-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Efeito parallax no mouse para fallback
+            if (document.body.classList.contains('no-webgl')) {
+                document.addEventListener('mousemove', (e) => {
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
+                    
+                    const layers = document.querySelectorAll('.parallax-layer');
+                    layers[0].style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+                    layers[1].style.transform = `translate(${x * -30}px, ${y * -30}px)`;
+                });
+            }
+        });
+    </script>
 </body>
 </html>
