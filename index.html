@@ -1,230 +1,559 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Área Exclusiva | MOSCHIAT</title>
-  <style>
-    :root {
-      --grad1: #0f0c29;
-      --grad2: #302b63;
-      --grad3: #24243e;
-      --highlight: #25d366;
-      --text: #e0e0e0;
-      --shadow: rgba(37, 211, 102, 0.25);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    
+    <!-- SEO -->
+    <title>MOSCHIAT | Paulo Marques - Desenvolvedor & Designer Criativo</title>
+    <meta name="description" content="Portfólio de Paulo Marques - Especialista em desenvolvimento Python, modelagem 3D, fotografia e design criativo.">
+    <meta name="keywords" content="desenvolvimento, python, 3D, blender, fotografia, design, arte digital">
+    <meta name="author" content="Paulo Marques">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="MOSCHIAT | Paulo Marques">
+    <meta property="og:description" content="Desenvolvedor & Designer Criativo">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moschiat.com">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <style>
+        :root {
+            --primary: #00ffae;
+            --primary-dark: #00b377;
+            --secondary: #1a1a1a;
+            --background: #0a0a0a;
+            --card-bg: rgba(26, 26, 26, 0.95);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border: rgba(255, 255, 255, 0.1);
+            --shadow: rgba(0, 0, 0, 0.3);
+            --gradient-1: #0f0c29;
+            --gradient-2: #302b63;
+            --gradient-3: #24243e;
+        }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(-45deg, var(--grad1), var(--grad2), var(--grad3));
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: var(--text);
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(-45deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    /* Splash screen */
-    #splash {
-      background: #000;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
-      animation: fadeOut 1s ease 5s forwards;
-    }
+        @keyframes gradientBG {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
 
-    svg {
-      width: 70%;
-      height: auto;
-    }
+        /* Splash Screen */
+        #splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
 
-    .path {
-      fill: none;
-      stroke: var(--highlight);
-      stroke-width: 3;
-      stroke-dasharray: 1000;
-      stroke-dashoffset: 1000;
-      animation: draw 4s ease forwards;
-    }
+        #splash.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
 
-    @keyframes draw {
-      to { stroke-dashoffset: 0; }
-    }
+        .logo-animation {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--primary);
+            text-shadow: 0 0 20px var(--primary);
+            animation: pulse 2s ease-in-out infinite;
+        }
 
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
 
-    /* Layout landscape principal */
-    #main-content {
-      display: none;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      height: 100vh;
-      width: 100vw;
-      padding: 0 8vw;
-    }
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
 
-    .left {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 20px;
-    }
+        header.hidden {
+            transform: translateY(-100%);
+        }
 
-    .left h1 {
-      font-size: 4vw;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      text-shadow: 0 0 25px var(--shadow);
-    }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .left p {
-      max-width: 80%;
-      font-size: 1.3vw;
-      opacity: 0.9;
-      line-height: 1.6;
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            transition: text-shadow 0.3s ease;
+        }
 
-    .card {
-      background: rgba(17, 17, 17, 0.8);
-      border-radius: 16px;
-      padding: 40px;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1),
-                  0 0 50px var(--shadow);
-      width: 30%;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+        .logo:hover {
+            text-shadow: 0 0 20px var(--primary);
+        }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(to bottom right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0) 40%);
-      transform: rotate(30deg);
-      animation: shine 3s infinite;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
 
-    @keyframes shine {
-      0% { transform: rotate(30deg) translate(-30%, -30%); }
-      100% { transform: rotate(30deg) translate(30%, 30%); }
-    }
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
 
-    input[type="password"] {
-      padding: 15px;
-      width: 100%;
-      margin: 20px 0;
-      border-radius: 8px;
-      border: 2px solid #333;
-      background: rgba(51, 51, 51, 0.5);
-      color: #fff;
-      font-size: 16px;
-    }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
 
-    input[type="password"]:focus {
-      outline: none;
-      border-color: var(--highlight);
-      box-shadow: 0 0 10px var(--shadow);
-    }
+        .nav-link:hover {
+            color: var(--primary);
+        }
 
-    .btn {
-      background: var(--highlight);
-      border: none;
-      padding: 12px 25px;
-      font-weight: bold;
-      border-radius: 6px;
-      color: #000;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+        .nav-link:hover::after {
+            width: 100%;
+        }
 
-    .btn:hover {
-      background: #00ffae;
-      transform: scale(1.05);
-    }
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 2rem;
+            min-height: calc(100vh - 80px);
+        }
 
-    /* Responsivo */
-    @media (max-width: 900px) {
-      #main-content {
-        flex-direction: column;
-        padding: 4vw;
-        text-align: center;
-      }
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+        }
 
-      .left h1 {
-        font-size: 10vw;
-      }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-      .left p {
-        font-size: 4vw;
-      }
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
 
-      .card {
-        width: 90%;
-        margin-top: 30px;
-      }
-    }
-  </style>
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 30px var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Cards Grid */
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 255, 174, 0.5);
+            box-shadow: 0 8px 32px rgba(0, 255, 174, 0.2);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-link {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1rem;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
 </head>
 <body>
+    <!-- Splash Screen -->
+    <div id="splash">
+        <div class="logo-animation">MOSCHIAT</div>
+    </div>
 
-<!-- Splash screen -->
-<div id="splash">
-  <svg viewBox="0 0 800 200">
-    <text x="50" y="140" font-size="120" font-family="Arial Black, sans-serif" class="path">MOSCHIAT</text>
-  </svg>
-</div>
+    <!-- Header -->
+    <header id="header">
+        <div class="header-content">
+            <a href="#" class="logo">MOSCHIAT</a>
+            <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#about" class="nav-link">Sobre</a></li>
+                    <li><a href="#projects" class="nav-link">Projetos</a></li>
+                    <li><a href="#skills" class="nav-link">Habilidades</a></li>
+                    <li><a href="#contact" class="nav-link">Contato</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<!-- Conteúdo principal -->
-<div id="main-content">
-  <div class="left">
-    <h1>MOSCHIAT</h1>
-    <p>
-      Bem-vindo à área exclusiva da <strong>MOSCHIAT</strong> — onde cultura, arte, 3D, fotografia e AI se fundem.
-      Um espaço reservado para mentes criativas e visionárias.
-    </p>
-  </div>
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Desenvolvedor & Designer Criativo</h1>
+            <p>
+                Transformo ideias em realidade através de código, design e arte digital. 
+                Especializado em desenvolvimento Python, modelagem 3D e criação de experiências interativas.
+            </p>
+            <a href="#projects" class="cta-button">Ver Projetos</a>
+        </section>
 
-  <div class="card">
-    <h2>Área Restrita</h2>
-    <p>Digite a senha para continuar:</p>
-    <input type="password" placeholder="Senha..." />
-    <button class="btn">Entrar</button>
-  </div>
-</div>
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3>Desenvolvimento</h3>
+                    <p>Especialista em Python com foco em automação, IA e integração com ferramentas 3D.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-cube"></i></div>
+                    <h3>Modelagem 3D</h3>
+                    <p>Criação de ambientes, personagens e animações usando Blender e técnicas avançadas de VFX.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-camera"></i></div>
+                    <h3>Fotografia</h3>
+                    <p>Capturando momentos únicos com estilo autêntico e composição profissional.</p>
+                </div>
+            </div>
+        </section>
 
-<script>
-  setTimeout(() => {
-    document.getElementById("main-content").style.display = "flex";
-  }, 5000);
-</script>
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2 class="section-title">Projetos em Destaque</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fab fa-github"></i></div>
+                    <h3>Automações Python</h3>
+                    <p>Scripts e bibliotecas para otimização de workflows criativos e manipulação de dados.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-vr-cardboard"></i></div>
+                    <h3>Museu Virtual 3D</h3>
+                    <p>Espaço interativo desenvolvido em Blender para exibição de arte digital.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-music"></i></div>
+                    <h3>Sound Design</h3>
+                    <p>Produção de trilhas sonoras e efeitos para projetos audiovisuais.</p>
+                </div>
+            </div>
+        </section>
 
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <h2 class="section-title">Stack Tecnológico</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fab fa-python"></i></div>
+                    <h3>Python</h3>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fab fa-blender"></i></div>
+                    <h3>Blender</h3>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-code"></i></div>
+                    <h3>JavaScript</h3>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fab fa-github"></i></div>
+                    <h3>Git</h3>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-palette"></i></div>
+                    <h3>Adobe CC</h3>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-brain"></i></div>
+                    <h3>AI Tools</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2 class="section-title">Vamos Conectar</h2>
+            <div class="social-links">
+                <a href="https://github.com/MOSCHIAT" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:contato@moschiat.com" class="social-link" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://linkedin.com/in/moschiat" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 MOSCHIAT. Todos os direitos reservados.</p>
+        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem;">
+            Design e Desenvolvimento por Paulo Marques
+        </p>
+    </footer>
+
+    <script>
+        // Splash Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('splash').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+            });
+        });
+
+        // Header hide on scroll down
+        let lastScroll = 0;
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
