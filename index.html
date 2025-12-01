@@ -1,559 +1,95 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    
-    <!-- SEO -->
-    <title>MOSCHIAT | Paulo Marques - Desenvolvedor & Designer Criativo</title>
-    <meta name="description" content="Portfólio de Paulo Marques - Especialista em desenvolvimento Python, modelagem 3D, fotografia e design criativo.">
-    <meta name="keywords" content="desenvolvimento, python, 3D, blender, fotografia, design, arte digital">
-    <meta name="author" content="Paulo Marques">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="MOSCHIAT | Paulo Marques">
-    <meta property="og:description" content="Desenvolvedor & Designer Criativo">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://moschiat.com">
-    
-    <!-- Security Headers -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    
-    <style>
-        :root {
-            --primary: #00ffae;
-            --primary-dark: #00b377;
-            --secondary: #1a1a1a;
-            --background: #0a0a0a;
-            --card-bg: rgba(26, 26, 26, 0.95);
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --border: rgba(255, 255, 255, 0.1);
-            --shadow: rgba(0, 0, 0, 0.3);
-            --gradient-1: #0f0c29;
-            --gradient-2: #302b63;
-            --gradient-3: #24243e;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: linear-gradient(-45deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        @keyframes gradientBG {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Splash Screen */
-        #splash {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 1s ease, visibility 1s ease;
-        }
-
-        #splash.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .logo-animation {
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 900;
-            color: transparent;
-            -webkit-text-stroke: 2px var(--primary);
-            text-shadow: 0 0 20px var(--primary);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.8; transform: scale(1.05); }
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 2rem;
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-
-        header.hidden {
-            transform: translateY(-100%);
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-            transition: text-shadow 0.3s ease;
-        }
-
-        .logo:hover {
-            text-shadow: 0 0 20px var(--primary);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--primary);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Main Content */
-        main {
-            margin-top: 80px;
-            max-width: 1400px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 2rem;
-            min-height: calc(100vh - 80px);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
-            margin-bottom: 4rem;
-        }
-
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary), #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background: var(--primary);
-            color: #000;
-            box-shadow: 0 0 30px var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* Cards Grid */
-        .section {
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(0, 255, 174, 0.5);
-            box-shadow: 0 8px 32px rgba(0, 255, 174, 0.2);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        footer {
-            background: rgba(10, 10, 10, 0.95);
-            padding: 2rem;
-            text-align: center;
-            border-top: 1px solid var(--border);
-            margin-top: 4rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .social-link {
-            color: var(--text-secondary);
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            color: var(--primary);
-            transform: translateY(-3px);
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 72px;
-                left: 0;
-                right: 0;
-                background: rgba(10, 10, 10, 0.98);
-                flex-direction: column;
-                padding: 2rem;
-                gap: 1rem;
-                transform: translateY(-100%);
-                transition: transform 0.3s ease;
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--background);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Procura-se Modelos — Moschiat</title>
+  <style>
+    :root{--bg:#0f0f10;--card:#121214;--accent:#f6c357;--muted:#bdbdbd;--glass: rgba(255,255,255,0.03)}
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:linear-gradient(180deg,#060607 0%, #0b0b0c 100%); color:#fff; -webkit-font-smoothing:antialiased}
+    .wrap{max-width:920px;margin:56px auto;padding:32px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,23,0.7)}
+    .eyebrow{color:var(--accent);font-weight:700;letter-spacing:0.6px}
+    h1{margin:10px 0;font-size:28px}
+    p.lead{color:var(--muted);margin:0 0 20px}
+    .grid{display:grid;grid-template-columns:1fr 300px;gap:20px}
+    .card{background:var(--card);padding:18px;border-radius:10px}
+    ul{padding-left:18px;margin:8px 0}
+    li{margin:8px 0;color:var(--muted)}
+    .cta{display:inline-block;padding:12px 18px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#ffba5a);color:#0b0b0c;font-weight:700;text-decoration:none}
+    .note{font-size:13px;color:#e6e6e6;margin-top:12px}
+    .muted{color:var(--muted);font-size:14px}
+    .small{font-size:13px;color:var(--muted)}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);color:var(--muted);font-weight:600;margin-right:8px}
+    footer{margin-top:18px;color:var(--muted);font-size:13px}
+    @media (max-width:880px){.grid{grid-template-columns:1fr;}.wrap{margin:20px;padding:18px}}
+  </style>
 </head>
 <body>
-    <!-- Splash Screen -->
-    <div id="splash">
-        <div class="logo-animation">MOSCHIAT</div>
+  <main class="wrap">
+    <div class="eyebrow">MOSCHIAT — CHAMADA ABERTA</div>
+    <h1>Procuro modelos para ensaios experimentais — BH, Contagem e Betim</h1>
+    <p class="lead">Ensaios em <strong>permuta (gratuito)</strong>: você recebe fotos editadas para portfólio; eu exploro estética, luz e narrativa. Aberto para quem tem experiência e para quem nunca posou antes.</p>
+
+    <div class="grid">
+      <section>
+        <div class="card">
+          <h3>Quem procuro</h3>
+          <ul>
+            <li>Maiores de 18 anos</li>
+            <li>Moradores de Belo Horizonte, Contagem ou Betim (ou região próxima)</li>
+            <li>Qualquer gênero, aparência ou nível de experiência</li>
+            <li>Atitude curiosa, disponibilidade e respeito mútuo</li>
+          </ul>
+
+          <h3>Como funciona</h3>
+          <ul>
+            <li>Ensaios rápidos (30–60 min)</li>
+            <li>Conceito experimental — direção criativa do Moschiat</li>
+            <li>Você recebe as fotos finais (altura e formato combinados)</li>
+            <li>Permuta: <strong>trabalho gratuito</strong> — uso das imagens para portfólio/veiculação mediante autorização</li>
+          </ul>
+
+          <h3>O que eu peço</h3>
+          <ul>
+            <li>Pontualidade e comunicação clara</li>
+            <li>Respeito às orientações de direção e ao conceito</li>
+            <li>Consentimento por escrito para uso das imagens (podemos combinar limites)</li>
+          </ul>
+
+          <p class="note">Observação: Vou priorizar projetos que tragam algo interessante ao conceito — esteja aberto(a) a experimentar. Não há pagamento em dinheiro; a troca é por material fotográfico.</p>
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <div style="margin-bottom:12px">
+            <span class="pill">Local</span>
+            <span class="pill">Permuta / Gratuito</span>
+          </div>
+
+          <h4 style="margin:6px 0">Quer participar?</h4>
+          <p class="muted">Preencha o formulário para eu entender seu perfil. Vou responder por WhatsApp ou e‑mail se seu perfil se encaixar nos próximos ensaios.</p>
+
+          <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdteRqAFxqeeQM-KKEPcQ-tmrwMw226oFHsp5dVj7_7IPLGQg/viewform?usp=dialog" target="_blank" rel="noopener">Preencher formulário</a>
+
+          <p class="small">Dica: anexe 2–5 fotos suas e me diga se tem experiência. Se preferir, manda primeiro o Instagram.</p>
+
+          <footer>moschiat.com — contato: contato@moschiat.com</footer>
+        </div>
+      </aside>
     </div>
 
-    <!-- Header -->
-    <header id="header">
-        <div class="header-content">
-            <a href="#" class="logo">MOSCHIAT</a>
-            <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#about" class="nav-link">Sobre</a></li>
-                    <li><a href="#projects" class="nav-link">Projetos</a></li>
-                    <li><a href="#skills" class="nav-link">Habilidades</a></li>
-                    <li><a href="#contact" class="nav-link">Contato</a></li>
-                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <section style="margin-top:22px" class="card">
+      <h3>Mini FAQ</h3>
+      <ul>
+        <li><strong>É pago?</strong> Não — é permuta; você recebe fotos para portfólio.</li>
+        <li><strong>Onde acontecem as sessões?</strong> Em BH e regiões próximas; local exato será combinado.</li>
+        <li><strong>Precisa ter experiência?</strong> Não — aceito iniciantes e experientes.</li>
+      </ul>
+    </section>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>Desenvolvedor & Designer Criativo</h1>
-            <p>
-                Transformo ideias em realidade através de código, design e arte digital. 
-                Especializado em desenvolvimento Python, modelagem 3D e criação de experiências interativas.
-            </p>
-            <a href="#projects" class="cta-button">Ver Projetos</a>
-        </section>
 
-        <!-- About Section -->
-        <section id="about" class="section">
-            <h2 class="section-title">Sobre Mim</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-code"></i></div>
-                    <h3>Desenvolvimento</h3>
-                    <p>Especialista em Python com foco em automação, IA e integração com ferramentas 3D.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-cube"></i></div>
-                    <h3>Modelagem 3D</h3>
-                    <p>Criação de ambientes, personagens e animações usando Blender e técnicas avançadas de VFX.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-camera"></i></div>
-                    <h3>Fotografia</h3>
-                    <p>Capturando momentos únicos com estilo autêntico e composição profissional.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section">
-            <h2 class="section-title">Projetos em Destaque</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-icon"><i class="fab fa-github"></i></div>
-                    <h3>Automações Python</h3>
-                    <p>Scripts e bibliotecas para otimização de workflows criativos e manipulação de dados.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-vr-cardboard"></i></div>
-                    <h3>Museu Virtual 3D</h3>
-                    <p>Espaço interativo desenvolvido em Blender para exibição de arte digital.</p>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-music"></i></div>
-                    <h3>Sound Design</h3>
-                    <p>Produção de trilhas sonoras e efeitos para projetos audiovisuais.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="section">
-            <h2 class="section-title">Stack Tecnológico</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card-icon"><i class="fab fa-python"></i></div>
-                    <h3>Python</h3>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fab fa-blender"></i></div>
-                    <h3>Blender</h3>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-code"></i></div>
-                    <h3>JavaScript</h3>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fab fa-github"></i></div>
-                    <h3>Git</h3>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-palette"></i></div>
-                    <h3>Adobe CC</h3>
-                </div>
-                <div class="card">
-                    <div class="card-icon"><i class="fas fa-brain"></i></div>
-                    <h3>AI Tools</h3>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <h2 class="section-title">Vamos Conectar</h2>
-            <div class="social-links">
-                <a href="https://github.com/MOSCHIAT" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="mailto:contato@moschiat.com" class="social-link" aria-label="Email">
-                    <i class="fas fa-envelope"></i>
-                </a>
-                <a href="https://linkedin.com/in/moschiat" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 MOSCHIAT. Todos os direitos reservados.</p>
-        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.5rem;">
-            Design e Desenvolvimento por Paulo Marques
-        </p>
-    </footer>
-
-    <script>
-        // Splash Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('splash').classList.add('hidden');
-            }, 2000);
-        });
-
-        // Mobile Menu Toggle
-        const menuBtn = document.getElementById('menuBtn');
-        const navLinks = document.getElementById('navLinks');
-
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            const icon = menuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
-            });
-        });
-
-        // Header hide on scroll down
-        let lastScroll = 0;
-        const header = document.getElementById('header');
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                header.classList.add('hidden');
-            } else {
-                header.classList.remove('hidden');
-            }
-            
-            lastScroll = currentScroll;
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+  </main>
 </body>
 </html>
