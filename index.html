@@ -4,37 +4,74 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Procura-se Modelos — Moschiat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{--bg:#0f0f10;--card:#121214;--accent:#f6c357;--muted:#bdbdbd;--glass: rgba(255,255,255,0.03)}
     *{box-sizing:border-box}
-    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0; background:linear-gradient(180deg,#060607 0%, #0b0b0c 100%); color:#fff; -webkit-font-smoothing:antialiased}
+    /* Adicionei 'Inter' como primeira opção se ela for importada acima */
+    body{font-family:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; margin:0; background:linear-gradient(180deg,#060607 0%, #0b0b0c 100%); color:#fff; -webkit-font-smoothing:antialiased; line-height: 1.5;}
+
     .wrap{max-width:920px;margin:56px auto;padding:32px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,23,0.7)}
-    .eyebrow{color:var(--accent);font-weight:700;letter-spacing:0.6px}
-    h1{margin:10px 0;font-size:28px}
-    p.lead{color:var(--muted);margin:0 0 20px}
-    .grid{display:grid;grid-template-columns:1fr 300px;gap:20px}
-    .card{background:var(--card);padding:18px;border-radius:10px}
-    ul{padding-left:18px;margin:8px 0}
+
+    /* Estilo para a nova imagem de cabeçalho */
+    .header-banner {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .eyebrow{color:var(--accent);font-weight:700;letter-spacing:0.6px; text-transform: uppercase; font-size: 14px;}
+    h1{margin:10px 0;font-size:28px; letter-spacing: -0.5px;}
+    h3 {margin-top: 24px; margin-bottom: 12px;}
+    h4.cta-title {margin: 6px 0;}
+
+    p.lead{color:var(--muted);margin:0 0 28px; font-size: 17px;}
+
+    .grid{display:grid;grid-template-columns:1fr 300px;gap:24px}
+    .card{background:var(--card);padding:24px;border-radius:10px; border: 1px solid rgba(255,255,255,0.03);}
+
+    ul{padding-left:20px;margin:8px 0}
     li{margin:8px 0;color:var(--muted)}
-    .cta{display:inline-block;padding:12px 18px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#ffba5a);color:#0b0b0c;font-weight:700;text-decoration:none}
-    .note{font-size:13px;color:#e6e6e6;margin-top:12px}
+
+    /* Classes utilitárias para substituir estilos inline */
+    .tags-wrapper { margin-bottom: 12px; }
+    .faq-section { margin-top: 24px; }
+
+    .cta{display:block; text-align: center; padding:14px 18px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#ffba5a);color:#0b0b0c;font-weight:700;text-decoration:none; transition: transform 0.2s, filter 0.2s;}
+    .cta:hover { transform: translateY(-2px); filter: brightness(1.1);}
+
+    .note{font-size:13px;color:#e6e6e6;margin-top:16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);}
     .muted{color:var(--muted);font-size:14px}
-    .small{font-size:13px;color:var(--muted)}
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);color:var(--muted);font-weight:600;margin-right:8px}
-    footer{margin-top:18px;color:var(--muted);font-size:13px}
-    @media (max-width:880px){.grid{grid-template-columns:1fr;}.wrap{margin:20px;padding:18px}}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);color:var(--muted);font-weight:600;margin-right:8px; font-size: 12px; border: 1px solid rgba(255,255,255,0.05);}
+
+    .main-footer{margin-top:32px;color:var(--muted);font-size:13px; text-align: center; opacity: 0.7;}
+    .main-footer a { color: var(--accent); text-decoration: none;}
+
+    @media (max-width:880px){
+        .grid{grid-template-columns:1fr;}
+        .wrap{margin:20px 16px;padding:20px}
+        h1{font-size: 24px;}
+    }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <div class="eyebrow">MOSCHIAT — CHAMADA ABERTA</div>
+    <img src="https://i.ibb.co/szMj50N/Screen-Shot-2025-11-30-at-22-19-08.png" alt="Moschiat Fotografia Experimental - Amostra de trabalho" class="header-banner">
+
+    <div class="eyebrow">Moschiat — Chamada Aberta</div>
     <h1>Procuro modelos para ensaios experimentais — BH, Contagem e Betim</h1>
     <p class="lead">Ensaios em <strong>permuta (gratuito)</strong>: você recebe fotos editadas para portfólio; eu exploro estética, luz e narrativa. Aberto para quem tem experiência e para quem nunca posou antes.</p>
 
     <div class="grid">
       <section>
         <div class="card">
-          <h3>Quem procuro</h3>
+          <h3 style="margin-top:0">Quem procuro</h3>
           <ul>
             <li>Maiores de 18 anos</li>
             <li>Moradores de Belo Horizonte, Contagem ou Betim (ou região próxima)</li>
@@ -63,25 +100,21 @@
 
       <aside>
         <div class="card">
-          <div style="margin-bottom:12px">
+          <div class="tags-wrapper">
             <span class="pill">Local</span>
             <span class="pill">Permuta / Gratuito</span>
           </div>
 
-          <h4 style="margin:6px 0">Quer participar?</h4>
+          <h4 class="cta-title">Quer participar?</h4>
           <p class="muted">Preencha o formulário para eu entender seu perfil. Vou responder por WhatsApp ou e‑mail se seu perfil se encaixar nos próximos ensaios.</p>
 
           <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdteRqAFxqeeQM-KKEPcQ-tmrwMw226oFHsp5dVj7_7IPLGQg/viewform?usp=dialog" target="_blank" rel="noopener">Preencher formulário</a>
-
-          <p class="small">Dica: anexe 2–5 fotos suas e me diga se tem experiência. Se preferir, manda primeiro o Instagram.</p>
-
-          <footer>moschiat.com — contato: contato@moschiat.com</footer>
         </div>
       </aside>
     </div>
 
-    <section style="margin-top:22px" class="card">
-      <h3>Mini FAQ</h3>
+    <section class="card faq-section">
+      <h3 style="margin-top:0">Mini FAQ</h3>
       <ul>
         <li><strong>É pago?</strong> Não — é permuta; você recebe fotos para portfólio.</li>
         <li><strong>Onde acontecem as sessões?</strong> Em BH e regiões próximas; local exato será combinado.</li>
@@ -89,6 +122,9 @@
       </ul>
     </section>
 
+    <footer class="main-footer">
+        Em caso de dúvidas — contato: <a href="mailto:contato@moschiat.com">contato@moschiat.com</a>
+    </footer>
 
   </main>
 </body>
