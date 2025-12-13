@@ -11,12 +11,10 @@
   <style>
     :root{--bg:#0f0f10;--card:#121214;--accent:#f6c357;--muted:#bdbdbd;--glass: rgba(255,255,255,0.03)}
     *{box-sizing:border-box}
-    /* Adicionei 'Inter' como primeira opção se ela for importada acima */
     body{font-family:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; margin:0; background:linear-gradient(180deg,#060607 0%, #0b0b0c 100%); color:#fff; -webkit-font-smoothing:antialiased; line-height: 1.5;}
 
     .wrap{max-width:920px;margin:56px auto;padding:32px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,23,0.7)}
 
-    /* Estilo para a nova imagem de cabeçalho */
     .header-banner {
       display: block;
       width: 100%;
@@ -39,7 +37,6 @@
     ul{padding-left:20px;margin:8px 0}
     li{margin:8px 0;color:var(--muted)}
 
-    /* Classes utilitárias para substituir estilos inline */
     .tags-wrapper { margin-bottom: 12px; }
     .faq-section { margin-top: 24px; }
 
@@ -52,6 +49,72 @@
 
     .main-footer{margin-top:32px;color:var(--muted);font-size:13px; text-align: center; opacity: 0.7;}
     .main-footer a { color: var(--accent); text-decoration: none;}
+
+    /* Estilos para a área protegida */
+    .protected-container {
+      margin-top: 24px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.05);
+      display: none;
+    }
+    
+    .password-section {
+      background: rgba(255,255,255,0.03);
+      padding: 16px;
+      text-align: center;
+      border-radius: 8px;
+      margin-top: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .password-section h4 {
+      margin: 0 0 8px 0;
+      font-size: 16px;
+      color: var(--accent);
+    }
+    
+    .password-section .muted {
+      margin-bottom: 12px;
+      display: block;
+    }
+    
+    .password-input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.3);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+    }
+    
+    .password-btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      background: linear-gradient(90deg, var(--accent), #ffba5a);
+      color: #0b0b0c;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+    
+    .password-btn:hover {
+      filter: brightness(1.1);
+    }
+    
+    .password-error {
+      color: #ff6b6b;
+      margin-top: 8px;
+      font-size: 13px;
+      display: none;
+    }
 
     @media (max-width:880px){
         .grid{grid-template-columns:1fr;}
@@ -109,6 +172,15 @@
           <p class="muted">Preencha o formulário para eu entender seu perfil. Vou responder por WhatsApp ou e‑mail se seu perfil se encaixar nos próximos ensaios.</p>
 
           <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdteRqAFxqeeQM-KKEPcQ-tmrwMw226oFHsp5dVj7_7IPLGQg/viewform?usp=dialog" target="_blank" rel="noopener">Preencher formulário</a>
+          
+          <!-- Seção de senha (agora dentro do card do lado direito) -->
+          <div class="password-section">
+            <h4>Área Protegida</h4>
+            <p class="muted">Acesso restrito a conteúdo adicional</p>
+            <input type="password" class="password-input" id="passwordInput" placeholder="Digite a senha">
+            <button class="password-btn" onclick="checkPassword()">Acessar</button>
+            <div class="password-error" id="passwordError">Senha incorreta. Tente novamente.</div>
+          </div>
         </div>
       </aside>
     </div>
@@ -122,11 +194,136 @@
       </ul>
     </section>
 
+    <!-- Container para o iframe (inicialmente oculto) -->
+    <div class="protected-container" id="protectedContainer">
+      <iframe id="protectedIframe" style="width:100%; height:600px; border:none;" sandbox="allow-scripts allow-same-origin"></iframe>
+    </div>
+
     <footer class="main-footer">
         Em caso de dúvidas — contato: <a href="mailto:contato@moschiat.com">contato@moschiat.com</a>
     </footer>
 
   </main>
+
+  <script>
+    // Função para verificar a senha
+    function checkPassword() {
+      const passwordInput = document.getElementById('passwordInput');
+      const passwordError = document.getElementById('passwordError');
+      const protectedContainer = document.getElementById('protectedContainer');
+      const passwordSection = document.querySelector('.password-section');
+      
+      if (passwordInput.value === 'moschiat2025') {
+        // Senha correta - mostra o conteúdo protegido
+        passwordSection.style.display = 'none';
+        protectedContainer.style.display = 'block';
+        
+        // Carrega o conteúdo da subpágina no iframe
+        const iframe = document.getElementById('protectedIframe');
+        iframe.srcdoc = `
+          <!DOCTYPE html>
+          <html lang="pt-BR">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Conteúdo Protegido - Moschiat</title>
+            <style>
+              body {
+                font-family: 'Inter', sans-serif;
+                margin: 0;
+                padding: 20px;
+                background: #121214;
+                color: #fff;
+              }
+              .gallery-container {
+                max-width: 920px;
+                margin: 0 auto;
+              }
+              .gallery-title {
+                text-align: center;
+                margin-bottom: 30px;
+                color: #f6c357;
+              }
+              .image-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+              }
+              .image-item {
+                border-radius: 10px;
+                overflow: hidden;
+                background: #0f0f10;
+                border: 1px solid rgba(255,255,255,0.05);
+              }
+              .image-item img {
+                width: 100%;
+                height: auto;
+                display: block;
+              }
+              .image-caption {
+                padding: 12px;
+                font-size: 14px;
+                color: #bdbdbd;
+                text-align: center;
+              }
+              @media (max-width: 768px) {
+                .image-grid {
+                  grid-template-columns: 1fr;
+                }
+              }
+            </style>
+          </head>
+          <body>
+            <div class="gallery-container">
+              <h1 class="gallery-title">Portfólio Experimental - Moschiat</h1>
+              <div class="image-grid">
+                <div class="image-item">
+                  <img src="https://i.ibb.co/MkQFsd14/ERXL5564-BOOM.png" alt="Imagem experimental 1">
+                  <div class="image-caption">ERXL5564-BOOM</div>
+                </div>
+                <div class="image-item">
+                  <img src="https://i.ibb.co/LXL1QZkP/DVID4989-BOOM.png" alt="Imagem experimental 2">
+                  <div class="image-caption">DVID4989-BOOM</div>
+                </div>
+                <div class="image-item">
+                  <img src="https://i.ibb.co/n85nV4M9/BKRH4467-BOOM.png" alt="Imagem experimental 3">
+                  <div class="image-caption">BKRH4467-BOOM</div>
+                </div>
+                <div class="image-item">
+                  <img src="https://i.ibb.co/Mxt2MSkc/QAFW0152-BOOM.png" alt="Imagem experimental 4">
+                  <div class="image-caption">QAFW0152-BOOM</div>
+                </div>
+                <div class="image-item">
+                  <img src="https://i.ibb.co/nsZqNWMk/Screen-Shot-2025-09-27-at-12-10-08.png" alt="Imagem experimental 5">
+                  <div class="image-caption">Screen Shot 2025-09-27</div>
+                </div>
+                <div class="image-item">
+                  <img src="https://i.ibb.co/MkQFsd14/ERXL5564-BOOM.png" alt="Imagem experimental 6">
+                  <div class="image-caption">ERXL5564-BOOM (duplicada)</div>
+                </div>
+              </div>
+            </div>
+          </body>
+          </html>
+        `;
+      } else {
+        // Senha incorreta
+        passwordError.style.display = 'block';
+        passwordInput.style.borderColor = '#ff6b6b';
+        
+        // Limpa o campo após erro
+        setTimeout(() => {
+          passwordInput.value = '';
+        }, 300);
+      }
+    }
+
+    // Permitir pressionar Enter para submeter a senha
+    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        checkPassword();
+      }
+    });
+  </script>
 </body>
 </html>
-
