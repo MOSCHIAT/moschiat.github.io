@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
@@ -9,13 +9,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- Variáveis e Reset do Tema Escuro (Baseado em Moschiat) --- */
+    /* --- CONFIGURAÇÕES GERAIS (TEMA ESCURO) --- */
     :root{
         --bg:#0f0f10;
         --card:#121214;
-        --accent:#f6c357; /* Cor de destaque (dourado) */
+        --accent:#f6c357; 
         --accent-hover: #ffba5a;
-        --muted:#bdbdbd; /* Texto cinza claro */
+        --muted:#bdbdbd; 
         --glass: rgba(255,255,255,0.03);
         --border-color: rgba(255,255,255,0.05);
     }
@@ -27,9 +27,8 @@
         line-height: 1.6;
     }
 
-    /* Container Principal */
     .wrap{
-        max-width:1000px; /* Aumentei um pouco para acomodar melhor a grade */
+        max-width:1000px;
         margin:40px auto;
         padding:32px;
         border-radius:14px;
@@ -37,38 +36,32 @@
         box-shadow:0 8px 30px rgba(2,6,23,0.7);
     }
 
-    /* Tipografia e Elementos Gerais */
     h1, h2, h3, h4 { color: #fff; letter-spacing: -0.5px; }
     h1{ margin:10px 0 20px; font-size:28px; }
     h2.section-divider-title {
-        text-align: center;
-        margin: 60px 0 40px;
-        font-size: 24px;
-        color: var(--accent);
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        text-align: center; margin: 60px 0 40px; font-size: 24px;
+        color: var(--accent); text-transform: uppercase; letter-spacing: 1px;
     }
     h3 {margin-top: 24px; margin-bottom: 12px;}
     p.lead{color:var(--muted);margin:0 0 28px; font-size: 17px;}
     ul{padding-left:20px;margin:8px 0}
     li{margin:8px 0;color:var(--muted)}
     .muted{color:var(--muted);font-size:14px}
-    
-    /* Header Banner & Eyebrow */
+    .note{font-size:13px;color:#e6e6e6;margin-top:16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);}
+
+    /* HEADER */
     .header-banner {
       display: block; width: 100%; height: auto; border-radius: 10px;
       margin-bottom: 28px; border: 1px solid var(--border-color);
     }
     .eyebrow{color:var(--accent);font-weight:700;letter-spacing:0.6px; text-transform: uppercase; font-size: 14px;}
 
-    /* Cards Gerais (Layout Moschiat) */
+    /* LAYOUT GERAL */
     .grid-layout{display:grid;grid-template-columns:1fr 300px;gap:24px; margin-bottom: 40px;}
     .info-card{background:var(--card);padding:24px;border-radius:10px; border: 1px solid var(--border-color);}
     .tags-wrapper { margin-bottom: 12px; }
     .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);color:var(--muted);font-weight:600;margin-right:8px; font-size: 12px; border: 1px solid var(--border-color);}
-    .note{font-size:13px;color:#e6e6e6;margin-top:16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);}
 
-    /* Botões CTA (Estilo Gradiente Unificado) */
     .cta-button{
         display:block; text-align: center; width: 100%;
         padding:14px 18px; border-radius:8px;
@@ -79,122 +72,147 @@
     }
     .cta-button:hover { transform: translateY(-2px); filter: brightness(1.1);}
 
-    /* --- SEÇÃO DE VENDAS (Adaptado do Studio para o Tema Escuro) --- */
-    
+    /* --- ESTILOS DA LOJA (CARDS) --- */
     .product-grid {
         display: grid;
-        /* Grade responsiva automática */
         grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 2rem;
-        margin-bottom: 40px;
+        gap: 2rem; margin-bottom: 40px;
     }
 
     .product-card {
-        background: var(--card); /* Fundo escuro */
-        border-radius: 10px;
-        overflow: hidden;
-        border: 1px solid var(--border-color); /* Borda sutil */
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
+        background: var(--card); border-radius: 10px; overflow: hidden;
+        border: 1px solid var(--border-color); transition: all 0.3s ease;
+        display: flex; flex-direction: column; cursor: pointer;
     }
-
     .product-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         border-color: rgba(255,255,255,0.15);
     }
-
     .card-image-container {
-        position: relative;
-        padding-top: 125%; /* Aspect ratio 4:5 */
-        background-color: rgba(255,255,255,0.02); /* Placeholder escuro */
+        position: relative; padding-top: 125%; background-color: rgba(255,255,255,0.02);
     }
-
     .card-image-container img {
         position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
     }
-
-    .card-content {
-        padding: 1.2rem;
-        flex-grow: 1; display: flex; flex-direction: column;
-    }
-
-    .card-title {
-        font-size: 1.1rem; font-weight: 600; margin-bottom: 0.8rem; color: #fff; /* Título branco */
-    }
-
-    .card-details {
-        list-style: none; margin: 0 0 1rem 0; padding: 0; font-size: 0.9rem; color: var(--muted);
-    }
+    .card-content { padding: 1.2rem; flex-grow: 1; display: flex; flex-direction: column; }
+    .card-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.8rem; color: #fff; }
+    .card-details { list-style: none; margin: 0 0 1rem 0; padding: 0; font-size: 0.9rem; color: var(--muted); }
     .card-details li { margin-bottom: 0.3rem; display: flex; color: var(--muted); }
     .card-details li strong { color: #fff; margin-right: 6px; min-width: 65px; }
-
+    
     .card-footer {
         margin-top: auto; display: flex; justify-content: space-between; align-items: center;
-        border-top: 1px solid var(--border-color);
-        padding-top: 1rem;
+        border-top: 1px solid var(--border-color); padding-top: 1rem;
     }
-
     .price { font-size: 1.25rem; font-weight: 700; color: var(--accent); }
+    .btn-visual {
+        padding: 0.6rem 1.2rem; background: rgba(255,255,255,0.1);
+        color: #fff; border: none; border-radius: 6px; font-weight: 600; font-size: 0.9rem;
+        transition: background 0.2s; pointer-events: none;
+    }
+
+    /* --- ESTILO DO MODAL (POP-UP) --- */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.85); z-index: 1000;
+        display: none; justify-content: center; align-items: center;
+        padding: 20px; backdrop-filter: blur(5px);
+        opacity: 0; transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active { display: flex; opacity: 1; }
+
+    .modal-content {
+        background: #18181b; border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px; max-width: 800px; width: 100%;
+        display: grid; grid-template-columns: 1fr 1.2fr; overflow: hidden;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        transform: scale(0.95); transition: transform 0.3s ease;
+    }
+    .modal-overlay.active .modal-content { transform: scale(1); }
+
+    .modal-img {
+        width: 100%; height: 100%; min-height: 400px;
+        object-fit: cover; background: #000;
+    }
+    .modal-details { padding: 40px; display: flex; flex-direction: column; position: relative; }
+    .close-modal {
+        position: absolute; top: 15px; right: 20px; background: none; border: none;
+        color: #fff; font-size: 28px; cursor: pointer; opacity: 0.7; z-index: 10;
+    }
+    .close-modal:hover { opacity: 1; }
+
+    .modal-title { font-size: 1.8rem; margin-bottom: 10px; color: #fff; line-height: 1.2; }
+    .modal-desc { color: #d4d4d8; font-size: 1rem; line-height: 1.6; margin-bottom: 25px; flex-grow: 1; }
+    .modal-meta { margin-bottom: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+    .modal-meta p { color: var(--muted); margin-bottom: 8px; font-size: 0.95rem; }
+    .modal-meta strong { color: #fff; margin-right: 5px; }
     
-    /* Botão de compra menor, usando o mesmo estilo do CTA principal */
-    .btn-buy {
-        padding: 0.6rem 1.2rem;
-        background:linear-gradient(90deg,var(--accent),var(--accent-hover));
-        color: #0b0b0c; border: none; border-radius: 6px;
-        font-weight: 700; cursor: pointer; transition: all 0.2s;
+    .modal-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+    .modal-price { font-size: 2rem; font-weight: 700; color: var(--accent); }
+    
+    .modal-buy-btn {
+        background:linear-gradient(90deg, #25D366, #128C7E);
+        color: #fff; padding: 12px 30px; border-radius: 8px; text-decoration: none;
+        font-weight: 700; font-size: 1rem; cursor: pointer; transition: transform 0.2s;
+        display: inline-flex; align-items: center; gap: 8px;
     }
-    .btn-buy:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .modal-buy-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
-
-    /* --- Área de Senha e Footer --- */
-    .password-section {
-      background: rgba(255,255,255,0.03); padding: 16px; text-align: center;
-      border-radius: 8px; margin-top: 20px; border: 1px solid var(--border-color);
-    }
-    .password-input {
-      width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3);
-      color: white; font-family: 'Inter', sans-serif; font-size: 14px;
-    }
+    /* SENHA E FOOTER */
+    .password-section { background: rgba(255,255,255,0.03); padding: 16px; text-align: center; border-radius: 8px; margin-top: 20px; border: 1px solid var(--border-color); }
+    .password-input { width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); color: white; font-family: 'Inter', sans-serif; }
     .password-error { color: #ff6b6b; margin-top: 8px; font-size: 13px; display: none; }
-    .protected-container {
-      margin-top: 24px; border-radius: 10px; overflow: hidden;
-      border: 1px solid var(--border-color); display: none;
-    }
+    .protected-container { margin-top: 24px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-color); display: none; }
     .main-footer{margin-top:60px;color:var(--muted);font-size:13px; text-align: center; opacity: 0.7; padding-top: 20px; border-top: 1px solid var(--border-color);}
     .main-footer a { color: var(--accent); text-decoration: none;}
+    .faq-section { margin-top: 24px; }
 
     @media (max-width:880px){
         .grid-layout{grid-template-columns:1fr;}
-        .wrap{margin:20px 16px;padding:20px}
-        h1{font-size: 24px;}
+        .wrap{margin:10px; padding:20px}
+        .modal-content { grid-template-columns: 1fr; max-height: 90vh; overflow-y: auto; }
+        .modal-img { height: 250px; min-height: auto; }
+        .modal-details { padding: 25px; }
+        .modal-title { font-size: 1.5rem; }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <img src="https://i.ibb.co/szMj50N/Screen-Shot-2025-11-30-at-22-19-08.png" alt="Moschiat Fotografia Experimental" class="header-banner">
+    
+    <img src="https://i.ibb.co/szMj50N/Screen-Shot-2025-11-30-at-22-19-08.png" alt="Moschiat Header" class="header-banner">
 
     <div class="eyebrow">Moschiat — Chamada Aberta</div>
-    <h1>Procuro modelos para ensaios experimentais — BH e Região</h1>
-    <p class="lead">Ensaios em <strong>permuta (gratuito)</strong>: você recebe fotos editadas para portfólio; eu exploro estética, luz e narrativa.</p>
+    <h1>Procuro modelos para ensaios experimentais — BH, Contagem e Betim</h1>
+    <p class="lead">Ensaios em <strong>permuta (gratuito)</strong>: você recebe fotos editadas para portfólio; eu exploro estética, luz e narrativa. Aberto para quem tem experiência e para quem nunca posou antes.</p>
 
     <div class="grid-layout">
       <section>
         <div class="info-card">
-          <h3 style="margin-top:0">Como funciona</h3>
+          <h3 style="margin-top:0">Quem procuro</h3>
+          <ul>
+            <li>Maiores de 18 anos</li>
+            <li>Moradores de Belo Horizonte, Contagem ou Betim (ou região próxima)</li>
+            <li>Qualquer gênero, aparência ou nível de experiência</li>
+            <li>Atitude curiosa, disponibilidade e respeito mútuo</li>
+          </ul>
+
+          <h3>Como funciona</h3>
           <ul>
             <li>Ensaios rápidos (30–60 min) com direção criativa experimental.</li>
-            <li>Você recebe as fotos finais tratadas.</li>
-            <li>Permuta: trabalho gratuito em troca de uso de imagem para portfólio.</li>
+            <li>Você recebe as fotos finais tratadas (altura e formato combinados).</li>
+            <li>Permuta: <strong>trabalho gratuito</strong> — troca de imagem por portfólio.</li>
           </ul>
+
           <h3>O que eu peço</h3>
           <ul>
-             <li>Pontualidade, respeito mútuo e consentimento por escrito para uso das imagens.</li>
+            <li>Pontualidade e comunicação clara</li>
+            <li>Respeito às orientações de direção e ao conceito</li>
+            <li>Consentimento por escrito para uso das imagens</li>
           </ul>
-          <p class="note">Vou priorizar projetos que tragam algo interessante ao conceito.</p>
+
+          <p class="note">Observação: Vou priorizar projetos que tragam algo interessante ao conceito — esteja aberto(a) a experimentar.</p>
         </div>
       </section>
 
@@ -204,6 +222,7 @@
             <span class="pill">Belo Horizonte / Região</span>
             <span class="pill">Gratuito</span>
           </div>
+
           <h4 style="margin: 6px 0;">Quer participar?</h4>
           <p class="muted" style="margin-bottom: 16px;">Preencha o formulário para eu entender seu perfil.</p>
           <a class="cta-button" href="https://docs.google.com/forms/d/e/1FAIpQLSdteRqAFxqeeQM-KKEPcQ-tmrwMw226oFHsp5dVj7_7IPLGQg/viewform?usp=dialog" target="_blank" rel="noopener">Preencher formulário</a>
@@ -218,289 +237,215 @@
         </div>
       </aside>
     </div>
+    
+    <section class="info-card faq-section">
+      <h3 style="margin-top:0">Mini FAQ</h3>
+      <ul>
+        <li><strong>É pago?</strong> Não — é permuta; você recebe fotos para portfólio.</li>
+        <li><strong>Onde acontecem as sessões?</strong> Em BH e regiões próximas; local exato será combinado.</li>
+        <li><strong>Precisa ter experiência?</strong> Não — aceito iniciantes e experientes.</li>
+      </ul>
+    </section>
 
     <h2 class="section-divider-title">Prints e Desenhos à Venda</h2>
 
     <div class="product-grid">
 
-        <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Arte+Abstrata+1" alt="Print Abstrato Azul">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Horizonte Azulado nº 4</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> A3 (29.7 x 42 cm)</li>
-                    <li><strong>Papel:</strong> Fine Art Hahnemühle</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 120,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="Horizonte Azulado nº 4" data-price="R$ 120,00" data-size="A3 (29.7 x 42 cm)" data-paper="Fine Art Hahnemühle"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=Horizonte+Azul"
+            data-description="Uma exploração profunda das tonalidades cianas e azuis. Esta peça busca trazer calma e profundidade para ambientes minimalistas.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Horizonte+Azul" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">Horizonte Azulado nº 4</h3>
+            <div class="card-footer"><span class="price">R$ 120,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-        <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Desenho+Linha+2" alt="Desenho minimalista">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">O Pensador Minimalista</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> A4 (21 x 29.7 cm)</li>
-                    <li><strong>Papel:</strong> Couché Fosco 250g</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 65,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="O Pensador Minimalista" data-price="R$ 65,00" data-size="A4 (21 x 29.7 cm)" data-paper="Couché Fosco 250g"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=Pensador"
+            data-description="Traços contínuos e fluidos definem esta obra. Um estudo sobre como poucas linhas podem expressar emoções complexas.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Pensador" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">O Pensador Minimalista</h3>
+            <div class="card-footer"><span class="price">R$ 65,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-        <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Ilustracao+Botanica+3" alt="Ilustração botânica">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Botânica: Costela de Adão</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> 50 x 70 cm (Pôster)</li>
-                    <li><strong>Papel:</strong> Offset Premium</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 180,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="Botânica: Costela de Adão" data-price="R$ 180,00" data-size="50 x 70 cm" data-paper="Offset Premium 180g"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=Botanica"
+            data-description="A força da natureza capturada em alto contraste. Ilustração detalhada da Monstera Deliciosa.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Botanica" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">Botânica: Costela de Adão</h3>
+            <div class="card-footer"><span class="price">R$ 180,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-         <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Geometria+Urbana+4" alt="Arte geométrica">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Geometria Urbana SP</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> A5 (14.8 x 21 cm)</li>
-                    <li><strong>Papel:</strong> Cartão texturizado</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 45,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="Geometria Urbana SP" data-price="R$ 45,00" data-size="A5" data-paper="Cartão texturizado"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=Geometria"
+            data-description="Formas rígidas encontram cores vibrantes. Uma interpretação abstrata da arquitetura de São Paulo.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Geometria" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">Geometria Urbana SP</h3>
+            <div class="card-footer"><span class="price">R$ 45,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-        <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Aquarela+Flow+5" alt="Aquarela abstrata">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Aquarela "Flow"</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> A3 (29.7 x 42 cm)</li>
-                    <li><strong>Papel:</strong> Fine Art Algodão</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 150,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="Aquarela 'Flow'" data-price="R$ 150,00" data-size="A3" data-paper="Fine Art Algodão"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=Aquarela"
+            data-description="A imprevisibilidade da água e do pigmento. Esta aquarela original não é uma impressão, peça única.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Aquarela" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">Aquarela "Flow"</h3>
+            <div class="card-footer"><span class="price">R$ 150,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-        <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Nanquim+Dragao+6" alt="Desenho em nanquim">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Estudo em Nanquim Nº 8</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> A4 (Original)</li>
-                    <li><strong>Papel:</strong> Pólen Bold 90g</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 220,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="Estudo em Nanquim Nº 8" data-price="R$ 220,00" data-size="A4" data-paper="Pólen Bold 90g"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=Nanquim"
+            data-description="Original em nanquim sobre papel Pólen. Estudo sobre anatomia e sombras.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Nanquim" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">Estudo em Nanquim</h3>
+            <div class="card-footer"><span class="price">R$ 220,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-        <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Colagem+Vintage+7" alt="Arte de colagem">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Colagem "Tempos Modernos"</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> 30 x 40 cm</li>
-                    <li><strong>Papel:</strong> Fotográfico Fosco</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 90,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="Colagem 'Tempos Modernos'" data-price="R$ 90,00" data-size="30 x 40 cm" data-paper="Fotográfico Fosco"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=Colagem"
+            data-description="Uma fusão de recortes vintage com estética cyberpunk. Crítica visual ao ritmo frenético da cidade.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Colagem" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">Colagem "Tempos Modernos"</h3>
+            <div class="card-footer"><span class="price">R$ 90,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-         <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Retrato+Carvao+8" alt="Retrato em carvão">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Retrato a Carvão "Olhar"</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> A2 (42 x 59.4 cm)</li>
-                    <li><strong>Papel:</strong> Canson Mi-Teintes</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 350,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="Retrato a Carvão 'Olhar'" data-price="R$ 350,00" data-size="A2 (42 x 59.4 cm)" data-paper="Canson Mi-Teintes"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=Carvao"
+            data-description="A densidade do carvão criando volume e emoção. Peça original, assinada e com fixador profissional.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Carvao" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">Retrato a Carvão "Olhar"</h3>
+            <div class="card-footer"><span class="price">R$ 350,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-         <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Paisagem+Digital+9" alt="Pintura digital">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Paisagem "Vale do Sol"</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> A3+ (32.9 x 48cm)</li>
-                    <li><strong>Papel:</strong> Semibrilho Premium</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 110,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="Paisagem 'Vale do Sol'" data-price="R$ 110,00" data-size="A3+" data-paper="Semibrilho Premium"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=Paisagem"
+            data-description="Pintura digital impressa em alta resolução. Cores quentes que aquecem qualquer ambiente.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Paisagem" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">Paisagem "Vale do Sol"</h3>
+            <div class="card-footer"><span class="price">R$ 110,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-         <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Pop+Art+Cores+10" alt="Arte estilo Pop Art">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Explosão Pop Art</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> 50 x 50 cm</li>
-                    <li><strong>Papel:</strong> Vinil Adesivo Fosco</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 140,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="Explosão Pop Art" data-price="R$ 140,00" data-size="50 x 50 cm" data-paper="Vinil Adesivo"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=PopArt"
+            data-description="Cores vibrantes, estilo HQ e muita energia. Impresso em vinil de alta qualidade, pronto para emoldurar ou aplicar.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=PopArt" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">Explosão Pop Art</h3>
+            <div class="card-footer"><span class="price">R$ 140,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-        <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Esboco+Lapis+11" alt="Esboço a lápis">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Esboço de Figura Humana</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> A4 (Pack c/ 3)</li>
-                    <li><strong>Papel:</strong> Sulfite Reciclado</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 50,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="Esboço de Figura Humana" data-price="R$ 50,00" data-size="A4 (Pack c/ 3)" data-paper="Sulfite Reciclado"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=Esboco"
+            data-description="Pack com 3 reproduções de esboços gestuais (gesture drawing). Perfeito para estudantes de arte e decoração clean.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Esboco" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">Esboço de Figura Humana</h3>
+            <div class="card-footer"><span class="price">R$ 50,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-         <article class="product-card">
-            <div class="card-image-container">
-                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Arte+Abstrata+Final+12" alt="Última arte abstrata">
-            </div>
-            <div class="card-content">
-                <h3 class="card-title">Composição Noturna</h3>
-                <ul class="card-details">
-                    <li><strong>Tamanho:</strong> A2 (42 x 59.4 cm)</li>
-                    <li><strong>Papel:</strong> Fine Art Metálico</li>
-                </ul>
-                <div class="card-footer">
-                    <span class="price">R$ 290,00</span>
-                    <button class="btn-buy">Comprar</button>
-                </div>
-            </div>
+        <article class="product-card" onclick="openProduct(this)"
+            data-title="Composição Noturna" data-price="R$ 290,00" data-size="A2" data-paper="Fine Art Metálico"
+            data-img="https://placehold.co/600x800/2a2a2c/ffffff?text=Noturna"
+            data-description="O contraste absoluto entre o preto profundo e pontos de luz. Papel metálico confere um brilho único à obra.">
+            <div class="card-image-container"><img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Noturna" alt="Arte"></div>
+            <div class="card-content"><h3 class="card-title">Composição Noturna</h3>
+            <div class="card-footer"><span class="price">R$ 290,00</span><button class="btn-visual">Ver +</button></div></div>
         </article>
 
-    </div> <section class="info-card faq-section">
-        <h3 style="margin-top:0">Mini FAQ</h3>
-        <ul>
-        <li><strong>É pago?</strong> Não — é permuta; você recebe fotos para portfólio.</li>
-        <li><strong>Onde acontecem as sessões?</strong> Em BH e regiões próximas; local exato será combinado.</li>
-        <li><strong>Precisa ter experiência?</strong> Não — aceito iniciantes e experientes.</li>
-        </ul>
-    </section>
+    </div>
 
     <div class="protected-container" id="protectedContainer">
       <iframe id="protectedIframe" style="width:100%; height:600px; border:none;" sandbox="allow-scripts allow-same-origin"></iframe>
     </div>
 
     <footer class="main-footer">
-        <p>© 2025 Moschiat Studio. Todos os direitos reservados. Contato: <a href="mailto:contato@moschiat.com">contato@moschiat.com</a></p>
+        <p>© 2025 Moschiat Studio. Contato: <a href="mailto:contato@moschiat.com">contato@moschiat.com</a></p>
     </footer>
-
   </main>
 
+  <div class="modal-overlay" id="productModal" onclick="closeModal(event)">
+      <div class="modal-content">
+          <button class="close-modal" onclick="closeModalButton()">×</button>
+          <img src="" alt="Arte detalhe" class="modal-img" id="mImg">
+          <div class="modal-details">
+              <h2 class="modal-title" id="mTitle">Título</h2>
+              <div class="modal-meta">
+                  <p><strong>Tamanho:</strong> <span id="mSize"></span></p>
+                  <p><strong>Papel:</strong> <span id="mPaper"></span></p>
+              </div>
+              <div class="modal-desc" id="mDesc"></div>
+              <div class="modal-footer">
+                  <span class="modal-price" id="mPrice">R$ 00,00</span>
+                  <a href="#" id="waLink" target="_blank" class="modal-buy-btn">
+                      Comprar no WhatsApp
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+
   <script>
-    // Script original da página Moschiat para a área de senha
-    function checkPassword() {
-      const passwordInput = document.getElementById('passwordInput');
-      const passwordError = document.getElementById('passwordError');
-      const protectedContainer = document.getElementById('protectedContainer');
-      // Seleciona o pai do input para esconder a caixa de senha
-      const passwordSectionDiv = passwordInput.closest('.password-section');
-      
-      if (passwordInput.value === 'moschiat2025') {
-        // Senha correta
-        passwordSectionDiv.style.display = 'none'; // Esconde a caixa de senha
-        protectedContainer.style.display = 'block'; // Mostra o iframe
+    // 1. MODAL E WHATSAPP
+    const modal = document.getElementById('productModal');
+    const mTitle = document.getElementById('mTitle');
+    const mPrice = document.getElementById('mPrice');
+    const mSize = document.getElementById('mSize');
+    const mPaper = document.getElementById('mPaper');
+    const mDesc = document.getElementById('mDesc');
+    const mImg = document.getElementById('mImg');
+    const waLink = document.getElementById('waLink'); 
+
+    function openProduct(card) {
+        const title = card.getAttribute('data-title');
+        const price = card.getAttribute('data-price');
         
-        // Carrega o conteúdo do iframe (Conteúdo original da página 1)
-        const iframe = document.getElementById('protectedIframe');
-        iframe.srcdoc = `
-          <!DOCTYPE html>
-          <html lang="pt-BR">
-          <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Conteúdo Protegido - Moschiat</title>
-            <style>
-              body { font-family: 'Inter', sans-serif; margin: 0; padding: 20px; background: #121214; color: #fff; }
-              .gallery-title { text-align: center; margin-bottom: 30px; color: #f6c357; }
-              .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-              .image-item { border-radius: 10px; overflow: hidden; background: #0f0f10; border: 1px solid rgba(255,255,255,0.05); }
-              .image-item img { width: 100%; height: auto; display: block; }
-              .image-caption { padding: 12px; font-size: 13px; color: #bdbdbd; text-align: center; }
-            </style>
-          </head>
-          <body>
-            <h2 class="gallery-title">Portfólio Experimental Restrito</h2>
-            <div class="image-grid">
-              <div class="image-item"><img src="https://i.ibb.co/MkQFsd14/ERXL5564-BOOM.png" alt="Img 1"><div class="image-caption">Série Boom - ERXL</div></div>
-              <div class="image-item"><img src="https://i.ibb.co/LXL1QZkP/DVID4989-BOOM.png" alt="Img 2"><div class="image-caption">Série Boom - DVID</div></div>
-              <div class="image-item"><img src="https://i.ibb.co/n85nV4M9/BKRH4467-BOOM.png" alt="Img 3"><div class="image-caption">Série Boom - BKRH</div></div>
-              <div class="image-item"><img src="https://i.ibb.co/Mxt2MSkc/QAFW0152-BOOM.png" alt="Img 4"><div class="image-caption">Série Boom - QAFW</div></div>
-              <div class="image-item"><img src="https://i.ibb.co/nsZqNWMk/Screen-Shot-2025-09-27-at-12-10-08.png" alt="Img 5"><div class="image-caption">Estudo de Luz Set/25</div></div>
-              <div class="image-item"><img src="https://i.ibb.co/MkQFsd14/ERXL5564-BOOM.png" alt="Img 6"><div class="image-caption">Variação ERXL</div></div>
-            </div>
-          </body>
-          </html>
-        `;
+        mTitle.innerText = title;
+        mPrice.innerText = price;
+        mSize.innerText = card.getAttribute('data-size');
+        mPaper.innerText = card.getAttribute('data-paper');
+        mDesc.innerText = card.getAttribute('data-description');
+        mImg.src = card.getAttribute('data-img');
+
+        // Configuração do WhatsApp
+        const phone = "5511972000152"; 
+        const text = `Olá! Tenho interesse na obra *${title}* (${price}). Gostaria de saber detalhes para pagamento e frete.`;
+        waLink.href = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModalButton() {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    function closeModal(e) { if (e.target === modal) closeModalButton(); }
+    document.addEventListener('keydown', (e) => { if (e.key === "Escape") closeModalButton(); });
+
+    // 2. SENHA
+    function checkPassword() {
+      const pInput = document.getElementById('passwordInput');
+      const pError = document.getElementById('passwordError');
+      const pContainer = document.getElementById('protectedContainer');
+      const pSection = pInput.closest('.password-section');
+      
+      if (pInput.value === 'moschiat2025') {
+        pSection.style.display = 'none';
+        pContainer.style.display = 'block';
+        document.getElementById('protectedIframe').srcdoc = `<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><style>body{font-family:'Inter',sans-serif;margin:0;padding:20px;background:#121214;color:#fff}.t{text-align:center;color:#f6c357}.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px}.i{border-radius:10px;overflow:hidden;background:#0f0f10;border:1px solid rgba(255,255,255,0.05)}.i img{width:100%;display:block}</style></head><body><h2 class="t">Portfólio Restrito</h2><div class="g"><div class="i"><img src="https://placehold.co/600x600/111/fff?text=Obra+Exclusiva"></div></div></body></html>`;
       } else {
-        // Senha incorreta
-        passwordError.style.display = 'block';
-        passwordInput.style.borderColor = '#ff6b6b';
-        setTimeout(() => { passwordInput.value = ''; }, 300);
+        pError.style.display = 'block';
+        pInput.style.borderColor = '#ff6b6b';
       }
     }
-    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') checkPassword();
-    });
+    document.getElementById('passwordInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') checkPassword(); });
   </script>
 </body>
 </html>
