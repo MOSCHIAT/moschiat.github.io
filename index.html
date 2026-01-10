@@ -3,121 +3,171 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Moschiat</title>
+  <title>Moschiat | Studio & Chamada Aberta</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{--bg:#0f0f10;--card:#121214;--accent:#f6c357;--muted:#bdbdbd;--glass: rgba(255,255,255,0.03)}
-    *{box-sizing:border-box}
-    body{font-family:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; margin:0; background:linear-gradient(180deg,#060607 0%, #0b0b0c 100%); color:#fff; -webkit-font-smoothing:antialiased; line-height: 1.5;}
-
-    .wrap{max-width:920px;margin:56px auto;padding:32px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,23,0.7)}
-
-    .header-banner {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 28px;
-      border: 1px solid rgba(255,255,255,0.05);
+    /* --- Variáveis e Reset do Tema Escuro (Baseado em Moschiat) --- */
+    :root{
+        --bg:#0f0f10;
+        --card:#121214;
+        --accent:#f6c357; /* Cor de destaque (dourado) */
+        --accent-hover: #ffba5a;
+        --muted:#bdbdbd; /* Texto cinza claro */
+        --glass: rgba(255,255,255,0.03);
+        --border-color: rgba(255,255,255,0.05);
+    }
+    *{box-sizing:border-box; margin: 0; padding: 0;}
+    body{
+        font-family:'Inter', system-ui, sans-serif;
+        background:linear-gradient(180deg,#060607 0%, #0b0b0c 100%);
+        color:#fff;
+        line-height: 1.6;
     }
 
-    .eyebrow{color:var(--accent);font-weight:700;letter-spacing:0.6px; text-transform: uppercase; font-size: 14px;}
-    h1{margin:10px 0;font-size:28px; letter-spacing: -0.5px;}
+    /* Container Principal */
+    .wrap{
+        max-width:1000px; /* Aumentei um pouco para acomodar melhor a grade */
+        margin:40px auto;
+        padding:32px;
+        border-radius:14px;
+        background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+        box-shadow:0 8px 30px rgba(2,6,23,0.7);
+    }
+
+    /* Tipografia e Elementos Gerais */
+    h1, h2, h3, h4 { color: #fff; letter-spacing: -0.5px; }
+    h1{ margin:10px 0 20px; font-size:28px; }
+    h2.section-divider-title {
+        text-align: center;
+        margin: 60px 0 40px;
+        font-size: 24px;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
     h3 {margin-top: 24px; margin-bottom: 12px;}
-    h4.cta-title {margin: 6px 0;}
-
     p.lead{color:var(--muted);margin:0 0 28px; font-size: 17px;}
-
-    .grid{display:grid;grid-template-columns:1fr 300px;gap:24px}
-    .card{background:var(--card);padding:24px;border-radius:10px; border: 1px solid rgba(255,255,255,0.03);}
-
     ul{padding-left:20px;margin:8px 0}
     li{margin:8px 0;color:var(--muted)}
-
-    .tags-wrapper { margin-bottom: 12px; }
-    .faq-section { margin-top: 24px; }
-
-    .cta{display:block; text-align: center; padding:14px 18px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#ffba5a);color:#0b0b0c;font-weight:700;text-decoration:none; transition: transform 0.2s, filter 0.2s;}
-    .cta:hover { transform: translateY(-2px); filter: brightness(1.1);}
-
-    .note{font-size:13px;color:#e6e6e6;margin-top:16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);}
     .muted{color:var(--muted);font-size:14px}
-    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);color:var(--muted);font-weight:600;margin-right:8px; font-size: 12px; border: 1px solid rgba(255,255,255,0.05);}
+    
+    /* Header Banner & Eyebrow */
+    .header-banner {
+      display: block; width: 100%; height: auto; border-radius: 10px;
+      margin-bottom: 28px; border: 1px solid var(--border-color);
+    }
+    .eyebrow{color:var(--accent);font-weight:700;letter-spacing:0.6px; text-transform: uppercase; font-size: 14px;}
 
-    .main-footer{margin-top:32px;color:var(--muted);font-size:13px; text-align: center; opacity: 0.7;}
+    /* Cards Gerais (Layout Moschiat) */
+    .grid-layout{display:grid;grid-template-columns:1fr 300px;gap:24px; margin-bottom: 40px;}
+    .info-card{background:var(--card);padding:24px;border-radius:10px; border: 1px solid var(--border-color);}
+    .tags-wrapper { margin-bottom: 12px; }
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--glass);color:var(--muted);font-weight:600;margin-right:8px; font-size: 12px; border: 1px solid var(--border-color);}
+    .note{font-size:13px;color:#e6e6e6;margin-top:16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);}
+
+    /* Botões CTA (Estilo Gradiente Unificado) */
+    .cta-button{
+        display:block; text-align: center; width: 100%;
+        padding:14px 18px; border-radius:8px;
+        background:linear-gradient(90deg,var(--accent),var(--accent-hover));
+        color:#0b0b0c; font-weight:700; text-decoration:none; border: none;
+        cursor: pointer; font-family: 'Inter', sans-serif; font-size: 14px;
+        transition: transform 0.2s, filter 0.2s;
+    }
+    .cta-button:hover { transform: translateY(-2px); filter: brightness(1.1);}
+
+    /* --- SEÇÃO DE VENDAS (Adaptado do Studio para o Tema Escuro) --- */
+    
+    .product-grid {
+        display: grid;
+        /* Grade responsiva automática */
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 2rem;
+        margin-bottom: 40px;
+    }
+
+    .product-card {
+        background: var(--card); /* Fundo escuro */
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid var(--border-color); /* Borda sutil */
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        border-color: rgba(255,255,255,0.15);
+    }
+
+    .card-image-container {
+        position: relative;
+        padding-top: 125%; /* Aspect ratio 4:5 */
+        background-color: rgba(255,255,255,0.02); /* Placeholder escuro */
+    }
+
+    .card-image-container img {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+    }
+
+    .card-content {
+        padding: 1.2rem;
+        flex-grow: 1; display: flex; flex-direction: column;
+    }
+
+    .card-title {
+        font-size: 1.1rem; font-weight: 600; margin-bottom: 0.8rem; color: #fff; /* Título branco */
+    }
+
+    .card-details {
+        list-style: none; margin: 0 0 1rem 0; padding: 0; font-size: 0.9rem; color: var(--muted);
+    }
+    .card-details li { margin-bottom: 0.3rem; display: flex; color: var(--muted); }
+    .card-details li strong { color: #fff; margin-right: 6px; min-width: 65px; }
+
+    .card-footer {
+        margin-top: auto; display: flex; justify-content: space-between; align-items: center;
+        border-top: 1px solid var(--border-color);
+        padding-top: 1rem;
+    }
+
+    .price { font-size: 1.25rem; font-weight: 700; color: var(--accent); }
+    
+    /* Botão de compra menor, usando o mesmo estilo do CTA principal */
+    .btn-buy {
+        padding: 0.6rem 1.2rem;
+        background:linear-gradient(90deg,var(--accent),var(--accent-hover));
+        color: #0b0b0c; border: none; border-radius: 6px;
+        font-weight: 700; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-buy:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+
+    /* --- Área de Senha e Footer --- */
+    .password-section {
+      background: rgba(255,255,255,0.03); padding: 16px; text-align: center;
+      border-radius: 8px; margin-top: 20px; border: 1px solid var(--border-color);
+    }
+    .password-input {
+      width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3);
+      color: white; font-family: 'Inter', sans-serif; font-size: 14px;
+    }
+    .password-error { color: #ff6b6b; margin-top: 8px; font-size: 13px; display: none; }
+    .protected-container {
+      margin-top: 24px; border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--border-color); display: none;
+    }
+    .main-footer{margin-top:60px;color:var(--muted);font-size:13px; text-align: center; opacity: 0.7; padding-top: 20px; border-top: 1px solid var(--border-color);}
     .main-footer a { color: var(--accent); text-decoration: none;}
 
-    /* Estilos para a área protegida */
-    .protected-container {
-      margin-top: 24px;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.05);
-      display: none;
-    }
-    
-    .password-section {
-      background: rgba(255,255,255,0.03);
-      padding: 16px;
-      text-align: center;
-      border-radius: 8px;
-      margin-top: 20px;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-    
-    .password-section h4 {
-      margin: 0 0 8px 0;
-      font-size: 16px;
-      color: var(--accent);
-    }
-    
-    .password-section .muted {
-      margin-bottom: 12px;
-      display: block;
-    }
-    
-    .password-input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(0,0,0,0.3);
-      color: white;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-    }
-    
-    .password-btn {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      background: linear-gradient(90deg, var(--accent), #ffba5a);
-      color: #0b0b0c;
-      font-weight: 700;
-      border: none;
-      cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      margin-top: 4px;
-    }
-    
-    .password-btn:hover {
-      filter: brightness(1.1);
-    }
-    
-    .password-error {
-      color: #ff6b6b;
-      margin-top: 8px;
-      font-size: 13px;
-      display: none;
-    }
-
     @media (max-width:880px){
-        .grid{grid-template-columns:1fr;}
+        .grid-layout{grid-template-columns:1fr;}
         .wrap{margin:20px 16px;padding:20px}
         h1{font-size: 24px;}
     }
@@ -125,100 +175,292 @@
 </head>
 <body>
   <main class="wrap">
-    <img src="https://i.ibb.co/szMj50N/Screen-Shot-2025-11-30-at-22-19-08.png" alt="Moschiat Fotografia Experimental - Amostra de trabalho" class="header-banner">
+    <img src="https://i.ibb.co/szMj50N/Screen-Shot-2025-11-30-at-22-19-08.png" alt="Moschiat Fotografia Experimental" class="header-banner">
 
     <div class="eyebrow">Moschiat — Chamada Aberta</div>
-    <h1>Procuro modelos para ensaios experimentais — BH, Contagem e Betim</h1>
-    <p class="lead">Ensaios em <strong>permuta (gratuito)</strong>: você recebe fotos editadas para portfólio; eu exploro estética, luz e narrativa. Aberto para quem tem experiência e para quem nunca posou antes.</p>
+    <h1>Procuro modelos para ensaios experimentais — BH e Região</h1>
+    <p class="lead">Ensaios em <strong>permuta (gratuito)</strong>: você recebe fotos editadas para portfólio; eu exploro estética, luz e narrativa.</p>
 
-    <div class="grid">
+    <div class="grid-layout">
       <section>
-        <div class="card">
-          <h3 style="margin-top:0">Quem procuro</h3>
+        <div class="info-card">
+          <h3 style="margin-top:0">Como funciona</h3>
           <ul>
-            <li>Maiores de 18 anos</li>
-            <li>Moradores de Belo Horizonte, Contagem ou Betim (ou região próxima)</li>
-            <li>Qualquer gênero, aparência ou nível de experiência</li>
-            <li>Atitude curiosa, disponibilidade e respeito mútuo</li>
+            <li>Ensaios rápidos (30–60 min) com direção criativa experimental.</li>
+            <li>Você recebe as fotos finais tratadas.</li>
+            <li>Permuta: trabalho gratuito em troca de uso de imagem para portfólio.</li>
           </ul>
-
-          <h3>Como funciona</h3>
-          <ul>
-            <li>Ensaios rápidos (30–60 min)</li>
-            <li>Conceito experimental — direção criativa do Moschiat</li>
-            <li>Você recebe as fotos finais (altura e formato combinados)</li>
-            <li>Permuta: <strong>trabalho gratuito</strong> — uso das imagens para portfólio/veiculação mediante autorização</li>
-          </ul>
-
           <h3>O que eu peço</h3>
           <ul>
-            <li>Pontualidade e comunicação clara</li>
-            <li>Respeito às orientações de direção e ao conceito</li>
-            <li>Consentimento por escrito para uso das imagens (podemos combinar limites)</li>
+             <li>Pontualidade, respeito mútuo e consentimento por escrito para uso das imagens.</li>
           </ul>
-
-          <p class="note">Observação: Vou priorizar projetos que tragam algo interessante ao conceito — esteja aberto(a) a experimentar. Não há pagamento em dinheiro; a troca é por material fotográfico.</p>
+          <p class="note">Vou priorizar projetos que tragam algo interessante ao conceito.</p>
         </div>
       </section>
 
       <aside>
-        <div class="card">
+        <div class="info-card">
           <div class="tags-wrapper">
-            <span class="pill">Local</span>
-            <span class="pill">Permuta / Gratuito</span>
+            <span class="pill">Belo Horizonte / Região</span>
+            <span class="pill">Gratuito</span>
           </div>
-
-          <h4 class="cta-title">Quer participar?</h4>
-          <p class="muted">Preencha o formulário para eu entender seu perfil. Vou responder por WhatsApp ou e‑mail se seu perfil se encaixar nos próximos ensaios.</p>
-
-          <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLSdteRqAFxqeeQM-KKEPcQ-tmrwMw226oFHsp5dVj7_7IPLGQg/viewform?usp=dialog" target="_blank" rel="noopener">Preencher formulário</a>
+          <h4 style="margin: 6px 0;">Quer participar?</h4>
+          <p class="muted" style="margin-bottom: 16px;">Preencha o formulário para eu entender seu perfil.</p>
+          <a class="cta-button" href="https://docs.google.com/forms/d/e/1FAIpQLSdteRqAFxqeeQM-KKEPcQ-tmrwMw226oFHsp5dVj7_7IPLGQg/viewform?usp=dialog" target="_blank" rel="noopener">Preencher formulário</a>
           
-          <!-- Seção de senha (agora dentro do card do lado direito) -->
           <div class="password-section">
             <h4>Área Protegida</h4>
-            <p class="muted">Acesso restrito a conteúdo adicional</p>
+            <p class="muted" style="margin-bottom: 12px;">Acesso a portfólio restrito</p>
             <input type="password" class="password-input" id="passwordInput" placeholder="Digite a senha">
-            <button class="password-btn" onclick="checkPassword()">Acessar</button>
-            <div class="password-error" id="passwordError">Senha incorreta. Tente novamente.</div>
+            <button class="cta-button" onclick="checkPassword()">Acessar</button>
+            <div class="password-error" id="passwordError">Senha incorreta.</div>
           </div>
         </div>
       </aside>
     </div>
 
-    <section class="card faq-section">
-      <h3 style="margin-top:0">Mini FAQ</h3>
-      <ul>
+    <h2 class="section-divider-title">Prints e Desenhos à Venda</h2>
+
+    <div class="product-grid">
+
+        <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Arte+Abstrata+1" alt="Print Abstrato Azul">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Horizonte Azulado nº 4</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> A3 (29.7 x 42 cm)</li>
+                    <li><strong>Papel:</strong> Fine Art Hahnemühle</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 120,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Desenho+Linha+2" alt="Desenho minimalista">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">O Pensador Minimalista</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> A4 (21 x 29.7 cm)</li>
+                    <li><strong>Papel:</strong> Couché Fosco 250g</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 65,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Ilustracao+Botanica+3" alt="Ilustração botânica">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Botânica: Costela de Adão</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> 50 x 70 cm (Pôster)</li>
+                    <li><strong>Papel:</strong> Offset Premium</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 180,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+         <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Geometria+Urbana+4" alt="Arte geométrica">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Geometria Urbana SP</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> A5 (14.8 x 21 cm)</li>
+                    <li><strong>Papel:</strong> Cartão texturizado</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 45,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Aquarela+Flow+5" alt="Aquarela abstrata">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Aquarela "Flow"</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> A3 (29.7 x 42 cm)</li>
+                    <li><strong>Papel:</strong> Fine Art Algodão</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 150,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Nanquim+Dragao+6" alt="Desenho em nanquim">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Estudo em Nanquim Nº 8</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> A4 (Original)</li>
+                    <li><strong>Papel:</strong> Pólen Bold 90g</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 220,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Colagem+Vintage+7" alt="Arte de colagem">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Colagem "Tempos Modernos"</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> 30 x 40 cm</li>
+                    <li><strong>Papel:</strong> Fotográfico Fosco</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 90,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+         <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Retrato+Carvao+8" alt="Retrato em carvão">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Retrato a Carvão "Olhar"</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> A2 (42 x 59.4 cm)</li>
+                    <li><strong>Papel:</strong> Canson Mi-Teintes</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 350,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+         <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Paisagem+Digital+9" alt="Pintura digital">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Paisagem "Vale do Sol"</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> A3+ (32.9 x 48cm)</li>
+                    <li><strong>Papel:</strong> Semibrilho Premium</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 110,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+         <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Pop+Art+Cores+10" alt="Arte estilo Pop Art">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Explosão Pop Art</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> 50 x 50 cm</li>
+                    <li><strong>Papel:</strong> Vinil Adesivo Fosco</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 140,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+        <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Esboco+Lapis+11" alt="Esboço a lápis">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Esboço de Figura Humana</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> A4 (Pack c/ 3)</li>
+                    <li><strong>Papel:</strong> Sulfite Reciclado</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 50,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+         <article class="product-card">
+            <div class="card-image-container">
+                <img src="https://placehold.co/400x500/2a2a2c/ffffff?text=Arte+Abstrata+Final+12" alt="Última arte abstrata">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">Composição Noturna</h3>
+                <ul class="card-details">
+                    <li><strong>Tamanho:</strong> A2 (42 x 59.4 cm)</li>
+                    <li><strong>Papel:</strong> Fine Art Metálico</li>
+                </ul>
+                <div class="card-footer">
+                    <span class="price">R$ 290,00</span>
+                    <button class="btn-buy">Comprar</button>
+                </div>
+            </div>
+        </article>
+
+    </div> <section class="info-card faq-section">
+        <h3 style="margin-top:0">Mini FAQ</h3>
+        <ul>
         <li><strong>É pago?</strong> Não — é permuta; você recebe fotos para portfólio.</li>
         <li><strong>Onde acontecem as sessões?</strong> Em BH e regiões próximas; local exato será combinado.</li>
         <li><strong>Precisa ter experiência?</strong> Não — aceito iniciantes e experientes.</li>
-      </ul>
+        </ul>
     </section>
 
-    <!-- Container para o iframe (inicialmente oculto) -->
     <div class="protected-container" id="protectedContainer">
       <iframe id="protectedIframe" style="width:100%; height:600px; border:none;" sandbox="allow-scripts allow-same-origin"></iframe>
     </div>
 
     <footer class="main-footer">
-        Em caso de dúvidas — contato: <a href="mailto:contato@moschiat.com">contato@moschiat.com</a>
+        <p>© 2025 Moschiat Studio. Todos os direitos reservados. Contato: <a href="mailto:contato@moschiat.com">contato@moschiat.com</a></p>
     </footer>
 
   </main>
 
   <script>
-    // Função para verificar a senha
+    // Script original da página Moschiat para a área de senha
     function checkPassword() {
       const passwordInput = document.getElementById('passwordInput');
       const passwordError = document.getElementById('passwordError');
       const protectedContainer = document.getElementById('protectedContainer');
-      const passwordSection = document.querySelector('.password-section');
+      // Seleciona o pai do input para esconder a caixa de senha
+      const passwordSectionDiv = passwordInput.closest('.password-section');
       
       if (passwordInput.value === 'moschiat2025') {
-        // Senha correta - mostra o conteúdo protegido
-        passwordSection.style.display = 'none';
-        protectedContainer.style.display = 'block';
+        // Senha correta
+        passwordSectionDiv.style.display = 'none'; // Esconde a caixa de senha
+        protectedContainer.style.display = 'block'; // Mostra o iframe
         
-        // Carrega o conteúdo da subpágina no iframe
+        // Carrega o conteúdo do iframe (Conteúdo original da página 1)
         const iframe = document.getElementById('protectedIframe');
         iframe.srcdoc = `
           <!DOCTYPE html>
@@ -228,80 +470,23 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Conteúdo Protegido - Moschiat</title>
             <style>
-              body {
-                font-family: 'Inter', sans-serif;
-                margin: 0;
-                padding: 20px;
-                background: #121214;
-                color: #fff;
-              }
-              .gallery-container {
-                max-width: 920px;
-                margin: 0 auto;
-              }
-              .gallery-title {
-                text-align: center;
-                margin-bottom: 30px;
-                color: #f6c357;
-              }
-              .image-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                gap: 20px;
-              }
-              .image-item {
-                border-radius: 10px;
-                overflow: hidden;
-                background: #0f0f10;
-                border: 1px solid rgba(255,255,255,0.05);
-              }
-              .image-item img {
-                width: 100%;
-                height: auto;
-                display: block;
-              }
-              .image-caption {
-                padding: 12px;
-                font-size: 14px;
-                color: #bdbdbd;
-                text-align: center;
-              }
-              @media (max-width: 768px) {
-                .image-grid {
-                  grid-template-columns: 1fr;
-                }
-              }
+              body { font-family: 'Inter', sans-serif; margin: 0; padding: 20px; background: #121214; color: #fff; }
+              .gallery-title { text-align: center; margin-bottom: 30px; color: #f6c357; }
+              .image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+              .image-item { border-radius: 10px; overflow: hidden; background: #0f0f10; border: 1px solid rgba(255,255,255,0.05); }
+              .image-item img { width: 100%; height: auto; display: block; }
+              .image-caption { padding: 12px; font-size: 13px; color: #bdbdbd; text-align: center; }
             </style>
           </head>
           <body>
-            <div class="gallery-container">
-              <h1 class="gallery-title">Portfólio Experimental - Moschiat</h1>
-              <div class="image-grid">
-                <div class="image-item">
-                  <img src="https://i.ibb.co/MkQFsd14/ERXL5564-BOOM.png" alt="Imagem experimental 1">
-                  <div class="image-caption">ERXL5564-BOOM</div>
-                </div>
-                <div class="image-item">
-                  <img src="https://i.ibb.co/LXL1QZkP/DVID4989-BOOM.png" alt="Imagem experimental 2">
-                  <div class="image-caption">DVID4989-BOOM</div>
-                </div>
-                <div class="image-item">
-                  <img src="https://i.ibb.co/n85nV4M9/BKRH4467-BOOM.png" alt="Imagem experimental 3">
-                  <div class="image-caption">BKRH4467-BOOM</div>
-                </div>
-                <div class="image-item">
-                  <img src="https://i.ibb.co/Mxt2MSkc/QAFW0152-BOOM.png" alt="Imagem experimental 4">
-                  <div class="image-caption">QAFW0152-BOOM</div>
-                </div>
-                <div class="image-item">
-                  <img src="https://i.ibb.co/nsZqNWMk/Screen-Shot-2025-09-27-at-12-10-08.png" alt="Imagem experimental 5">
-                  <div class="image-caption">Screen Shot 2025-09-27</div>
-                </div>
-                <div class="image-item">
-                  <img src="https://i.ibb.co/MkQFsd14/ERXL5564-BOOM.png" alt="Imagem experimental 6">
-                  <div class="image-caption">ERXL5564-BOOM (duplicada)</div>
-                </div>
-              </div>
+            <h2 class="gallery-title">Portfólio Experimental Restrito</h2>
+            <div class="image-grid">
+              <div class="image-item"><img src="https://i.ibb.co/MkQFsd14/ERXL5564-BOOM.png" alt="Img 1"><div class="image-caption">Série Boom - ERXL</div></div>
+              <div class="image-item"><img src="https://i.ibb.co/LXL1QZkP/DVID4989-BOOM.png" alt="Img 2"><div class="image-caption">Série Boom - DVID</div></div>
+              <div class="image-item"><img src="https://i.ibb.co/n85nV4M9/BKRH4467-BOOM.png" alt="Img 3"><div class="image-caption">Série Boom - BKRH</div></div>
+              <div class="image-item"><img src="https://i.ibb.co/Mxt2MSkc/QAFW0152-BOOM.png" alt="Img 4"><div class="image-caption">Série Boom - QAFW</div></div>
+              <div class="image-item"><img src="https://i.ibb.co/nsZqNWMk/Screen-Shot-2025-09-27-at-12-10-08.png" alt="Img 5"><div class="image-caption">Estudo de Luz Set/25</div></div>
+              <div class="image-item"><img src="https://i.ibb.co/MkQFsd14/ERXL5564-BOOM.png" alt="Img 6"><div class="image-caption">Variação ERXL</div></div>
             </div>
           </body>
           </html>
@@ -310,19 +495,11 @@
         // Senha incorreta
         passwordError.style.display = 'block';
         passwordInput.style.borderColor = '#ff6b6b';
-        
-        // Limpa o campo após erro
-        setTimeout(() => {
-          passwordInput.value = '';
-        }, 300);
+        setTimeout(() => { passwordInput.value = ''; }, 300);
       }
     }
-
-    // Permitir pressionar Enter para submeter a senha
     document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        checkPassword();
-      }
+      if (e.key === 'Enter') checkPassword();
     });
   </script>
 </body>
