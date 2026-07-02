@@ -28,7 +28,6 @@
       position: relative;
     }
 
-    /* Fundo gradiente estático */
     .bg-static {
       position: fixed;
       inset: 0;
@@ -36,7 +35,6 @@
       background: linear-gradient(135deg, #1a0a1a, #2d0a2d, #4a0a3a);
     }
 
-    /* Glassmorphism */
     .glass {
       background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(20px);
@@ -54,7 +52,6 @@
       border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    /* Rainbow glow text */
     .rainbow-glow {
       background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00cc44, #0088ff, #6633cc, #ff00aa, #ff0000);
       background-size: 300% 100%;
@@ -68,7 +65,6 @@
       100% { background-position: 300% 50%; }
     }
 
-    /* Inputs */
     .input-glass {
       background: rgba(255, 255, 255, 0.07);
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -155,7 +151,6 @@
       outline-offset: 2px;
     }
 
-    /* Tabs */
     .tab-list {
       display: flex;
       gap: 0.5rem;
@@ -204,7 +199,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Progresso */
     .progress-bar {
       height: 6px;
       background: rgba(255, 255, 255, 0.08);
@@ -220,7 +214,6 @@
       transition: width 0.5s ease;
     }
 
-    /* Erros */
     .error-message {
       color: #ff6b8a;
       font-size: 0.8rem;
@@ -236,7 +229,6 @@
       box-shadow: 0 0 0 2px rgba(255, 107, 138, 0.3) !important;
     }
 
-    /* Toast global */
     #global-toast {
       position: fixed;
       top: 1.5rem;
@@ -296,7 +288,6 @@
       display: block;
     }
 
-    /* Upload de arquivos – feedback */
     .file-info {
       font-size: 0.8rem;
       color: #a090a0;
@@ -317,7 +308,6 @@
     legend { font-size: 1rem; font-weight: 700; color: #e8dce8; margin-bottom: 0.5rem; }
   </style>
 </head>
-
 <body>
 
   <div class="bg-static"></div>
@@ -664,13 +654,26 @@
 
   </div>
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
+  <!-- ===== FIREBASE MODULAR SDK VIA IMPORT MAP ===== -->
+  <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
+        "firebase/firestore": "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js",
+        "firebase/storage": "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js",
+        "firebase/analytics": "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js"
+      }
+    }
+  </script>
 
-  <script>
-    // ===== FIREBASE CONFIG =====
+  <script type="module">
+    // ===== IMPORTAÇÕES FIREBASE (CONFORME SOLICITADO) =====
+    import { initializeApp } from "firebase/app";
+    import { getAnalytics } from "firebase/analytics";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+    // ===== CONFIGURAÇÃO =====
     const firebaseConfig = {
       apiKey: "AIzaSyCrP-7DRcbjPdUlZBAehW4v3wj3wK5YQZ0",
       authDomain: "parada-inscricoes.firebaseapp.com",
@@ -680,11 +683,14 @@
       appId: "1:996852119355:web:2dda55f7756473d250a91e",
       measurementId: "G-S0K02360JL"
     };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const storage = firebase.storage();
 
-    // ===== SCRIPT PRINCIPAL =====
+    // ===== INICIALIZA =====
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
+    // ===== SCRIPT DO FORMULÁRIO (agora com Firebase modular) =====
     (function() {
       // Elementos
       const form = document.getElementById('mainForm');
@@ -812,7 +818,7 @@
       }
 
       // ===== SUBMISSÃO DO FORMULÁRIO =====
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', async function(e) {
         e.preventDefault();
 
         // Limpa erros
@@ -894,18 +900,16 @@
         // --- COLETA DE DADOS VIA data-firestore ---
         const dados = {
           tipo: currentRole,
-          dataHora: firebase.firestore.FieldValue.serverTimestamp()
+          dataHora: serverTimestamp()
         };
 
         // Mapeia todos os campos com data-firestore
         activePanel.querySelectorAll('[data-firestore]').forEach(el => {
           const key = el.dataset.firestore;
           if (el.type === 'checkbox') {
-            // Se for checkbox, armazenamos o valor se estiver checado (para termos, boolean)
             if (el.id && el.id.startsWith('termos')) {
               dados[key] = el.checked;
             } else {
-              // Para áreas (múltiplos checkboxes), coletamos em array
               if (!dados[key]) dados[key] = [];
               if (el.checked) dados[key].push(el.value);
             }
@@ -916,10 +920,7 @@
           }
         });
 
-        // Para áreas, se for voluntário e tiver apenas um checkbox marcado, ainda será array
-        // Se não houver nenhum, não incluímos (já validamos)
-
-        // Remove campos vazios para não poluir
+        // Remove campos vazios
         Object.keys(dados).forEach(k => {
           if (dados[k] === '' || (Array.isArray(dados[k]) && dados[k].length === 0)) {
             delete dados[k];
@@ -931,18 +932,17 @@
         const uploadPromises = [];
 
         if (files && files.length > 0) {
-          // Prepara para upload
           const uploadFolder = `documentos/${dados.email || 'anonimo'}/`;
           for (let i = 0; i < files.length; i++) {
             const file = files[i];
-            // Verifica tamanho (5MB)
             if (file.size > 5 * 1024 * 1024) {
               showToast(`O arquivo "${file.name}" excede 5MB.`, 'error');
               return;
             }
-            const ref = storage.ref().child(uploadFolder + file.name);
-            const promise = ref.put(file).then(snapshot => snapshot.ref.getDownloadURL());
-            uploadPromises.push(promise);
+            const fileRef = ref(storage, uploadFolder + file.name);
+            const snapshot = await uploadBytes(fileRef, file);
+            const url = await getDownloadURL(snapshot.ref);
+            uploadPromises.push(url);
           }
         }
 
@@ -951,55 +951,49 @@
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2" aria-hidden="true"></i> Enviando...';
 
-        // Se houver uploads, aguarda todos
-        Promise.all(uploadPromises)
-          .then(urls => {
-            if (urls.length > 0) {
-              dados.documentosURLs = urls;
-            }
-            // Salva no Firestore
-            return db.collection("inscricoes").add(dados);
-          })
-          .then(() => {
-            form.style.display = 'none';
-            successScreen.classList.add('active');
-            progressFill.style.width = '100%';
-            progressLabel.textContent = '100%';
-            progressBar.setAttribute('aria-valuenow', '100');
-            showToast('Inscrição enviada com sucesso! 🎉', 'success');
-          })
-          .catch((erro) => {
-            console.error('Erro no envio:', erro);
-            showToast('Erro ao salvar sua inscrição: ' + erro.message, 'error');
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-paper-plane mr-2" aria-hidden="true"></i> Enviar inscrição';
-          });
+        try {
+          // Aguarda uploads (já feitos com await acima, mas se houver múltiplos, Promise.all)
+          const urls = await Promise.all(uploadPromises);
+          if (urls.length > 0) {
+            dados.documentosURLs = urls;
+          }
+
+          // Salva no Firestore
+          await addDoc(collection(db, "inscricoes"), dados);
+
+          // Sucesso
+          form.style.display = 'none';
+          successScreen.classList.add('active');
+          progressFill.style.width = '100%';
+          progressLabel.textContent = '100%';
+          progressBar.setAttribute('aria-valuenow', '100');
+          showToast('Inscrição enviada com sucesso! 🎉', 'success');
+        } catch (erro) {
+          console.error('Erro no envio:', erro);
+          showToast('Erro ao salvar sua inscrição: ' + erro.message, 'error');
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fas fa-paper-plane mr-2" aria-hidden="true"></i> Enviar inscrição';
+        }
       });
 
-      // ===== BOTÃO "NOVA INSCRIÇÃO" (reset sem reload) =====
+      // ===== BOTÃO "NOVA INSCRIÇÃO" =====
       novaInscricaoBtn.addEventListener('click', function() {
         form.reset();
-        // Limpa informações de arquivo
         if (fileInput) {
           fileInput.value = '';
           fileInfo.innerHTML = '<i class="fas fa-info-circle"></i> Nenhum arquivo selecionado.';
         }
-        // Remove erros
         document.querySelectorAll('.error-message').forEach(el => el.classList.remove('visible'));
         document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
-        // Esconde sucesso, mostra form
         successScreen.classList.remove('active');
         form.style.display = 'block';
-        // Reseta progresso
         progressFill.style.width = '0%';
         progressLabel.textContent = '0%';
         progressBar.setAttribute('aria-valuenow', '0');
-        // Habilita botões
         document.querySelectorAll('button[type="submit"]').forEach(b => {
           b.disabled = false;
           b.innerHTML = '<i class="fas fa-paper-plane mr-2" aria-hidden="true"></i> Enviar inscrição';
         });
-        // Volta para a primeira aba
         switchTab('artista');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
@@ -1008,7 +1002,7 @@
       switchTab('artista');
       setTimeout(updateProgress, 200);
 
-      // Validação extra em tempo real para telefone (máscara simples)
+      // Máscara de telefone
       document.querySelectorAll('input[type="tel"]').forEach(input => {
         input.addEventListener('input', function() {
           let val = this.value.replace(/\D/g, '');
