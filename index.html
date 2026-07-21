@@ -1,249 +1,745 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOSCHIAT | Desenvolvedor Full Stack & Creative Technologist</title>
+    <meta name="description" content="Desenvolvedor Full Stack especializado em criar experiências digitais inovadoras. Design, código e criatividade se encontram aqui.">
+    <meta name="theme-color" content="#1a1a1a">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<title>Moschiat</title>
+        :root {
+            --primary: #ff006e;
+            --secondary: #8338ec;
+            --accent: #3a86ff;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
 
-<style>
+        html {
+            scroll-behavior: smooth;
+        }
 
-body{
-margin:0;
-background:black;
-color:white;
-font-family:Arial, Helvetica, sans-serif;
-display:flex;
-align-items:center;
-justify-content:center;
-height:100vh;
-overflow:hidden;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark);
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-/* PARTICULAS */
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 0, 110, 0.1);
+        }
 
-#particles{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-z-index:0;
-}
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-/* CONTEUDO */
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
 
-.container{
-position:relative;
-z-index:1;
-text-align:center;
-max-width:600px;
-padding:40px;
-}
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
 
-.logo{
-width:220px;
-margin-bottom:30px;
-}
+        .nav-links a {
+            text-decoration: none;
+            color: #e0e0e0;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
 
-p{
-font-size:18px;
-opacity:0.8;
-}
+        .nav-links a:hover {
+            color: var(--primary);
+        }
 
-/* BOTÕES */
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.95));
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+        }
 
-.buttons{
-margin-top:35px;
-display:flex;
-justify-content:center;
-gap:15px;
-}
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 0, 110, 0.1), transparent);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 20s infinite ease-in-out;
+        }
 
-.cta{
-padding:14px 30px;
-border-radius:40px;
-text-decoration:none;
-font-weight:bold;
-transition:0.3s;
-}
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(131, 56, 236, 0.1), transparent);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+            animation: float 25s infinite ease-in-out reverse;
+        }
 
-/* WHATSAPP PULSANDO */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
 
-.whatsapp{
-background:#25D366;
-color:black;
-animation:pulse 2s infinite;
-}
+        .hero-content {
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
 
-@keyframes pulse{
-0%{box-shadow:0 0 0 0 rgba(37,211,102,0.7)}
-70%{box-shadow:0 0 0 20px rgba(37,211,102,0)}
-100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
-}
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-weight: 800;
+        }
 
-.exclusiveBtn{
-background:white;
-color:black;
-cursor:pointer;
-}
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-.cta:hover{
-transform:scale(1.05);
-}
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: var(--gray);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-/* SENHA */
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-.passwordBox{
-margin-top:25px;
-opacity:0;
-max-height:0;
-overflow:hidden;
-transition:all 0.6s ease;
-}
+        .btn {
+            padding: 0.8rem 2.5rem;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-weight: 600;
+        }
 
-.passwordBox.show{
-opacity:1;
-max-height:100px;
-}
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+        }
 
-input{
-padding:12px;
-border-radius:6px;
-border:none;
-}
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
+        }
 
-button{
-padding:12px 25px;
-border:none;
-border-radius:6px;
-margin-left:10px;
-cursor:pointer;
-}
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+        }
 
-.erro{
-color:red;
-margin-top:10px;
-display:none;
-}
+        .btn-secondary:hover {
+            background: rgba(255, 0, 110, 0.1);
+            transform: translateY(-2px);
+        }
 
-</style>
+        /* SECTION STYLES */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 1rem auto 0;
+        }
+
+        /* ABOUT SECTION */
+        .about {
+            background: rgba(255, 0, 110, 0.03);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(131, 56, 236, 0.1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(131, 56, 236, 0.3);
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            background: rgba(131, 56, 236, 0.2);
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+        }
+
+        .skill-card strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* PORTFOLIO SECTION */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .portfolio-card {
+            background: rgba(131, 56, 236, 0.08);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(131, 56, 236, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 40px rgba(131, 56, 236, 0.2);
+        }
+
+        .portfolio-card-header {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-card-header::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .portfolio-card-content {
+            padding: 1.5rem;
+        }
+
+        .portfolio-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .portfolio-card p {
+            color: #999;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(255, 0, 110, 0.15);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(255, 0, 110, 0.3);
+        }
+
+        /* SERVICES SECTION */
+        .services {
+            background: rgba(58, 134, 255, 0.03);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(131, 56, 236, 0.1), rgba(58, 134, 255, 0.1));
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(131, 56, 236, 0.2);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.15), rgba(131, 56, 236, 0.15));
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: #999;
+            line-height: 1.8;
+        }
+
+        /* CONTACT SECTION */
+        .contact {
+            background: rgba(255, 0, 110, 0.05);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 600px;
+            margin: 3rem auto 0;
+        }
+
+        .contact p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(131, 56, 236, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(131, 56, 236, 0.4);
+        }
+
+        .social-link:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            border-color: var(--secondary);
+        }
+
+        /* FOOTER */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid rgba(255, 0, 110, 0.1);
+        }
+
+        /* SCROLL ANIMATION */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                margin-top: 50px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-content">
+            <div class="logo">MOSCHIAT</div>
+            <ul class="nav-links">
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#services">Serviços</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
 
-<canvas id="particles"></canvas>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Criatividade na <span>Interseção</span> do Código e Arte</h1>
+            <p class="hero-subtitle">Desenvolvedor Full Stack especializado em transformar ideias em experiências digitais memoráveis. Design, código e curiosidade se encontram aqui.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn btn-primary">Vamos Conversar</a>
+                <a href="#portfolio" class="btn btn-secondary">Ver Meu Trabalho</a>
+            </div>
+        </div>
+    </section>
 
-<div class="container">
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about">
+        <h2 class="section-title">Sobre Mim</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <h3>Desenvolvedor Full Stack & Creative Technologist</h3>
+                <p>Com experiência em criar soluções digitais inovadoras, combino design thinking com desenvolvimento técnico robusto. Meu foco é transformar desafios complexos em aplicações elegantes e intuitivas.</p>
+                <p>Trabalho com tecnologias modernas, sempre priorizando a experiência do usuário, performance e código limpo. Acredito que bom design e bom código devem caminhar juntos.</p>
+                <p>Fora do código, exploro a interseção entre arte, criatividade e tecnologia, buscando sempre aprender e evoluir.</p>
+            </div>
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 2rem;">Stack Técnico</h3>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <strong>Frontend</strong>
+                        <small>React, Vue, HTML, CSS, JavaScript</small>
+                    </div>
+                    <div class="skill-card">
+                        <strong>Backend</strong>
+                        <small>Python, Node.js, Django, FastAPI</small>
+                    </div>
+                    <div class="skill-card">
+                        <strong>Database</strong>
+                        <small>PostgreSQL, MongoDB, Redis</small>
+                    </div>
+                    <div class="skill-card">
+                        <strong>DevOps</strong>
+                        <small>Docker, AWS, CI/CD</small>
+                    </div>
+                    <div class="skill-card">
+                        <strong>Design</strong>
+                        <small>UI/UX, Figma, Adobe Suite</small>
+                    </div>
+                    <div class="skill-card">
+                        <strong>Ferramentas</strong>
+                        <small>Git, REST APIs, GraphQL</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<img class="logo"
-src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEif-oYA9Ub7-c94KnddIbzUn73cLsiYw5hzbFoTA5qUw-VXV0RYAqgE2B8HksU6iHpogwKktpI5iJqd1PfcdBnGMIMPZ9QVqnVw449OKNlYwzkkfwSSlscFns10T1MyRFTJ3WCCGwkCR2nKxOfDB1ZoZCUb8mwesizs4Rw-n_qUgwhXmam1c41yEfjHyxKE/s1600/MOSCHIATlogo.png">
+    <!-- SERVICES SECTION -->
+    <section id="services" class="services">
+        <h2 class="section-title">Serviços</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Web Design</h3>
+                <p>Interfaces modernas, responsivas e focadas na experiência do usuário. Design que não apenas fica bonito, mas também funciona.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Desenvolvimento Web</h3>
+                <p>Aplicações full stack robustas e escaláveis. Do frontend elegante ao backend poderoso, entrego soluções completas.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>Otimização & Performance</h3>
+                <p>Acelero aplicações, melhoro métricas e garanto que seus usuários tenham a melhor experiência possível.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Consultoria Técnica</h3>
+                <p>Análise de arquitetura, recomendações tecnológicas e estratégia digital para seu projeto ou equipe.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Aplicações Mobile</h3>
+                <p>Apps responsivos usando React Native e tecnologias cross-platform. Funcionalidade em qualquer tela.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3>Projeto Customizado</h3>
+                <p>Sua ideia, sua solução. Trabalho com projetos únicos que requerem abordagens criativas e personalizadas.</p>
+            </div>
+        </div>
+    </section>
 
-<p>
-Criação de identidade visual para artistas e projetos digitais.<br>
-Capas de álbum • Visualizers • Motion design
-</p>
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="portfolio">
+        <h2 class="section-title">Portfólio</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-card fade-in">
+                <div class="portfolio-card-header">💻</div>
+                <div class="portfolio-card-content">
+                    <h3>Quote Generator</h3>
+                    <p>Aplicação em Python para explorar e gerenciar citações inspiracionais com favoritos persistentes.</p>
+                    <div class="tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">CLI</span>
+                        <span class="tag">JSON</span>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-card fade-in">
+                <div class="portfolio-card-header">🎨</div>
+                <div class="portfolio-card-content">
+                    <h3>Design System</h3>
+                    <p>Sistema de design completo com componentes reutilizáveis e documentação técnica.</p>
+                    <div class="tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Figma</span>
+                        <span class="tag">Storybook</span>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-card fade-in">
+                <div class="portfolio-card-header">🚀</div>
+                <div class="portfolio-card-content">
+                    <h3>Startup MVP</h3>
+                    <p>MVP funcional entregue em tempo recorde para startup de tecnologia. Iteração rápida e feedback loop.</p>
+                    <div class="tags">
+                        <span class="tag">Full Stack</span>
+                        <span class="tag">Agile</span>
+                        <span class="tag">MVP</span>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-card fade-in">
+                <div class="portfolio-card-header">📊</div>
+                <div class="portfolio-card-content">
+                    <h3>Dashboard Analytics</h3>
+                    <p>Dashboard interativo para visualização de dados em tempo real com gráficos e métricas avançadas.</p>
+                    <div class="tags">
+                        <span class="tag">D3.js</span>
+                        <span class="tag">Charts</span>
+                        <span class="tag">Real-time</span>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-card fade-in">
+                <div class="portfolio-card-header">🛒</div>
+                <div class="portfolio-card-content">
+                    <h3>E-commerce Platform</h3>
+                    <p>Plataforma de e-commerce completa com pagamentos, inventário e experiência de compra otimizada.</p>
+                    <div class="tags">
+                        <span class="tag">Stripe</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">React</span>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-card fade-in">
+                <div class="portfolio-card-header">🔐</div>
+                <div class="portfolio-card-content">
+                    <h3>Auth System</h3>
+                    <p>Sistema de autenticação robusto com 2FA, OAuth e gestão de permissões enterprise.</p>
+                    <div class="tags">
+                        <span class="tag">Security</span>
+                        <span class="tag">OAuth2</span>
+                        <span class="tag">2FA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="buttons">
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Vamos Trabalhar Juntos</h2>
+        <div class="contact-content">
+            <p>Tenho interesse em trabalhos desafiadores e projetos criativos. Se você tem uma ideia interessante ou precisa de ajuda com seu projeto, adoraria conversar!</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/MOSCHIAT" class="social-link" target="_blank" rel="noopener noreferrer" title="GitHub">💻</a>
+                <a href="https://linkedin.com/in/paulo-moschiat" class="social-link" target="_blank" rel="noopener noreferrer" title="LinkedIn">💼</a>
+                <a href="https://twitter.com/moschiat" class="social-link" target="_blank" rel="noopener noreferrer" title="Twitter">🐦</a>
+                <a href="mailto:contact@moschiat.com" class="social-link" title="Email">✉️</a>
+            </div>
 
-<a class="cta whatsapp"
-href="https://wa.me/5511972000152?text=Olá%20quero%20saber%20sobre%20valores%20e%20horarios">
-WhatsApp
-</a>
+            <a href="mailto:contact@moschiat.com" class="btn btn-primary">Enviar Email</a>
+        </div>
+    </section>
 
-<div class="cta exclusiveBtn" onclick="mostrarSenha()">
-Acesso exclusivo
-</div>
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 MOSCHIAT. Feito com ❤️ e código limpo. At the intersection of code, art and curiosity.</p>
+    </footer>
 
-</div>
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-<div class="passwordBox" id="passwordBox">
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-<input type="password" id="senha" placeholder="Digite a senha">
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
 
-<button onclick="verificarSenha()">Entrar</button>
-
-<div id="erro" class="erro">
-Senha incorreta
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-/* MOSTRAR SENHA */
-
-function mostrarSenha(){
-document.getElementById("passwordBox").classList.add("show")
-}
-
-function verificarSenha(){
-
-let senha = document.getElementById("senha").value
-
-if(senha === "vip2026"){
-window.location.href = "12.html"
-}
-
-else{
-document.getElementById("erro").style.display = "block"
-}
-
-}
-
-/* PARTICULAS */
-
-const canvas = document.getElementById("particles")
-const ctx = canvas.getContext("2d")
-
-canvas.width = window.innerWidth
-canvas.height = window.innerHeight
-
-let particles = []
-
-for(let i=0;i<60;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-r:Math.random()*2,
-d:Math.random()*0.5
-})
-}
-
-function draw(){
-
-ctx.clearRect(0,0,canvas.width,canvas.height)
-
-ctx.fillStyle="rgba(255,255,255,0.3)"
-
-for(let i=0;i<particles.length;i++){
-
-let p = particles[i]
-
-ctx.beginPath()
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true)
-ctx.fill()
-
-p.y += p.d
-
-if(p.y>canvas.height){
-p.y=0
-}
-
-}
-
-requestAnimationFrame(draw)
-
-}
-
-draw()
-
-</script>
-
+        document.querySelectorAll('.portfolio-card, .skill-card, .service-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
-
