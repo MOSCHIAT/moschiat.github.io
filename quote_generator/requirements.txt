@@ -1,0 +1,1 @@
+# Apenas para satisfazer o requisito de requirements.txt (sem dependências externas)
