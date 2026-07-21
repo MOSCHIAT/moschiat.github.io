@@ -1,2 +1,0 @@
-# Sem dependências externas - uses apenas a biblioteca padrão do Python
-# Para executar: python3 quotes_generator.py
