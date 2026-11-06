@@ -2,125 +2,1759 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f5f5" media="(prefers-color-scheme: light)">
+<meta name="description" content="MOSCHIAT.COM — Fotografia, Audiovisual, Música e Bem-estar. Profissionalismo, discrição e qualidade em Belo Horizonte e região.">
 
-<title>MOSCHIAT</title>
+<!-- Segurança (o que é possível via meta em hospedagem estática) -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Preconnect para imagens remotas -->
+<link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+
+<title>MOSCHIAT.COM</title>
 
 <style>
+  /* ===================================================================
+     TOKENS (design preservado — contraste ajustado para WCAG AA)
+  =================================================================== */
+  :root {
+    --bg: #000;
+    --card: #0d0d0d;
+    --card-2: #141414;
+    --border: #222;
+    --border-soft: #1c1c1c;
+    --text: #e8e8e8;
+    --text-soft: #cfcfcf;
+    --text-muted: #9a9a9a;   /* era #888 — agora AA sobre #0d0d0d */
+    --heading: #fff;
+    --accent: #4ade80;
+    --accent-contrast: #000;
+    --shadow: rgba(74,222,128,0.06);
+    --audio-bg: #0a0f0c;
+    --audio-line: rgba(74,222,128,0.15);
+    --focus-ring: 2px solid var(--accent);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-top: env(safe-area-inset-top, 0px);
+  }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+  body.light {
+    --bg: #f5f5f5;
+    --card: #ffffff;
+    --card-2: #f0f0f0;
+    --border: #ddd;
+    --border-soft: #e5e5e5;
+    --text: #1a1a1a;
+    --text-soft: #333;
+    --text-muted: #555;
+    --heading: #000;
+    --accent: #16a34a;
+    --accent-contrast: #fff;
+    --shadow: rgba(0,0,0,0.08);
+    --audio-bg: #eef7f0;
+    --audio-line: rgba(22,163,74,0.2);
+  }
 
-html,body{
-    width:100%;
-    height:100%;
-    background:#000;
-    color:#fff;
-    font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif;
-}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+  html { scroll-behavior: smooth; }
 
-section{
-    width:min(900px,90%);
-}
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+    transition: background .3s, color .3s;
+    -webkit-text-size-adjust: 100%;
+  }
 
-.logo{
+  img { max-width: 100%; height: auto; display: block; }
 
-    font-size:.8rem;
-    letter-spacing:.45em;
-    color:#888;
-    margin-bottom:40px;
-    text-transform:uppercase;
+  /* Foco visível (WCAG 2.4.7) */
+  :focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 
-}
+  /* Skip link (WCAG 2.4.1) */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 10px;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    padding: 12px 18px;
+    border-radius: 6px;
+    font-weight: 700;
+    z-index: 9999;
+    text-decoration: none;
+    transition: top .2s;
+  }
+  .skip-link:focus { top: 10px; }
 
-h1{
+  /* H1 visualmente oculto (hierarquia WCAG 1.3.1) */
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
 
-    font-weight:300;
-    font-size:clamp(2.3rem,6vw,5rem);
-    line-height:1.08;
+  /* ===================================================================
+     LOGO
+  =================================================================== */
+  .logo-section {
+    text-align: center;
+    padding: clamp(35px, 6vw, 55px) clamp(15px, 4vw, 20px) clamp(25px, 4vw, 35px);
+    border-bottom: 1px solid var(--border-soft);
+    position: relative;
+    padding-top: calc(clamp(35px, 6vw, 55px) + var(--safe-top));
+  }
 
-}
+  .logo-section img {
+    max-width: 260px;
+    width: clamp(180px, 55vw, 260px);
+    height: auto;
+    margin: 0 auto;
+    filter: drop-shadow(0 0 14px rgba(74,222,128,0.25));
+  }
 
-strong{
-    font-weight:600;
-}
+  body.light .logo-section img { filter: none; }
 
-.line{
+  .logo-section p {
+    margin-top: 18px;
+    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
 
-    width:80px;
-    height:1px;
-    background:#444;
-    margin:50px 0;
+  /* ===================================================================
+     TOGGLE
+  =================================================================== */
+  .theme-toggle {
+    position: fixed;
+    top: calc(18px + var(--safe-top));
+    right: calc(18px + var(--safe-right));
+    z-index: 1000;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s, background .3s;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  }
 
-}
+  .theme-toggle:hover { transform: scale(1.1); }
 
-p{
+  /* ===================================================================
+     CONTAINER
+  =================================================================== */
+  .container {
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 60px) clamp(15px, 4vw, 20px);
+  }
 
-    max-width:620px;
-    color:#9c9c9c;
-    font-size:1rem;
-    line-height:1.9;
+  .section-title {
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
 
-}
+  .section-sub {
+    font-size: clamp(1.3rem, 4vw, 1.625rem);
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: clamp(25px, 4vw, 40px);
+    line-height: 1.25;
+  }
 
-footer{
+  /* ===================================================================
+     GRID PADRÃO
+  =================================================================== */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(16px, 3vw, 24px);
+    margin-bottom: clamp(50px, 8vw, 80px);
+  }
 
-    position:fixed;
-    bottom:30px;
-    left:50%;
-    transform:translateX(-50%);
-    color:#555;
-    font-size:.75rem;
-    letter-spacing:.18em;
+  .pacote {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: clamp(22px, 4vw, 30px) clamp(20px, 3vw, 26px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color .25s, transform .25s, background .3s;
+  }
 
-}
+  .pacote:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
 
-::selection{
-    background:#fff;
-    color:#000;
-}
+  .pacote .tag {
+    font-size: 0.625rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
 
+  .pacote h3 {
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+    color: var(--heading);
+    font-weight: 600;
+  }
+
+  .pacote .preco {
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
+    color: var(--heading);
+  }
+
+  .pacote .preco small {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .pacote ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pacote ul li {
+    font-size: 0.8125rem;
+    color: var(--text-soft);
+    line-height: 1.5;
+  }
+
+  .pacote ul li::before {
+    content: "✓ ";
+    color: var(--accent);
+  }
+
+  .btn {
+    margin-top: auto;
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: opacity .2s;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn:hover { opacity: .85; }
+
+  .divisor {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: clamp(45px, 8vw, 70px) 0;
+  }
+
+  /* ===================================================================
+     SLIDESHOW
+  =================================================================== */
+  .gallery-block { margin-bottom: clamp(50px, 8vw, 80px); }
+
+  .slideshow {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    /* fallback para Safari < 15 */
+    min-height: 200px;
+    background: var(--card-2);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px var(--shadow);
+    touch-action: pan-y;
+  }
+
+  @supports not (aspect-ratio: 1) {
+    .slideshow::before {
+      content: "";
+      display: block;
+      padding-top: 56.25%;
+    }
+    .slideshow > .slide { position: absolute; inset: 0; }
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity .8s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide.active { opacity: 1; z-index: 2; }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slide .fallback {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: var(--card-2);
+  }
+
+  .slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s, transform .2s;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  @supports not (backdrop-filter: blur(4px)) {
+    .slide-btn { background: rgba(0,0,0,0.75); }
+  }
+
+  .slide-btn:hover {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    border-color: var(--accent);
+  }
+
+  .slide-btn.prev { left: 16px; }
+  .slide-btn.next { right: 16px; }
+
+  .slide-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    gap: 10px;
+  }
+
+  .slide-dots button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.5);
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    transition: background .2s, transform .2s;
+    min-width: 12px;
+    min-height: 12px;
+  }
+
+  .slide-dots button.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: scale(1.2);
+  }
+
+  .slide-counter {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 5;
+    background: rgba(0,0,0,0.65);
+    color: #fff;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* ===================================================================
+     +18
+  =================================================================== */
+  .adult-section {
+    margin: 0 0 clamp(50px, 8vw, 80px);
+    padding: clamp(24px, 4vw, 40px) clamp(16px, 3vw, 30px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--card);
+  }
+
+  .adult-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .adult-badge {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .adult-section .section-sub {
+    margin-bottom: 10px;
+    font-size: clamp(1.1rem, 3vw, 1.375rem);
+  }
+
+  .adult-desc {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 640px;
+  }
+
+  .adult-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    gap: clamp(12px, 2vw, 18px);
+    margin-bottom: 30px;
+  }
+
+  .adult-card {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    min-height: 200px;
+    background: var(--card-2);
+    transition: border-color .25s, transform .25s;
+  }
+
+  @supports not (aspect-ratio: 1) {
+    .adult-card::before {
+      content: "";
+      display: block;
+      padding-top: 133.33%;
+    }
+  }
+
+  .adult-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+
+  .adult-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(14px) brightness(0.65);
+    transform: scale(1.08);
+    transition: filter .4s ease, transform .4s ease;
+  }
+
+  .adult-card:hover img {
+    filter: blur(10px) brightness(0.75);
+    transform: scale(1.1);
+  }
+
+  .adult-card .adult-lock {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .adult-card .adult-lock svg {
+    width: 34px; height: 34px;
+    fill: #fff;
+    opacity: 0.85;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+  }
+
+  .adult-card .adult-lock span {
+    font-size: 0.625rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0,0,0,0.65);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .adult-card .adult-card-tag {
+    position: absolute;
+    top: 10px; left: 10px;
+    z-index: 3;
+    font-size: 0.625rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(0,0,0,0.75);
+    border: 1px solid var(--accent);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .adult-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 26px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.8125rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+    min-height: 44px;
+  }
+
+  .adult-cta:hover {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
+
+  .adult-cta svg { width: 18px; height: 18px; fill: currentColor; }
+
+  .adult-note {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+
+  /* ===================================================================
+     AUDIO
+  =================================================================== */
+  .audio-section {
+    background: var(--audio-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: clamp(30px, 5vw, 50px) clamp(18px, 3vw, 40px);
+    margin-bottom: clamp(50px, 8vw, 80px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .audio-section::before {
+    content: "";
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,222,128,0.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  .audio-section::after {
+    content: "";
+    position: absolute;
+    bottom: -140px; left: -140px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,222,128,0.07), transparent 70%);
+    pointer-events: none;
+  }
+
+  .audio-header {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 40px;
+  }
+
+  .audio-header .section-title { color: var(--accent); }
+
+  .audio-header .section-sub {
+    margin-bottom: 6px;
+    font-size: clamp(1.4rem, 4vw, 1.875rem);
+  }
+
+  .audio-header .audio-desc {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    max-width: 620px;
+    line-height: 1.6;
+  }
+
+  .audio-lista {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .audio-item {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 2vw, 26px);
+    padding: clamp(18px, 3vw, 26px) 10px;
+    border-top: 1px solid var(--audio-line);
+    transition: background .25s, padding-left .25s;
+    border-radius: 8px;
+    flex-wrap: wrap;
+  }
+
+  .audio-item:last-child { border-bottom: 1px solid var(--audio-line); }
+
+  .audio-item:hover {
+    background: rgba(74,222,128,0.05);
+    padding-left: 22px;
+  }
+
+  .audio-num {
+    font-size: clamp(1.8rem, 5vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--accent);
+    text-stroke: 1.5px var(--accent);
+    min-width: clamp(48px, 8vw, 80px);
+    text-align: center;
+    flex-shrink: 0;
+    transition: color .25s;
+  }
+
+  .audio-item:hover .audio-num {
+    color: var(--accent);
+  }
+
+  .audio-info { flex: 1 1 200px; min-width: 0; }
+
+  .audio-info h3 {
+    font-size: clamp(0.95rem, 2.2vw, 1.125rem);
+    font-weight: 600;
+    color: var(--heading);
+    margin-bottom: 6px;
+  }
+
+  .audio-info p {
+    font-size: 0.8125rem;
+    color: var(--text-soft);
+    line-height: 1.55;
+  }
+
+  .audio-preco {
+    flex-shrink: 0;
+    text-align: right;
+    min-width: 140px;
+  }
+
+  .audio-preco .valor {
+    font-size: clamp(0.95rem, 2vw, 1.125rem);
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .audio-preco .unidade {
+    display: block;
+    font-size: 0.6875rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+
+  /* ===================================================================
+     EXPERIÊNCIA
+  =================================================================== */
+  .card-experiencia {
+    display: flex;
+    flex-wrap: wrap;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 40px var(--shadow);
+  }
+
+  .foto {
+    flex: 1 1 min(100%, 380px);
+    min-height: clamp(300px, 60vw, 600px);
+    background: var(--card-2) url('SUA-FOTO-AQUI.jpg') center/cover no-repeat;
+    position: relative;
+  }
+
+  .foto::after {
+    content: "PERFIL VERIFICADO";
+    position: absolute;
+    bottom: 15px; left: 15px;
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    font-size: 0.6875rem;
+    letter-spacing: 2px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid #333;
+  }
+
+  .descricao {
+    flex: 1 1 min(100%, 480px);
+    padding: clamp(24px, 4vw, 40px) clamp(20px, 3vw, 35px);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .descricao h2 {
+    font-size: clamp(1.2rem, 3vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--heading);
+  }
+
+  .descricao h2 span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tags span {
+    font-size: 0.6875rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 20px;
+  }
+
+  .bloco h3 {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+  }
+
+  .bloco p, .bloco li {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+
+  .bloco ul { list-style: none; }
+
+  .bloco ul li::before {
+    content: "— ";
+    color: var(--text-muted);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  table td, table th {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--text-soft);
+  }
+
+  table th {
+    font-size: 0.625rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+
+  table td:last-child, table th:last-child {
+    text-align: right;
+    font-weight: 600;
+    color: var(--heading);
+    white-space: nowrap;
+  }
+
+  table.economia td:nth-child(2) { text-align: right; }
+  table.economia td:nth-child(3) { text-align: right; color: var(--accent); }
+  table.economia th:nth-child(2),
+  table.economia th:nth-child(3) { text-align: right; }
+
+  .obs {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .pagamento {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .pagamento span {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  .contato {
+    background: var(--card-2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+
+  .contato p {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .contato a {
+    color: var(--heading);
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+
+  .contato a:hover { color: var(--accent); }
+
+  .aviso {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    border-left: 2px solid var(--border);
+    padding-left: 12px;
+  }
+
+  /* ===================================================================
+     DEPOIMENTOS COM BLUR (acessível — permite leitura por leitor de tela)
+  =================================================================== */
+  .depoimentos .grid { margin-bottom: 0; }
+
+  .depoimento {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow: hidden;
+    transition: border-color .25s;
+  }
+
+  .depoimento:hover { border-color: var(--accent); }
+
+  .depoimento .conteudo {
+    filter: blur(5px);
+    transition: filter .4s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    /* Permite leitores de tela lerem o texto (WCAG 1.3.1) */
+  }
+
+  .depoimento:hover .conteudo { filter: blur(2px); }
+
+  .depoimento .estrelas {
+    color: var(--accent);
+    font-size: 0.9375rem;
+    letter-spacing: 2px;
+  }
+
+  .depoimento .texto {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-soft);
+    font-style: italic;
+  }
+
+  .depoimento .autor {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .depoimento .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    z-index: 3;
+    background: rgba(0,0,0,0.25);
+    pointer-events: none;
+  }
+
+  body.light .depoimento .overlay { background: rgba(255,255,255,0.25); }
+
+  .depoimento .overlay .cadeado {
+    width: 30px; height: 30px;
+    fill: var(--accent);
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  }
+
+  .depoimento .overlay span {
+    font-size: 0.625rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--heading);
+    background: rgba(0,0,0,0.65);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--accent);
+  }
+
+  /* ===================================================================
+     WHATSAPP FLUTUANTE (com safe-area)
+  =================================================================== */
+  .whatsapp-float {
+    position: fixed;
+    bottom: calc(24px + var(--safe-bottom));
+    right: calc(24px + var(--safe-right));
+    z-index: 1000;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(37,211,102,0.45);
+    transition: transform .2s, box-shadow .2s;
+    text-decoration: none;
+  }
+
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 26px rgba(37,211,102,0.65);
+  }
+
+  .whatsapp-float svg { width: 32px; height: 32px; fill: #fff; }
+
+  /* ===================================================================
+     RESPONSIVO
+  =================================================================== */
+  @media (max-width: 760px) {
+    .card-experiencia { flex-direction: column; }
+    .descricao { padding: 26px 20px; }
+    .theme-toggle {
+      width: 40px; height: 40px; font-size: 17px;
+      top: calc(12px + var(--safe-top));
+      right: calc(12px + var(--safe-right));
+    }
+    .whatsapp-float {
+      width: 54px; height: 54px;
+      bottom: calc(18px + var(--safe-bottom));
+      right: calc(18px + var(--safe-right));
+    }
+    .whatsapp-float svg { width: 28px; height: 28px; }
+
+    .audio-item { flex-wrap: wrap; gap: 12px; }
+    .audio-info { flex: 1 1 100%; order: 2; }
+    .audio-preco {
+      order: 3;
+      text-align: left;
+      min-width: 0;
+      flex: 1 1 100%;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .audio-preco .unidade { display: inline; margin-top: 0; }
+
+    .slide-btn { width: 40px; height: 40px; font-size: 16px; }
+    .slide-btn.prev { left: 10px; }
+    .slide-btn.next { right: 10px; }
+    .slide-counter { font-size: 0.625rem; padding: 4px 9px; top: 10px; right: 10px; }
+    .slide-dots { bottom: 10px; gap: 7px; }
+    .slide-dots button { width: 10px; height: 10px; }
+  }
+
+  @media (max-width: 360px) {
+    .adult-grid { grid-template-columns: 1fr; }
+    .pacote { padding: 20px 16px; }
+  }
+
+  /* Ultrawide — limita largura do container para legibilidade */
+  @media (min-width: 1600px) {
+    .container { max-width: 1280px; }
+    .audio-section { padding: 60px 60px; }
+  }
+
+  /* Orientação horizontal em mobile pequeno */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .logo-section { padding: 20px 20px 15px; }
+    .logo-section img { max-width: 160px; }
+    .theme-toggle { top: calc(8px + var(--safe-top)); right: calc(8px + var(--safe-right)); }
+  }
+
+  /* ===================================================================
+     PREFERS-REDUCED-MOTION (WCAG 2.3.3)
+  =================================================================== */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .slide { transition: none !important; }
+    .pacote:hover { transform: none !important; }
+    .adult-card:hover { transform: none !important; }
+    .whatsapp-float:hover { transform: none !important; }
+  }
+
+  /* ===================================================================
+     PRINT (opcional — para contato/currículo)
+  =================================================================== */
+  @media print {
+    .theme-toggle, .whatsapp-float, .slide-btn, .slide-dots, .adult-section { display: none !important; }
+    body { background: #fff !important; color: #000 !important; }
+    .depoimento .conteudo { filter: none !important; }
+  }
 </style>
-
 </head>
-
 <body>
 
-<section>
+<a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
 
-<div class="logo">
-MOSCHIAT
-</div>
+<button class="theme-toggle" id="themeToggle" title="Alternar tema" aria-label="Alternar tema claro e escuro" aria-pressed="false">🌙</button>
 
-<h1>
-Toda marca começa com uma <strong>promessa</strong>.<br>
-Cresce através da <strong>experiência</strong>.<br>
-Permanece pela <strong>conexão</strong>.
-</h1>
+<h1 class="visually-hidden">MOSCHIAT.COM — Fotografia, Audiovisual, Música e Bem-estar</h1>
 
-<div class="line"></div>
+<!-- ===== LOGO ===== -->
+<header class="logo-section">
+  <img
+    src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/MOSCHIAT.png"
+    alt="MOSCHIAT.COM — logotipo da marca"
+    width="260"
+    height="auto"
+    decoding="async"
+    fetchpriority="high"
+    data-fallback-hide
+  >
+  <p>Fotografia · Audiovisual · Música · Bem-estar</p>
+</header>
 
-<p>
+<main id="main-content" class="container">
 
-</p>
+  <!-- ============================================================
+       2. GALERIA DE FOTOS
+  ============================================================ -->
+  <section class="gallery-block" aria-labelledby="galeria-title">
+    <p class="section-title">Portfólio</p>
+    <h2 id="galeria-title" class="section-sub">Galeria de Fotos</h2>
 
-</section>
+    <div class="slideshow" id="slideshow" role="region" aria-roledescription="carrossel" aria-label="Galeria de fotos do portfólio">
+      <div class="slide active" role="group" aria-roledescription="slide" aria-label="1 de 4">
+        <img
+          src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/1.jpg"
+          alt="Ensaio fotográfico profissional — foto 1 do portfólio"
+          width="1600" height="900"
+          loading="eager"
+          decoding="async"
+          data-fallback-sibling
+        >
+        <div class="fallback">Imagem 1 indisponível</div>
+      </div>
 
-<footer>
-EST. 2026
-</footer>
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 4">
+        <img
+          src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/2.jpg"
+          alt="Ensaio fotográfico profissional — foto 2 do portfólio"
+          width="1600" height="900"
+          loading="lazy"
+          decoding="async"
+          data-fallback-sibling
+        >
+        <div class="fallback">Imagem 2 indisponível</div>
+      </div>
+
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 4">
+        <img
+          src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/3.jpg"
+          alt="Ensaio fotográfico profissional — foto 3 do portfólio"
+          width="1600" height="900"
+          loading="lazy"
+          decoding="async"
+          data-fallback-sibling
+        >
+        <div class="fallback">Imagem 3 indisponível</div>
+      </div>
+
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="4 de 4">
+        <img
+          src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/4.jpg"
+          alt="Ensaio fotográfico profissional — foto 4 do portfólio"
+          width="1600" height="900"
+          loading="lazy"
+          decoding="async"
+          data-fallback-sibling
+        >
+        <div class="fallback">Imagem 4 indisponível</div>
+      </div>
+
+      <button class="slide-btn prev" id="slidePrev" aria-label="Foto anterior">‹</button>
+      <button class="slide-btn next" id="slideNext" aria-label="Próxima foto">›</button>
+
+      <div class="slide-counter" id="slideCounter" aria-live="polite" aria-atomic="true">1 / 4</div>
+
+      <div class="slide-dots" id="slideDots" role="tablist" aria-label="Selecionar foto">
+        <button class="active" data-index="0" role="tab" aria-selected="true" aria-label="Ir para foto 1"></button>
+        <button data-index="1" role="tab" aria-selected="false" aria-label="Ir para foto 2"></button>
+        <button data-index="2" role="tab" aria-selected="false" aria-label="Ir para foto 3"></button>
+        <button data-index="3" role="tab" aria-selected="false" aria-label="Ir para foto 4"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. PACOTES DE FOTOGRAFIA
+  ============================================================ -->
+  <section aria-labelledby="pacotes-title">
+    <p class="section-title">Serviços</p>
+    <h2 id="pacotes-title" class="section-sub">Pacotes de Fotografia</h2>
+
+    <div class="grid">
+      <article class="pacote">
+        <span class="tag">Essencial</span>
+        <h3>Ensaio Básico</h3>
+        <p class="preco">R$ 350 <small>/ sessão</small></p>
+        <ul>
+          <li>1 hora de ensaio</li>
+          <li>15 fotos tratadas</li>
+          <li>1 locação (BH)</li>
+          <li>Entrega digital em 7 dias</li>
+        </ul>
+        <a href="https://wa.me/5511972000152?text=Quero%20o%20pacote%20Ensaio%20B%C3%A1sico" class="btn" target="_blank" rel="noopener noreferrer">Contratar</a>
+      </article>
+
+      <article class="pacote">
+        <span class="tag">Mais vendido</span>
+        <h3>Ensaio Profissional</h3>
+        <p class="preco">R$ 650 <small>/ sessão</small></p>
+        <ul>
+          <li>2 horas de ensaio</li>
+          <li>30 fotos tratadas</li>
+          <li>2 locações (BH e região)</li>
+          <li>Direção de pose inclusa</li>
+          <li>Entrega digital em 5 dias</li>
+        </ul>
+        <a href="https://wa.me/5511972000152?text=Quero%20o%20pacote%20Ensaio%20Profissional" class="btn" target="_blank" rel="noopener noreferrer">Contratar</a>
+      </article>
+
+      <article class="pacote">
+        <span class="tag">Premium</span>
+        <h3>Ensaio Premium</h3>
+        <p class="preco">R$ 1.200 <small>/ sessão</small></p>
+        <ul>
+          <li>4 horas de ensaio</li>
+          <li>60 fotos tratadas</li>
+          <li>Locações ilimitadas na região</li>
+          <li>Make e styling inclusos</li>
+          <li>Álbum digital + impresso</li>
+          <li>Entrega em 3 dias</li>
+        </ul>
+        <a href="https://wa.me/5511972000152?text=Quero%20o%20pacote%20Ensaio%20Premium" class="btn" target="_blank" rel="noopener noreferrer">Contratar</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. CONTEÚDO +18
+  ============================================================ -->
+  <section class="adult-section" aria-labelledby="adult-title">
+    <div class="adult-header">
+      <span class="adult-badge" aria-label="Conteúdo para maiores de 18 anos">+18</span>
+      <p class="section-title" style="margin:0;">Conteúdo Exclusivo</p>
+    </div>
+    <h2 id="adult-title" class="section-sub">Acesso a Conteúdo Adulto</h2>
+    <p class="adult-desc">
+      Conteúdo exclusivo para maiores de 18 anos. As imagens abaixo estão censuradas por padrão.
+      Ao comprar o acesso, você recebe o link do conteúdo completo diretamente no WhatsApp.
+    </p>
+
+    <div class="adult-grid">
+      <div class="adult-card">
+        <span class="adult-card-tag">Pack 01</span>
+        <img
+          src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/1.jpg"
+          alt="Prévia censurada do pack 01 de conteúdo adulto"
+          width="600" height="800"
+          loading="lazy"
+          decoding="async"
+        >
+        <div class="adult-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>+18</span>
+        </div>
+      </div>
+
+      <div class="adult-card">
+        <span class="adult-card-tag">Pack 02</span>
+        <img
+          src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/2.jpg"
+          alt="Prévia censurada do pack 02 de conteúdo adulto"
+          width="600" height="800"
+          loading="lazy"
+          decoding="async"
+        >
+        <div class="adult-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>+18</span>
+        </div>
+      </div>
+
+      <div class="adult-card">
+        <span class="adult-card-tag">Pack 03</span>
+        <img
+          src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/3.jpg"
+          alt="Prévia censurada do pack 03 de conteúdo adulto"
+          width="600" height="800"
+          loading="lazy"
+          decoding="async"
+        >
+        <div class="adult-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>+18</span>
+        </div>
+      </div>
+    </div>
+
+    <a
+      href="https://wa.me/5511972000152?text=Quero%20comprar%20acesso%20a%20conte%C3%BAdo%20adulto"
+      class="adult-cta"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M16.04 3C9.4 3 4.04 8.36 4.04 15c0 2.12.56 4.18 1.6 6L4 29l8.2-2.14c1.76.96 3.74 1.46 5.84 1.46 6.64 0 12-5.36 12-12S22.68 3 16.04 3zm0 21.8c-1.86 0-3.68-.5-5.26-1.44l-.38-.22-4.86 1.27 1.3-4.74-.25-.4A9.77 9.77 0 0 1 6.24 15c0-5.42 4.4-9.8 9.8-9.8 5.4 0 9.8 4.38 9.8 9.8s-4.4 9.8-9.8 9.8zm5.38-7.34c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.2 5.07 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/>
+      </svg>
+      Comprar acesso
+    </a>
+
+    <p class="adult-note">
+      Ao clicar, você será direcionado ao WhatsApp oficial. Conteúdo destinado exclusivamente a maiores de 18 anos.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       5. ESTÚDIO
+  ============================================================ -->
+  <section class="audio-section" aria-labelledby="audio-title">
+    <div class="audio-header">
+      <p class="section-title">Estúdio</p>
+      <h2 id="audio-title" class="section-sub">Audiovisual & Música</h2>
+      <p class="audio-desc">
+        Produção musical, edição, mixagem e identidade sonora. Valores por projeto,
+        conforme complexidade e licença.
+      </p>
+    </div>
+
+    <div class="audio-lista">
+      <div class="audio-item">
+        <div class="audio-num" aria-hidden="true">01</div>
+        <div class="audio-info">
+          <h3>Criação de Beats Personalizados</h3>
+          <p>Beats de funk, trap, house, techno, experimental e outros gêneros. Valor conforme complexidade e licença.</p>
+        </div>
+        <div class="audio-preco">
+          <span class="valor">R$ 100–350</span>
+          <span class="unidade">por instrumental</span>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-num" aria-hidden="true">02</div>
+        <div class="audio-info">
+          <h3>Edição de Áudio</h3>
+          <p>Cortes, organização, limpeza, ajustes de volume, fades e preparação de arquivos.</p>
+        </div>
+        <div class="audio-preco">
+          <span class="valor">R$ 40–120</span>
+          <span class="unidade">por projeto</span>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-num" aria-hidden="true">03</div>
+        <div class="audio-info">
+          <h3>Remixes e Versões Alternativas</h3>
+          <p>Remixes, versões estendidas, edits para DJs e versões com introduções e finais personalizados.</p>
+        </div>
+        <div class="audio-preco">
+          <span class="valor">R$ 100–300</span>
+          <span class="unidade">por faixa</span>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-num" aria-hidden="true">04</div>
+        <div class="audio-info">
+          <h3>Mixagem Básica</h3>
+          <p>Ajuste de volumes, equalização, panorama, efeitos e equilíbrio dos elementos.</p>
+        </div>
+        <div class="audio-preco">
+          <span class="valor">R$ 80–250</span>
+          <span class="unidade">por projeto</span>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-num" aria-hidden="true">05</div>
+        <div class="audio-info">
+          <h3>Visualizer Musical</h3>
+          <p>Vídeo com ondas, espectros, animações e identidade visual para YouTube.</p>
+        </div>
+        <div class="audio-preco">
+          <span class="valor">R$ 80–200</span>
+          <span class="unidade">por vídeo</span>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-num" aria-hidden="true">06</div>
+        <div class="audio-info">
+          <h3>Intro e Assinatura Sonora</h3>
+          <p>Pequenas identidades sonoras para DJs, canais, marcas e artistas.</p>
+        </div>
+        <div class="audio-preco">
+          <span class="valor">R$ 80–180</span>
+          <span class="unidade">por assinatura</span>
+        </div>
+      </div>
+
+      <div class="audio-item">
+        <div class="audio-num" aria-hidden="true">07</div>
+        <div class="audio-info">
+          <h3>Música para Conteúdo Audiovisual</h3>
+          <p>Trilhas curtas para vídeos, campanhas, Reels e apresentações.</p>
+        </div>
+        <div class="audio-preco">
+          <span class="valor">R$ 100–300</span>
+          <span class="unidade">por trilha</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divisor" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       6. EXPERIÊNCIAS
+  ============================================================ -->
+  <section aria-labelledby="exp-title">
+    <p class="section-title">Experiências</p>
+    <h2 id="exp-title" class="section-sub">Companhia para Eventos & Experiências</h2>
+
+    <div class="card-experiencia">
+      <div class="foto" role="img" aria-label="Foto do perfil — ambiente reservado"></div>
+
+      <div class="descricao">
+        <h2>
+          Companhia para Eventos & Experiências
+          <span>Discreto · Carismático · Belo Horizonte e região</span>
+        </h2>
+
+        <div class="tags">
+          <span>EN / PT</span>
+          <span>Discrição total</span>
+          <span>Agendamento prévio</span>
+          <span>Eventos & viagens</span>
+          <span>Massagens</span>
+        </div>
+
+        <div class="bloco">
+          <h3>Sobre</h3>
+          <p>
+            Acompanhante versátil, discreto e carismático. Priorizo higiene, segurança e respeito mútuo.
+            Atendo em ambientes reservados de Belo Horizonte e região, com discrição total.
+            Disponível para companhia em eventos, jantares, festas, shopping e viagens nacionais e internacionais.
+          </p>
+        </div>
+
+        <div class="bloco">
+          <h3>Valores — Companhia</h3>
+          <table>
+            <tbody>
+              <tr><td>30 minutos</td><td>R$ 150</td></tr>
+              <tr><td>1 hora</td><td>R$ 250</td></tr>
+              <tr><td>Companhia em eventos / viagens</td><td>A combinar</td></tr>
+            </tbody>
+          </table>
+          <div class="pagamento">
+            <span>Dinheiro</span>
+            <span>PIX</span>
+          </div>
+          <p class="obs" style="margin-top:10px;">
+            Não negocio valores. Deslocamento para fora da região central a combinar.
+          </p>
+        </div>
+
+        <div class="bloco">
+          <h3>Massagens — Tabela</h3>
+          <table>
+            <thead>
+              <tr><th scope="col">Serviço</th><th scope="col">Duração</th><th scope="col">Valor</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Relaxante</td><td>30 min</td><td>R$ 150</td></tr>
+              <tr><td>Relaxante</td><td>60 min</td><td>R$ 250</td></tr>
+              <tr><td>Terapêutica</td><td>60 min</td><td>R$ 280</td></tr>
+              <tr><td>Premium</td><td>90 min</td><td>R$ 380</td></tr>
+            </tbody>
+          </table>
+          <p class="obs" style="margin-top:10px;">
+            Pagamento em dinheiro ou PIX. Agendamento prévio obrigatório.
+          </p>
+        </div>
+
+        <div class="bloco">
+          <h3>Economia Proporcional</h3>
+          <table class="economia">
+            <thead>
+              <tr><th scope="col">Duração</th><th scope="col">Valor</th><th scope="col">Economia</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>30 minutos</td><td>R$ 150</td><td>—</td></tr>
+              <tr><td>1 hora</td><td>R$ 250</td><td>R$ 50</td></tr>
+              <tr><td>1h30</td><td>R$ 330</td><td>R$ 120</td></tr>
+              <tr><td>2 horas</td><td>R$ 400</td><td>R$ 200</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bloco">
+          <h3>Como funciona</h3>
+          <ul>
+            <li>Chame sendo objetivo e direto — diga o que procura, data e horário.</li>
+            <li>Ambiente sempre reservado e seguro.</li>
+            <li>Fotos: somente as do anúncio.</li>
+            <li>Atendimento somente com agendamento prévio.</li>
+          </ul>
+        </div>
+
+        <div class="contato">
+          <p>Contato oficial — converse apenas com este número</p>
+          <a href="https://wa.me/5511972000152" target="_blank" rel="noopener noreferrer">+55 11 97200-0152</a>
+        </div>
+
+        <p class="aviso">
+          Perfil verificado. Cuidado com números fakes. Desconfie de preços muito abaixo do mercado —
+          o barato sai caro. Atendimento somente com agendamento prévio.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divisor" aria-hidden="true"></div>
+
+  <!-- ============================================================
+       7. DEPOIMENTOS
+  ============================================================ -->
+  <section class="depoimentos" aria-labelledby="depo-title">
+    <p class="section-title">Avaliações</p>
+    <h2 id="depo-title" class="section-sub">Depoimentos de Clientes</h2>
+
+    <div class="grid">
+      <article class="depoimento">
+        <div class="conteudo">
+          <div class="estrelas" aria-label="5 de 5 estrelas">★★★★★</div>
+          <p class="texto">“Atendimento impecável, super discreto e educado. O ensaio ficou melhor do que eu esperava. Recomendo demais!”</p>
+          <div class="autor">— Cliente · Ensaio Profissional</div>
+        </div>
+        <div class="overlay" aria-hidden="true">
+          <svg class="cadeado" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>Depoimento verificado</span>
+        </div>
+      </article>
+
+      <article class="depoimento">
+        <div class="conteudo">
+          <div class="estrelas" aria-label="5 de 5 estrelas">★★★★★</div>
+          <p class="texto">“Contratei a produção de beat e a edição de áudio. Prazo cumprido, qualidade excelente e comunicação clara do início ao fim.”</p>
+          <div class="autor">— Cliente · Beats + Edição de Áudio</div>
+        </div>
+        <div class="overlay" aria-hidden="true">
+          <svg class="cadeado" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>Depoimento verificado</span>
+        </div>
+      </article>
+
+      <article class="depoimento">
+        <div class="conteudo">
+          <div class="estrelas" aria-label="5 de 5 estrelas">★★★★★</div>
+          <p class="texto">“A massagem terapêutica foi surreal. Ambiente reservado, profissionalismo e muita atenção aos detalhes.”</p>
+          <div class="autor">— Cliente · Massagem Terapêutica</div>
+        </div>
+        <div class="overlay" aria-hidden="true">
+          <svg class="cadeado" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>Depoimento verificado</span>
+        </div>
+      </article>
+
+      <article class="depoimento">
+        <div class="conteudo">
+          <div class="estrelas" aria-label="5 de 5 estrelas">★★★★★</div>
+          <p class="texto">“Pessoa de confiança, carismática e verdadeiramente discreta. Experiência tranquila e segura do começo ao fim.”</p>
+          <div class="autor">— Cliente · Companhia para Evento</div>
+        </div>
+        <div class="overlay" aria-hidden="true">
+          <svg class="cadeado" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>Depoimento verificado</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== WHATSAPP FLUTUANTE ===== -->
+<a
+  href="https://wa.me/5511972000152?text=Ol%C3%A1%2C%20vim%20pelo%20site%20MOSCHIAT.COM"
+  class="whatsapp-float"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Falar no WhatsApp"
+  title="Falar no WhatsApp"
+>
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M16.04 3C9.4 3 4.04 8.36 4.04 15c0 2.12.56 4.18 1.6 6L4 29l8.2-2.14c1.76.96 3.74 1.46 5.84 1.46 6.64 0 12-5.36 12-12S22.68 3 16.04 3zm0 21.8c-1.86 0-3.68-.5-5.26-1.44l-.38-.22-4.86 1.27 1.3-4.74-.25-.4A9.77 9.77 0 0 1 6.24 15c0-5.42 4.4-9.8 9.8-9.8 5.4 0 9.8 4.38 9.8 9.8s-4.4 9.8-9.8 9.8zm5.38-7.34c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.2 5.07 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/>
+  </svg>
+</a>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =====================================================
+     TEMA (com try/catch para modo privado Safari/iOS)
+  ===================================================== */
+  var toggle = document.getElementById('themeToggle');
+  var body = document.body;
+
+  function safeGet(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  }
+  function safeSet(key, val) {
+    try { localStorage.setItem(key, val); } catch (e) { /* noop */ }
+  }
+
+  function applyTheme(isLight) {
+    body.classList.toggle('light', isLight);
+    toggle.textContent = isLight ? '☀️' : '🌙';
+    toggle.setAttribute('aria-pressed', String(isLight));
+    // Atualiza theme-color dinamicamente
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', isLight ? '#f5f5f5' : '#000000');
+  }
+
+  if (safeGet('tema') === 'light') applyTheme(true);
+
+  toggle.addEventListener('click', function () {
+    var isLight = !body.classList.contains('light');
+    applyTheme(isLight);
+    safeSet('tema', isLight ? 'light' : 'dark');
+  });
+
+  /* =====================================================
+     FALLBACK DE IMAGENS (substitui onerror inline)
+  ===================================================== */
+  document.querySelectorAll('img[data-fallback-sibling]').forEach(function (img) {
+    img.addEventListener('error', function () {
+      img.style.display = 'none';
+      var sib = img.nextElementSibling;
+      if (sib && sib.classList.contains('fallback')) sib.style.display = 'flex';
+    });
+  });
+
+  document.querySelectorAll('img[data-fallback-hide]').forEach(function (img) {
+    img.addEventListener('error', function () { img.style.display = 'none'; });
+  });
+
+  /* =====================================================
+     SLIDESHOW (com prefers-reduced-motion)
+  ===================================================== */
+  var slideshow = document.getElementById('slideshow');
+  if (!slideshow) return;
+
+  var slides = slideshow.querySelectorAll('.slide');
+  var dots = document.querySelectorAll('#slideDots button');
+  var counter = document.getElementById('slideCounter');
+  var prevBtn = document.getElementById('slidePrev');
+  var nextBtn = document.getElementById('slideNext');
+
+  var current = 0;
+  var timer = null;
+  var INTERVAL = 5000;
+
+  // Respeita prefers-reduced-motion
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function goTo(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach(function (s, i) {
+      s.classList.toggle('active', i === current);
+      s.setAttribute('aria-hidden', String(i !== current));
+    });
+    dots.forEach(function (d, i) {
+      d.classList.toggle('active', i === current);
+      d.setAttribute('aria-selected', String(i === current));
+    });
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function startAuto() {
+    if (prefersReduced) return; // Não autoplay se usuário prefere menos movimento
+    stopAuto();
+    timer = setInterval(next, INTERVAL);
+  }
+
+  function stopAuto() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+
+  nextBtn.addEventListener('click', function () { next(); startAuto(); });
+  prevBtn.addEventListener('click', function () { prev(); startAuto(); });
+
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      goTo(parseInt(dot.dataset.index, 10));
+      startAuto();
+    });
+  });
+
+  slideshow.addEventListener('mouseenter', stopAuto);
+  slideshow.addEventListener('mouseleave', startAuto);
+  slideshow.addEventListener('focusin', stopAuto);
+  slideshow.addEventListener('focusout', startAuto);
+
+  // Touch swipe
+  var touchStartX = 0;
+  slideshow.addEventListener('touchstart', function (e) {
+    touchStartX = e.changedTouches[0].screenX;
+    stopAuto();
+  }, { passive: true });
+
+  slideshow.addEventListener('touchend', function (e) {
+    var diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) > 40) {
+      diff < 0 ? next() : prev();
+    }
+    startAuto();
+  }, { passive: true });
+
+  // Teclado
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { next(); startAuto(); }
+    if (e.key === 'ArrowLeft') { prev(); startAuto(); }
+  });
+
+  goTo(0);
+  startAuto();
+})();
+</script>
 
 </body>
 </html>
