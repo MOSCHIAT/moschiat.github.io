@@ -28,8 +28,6 @@
     --accent: #4ade80;
     --accent-contrast: #000;
     --shadow: rgba(74,222,128,0.06);
-    --audio-bg: #0a0f0c;
-    --audio-line: rgba(74,222,128,0.15);
     --focus-ring: 2px solid var(--accent);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
     --safe-right: env(safe-area-inset-right, 0px);
@@ -49,8 +47,6 @@
     --accent: #16a34a;
     --accent-contrast: #fff;
     --shadow: rgba(0,0,0,0.08);
-    --audio-bg: #eef7f0;
-    --audio-line: rgba(22,163,74,0.2);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -334,7 +330,7 @@
   .foto {
     flex: 1 1 min(100%, 380px);
     min-height: clamp(300px, 60vw, 600px);
-    background: var(--card-2) url('SUA-FOTO-AQUI.jpg') center/cover no-repeat;
+    background: var(--card-2) url('https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/IMG_9356~2.jpg') center/cover no-repeat;
     position: relative;
   }
   .foto::after {
@@ -588,45 +584,37 @@
 
   <!-- GALERIA -->
   <section class="gallery-block" aria-labelledby="galeria-title">
-    <p class="section-title">Portfólio</p>
     <h2 id="galeria-title" class="section-sub">Galeria de Fotos</h2>
 
-    <div class="slideshow" id="slideshow" role="region" aria-roledescription="carrossel" aria-label="Galeria de fotos do portfólio">
-      <div class="slide active" role="group" aria-roledescription="slide" aria-label="1 de 4">
+    <div class="slideshow" id="slideshow" role="region" aria-roledescription="carrossel" aria-label="Galeria de fotos">
+      <div class="slide active" role="group" aria-roledescription="slide" aria-label="1 de 3">
         <img src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/1.jpg"
-          alt="Ensaio fotográfico profissional — foto 1 do portfólio"
+          alt="Foto 1 da galeria"
           width="1600" height="900" loading="eager" decoding="async" data-fallback-sibling>
         <div class="fallback">Imagem 1 indisponível</div>
       </div>
-      <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 4">
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
         <img src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/2.jpg"
-          alt="Ensaio fotográfico profissional — foto 2 do portfólio"
+          alt="Foto 2 da galeria"
           width="1600" height="900" loading="lazy" decoding="async" data-fallback-sibling>
         <div class="fallback">Imagem 2 indisponível</div>
       </div>
-      <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 4">
-        <img src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/3.jpg"
-          alt="Ensaio fotográfico profissional — foto 3 do portfólio"
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
+        <img src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/1111111111111FCUX2226.JPG"
+          alt="Foto 3 da galeria"
           width="1600" height="900" loading="lazy" decoding="async" data-fallback-sibling>
         <div class="fallback">Imagem 3 indisponível</div>
-      </div>
-      <div class="slide" role="group" aria-roledescription="slide" aria-label="4 de 4">
-        <img src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/4.jpg"
-          alt="Ensaio fotográfico profissional — foto 4 do portfólio"
-          width="1600" height="900" loading="lazy" decoding="async" data-fallback-sibling>
-        <div class="fallback">Imagem 4 indisponível</div>
       </div>
 
       <button class="slide-btn prev" id="slidePrev" aria-label="Foto anterior">‹</button>
       <button class="slide-btn next" id="slideNext" aria-label="Próxima foto">›</button>
 
-      <div class="slide-counter" id="slideCounter" aria-live="polite" aria-atomic="true">1 / 4</div>
+      <div class="slide-counter" id="slideCounter" aria-live="polite" aria-atomic="true">1 / 3</div>
 
       <div class="slide-dots" id="slideDots" role="tablist" aria-label="Selecionar foto">
         <button class="active" data-index="0" role="tab" aria-selected="true" aria-label="Ir para foto 1"></button>
         <button data-index="1" role="tab" aria-selected="false" aria-label="Ir para foto 2"></button>
         <button data-index="2" role="tab" aria-selected="false" aria-label="Ir para foto 3"></button>
-        <button data-index="3" role="tab" aria-selected="false" aria-label="Ir para foto 4"></button>
       </div>
     </div>
   </section>
