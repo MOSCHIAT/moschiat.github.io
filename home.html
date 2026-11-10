@@ -1,1610 +1,972 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Parada Betim – 22ª Parada do Orgulho LGBTQIAPN+ | Notícias</title>
-    <meta name="description" content="Acompanhe as últimas notícias, programação e informações sobre a 22ª Parada do Orgulho LGBTQIAPN+ em Betim. Orgulho, diversidade e resistência." />
-    <link rel="canonical" href="https://paradabetim.com.br/" />
-
-    <!-- Ícone do site (favicon) -->
-    <link rel="icon" href="https://raw.githubusercontent.com/MOSCHIAT/paradabetim.com.br/refs/heads/main/logo.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="https://raw.githubusercontent.com/MOSCHIAT/paradabetim.com.br/refs/heads/main/logo.ico" type="image/x-icon" />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Parada Betim – 22ª Parada do Orgulho LGBTQIAPN+" />
-    <meta property="og:description" content="Acompanhe as últimas notícias, programação e informações sobre a 22ª Parada do Orgulho LGBTQIAPN+ em Betim." />
-    <meta property="og:url" content="https://paradabetim.com.br/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://paradabetim.com.br/images/og-image.jpg" />
-
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Parada Betim – 22ª Parada do Orgulho LGBTQIAPN+" />
-    <meta name="twitter:description" content="Acompanhe as últimas notícias, programação e informações sobre a 22ª Parada do Orgulho LGBTQIAPN+ em Betim." />
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-
-    <style>
-        /* ===== RESET & BASE ===== */
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            font-family: 'Montserrat', sans-serif;
-            background: #f8f6f8;
-            color: #1a0a1a;
-            line-height: 1.5;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .container {
-            width: min(1240px, 94%);
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        /* ===== HEADER ===== */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.80);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            padding: 0.6rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .header .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-weight: 900;
-            font-size: 1.3rem;
-            color: #1a0a1a;
-            letter-spacing: -0.5px;
-        }
-
-        .logo img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
-
-        .logo span {
-            background: rgba(233, 30, 140, 0.10);
-            padding: 0.1rem 0.6rem;
-            border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            color: #e91e8c;
-            border: 1px solid rgba(233, 30, 140, 0.12);
-        }
-
-        .nav {
-            display: flex;
-            align-items: center;
-            gap: 0.2rem;
-            flex-wrap: wrap;
-        }
-
-        .nav a {
-            color: #3a2a3a;
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: background 0.25s, transform 0.2s, color 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            cursor: pointer;
-        }
-
-        .nav a:hover,
-        .nav a:focus-visible {
-            background: rgba(233, 30, 140, 0.08);
-            color: #e91e8c;
-            transform: translateY(-2px);
-        }
-
-        .nav a i {
-            font-size: 0.9rem;
-            color: #e91e8c;
-        }
-
-        .nav a.active {
-            background: rgba(233, 30, 140, 0.10);
-            color: #e91e8c;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            color: #1a0a1a;
-            font-size: 1.8rem;
-            padding: 0.2rem 0.8rem;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .menu-toggle:hover {
-            background: rgba(233, 30, 140, 0.08);
-        }
-
-        /* ===== HERO ===== */
-        .hero {
-            min-height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, #FF6B9D, #FF4081, #FF80AB, #FFAB91, #E1BEE7, #CE93D8);
-            background-size: 300% 300%;
-            animation: softRainbow 12s ease infinite alternate;
-            color: #fff;
-            padding: 3rem 1rem;
-            padding-top: 90px;
-            flex: 1;
-            border-radius: 0 0 60px 60px;
-            margin-bottom: 2.5rem;
-            position: relative;
-        }
-
-        @keyframes softRainbow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .hero-content {
-            width: min(1100px, 95%);
-            padding: 1.5rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
-            font-weight: 900;
-            line-height: 1.05;
-            margin-bottom: 1rem;
-            color: #fff;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-
-        .hero-content h1 .rainbow-text {
-            background: linear-gradient(90deg,
-                    #FF6B9D, #FF4081, #FF80AB, #FFAB91,
-                    #E1BEE7, #CE93D8, #FF6B9D);
-            background-size: 300% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: rainbowMoveTitle 4s linear infinite;
-            display: inline-block;
-            text-shadow: none;
-        }
-
-        @keyframes rainbowMoveTitle {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 300% 50%; }
-        }
-
-        .hero-content .data {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: #fff;
-            text-shadow: 0 1px 6px rgba(0,0,0,0.15);
-        }
-
-        .contador {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .box {
-            min-width: 120px;
-            padding: 1.2rem;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            transition: transform 0.3s;
-        }
-
-        .box:hover {
-            transform: translateY(-4px);
-        }
-
-        .numero {
-            display: block;
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
-        }
-
-        .label {
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: .9rem;
-            color: #fff;
-            font-weight: 600;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
-        }
-
-        .frase-hero {
-            margin-top: 0.5rem;
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            font-weight: 600;
-            color: #fff;
-            text-shadow: 0 1px 6px rgba(0,0,0,0.15);
-        }
-
-        /* ===== HERO CTA ===== */
-        .hero-cta {
-            margin: 1.5rem auto 0.5rem;
-            padding: 1.2rem 1.8rem;
-            max-width: 600px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 28px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            text-align: center;
-        }
-
-        .hero-cta h3 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            margin-bottom: 0.2rem;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
-        }
-
-        .hero-cta p {
-            font-size: 0.9rem;
-            margin-bottom: 0.8rem;
-            color: #fff;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.1);
-        }
-
-        .btn-hero-cta {
-            display: inline-block;
-            padding: 0.7rem 1.8rem;
-            background: #e91e8c;
-            color: #fff;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: background 0.3s, transform 0.2s;
-            border: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .btn-hero-cta:hover {
-            background: #c2185b;
-            transform: translateY(-2px);
-            color: #fff;
-        }
-
-        .btn-hero-cta i {
-            margin-left: 0.4rem;
-        }
-
-        /* ===== PROGRAMAÇÃO DO DIA ===== */
-        .programacao-resumo {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 32px;
-            padding: 2rem 1.8rem;
-            margin: -1rem auto 2.5rem auto;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-            max-width: 1240px;
-            width: 94%;
-        }
-
-        .programacao-resumo .section-title {
-            border-bottom-color: rgba(233, 30, 140, 0.10);
-        }
-
-        .section-title {
-            font-size: clamp(1.6rem, 3vw, 2.2rem);
-            font-weight: 800;
-            margin-bottom: 0.3rem;
-            color: #1a0a1a;
-            letter-spacing: -0.5px;
-            border-bottom: 3px solid rgba(233, 30, 140, 0.15);
-            padding-bottom: 0.6rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .section-title i {
-            color: #e91e8c;
-        }
-
-        .lista-horarios {
-            display: flex;
-            flex-direction: column;
-            gap: 0.3rem;
-            margin-top: 1rem;
-            align-items: center;
-        }
-
-        .item-horario {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
-            transition: background 0.2s;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.02);
-            width: 100%;
-            max-width: 620px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .item-horario:hover {
-            background: rgba(233, 30, 140, 0.04);
-        }
-
-        .item-horario .hora {
-            font-weight: 700;
-            font-size: 0.85rem;
-            color: #6a5a6a;
-            min-width: 54px;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: 0.3px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .item-horario .atracoes-text {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-            font-weight: 500;
-            font-size: 0.88rem;
-            padding: 0.1rem 0.6rem;
-            border-radius: 30px;
-            background: rgba(0, 0, 0, 0.01);
-            border: 1px solid rgba(0, 0, 0, 0.02);
-            color: #1a0a1a;
-            justify-content: center;
-        }
-
-        .item-horario .artista-nome,
-        .item-horario .badge-atracao {
-            filter: blur(5px);
-            user-select: none;
-            transition: none;
-        }
-
-        .item-horario:hover .artista-nome,
-        .item-horario:hover .badge-atracao,
-        .item-horario:focus-within .artista-nome,
-        .item-horario:focus-within .badge-atracao {
-            filter: blur(5px);
-        }
-
-        .badge-atracao {
-            font-size: 0.55rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            padding: 0.05rem 0.6rem;
-            border-radius: 30px;
-            background: rgba(0, 0, 0, 0.03);
-            color: #6a5a6a;
-            border: 1px solid rgba(0, 0, 0, 0.03);
-            white-space: nowrap;
-        }
-
-        .item-horario.destaque {
-            background: rgba(233, 30, 140, 0.05);
-            border-left: 3px solid #e91e8c;
-            border-radius: 40px;
-        }
-
-        .item-horario.destaque .badge-atracao {
-            background: rgba(233, 30, 140, 0.08);
-            color: #e91e8c;
-        }
-
-        /* ===== CONTEÚDO PRINCIPAL ===== */
-        .main-grid {
-            display: block;
-            margin: 2.5rem 0;
-        }
-
-        .noticias-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.8rem;
-            margin-top: 1.5rem;
-        }
-
-        .noticia-card {
-            background: #fff;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(0, 0, 0, 0.02);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .noticia-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
-        }
-
-        .noticia-card .thumb {
-            background: #f0eef0;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: #ccc;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .noticia-card .thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .noticia-card .thumb .categoria-badge {
-            position: absolute;
-            top: 0.8rem;
-            left: 0.8rem;
-            background: rgba(233, 30, 140, 0.85);
-            backdrop-filter: blur(4px);
-            color: #fff;
-            font-size: 0.65rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-        }
-
-        .noticia-card .body {
-            padding: 1.2rem 1.2rem 1.5rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .noticia-card .body h3 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            line-height: 1.3;
-            margin-bottom: 0.5rem;
-            color: #1a0a1a;
-        }
-
-        .noticia-card .body .preview {
-            color: #4a3a4a;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 0.5rem;
-        }
-
-        .noticia-card .body .full-text {
-            display: none;
-        }
-
-        .noticia-card .body .leia-mais {
-            font-weight: 700;
-            color: #e91e8c;
-            font-size: 0.85rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: gap 0.2s;
-            align-self: flex-start;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            padding: 0.4rem 0;
-        }
-
-        .noticia-card .body .leia-mais:hover {
-            gap: 0.8rem;
-        }
-
-        /* ===== MODAL ===== */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-            box-sizing: border-box;
-        }
-
-        .modal-overlay.open {
-            display: flex;
-        }
-
-        .modal-box {
-            background: #fff;
-            border-radius: 32px;
-            max-width: 800px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 2rem 2rem 1.5rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            position: relative;
-            animation: modalFade 0.3s ease;
-        }
-
-        @keyframes modalFade {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-box .modal-close {
-            position: sticky;
-            top: 0;
-            float: right;
-            background: rgba(0, 0, 0, 0.04);
-            border: none;
-            font-size: 1.8rem;
-            padding: 0.2rem 0.8rem;
-            border-radius: 12px;
-            cursor: pointer;
-            color: #1a0a1a;
-            transition: background 0.2s;
-            margin-bottom: 0.5rem;
-        }
-
-        .modal-box .modal-close:hover {
-            background: rgba(233, 30, 140, 0.08);
-            color: #e91e8c;
-        }
-
-        .modal-box .modal-title {
-            font-size: 1.6rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            color: #1a0a1a;
-        }
-
-        .modal-box .modal-data {
-            font-size: 0.8rem;
-            color: #6a5a6a;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 1rem;
-        }
-
-        .modal-box .modal-body {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #1a0a1a;
-        }
-
-        .modal-box .modal-body p {
-            margin-bottom: 0.8rem;
-        }
-
-        .modal-box .modal-body .qr-code,
-        .modal-box .modal-body .poster {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            margin: 1rem auto;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        }
-
-        .modal-box .modal-body .qr-code {
-            max-width: 200px;
-        }
-
-        .modal-box .modal-body .poster {
-            max-width: 100%;
-        }
-
-        .modal-box .modal-body .btn-whatsapp {
-            display: inline-block;
-            background: #25D366;
-            color: #fff;
-            padding: 0.6rem 1.5rem;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: background 0.2s, transform 0.2s;
-            border: none;
-            text-decoration: none;
-        }
-
-        .modal-box .modal-body .btn-whatsapp:hover {
-            background: #128C7E;
-            transform: scale(1.03);
-        }
-
-        .modal-box .modal-body .btn-whatsapp i {
-            margin-right: 0.4rem;
-        }
-
-        /* ===== LOCAL ===== */
-        .local-partida {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 32px;
-            padding: 2rem 1.8rem;
-            margin: 2.5rem 0;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-        }
-
-        .local-partida .section-title {
-            border-bottom-color: rgba(233, 30, 140, 0.10);
-        }
-
-        .map-wrapper {
-            border-radius: 24px;
-            overflow: hidden;
-            margin-top: 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-        }
-
-        .map-wrapper iframe {
-            width: 100%;
-            height: 350px;
-            border: 0;
-            display: block;
-        }
-
-        /* ===== RODAPÉ GLOBAL ===== */
-        .footer {
-            background: #ffffff;
-            border-radius: 32px 32px 0 0;
-            box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.04);
-            padding: 3rem 1rem 1.5rem;
-            margin-top: auto;
-            max-width: 1240px;
-            width: 96%;
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .footer .container {
-            padding: 0;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1.8fr 1.4fr;
-            gap: 2.5rem;
-            margin-bottom: 2.5rem;
-            align-items: center;
-        }
-
-        .footer-col:first-child {
-            text-align: center;
-        }
-
-        .footer-col h4 {
-            font-size: 0.9rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #1a0a1a;
-            margin-bottom: 1.2rem;
-            position: relative;
-        }
-
-        .footer-col h4::after {
-            content: '';
-            display: block;
-            width: 28px;
-            height: 3px;
-            background: linear-gradient(90deg, #e91e8c, #ff1493);
-            border-radius: 4px;
-            margin-top: 0.4rem;
-        }
-
-        .footer-col p {
-            color: #4a3a4a;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-top: 0.5rem;
-        }
-
-        .footer-col .logo-footer img {
-            height: 44px;
-            width: auto;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-        }
-
-        .footer-col .contato-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 0.7rem;
-            color: #4a3a4a;
-            font-size: 0.9rem;
-        }
-
-        .footer-col .contato-item i {
-            width: 1.4rem;
-            color: #e91e8c;
-            font-size: 1rem;
-            text-align: center;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        .footer-social a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(233, 30, 140, 0.06);
-            color: #6a5a6a;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(233, 30, 140, 0.08);
-        }
-
-        .footer-social a:hover {
-            background: #e91e8c;
-            color: #fff;
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 8px 24px rgba(233, 30, 140, 0.20);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            padding-top: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .footer-bottom .legal-links {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-bottom .legal-links a {
-            color: #6a5a6a;
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .footer-bottom .legal-links a:hover {
-            color: #e91e8c;
-        }
-
-        .footer-bottom .copyright {
-            color: #6a5a6a;
-            font-size: 0.8rem;
-            font-weight: 400;
-        }
-
-        .footer-bottom .copyright i {
-            color: #e91e8c;
-            margin: 0 0.2rem;
-        }
-
-        /* ===== RESPONSIVO ===== */
-        @media (max-width: 992px) {
-            .noticias-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 820px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav {
-                display: none;
-                flex-direction: column;
-                width: 100%;
-                background: rgba(255, 255, 255, 0.96);
-                backdrop-filter: blur(16px);
-                padding: 1rem 0;
-                border-radius: 20px;
-                margin-top: 0.6rem;
-                border: 1px solid rgba(0, 0, 0, 0.04);
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
-                gap: 0.1rem;
-            }
-
-            .nav.open {
-                display: flex;
-            }
-
-            .nav a {
-                padding: 0.8rem 1.2rem;
-                width: 100%;
-                border-radius: 0;
-                justify-content: center;
-                border-left: 3px solid transparent;
-            }
-
-            .nav a:hover {
-                background: rgba(233, 30, 140, 0.04);
-                border-left-color: #e91e8c;
-                transform: none;
-            }
-
-            .box {
-                min-width: 90px;
-                padding: 1rem 0.8rem;
-            }
-
-            .hero {
-                border-radius: 0 0 40px 40px;
-                min-height: 70vh;
-            }
-
-            .noticias-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .map-wrapper iframe {
-                height: 280px;
-            }
-
-            .programacao-resumo,
-            .local-partida {
-                padding: 1.5rem 1rem;
-                margin: 1.5rem 0;
-            }
-
-            .item-horario {
-                gap: 0.5rem;
-                padding: 0.4rem 0.6rem;
-                max-width: 100%;
-            }
-
-            .item-horario .hora {
-                min-width: 44px;
-                font-size: 0.75rem;
-            }
-
-            .item-horario .atracoes-text {
-                font-size: 0.78rem;
-                padding: 0.1rem 0.4rem;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            .footer-col:first-child {
-                text-align: center;
-            }
-
-            .footer-col h4::after {
-                margin: 0.4rem auto 0;
-            }
-
-            .footer-col .contato-item {
-                justify-content: center;
-            }
-
-            .footer-social {
-                justify-content: center;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .footer-bottom .legal-links {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .box {
-                min-width: 80px;
-                padding: 0.8rem 0.6rem;
-            }
-            .numero {
-                font-size: 1.8rem;
-            }
-            .label {
-                font-size: 0.7rem;
-                letter-spacing: 1px;
-            }
-            .hero-content h1 {
-                font-size: clamp(2rem, 6vw, 3rem);
-            }
-            .main-grid {
-                margin: 1.5rem 0;
-            }
-            .noticia-card .thumb {
-                height: 160px;
-            }
-            .noticia-card .body h3 {
-                font-size: 1rem;
-            }
-            .map-wrapper iframe {
-                height: 220px;
-            }
-
-            .item-horario {
-                gap: 0.3rem;
-                padding: 0.3rem 0.4rem;
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .item-horario .hora {
-                min-width: 40px;
-                font-size: 0.7rem;
-            }
-            .item-horario .atracoes-text {
-                font-size: 0.7rem;
-                padding: 0.05rem 0.3rem;
-                gap: 0.3rem;
-            }
-            .badge-atracao {
-                font-size: 0.5rem;
-                padding: 0.05rem 0.4rem;
-            }
-
-            .modal-box {
-                padding: 1.5rem;
-            }
-            .modal-box .modal-title {
-                font-size: 1.2rem;
-            }
-
-            .hero-cta {
-                padding: 1rem 1.2rem;
-                margin-top: 1rem;
-            }
-            .hero-cta h3 {
-                font-size: 1rem;
-            }
-            .hero-cta p {
-                font-size: 0.8rem;
-            }
-            .btn-hero-cta {
-                font-size: 0.85rem;
-                padding: 0.6rem 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .box {
-                min-width: 68px;
-                padding: 0.6rem 0.4rem;
-            }
-            .numero {
-                font-size: 1.5rem;
-            }
-            .label {
-                font-size: 0.6rem;
-            }
-            .logo img {
-                height: 30px;
-            }
-            .logo span {
-                font-size: 0.6rem;
-                padding: 0.05rem 0.4rem;
-            }
-            .noticia-card .thumb {
-                height: 140px;
-            }
-            .footer {
-                padding: 2rem 0.8rem 1rem;
-            }
-        }
-
-        /* ===== FOCUS VISIBLE ===== */
-        a:focus-visible,
-        button:focus-visible,
-        input:focus-visible {
-            outline: 3px solid #e91e8c;
-            outline-offset: 2px;
-        }
-
-        /* ===== SKIP LINK ===== */
-        .skip-link {
-            position: absolute;
-            top: -100%;
-            left: 1rem;
-            background: #1a0a1a;
-            color: #fff;
-            padding: 0.8rem 1.2rem;
-            border-radius: 8px;
-            z-index: 9999;
-            font-weight: 700;
-            transition: top 0.2s;
-        }
-
-        .skip-link:focus {
-            top: 1rem;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="MOSCHIAT.COM — Fotografia, Audiovisual, Música e Bem-estar. Profissionalismo, discrição e qualidade em Belo Horizonte e região.">
+
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+
+<link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
+
+<title>MOSCHIAT.COM</title>
+
+<style>
+  :root {
+    --bg: #000;
+    --card: #0d0d0d;
+    --card-2: #141414;
+    --border: #222;
+    --border-soft: #1c1c1c;
+    --text: #e8e8e8;
+    --text-soft: #cfcfcf;
+    --text-muted: #9a9a9a;
+    --heading: #fff;
+    --accent: #4ade80;
+    --accent-contrast: #000;
+    --shadow: rgba(74,222,128,0.06);
+    --focus-ring: 2px solid var(--accent);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-top: env(safe-area-inset-top, 0px);
+  }
+
+  body.light {
+    --bg: #f5f5f5;
+    --card: #ffffff;
+    --card-2: #f0f0f0;
+    --border: #ddd;
+    --border-soft: #e5e5e5;
+    --text: #1a1a1a;
+    --text-soft: #333;
+    --text-muted: #555;
+    --heading: #000;
+    --accent: #16a34a;
+    --accent-contrast: #fff;
+    --shadow: rgba(0,0,0,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+    transition: background .3s, color .3s;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  img { max-width: 100%; height: auto; display: block; }
+
+  :focus-visible { outline: var(--focus-ring); outline-offset: 2px; border-radius: 4px; }
+
+  .skip-link {
+    position: absolute; top: -100px; left: 10px;
+    background: var(--accent); color: var(--accent-contrast);
+    padding: 12px 18px; border-radius: 6px; font-weight: 700;
+    z-index: 9999; text-decoration: none; transition: top .2s;
+  }
+  .skip-link:focus { top: 10px; }
+
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  /* LOGO */
+  .logo-section {
+    text-align: center;
+    padding: clamp(35px, 6vw, 55px) clamp(15px, 4vw, 20px) clamp(25px, 4vw, 35px);
+    border-bottom: 1px solid var(--border-soft);
+    position: relative;
+    padding-top: calc(clamp(35px, 6vw, 55px) + var(--safe-top));
+  }
+  .logo-section img {
+    max-width: 260px;
+    width: clamp(180px, 55vw, 260px);
+    height: auto;
+    margin: 0 auto;
+    filter: drop-shadow(0 0 14px rgba(74,222,128,0.25));
+  }
+  body.light .logo-section img { filter: none; }
+  .logo-section p {
+    margin-top: 18px;
+    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* TOGGLE */
+  .theme-toggle {
+    position: fixed;
+    top: calc(18px + var(--safe-top));
+    right: calc(18px + var(--safe-right));
+    z-index: 1000;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .2s, background .3s;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  }
+  .theme-toggle:hover { transform: scale(1.1); }
+
+  /* CONTAINER */
+  .container {
+    max-width: 1100px; width: 100%;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 60px) clamp(15px, 4vw, 20px);
+  }
+  .section-title {
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+    letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .section-sub {
+    font-size: clamp(1.3rem, 4vw, 1.625rem);
+    font-weight: 600; color: var(--heading);
+    margin-bottom: clamp(25px, 4vw, 40px); line-height: 1.25;
+  }
+
+  .divisor {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+    margin: clamp(45px, 8vw, 70px) 0;
+  }
+
+  /* SLIDESHOW */
+  .gallery-block { margin-bottom: clamp(50px, 8vw, 80px); }
+  .slideshow {
+    position: relative; width: 100%;
+    aspect-ratio: 16 / 9; min-height: 200px;
+    background: var(--card-2);
+    border: 1px solid var(--border);
+    border-radius: 18px; overflow: hidden;
+    box-shadow: 0 10px 40px var(--shadow);
+    touch-action: pan-y;
+  }
+  @supports not (aspect-ratio: 1) {
+    .slideshow::before { content: ""; display: block; padding-top: 56.25%; }
+    .slideshow > .slide { position: absolute; inset: 0; }
+  }
+  .slide {
+    position: absolute; inset: 0; opacity: 0;
+    transition: opacity .8s ease;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .slide.active { opacity: 1; z-index: 2; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; }
+  .slide .fallback {
+    position: absolute; inset: 0; display: none;
+    align-items: center; justify-content: center;
+    color: var(--text-muted); font-size: 0.875rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    background: var(--card-2);
+  }
+  .slide-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    z-index: 5; width: 46px; height: 46px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.55); color: #fff;
+    font-size: 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s, transform .2s;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    min-width: 44px; min-height: 44px;
+  }
+  @supports not (backdrop-filter: blur(4px)) {
+    .slide-btn { background: rgba(0,0,0,0.75); }
+  }
+  .slide-btn:hover {
+    background: var(--accent); color: var(--accent-contrast);
+    border-color: var(--accent);
+  }
+  .slide-btn.prev { left: 16px; }
+  .slide-btn.next { right: 16px; }
+  .slide-dots {
+    position: absolute; bottom: 16px; left: 50%;
+    transform: translateX(-50%); z-index: 5;
+    display: flex; gap: 10px;
+  }
+  .slide-dots button {
+    width: 12px; height: 12px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.5);
+    background: transparent; cursor: pointer; padding: 0;
+    transition: background .2s, transform .2s;
+    min-width: 12px; min-height: 12px;
+  }
+  .slide-dots button.active {
+    background: var(--accent); border-color: var(--accent);
+    transform: scale(1.2);
+  }
+  .slide-counter {
+    position: absolute; top: 16px; right: 16px;
+    z-index: 5; background: rgba(0,0,0,0.65); color: #fff;
+    font-size: 0.75rem; letter-spacing: 1px;
+    padding: 5px 12px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* +18 */
+  .adult-section {
+    margin: 0 0 clamp(50px, 8vw, 80px);
+    padding: clamp(24px, 4vw, 40px) clamp(16px, 3vw, 30px);
+    border: 1px solid var(--border);
+    border-radius: 16px; background: var(--card);
+  }
+  .adult-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 8px; flex-wrap: wrap;
+  }
+  .adult-badge {
+    font-size: 0.625rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent);
+    padding: 4px 10px; border-radius: 4px;
+  }
+  .adult-section .section-sub {
+    margin-bottom: 10px;
+    font-size: clamp(1.1rem, 3vw, 1.375rem);
+  }
+  .adult-desc {
+    font-size: 0.8125rem; color: var(--text-muted);
+    line-height: 1.6; margin-bottom: 30px; max-width: 640px;
+  }
+  .adult-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+    gap: clamp(12px, 2vw, 18px); margin-bottom: 30px;
+  }
+  .adult-card {
+    position: relative; border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+    aspect-ratio: 3 / 4; min-height: 200px;
+    background: var(--card-2);
+    transition: border-color .25s, transform .25s;
+  }
+  @supports not (aspect-ratio: 1) {
+    .adult-card::before {
+      content: ""; display: block; padding-top: 133.33%;
+    }
+  }
+  .adult-card:hover {
+    border-color: var(--accent); transform: translateY(-3px);
+  }
+  .adult-card img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: blur(14px) brightness(0.65);
+    transform: scale(1.08);
+    transition: filter .4s ease, transform .4s ease;
+  }
+  .adult-card:hover img {
+    filter: blur(10px) brightness(0.75);
+    transform: scale(1.1);
+  }
+  .adult-card .adult-lock {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px; z-index: 2; pointer-events: none;
+  }
+  .adult-card .adult-lock svg {
+    width: 34px; height: 34px; fill: #fff;
+    opacity: 0.85;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+  }
+  .adult-card .adult-lock span {
+    font-size: 0.625rem; letter-spacing: 3px;
+    text-transform: uppercase; color: #fff;
+    background: rgba(0,0,0,0.65); padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .adult-card .adult-card-tag {
+    position: absolute; top: 10px; left: 10px; z-index: 3;
+    font-size: 0.625rem; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent);
+    background: rgba(0,0,0,0.75);
+    border: 1px solid var(--accent);
+    padding: 4px 10px; border-radius: 4px;
+  }
+  .adult-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 26px; border-radius: 8px;
+    background: transparent; border: 1px solid var(--accent);
+    color: var(--accent); font-weight: 700;
+    font-size: 0.8125rem; letter-spacing: 1.5px;
+    text-transform: uppercase; text-decoration: none;
+    transition: background .2s, color .2s;
+    min-height: 44px;
+  }
+  .adult-cta:hover {
+    background: var(--accent); color: var(--accent-contrast);
+  }
+  .adult-cta svg { width: 18px; height: 18px; fill: currentColor; }
+  .adult-note {
+    font-size: 0.6875rem; color: var(--text-muted);
+    margin-top: 16px; line-height: 1.6;
+  }
+
+  /* EXPERIÊNCIA */
+  .card-experiencia {
+    display: flex; flex-wrap: wrap;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 0 40px var(--shadow);
+  }
+  .foto {
+    flex: 1 1 min(100%, 380px);
+    min-height: clamp(300px, 60vw, 600px);
+    background: var(--card-2) url('https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/IMG_9356~2.jpg') center/cover no-repeat;
+    position: relative;
+  }
+  .foto::after {
+    content: "PERFIL VERIFICADO";
+    position: absolute; bottom: 15px; left: 15px;
+    background: rgba(0,0,0,0.8); color: #fff;
+    font-size: 0.6875rem; letter-spacing: 2px;
+    padding: 6px 12px; border-radius: 20px;
+    border: 1px solid #333;
+  }
+  .descricao {
+    flex: 1 1 min(100%, 480px);
+    padding: clamp(24px, 4vw, 40px) clamp(20px, 3vw, 35px);
+    display: flex; flex-direction: column; gap: 22px;
+  }
+  .descricao h2 {
+    font-size: clamp(1.2rem, 3vw, 1.75rem);
+    font-weight: 600; letter-spacing: 1px; color: var(--heading);
+  }
+  .descricao h2 span {
+    display: block; font-size: 0.75rem;
+    font-weight: 400; letter-spacing: 3px;
+    color: var(--text-muted); margin-top: 6px;
+    text-transform: uppercase;
+  }
+  .tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .tags span {
+    font-size: 0.6875rem; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--text-soft);
+    border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 20px;
+  }
+  .bloco h3 {
+    font-size: 0.75rem; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-muted);
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+  }
+  .bloco p, .bloco li {
+    font-size: 0.875rem; line-height: 1.7; color: var(--text-soft);
+  }
+  .bloco ul { list-style: none; }
+  .bloco ul li::before { content: "— "; color: var(--text-muted); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  table td, table th {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--text-soft);
+  }
+  table th {
+    font-size: 0.625rem; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-muted);
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  table td:last-child, table th:last-child {
+    text-align: right; font-weight: 600;
+    color: var(--heading); white-space: nowrap;
+  }
+
+  .obs {
+    font-size: 0.75rem; color: var(--text-muted); line-height: 1.6;
+  }
+  .pagamento {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;
+  }
+  .pagamento span {
+    font-size: 0.75rem; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 5px 12px; border-radius: 20px;
+  }
+  .contato {
+    background: var(--card-2);
+    border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px;
+  }
+  .contato p {
+    font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 6px;
+  }
+  .contato a {
+    color: var(--heading);
+    font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+    font-weight: 600; text-decoration: none; letter-spacing: 1px;
+  }
+  .contato a:hover { color: var(--accent); }
+  .aviso {
+    font-size: 0.6875rem; color: var(--text-muted);
+    line-height: 1.6;
+    border-left: 2px solid var(--border); padding-left: 12px;
+  }
+
+  /* DEPOIMENTOS */
+  .depoimentos .grid { margin-bottom: 0; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(16px, 3vw, 24px);
+    margin-bottom: clamp(50px, 8vw, 80px);
+  }
+  .depoimento {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 26px;
+    display: flex; flex-direction: column; gap: 14px;
+    overflow: hidden; transition: border-color .25s;
+  }
+  .depoimento:hover { border-color: var(--accent); }
+  .depoimento .conteudo {
+    filter: blur(5px);
+    transition: filter .4s ease;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .depoimento:hover .conteudo { filter: blur(2px); }
+  .depoimento .estrelas {
+    color: var(--accent); font-size: 0.9375rem; letter-spacing: 2px;
+  }
+  .depoimento .texto {
+    font-size: 0.875rem; line-height: 1.7;
+    color: var(--text-soft); font-style: italic;
+  }
+  .depoimento .autor {
+    font-size: 0.75rem; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-muted);
+  }
+  .depoimento .overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px; z-index: 3;
+    background: rgba(0,0,0,0.25); pointer-events: none;
+  }
+  body.light .depoimento .overlay { background: rgba(255,255,255,0.25); }
+  .depoimento .overlay .cadeado {
+    width: 30px; height: 30px; fill: var(--accent);
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  }
+  .depoimento .overlay span {
+    font-size: 0.625rem; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--heading);
+    background: rgba(0,0,0,0.65);
+    padding: 5px 12px; border-radius: 20px;
+    border: 1px solid var(--accent);
+  }
+
+  /* WHATSAPP */
+  .whatsapp-float {
+    position: fixed;
+    bottom: calc(24px + var(--safe-bottom));
+    right: calc(24px + var(--safe-right));
+    z-index: 1000;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 20px rgba(37,211,102,0.45);
+    transition: transform .2s, box-shadow .2s;
+    text-decoration: none;
+  }
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 26px rgba(37,211,102,0.65);
+  }
+  .whatsapp-float svg { width: 32px; height: 32px; fill: #fff; }
+
+  /* RESPONSIVO */
+  @media (max-width: 760px) {
+    .card-experiencia { flex-direction: column; }
+    .descricao { padding: 26px 20px; }
+    .theme-toggle {
+      width: 40px; height: 40px; font-size: 17px;
+      top: calc(12px + var(--safe-top));
+      right: calc(12px + var(--safe-right));
+    }
+    .whatsapp-float {
+      width: 54px; height: 54px;
+      bottom: calc(18px + var(--safe-bottom));
+      right: calc(18px + var(--safe-right));
+    }
+    .whatsapp-float svg { width: 28px; height: 28px; }
+    .slide-btn { width: 40px; height: 40px; font-size: 16px; }
+    .slide-btn.prev { left: 10px; }
+    .slide-btn.next { right: 10px; }
+    .slide-counter { font-size: 0.625rem; padding: 4px 9px; top: 10px; right: 10px; }
+    .slide-dots { bottom: 10px; gap: 7px; }
+    .slide-dots button { width: 10px; height: 10px; }
+  }
+  @media (max-width: 360px) {
+    .adult-grid { grid-template-columns: 1fr; }
+  }
+  @media (min-width: 1600px) {
+    .container { max-width: 1280px; }
+  }
+  @media (max-height: 500px) and (orientation: landscape) {
+    .logo-section { padding: 20px 20px 15px; }
+    .logo-section img { max-width: 160px; }
+    .theme-toggle {
+      top: calc(8px + var(--safe-top));
+      right: calc(8px + var(--safe-right));
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .slide { transition: none !important; }
+    .adult-card:hover { transform: none !important; }
+    .whatsapp-float:hover { transform: none !important; }
+  }
+  @media print {
+    .theme-toggle, .whatsapp-float, .slide-btn, .slide-dots, .adult-section {
+      display: none !important;
+    }
+    body { background: #fff !important; color: #000 !important; }
+    .depoimento .conteudo { filter: none !important; }
+  }
+</style>
 </head>
 <body>
 
-    <!-- ===== SKIP LINK ===== -->
-    <a class="skip-link" href="#main">Pular para o conteúdo principal</a>
+<a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
 
-    <!-- ===== HEADER ===== -->
-    <header class="header" id="header" role="banner">
-        <div class="container">
-            <a href="index.html" class="logo" aria-label="Página inicial">
-                <!-- Logo e menu (mantidos conforme original) -->
-            </a>
-            <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menu">
-                <i class="fas fa-bars" aria-hidden="true"></i>
-            </button>
-            <nav class="nav" id="mainNav" role="navigation" aria-label="Menu principal">
-                <a href="#main" class="active"><i class="fas fa-home" aria-hidden="true"></i> Início</a>
-                <a href="#noticias-title"><i class="fas fa-newspaper" aria-hidden="true"></i> Notícias</a>
-                <a href="#prog-title"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Programação</a>
-                <a href="#local-title"><i class="fas fa-map-marked-alt" aria-hidden="true"></i> Local</a>
-                <a href="https://paradabetim.com.br/inscricoes" target="_blank" rel="noopener"><i class="fas fa-hand-paper" aria-hidden="true"></i> Inscrições</a>
-            </nav>
+<button class="theme-toggle" id="themeToggle"
+  title="Alternar tema claro e escuro"
+  aria-label="Alternar tema claro e escuro"
+  aria-pressed="false">🌙</button>
+
+<h1 class="visually-hidden">MOSCHIAT.COM — Fotografia, Audiovisual, Música e Bem-estar</h1>
+
+<header class="logo-section">
+  <img
+    src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/MOSCHIAT.png"
+    alt="MOSCHIAT.COM — logotipo da marca"
+    width="260"
+    decoding="async"
+    fetchpriority="high"
+    data-fallback-hide
+  >
+  <p>Fotografia · Audiovisual · Música · Bem-estar</p>
+</header>
+
+<main id="main-content" class="container">
+
+  <!-- GALERIA -->
+  <section class="gallery-block" aria-labelledby="galeria-title">
+    <h2 id="galeria-title" class="section-sub">Galeria de Fotos</h2>
+
+    <div class="slideshow" id="slideshow" role="region" aria-roledescription="carrossel" aria-label="Galeria de fotos">
+      <div class="slide active" role="group" aria-roledescription="slide" aria-label="1 de 3">
+        <img src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/1.jpg"
+          alt="Foto 1 da galeria"
+          width="1600" height="900" loading="eager" decoding="async" data-fallback-sibling>
+        <div class="fallback">Imagem 1 indisponível</div>
+      </div>
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
+        <img src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/2.jpg"
+          alt="Foto 2 da galeria"
+          width="1600" height="900" loading="lazy" decoding="async" data-fallback-sibling>
+        <div class="fallback">Imagem 2 indisponível</div>
+      </div>
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
+        <img src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/1111111111111FCUX2226.JPG"
+          alt="Foto 3 da galeria"
+          width="1600" height="900" loading="lazy" decoding="async" data-fallback-sibling>
+        <div class="fallback">Imagem 3 indisponível</div>
+      </div>
+
+      <button class="slide-btn prev" id="slidePrev" aria-label="Foto anterior">‹</button>
+      <button class="slide-btn next" id="slideNext" aria-label="Próxima foto">›</button>
+
+      <div class="slide-counter" id="slideCounter" aria-live="polite" aria-atomic="true">1 / 3</div>
+
+      <div class="slide-dots" id="slideDots" role="tablist" aria-label="Selecionar foto">
+        <button class="active" data-index="0" role="tab" aria-selected="true" aria-label="Ir para foto 1"></button>
+        <button data-index="1" role="tab" aria-selected="false" aria-label="Ir para foto 2"></button>
+        <button data-index="2" role="tab" aria-selected="false" aria-label="Ir para foto 3"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- +18 -->
+  <section class="adult-section" aria-labelledby="adult-title">
+    <div class="adult-header">
+      <span class="adult-badge" aria-label="Conteúdo para maiores de 18 anos">+18</span>
+      <p class="section-title" style="margin:0;">Conteúdo Exclusivo</p>
+    </div>
+    <h2 id="adult-title" class="section-sub">Acesso a Conteúdo Adulto</h2>
+    <p class="adult-desc">
+      Conteúdo exclusivo para maiores de 18 anos. As imagens abaixo estão censuradas por padrão.
+      Ao comprar o acesso, você recebe o link do conteúdo completo diretamente no WhatsApp.
+    </p>
+
+    <div class="adult-grid">
+      <div class="adult-card">
+        <span class="adult-card-tag">Pack 01</span>
+        <img src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/1.jpg"
+          alt="Prévia censurada do pack 01 de conteúdo adulto"
+          width="600" height="800" loading="lazy" decoding="async">
+        <div class="adult-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>+18</span>
         </div>
-    </header>
-
-    <!-- ===== HERO ===== -->
-    <section class="hero" id="hero" aria-labelledby="hero-title">
-        <div class="hero-content">
-            <h1 id="hero-title">22ª Parada do Orgulho <span class="rainbow-text">LGBTQIAPN+ de Betim</span></h1>
-
-            <div class="data">
-                26 de Julho de 2026 · 12h
-            </div>
-
-            <div class="contador" id="contador" role="timer" aria-label="Contagem regressiva para o evento">
-                <div class="box">
-                    <span id="dias" class="numero">00</span>
-                    <span class="label">Dias</span>
-                </div>
-                <div class="box">
-                    <span id="horas" class="numero">00</span>
-                    <span class="label">Horas</span>
-                </div>
-                <div class="box">
-                    <span id="minutos" class="numero">00</span>
-                    <span class="label">Minutos</span>
-                </div>
-                <div class="box">
-                    <span id="segundos" class="numero">00</span>
-                    <span class="label">Segundos</span>
-                </div>
-            </div>
-
-            <div class="frase-hero">
-                22 anos de luta. Orgulho que constrói futuros. ✨
-            </div>
-
-            <!-- CTA -->
-            <div class="hero-cta">
-                <h3><i class="fas fa-hand-paper" aria-hidden="true"></i> Artistas Voluntários</h3>
-                <p>Quer se apresentar na Parada? Inscreva-se como artista voluntário!</p>
-                <a href="https://paradabetim.com.br/inscricoes" class="btn-hero-cta" target="_blank" rel="noopener">
-                    Inscreva-se aqui <i class="fas fa-arrow-right" aria-hidden="true"></i>
-                </a>
-            </div>
+      </div>
+      <div class="adult-card">
+        <span class="adult-card-tag">Pack 02</span>
+        <img src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/2.jpg"
+          alt="Prévia censurada do pack 02 de conteúdo adulto"
+          width="600" height="800" loading="lazy" decoding="async">
+        <div class="adult-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>+18</span>
         </div>
-    </section>
-
-    <!-- ===== PROGRAMAÇÃO DO DIA ===== -->
-    <section class="container programacao-resumo" aria-labelledby="prog-title">
-        <h2 class="section-title" id="prog-title"><i class="fas fa-calendar-alt" aria-hidden="true"></i> Programação do Dia</h2>
-        <div class="lista-horarios">
-            <div class="item-horario">
-                <span class="hora">12:00</span>
-                <span class="atracoes-text"><i class="fas fa-flag-checkered" aria-hidden="true"></i> Concentração <span class="badge-atracao">Início</span></span>
-            </div>
-            <div class="item-horario">
-                <span class="hora">13:00</span>
-                <span class="atracoes-text"><i class="fas fa-microphone-alt" aria-hidden="true"></i> <span class="artista-nome">DJ Luna</span> <span class="badge-atracao">Eletrônica</span></span>
-            </div>
-            <div class="item-horario">
-                <span class="hora">14:00</span>
-                <span class="atracoes-text"><i class="fas fa-guitar" aria-hidden="true"></i> <span class="artista-nome">Banda Rainbow</span> <span class="badge-atracao">Rock</span></span>
-            </div>
-            <div class="item-horario">
-                <span class="hora">15:00</span>
-                <span class="atracoes-text"><i class="fas fa-mask" aria-hidden="true"></i> <span class="artista-nome">Drag Queens</span> <span class="badge-atracao">Arte</span></span>
-            </div>
-            <div class="item-horario">
-                <span class="hora">16:00</span>
-                <span class="atracoes-text"><i class="fas fa-drum" aria-hidden="true"></i> <span class="artista-nome">Bateria Diversidade</span> <span class="badge-atracao">Samba</span></span>
-            </div>
-            <div class="item-horario">
-                <span class="hora">17:00</span>
-                <span class="atracoes-text"><i class="fas fa-users" aria-hidden="true"></i> <span class="artista-nome">Bloco Afro</span> <span class="badge-atracao">Música</span></span>
-            </div>
-            <div class="item-horario">
-                <span class="hora">18:00</span>
-                <span class="atracoes-text"><i class="fas fa-headphones" aria-hidden="true"></i> <span class="artista-nome">DJ Madam P.</span> <span class="badge-atracao">Pop</span></span>
-            </div>
-            <div class="item-horario destaque">
-                <span class="hora">19:00</span>
-                <span class="atracoes-text"><i class="fas fa-music" aria-hidden="true"></i> <span class="artista-nome">Banda Praça Encontro</span> <span class="badge-atracao">Destaque</span></span>
-            </div>
-            <div class="item-horario">
-                <span class="hora">20:00</span>
-                <span class="atracoes-text"><i class="fas fa-fire" aria-hidden="true"></i> <span class="artista-nome">Fogo &amp; Luzes</span> <span class="badge-atracao">Efeitos</span></span>
-            </div>
-            <div class="item-horario">
-                <span class="hora">21:00</span>
-                <span class="atracoes-text"><i class="fas fa-music" aria-hidden="true"></i> <span class="artista-nome">Orquestra Pride</span> <span class="badge-atracao">Clássica</span></span>
-            </div>
-            <div class="item-horario">
-                <span class="hora">22:00</span>
-                <span class="atracoes-text"><i class="fas fa-glass-cheers" aria-hidden="true"></i> <span class="artista-nome">After DJ Fênix</span> <span class="badge-atracao">Festa</span></span>
-            </div>
-            <div class="item-horario">
-                <span class="hora">23:00</span>
-                <span class="atracoes-text"><i class="fas fa-flag-checkered" aria-hidden="true"></i> Encerramento <span class="badge-atracao">Fim</span></span>
-            </div>
+      </div>
+      <div class="adult-card">
+        <span class="adult-card-tag">Pack 03</span>
+        <img src="https://raw.githubusercontent.com/MOSCHIAT/moschiat.github.io/main/3.jpg"
+          alt="Prévia censurada do pack 03 de conteúdo adulto"
+          width="600" height="800" loading="lazy" decoding="async">
+        <div class="adult-lock" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>+18</span>
         </div>
-    </section>
-
-    <!-- ===== CONTEÚDO PRINCIPAL (NOTÍCIAS) ===== -->
-    <main id="main" role="main">
-        <div class="container main-grid">
-
-            <section aria-labelledby="noticias-title">
-                <h2 class="section-title" id="noticias-title"><i class="fas fa-newspaper" aria-hidden="true"></i> Últimas Notícias</h2>
-                <div class="noticias-grid">
-
-                    <!-- ===== NOTÍCIA – KERIDAINE (PIN) ===== -->
-                    <article class="noticia-card" data-titulo="Keridaine – Baile de Máscaras" data-data="26 de julho de 2026 · 20h">
-                        <div class="thumb" role="img" aria-label="Baile de Máscaras Keridaine">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjLu8jcvw0f_52mGNg6c7jD5Mp7g4MPhT1wTGsBRVIy5UTZTFTn7lCEjetjKGe-d3UPiV85q6han8pd5C6LpMsJsq3mAYbvET08bqfT8HgiyM03DYe6SSmsJm6q_zhv5yUxOQcmNbJZnvGJ21qzQLJ0jo_vKbeevOx17DVFtSwugU6oNkoE5FutKbFa98z0/s3508/Keridaine_bg.jpeg" alt="Keridaine – Baile de Máscaras" loading="lazy" />
-                            <span class="categoria-badge">📌 PIN</span>
-                        </div>
-                        <div class="body">
-                            <h3>Keridaine – Baile de Máscaras</h3>
-                            <p class="preview">Uma festa criada para celebrar a diversidade, a arte e o encontro entre pessoas keridas. No dia 26 de julho, a partir das 20h, no Bar Underground 173, no Centro de Betim.</p>
-                            <div class="full-text">
-                                <p><strong>Keridaine – Baile de Máscaras</strong> é uma festa criada para celebrar a diversidade, a arte e o encontro entre pessoas keridas. Mais do que um evento, é um espaço de acolhimento, respeito e liberdade, onde cada pessoa pode viver a noite com autenticidade.</p>
-
-                                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjnbjoJoNO82RPt4ZFsZzhylZsuVgwIjwqPCJ2qmBygSej0oAMcSB0sAxd54DiUs25E1Y0kARwkSPAr7Pm_OSBaI5kwdFVR-W0DfvtbIV-awrQvVYSduxxL0owbSaIKB3PQuPxujSTYnboiEtLS7FJe9Si3y5cbOHrRYuwx3fEmk_O_ckavUeInZf8Le2Wg/s1600/Poster.jpeg" alt="Poster do Baile de Máscaras Keridaine" class="poster" loading="lazy" />
-
-                                <p>No dia <strong>26 de julho</strong>, a partir das <strong>20h</strong>, o <strong>Bar Underground 173</strong>, no Centro de Betim, recebe uma programação especial com DJs, apresentações de Pole Dance e performances circenses, criando uma experiência única do início ao fim da noite.</p>
-
-                                <p>🎟️ <strong>O ingresso inclui</strong><br>
-                                Entrada para o evento.<br>
-                                1 máscara exclusiva do Baile de Máscaras.<br>
-                                Acesso a toda a programação artística da noite.</p>
-
-                                <p>Os ingressos são vendidos em lotes limitados. Cada lote possui uma quantidade específica de entradas e, quando esgotado, a venda passa automaticamente para o próximo lote, com novo valor.</p>
-
-                                <p>Garanta seu ingresso antecipadamente para aproveitar o menor preço e assegurar sua participação.</p>
-
-                                <p>📍 <strong>Local</strong><br>
-                                Bar Underground 173<br>
-                                Rua Dr. Antônio Gravatá, 173<br>
-                                Centro – Betim/MG</p>
-
-                                <p>📅 <strong>Data:</strong> 26 de julho<br>
-                                🕗 <strong>Horário:</strong> A partir das 20h</p>
-
-                                <p>✨ <strong>Atrações</strong><br>
-                                DJs<br>
-                                Pole Dance<br>
-                                Performance Circense</p>
-
-                                <p><strong>📞 Compre seu ingresso:</strong><br>
-                                <a href="https://web.whatsapp.com/send?phone=5531998126654&text=Quero%20comprar%20ingresso%20da%20KERIDAINE" target="_blank" rel="noopener" class="btn-whatsapp">
-                                    <i class="fab fa-whatsapp" aria-hidden="true"></i> Clique aqui e compre pelo WhatsApp
-                                </a>
-                                </p>
-
-                                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTtLG-ecEhjQhEAXzyVkd6zmlfcVTDCb8MWhcYTN3fFL3a-7_uAqhKD5i9HaFrK5Ff77-7EQtmz9GQ95myhhsg20YjnVHptjfkSJwMK0O1pHD_cEBnYz7uj-KBlVlBl2OXLnwqLVjiaaJdfCYUi4gDu_HGXOy4IT7OHLnzvKjnJkXqc3yNbwKg8s4gV0js/s1600/QR%20code%20KERIDAINE%20%281%29.png" alt="QR Code para compra de ingressos" class="qr-code" loading="lazy" />
-
-                                <p style="text-align:center;font-size:0.8rem;color:#6a5a6a;">Aponte a câmera do celular para o QR Code e garanta seu ingresso</p>
-
-                                <p>Vista sua máscara, celebre a diversidade e venha fazer parte de uma noite inesquecível. Seja keride. Seja Keridaine. 💖</p>
-                            </div>
-                            <button class="leia-mais">Leia mais <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
-                        </div>
-                    </article>
-
-                    <!-- NOTÍCIA 1 -->
-                    <article class="noticia-card" data-titulo="Parada do Orgulho LGBTQIA+ de Betim será no dia 26 de julho" data-data="26 de julho de 2026">
-                        <div class="thumb" role="img" aria-label="Imagem da Parada do Orgulho LGBTQIA+ em Betim">
-                            <img src="https://www.betimonline.com/images/artigos/completo/Julho_2026/16-07-2026.jpg" alt="22ª Parada do Orgulho LGBTQIA+ em Betim" loading="lazy" />
-                            <span class="categoria-badge">Destaque</span>
-                        </div>
-                        <div class="body">
-                            <h3>Parada do Orgulho LGBTQIA+ de Betim será no dia 26 de julho</h3>
-                            <p class="preview">A 22ª Parada do Orgulho LGBTQIAPN+ de Betim já tem data marcada. O evento acontece no último domingo de julho, dia 26, a partir das 12h, no estacionamento do Ginásio Poliesportivo Divino Braga.</p>
-                            <div class="full-text">
-                                <p>A 22ª Parada do Orgulho LGBTQIAPN+ de Betim já tem data marcada. O evento acontece no último domingo de julho, dia 26, a partir das 12h, no estacionamento do Ginásio Poliesportivo Divino Braga.</p>
-                                <p>A programação contará com praça de alimentação, apresentações artísticas, marcha com trio elétrico pela avenida Edméia Mattos Lazzarotti até a Praça do Encontro, ato político e, para encerrar a festa, show da banda Lex Luthor.</p>
-                                <p>Segundo a Prefeitura de Betim, a programação comemorativa começou no dia 26 de junho com a iluminação especial do Museu Paulo Araújo Moreira Gontijo e da Rodoviária de Betim. A ação fez referência ao Dia Internacional do Orgulho LGBTQIA+, celebrado mundialmente em 28 de junho.</p>
-                                <p>As atividades têm como objetivo ampliar a visibilidade da população LGBTQIA+, fortalecer as políticas públicas voltadas para a comunidade e incentivar a construção de uma sociedade mais inclusiva, baseada no respeito às diferenças e na garantia de direitos.</p>
-                                <p>No dia 9 de julho, das 9h às 12h, será realizado o 4º Seminário Municipal de Letramento e Visibilidade das Pessoas LGBTQIA+, no Auditório Ady Rosa de Freitas. O encontro contará com a participação da coordenadora do Centro de Referência LGBT de Belo Horizonte, Vênus Drubscky, e do defensor público estadual Jonatas Mello, que irão abordar temas relacionados à cidadania, aos direitos e ao enfrentamento da discriminação.</p>
-                                <p>A programação segue no dia 24 de julho com a realização do 14º Prêmio de Direitos Humanos LGBTQIA+ de Betim. A cerimônia acontecerá na Câmara Municipal, das 18h às 21h, homenageando pessoas, coletivos e instituições que contribuem para a promoção dos direitos da população LGBTQIA+ no município.</p>
-                                <p>Encerrando as atividades do mês, no dia 26 de julho será realizada a 22ª Parada do Orgulho LGBTQIA+, que neste ano traz como tema <strong>"22 anos de luta: orgulho que constrói futuros"</strong>.</p>
-                                <p>Para acompanhar novidades, programação e informações sobre a Parada, siga o Instagram <strong>@paradabetim.com.br</strong>.</p>
-                            </div>
-                            <button class="leia-mais">Leia mais <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
-                        </div>
-                    </article>
-
-                    <!-- NOTÍCIA 2 -->
-                    <article class="noticia-card" data-titulo="Faça parte da Parada de Betim! 🌈" data-data="6 de julho de 2026">
-                        <div class="thumb" role="img" aria-label="Chamada para artistas e voluntários">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgx6CmeuNombOOJkLII2TFTr4FiRt2_D5jT3gSNkR9vMkiyA_sF2Itur4W6BDj5pz4gdW7DWqpKU2nIPxDYvBR08ClkTEd_ANfIt8Slkwc2sMB50oojZKCkjoEESsaTKgEfqQEc34BkcWR7iuMhHZAGtnQJQcEGYXktEhagSo_g__RAsVWqicej_fLi7CL_/s1600/aa.png" alt="Faça parte da Parada de Betim" loading="lazy" />
-                            <span class="categoria-badge">Participe</span>
-                        </div>
-                        <div class="body">
-                            <h3>Faça parte da Parada de Betim! 🌈</h3>
-                            <p class="preview">A Parada de Betim está de portas abertas para quem deseja construir este evento conosco.</p>
-                            <div class="full-text">
-                                <p>A Parada de Betim está de portas abertas para quem deseja construir este evento conosco.</p>
-                                <p>Estamos convocando:</p>
-                                <p>🎤 <strong>Artistas locais</strong> — cantores, DJs, drag queens, performers, grupos de dança, músicos, poetas e outras expressões culturais.</p>
-                                <p>🤝 <strong>Pessoas voluntárias</strong> — venha contribuir na organização, recepção, apoio logístico, comunicação e diversas outras áreas.</p>
-                                <p>Acreditamos que a cultura e a participação da comunidade tornam a Parada mais forte, diversa e representativa.</p>
-                                <p>Sua arte, seu talento e sua dedicação fazem a diferença.</p>
-                                <p><strong>Inscreva-se e faça parte desta história!</strong></p>
-                                <p style="margin-top:0.8rem;">👉 <a href="https://paradabetim.com.br/inscricoes" style="color:#e91e8c;font-weight:700;" target="_blank">Clique aqui para se inscrever</a></p>
-                            </div>
-                            <button class="leia-mais">Leia mais <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
-                        </div>
-                    </article>
-
-                    <!-- NOTÍCIA 3 -->
-                    <article class="noticia-card" data-titulo="Betim promove o 4º Seminário Municipal de Letramento e Visibilidade da População LGBTQIA+" data-data="9 de julho de 2026">
-                        <div class="thumb" role="img" aria-label="Seminário Municipal de Letramento e Visibilidade da População LGBTQIA+ em Betim">
-                            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhu7NCmWm5xvSPDQLrHF3AfxQNZsfAkuq6liVvF933eV_9RnNseKNN7POOZWtMTzVE8hW0HXy5VDInJ87Oayi8sf9tV4hXYmTDxen_9N55xC0TFpYNA40PrH5igA8rPLyIumyMVfFK1_rLg-3xPqxY1Wtc5A0CsvQg8KRECaneAOW5SBePXPeA2VeTbohHY/s1600/ee25a152-4b2f-452a-880d-aaae3aa1d503.jpeg" alt="4º Seminário Municipal de Letramento e Visibilidade da População LGBTQIA+" loading="lazy" />
-                            <span class="categoria-badge">Evento</span>
-                        </div>
-                        <div class="body">
-                            <h3>Betim promove o 4º Seminário Municipal de Letramento e Visibilidade da População LGBTQIA+</h3>
-                            <p class="preview">A Prefeitura de Betim, por meio da Superintendência de Igualdade, realiza na próxima quinta-feira, 9 de julho, das 8h30 às 12h, o 4º Seminário Municipal de Letramento e Visibilidade da População LGBTQIA+. O encontro será realizado no Auditório Ady Rosa de Freitas e tem como objetivo fortalecer o debate sobre diversidade, inclusão, respeito e promoção dos direitos da população LGBTQIA+.</p>
-                            <div class="full-text">
-                                <p>O seminário é voltado para servidores públicos, profissionais das áreas de assistência social, saúde e educação, além de representantes da sociedade civil interessados na temática. A proposta é ampliar o conhecimento sobre diversidade sexual e de gênero, incentivando práticas de atendimento mais humanizadas, inclusivas e fundamentadas na garantia dos direitos humanos.</p>
-                                <p>A programação contará com palestras de Vênus Drubscky, coordenadora do Centro de Referência LGBT de Belo Horizonte, e de Carlos Magnos, referência nacional da Associação Brasileira de Lésbicas, Gays, Bissexuais, Travestis, Transexuais e Intersexos (ABGLT). Entre os temas abordados estão o letramento LGBTQIA+, o atendimento humanizado e os desafios enfrentados pela população LGBTQIA+ no acesso aos serviços públicos.</p>
-                                <p>Segundo o diretor municipal de Políticas Públicas LGBTQIA+ de Betim, Aleonidas Ferraz, a realização do seminário faz parte das ações permanentes do município para ampliar a visibilidade da população LGBTQIA+ e fortalecer políticas públicas voltadas à promoção da igualdade e da cidadania. O gestor destaca que o evento reúne profissionais de diferentes setores da administração pública para discutir formas de garantir um atendimento respeitoso, acolhedor e preparado para atender às diversas identidades de gênero e orientações sexuais.</p>
-                                <p>A superintendente de Igualdade, Iracema Assis, reforça que a iniciativa também contribui para a qualificação dos servidores municipais. Para ela, ampliar o letramento sobre a temática LGBTQIA+ é essencial para promover um atendimento baseado no respeito, na equidade e na dignidade, estimulando a reflexão sobre linguagem, práticas institucionais e formas de acolhimento que assegurem os direitos de todas as pessoas.</p>
-                                <p>O seminário integra as políticas públicas desenvolvidas pelo município para promover a inclusão social, combater a discriminação e fortalecer o acesso igualitário aos serviços públicos.</p>
-                                <p><strong>A inscrição é gratuita e deve ser realizada previamente pelo link:</strong> <a href="http://betim.mg.gov.br/politicaspublicas" style="color:#e91e8c;font-weight:700;" target="_blank">http://betim.mg.gov.br/politicaspublicas</a>.</p>
-                            </div>
-                            <button class="leia-mais">Leia mais <i class="fas fa-arrow-right" aria-hidden="true"></i></button>
-                        </div>
-                    </article>
-
-                </div>
-            </section>
-
-        </div>
-
-        <!-- ===== LOCAL ===== -->
-        <section class="container local-partida" aria-labelledby="local-title">
-            <h2 class="section-title" id="local-title"><i class="fas fa-map-marked-alt" aria-hidden="true"></i> Local de Partida</h2>
-            <p style="color:#4a3a4a;margin-bottom:0.5rem;">Concentração no Poliesportivo de Betim.</p>
-            <div class="map-wrapper">
-                <iframe src="https://www.google.com/maps?q=R.+Redelvim+Andrade,+300+-+Horto,+Betim+-+MG,+32604-142&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa do Poliesportivo de Betim"></iframe>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- ===== MODAL ===== -->
-    <div class="modal-overlay" id="modalNoticia" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
-        <div class="modal-box">
-            <button class="modal-close" id="modalClose" aria-label="Fechar notícia">&times;</button>
-            <h2 class="modal-title" id="modalTitulo"></h2>
-            <div class="modal-data"></div>
-            <div class="modal-body"></div>
-        </div>
+      </div>
     </div>
 
-    <!-- ===== RODAPÉ ===== -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="logo-footer">
-                        <!-- logo -->
-                    </div>
-                    <p>22ª Parada do Orgulho LGBTQIAPN+<br />Betim, 26 de Julho de 2026</p>
-                    <p style="font-size:0.85rem;color:#6a5a6a;margin-top:0.2rem;">Orgulho, diversidade e resistência.</p>
-                </div>
+    <a href="https://wa.me/5511972000152?text=Quero%20comprar%20acesso%20a%20conte%C3%BAdo%20adulto"
+      class="adult-cta" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M16.04 3C9.4 3 4.04 8.36 4.04 15c0 2.12.56 4.18 1.6 6L4 29l8.2-2.14c1.76.96 3.74 1.46 5.84 1.46 6.64 0 12-5.36 12-12S22.68 3 16.04 3zm0 21.8c-1.86 0-3.68-.5-5.26-1.44l-.38-.22-4.86 1.27 1.3-4.74-.25-.4A9.77 9.77 0 0 1 6.24 15c0-5.42 4.4-9.8 9.8-9.8 5.4 0 9.8 4.38 9.8 9.8s-4.4 9.8-9.8 9.8zm5.38-7.34c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.2 5.07 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/>
+      </svg>
+      Comprar acesso
+    </a>
 
-                <div class="footer-col">
-                    <h4>Contato</h4>
-                    <div class="contato-item">
-                        <i class="fas fa-envelope" aria-hidden="true"></i>
-                        <span>paradabetim@gmail.com</span>
-                    </div>
-                    <div class="contato-item">
-                        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                        <span>Betim, MG</span>
-                    </div>
+    <p class="adult-note">
+      Ao clicar, você será direcionado ao WhatsApp oficial. Conteúdo destinado exclusivamente a maiores de 18 anos.
+    </p>
+  </section>
 
-                    <div class="footer-social">
-                        <a href="https://www.instagram.com/paradabetim.com.br/" target="_blank" rel="noopener" aria-label="Instagram">
-                            <i class="fab fa-instagram" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://www.facebook.com/profile.php?id=61591568012547" target="_blank" rel="noopener" aria-label="Facebook">
-                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://x.com/ParadaBetim" target="_blank" rel="noopener" aria-label="X (Twitter)">
-                            <i class="fab fa-twitter" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://www.youtube.com/@ParadaBetim" target="_blank" rel="noopener" aria-label="YouTube">
-                            <i class="fab fa-youtube" aria-hidden="true"></i>
-                        </a>
-                        <a href="https://www.tiktok.com/@paradabetim" target="_blank" rel="noopener" aria-label="TikTok">
-                            <i class="fab fa-tiktok" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+  <div class="divisor" aria-hidden="true"></div>
 
-            <div class="footer-bottom">
-                <div class="legal-links">
-                    <a href="#">Política de Privacidade</a>
-                    <a href="#">Termos de Uso</a>
-                </div>
-                <div class="copyright">
-                    &copy; 2026 <i class="fas fa-rainbow" aria-hidden="true"></i> paradabetim.com · Todos os direitos reservados.
-                </div>
-            </div>
+  <!-- EXPERIÊNCIAS -->
+  <section aria-labelledby="exp-title">
+    <p class="section-title">Experiências</p>
+    <h2 id="exp-title" class="section-sub">Companhia para Eventos & Experiências</h2>
+
+    <div class="card-experiencia">
+      <div class="foto" role="img" aria-label="Foto do perfil — ambiente reservado"></div>
+
+      <div class="descricao">
+        <h2>
+          Companhia para Eventos & Experiências
+          <span>Discreto · Carismático · Belo Horizonte e região</span>
+        </h2>
+
+        <div class="tags">
+          <span>EN / PT</span>
+          <span>Discrição total</span>
+          <span>Agendamento prévio</span>
+          <span>Eventos & viagens</span>
+          <span>Massagens</span>
         </div>
-    </footer>
 
-    <!-- ===== JSON-LD ===== -->
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            "name": "Parada Betim – 22ª Parada do Orgulho LGBTQIAPN+",
-            "url": "https://paradabetim.com.br/",
-            "description": "Acompanhe as últimas notícias, programação e informações sobre a 22ª Parada do Orgulho LGBTQIAPN+ em Betim.",
-            "publisher": {
-                "@type": "Organization",
-                "name": "Comissão Organizadora da Parada do Orgulho LGBTQIAPN+ de Betim"
-            }
-        }
-    </script>
+        <div class="bloco">
+          <h3>Sobre</h3>
+          <p>
+            Acompanhante versátil, discreto e carismático. Priorizo higiene, segurança e respeito mútuo.
+            Atendo em ambientes reservados de Belo Horizonte e região, com discrição total.
+            Disponível para companhia em eventos, jantares, festas, shopping e viagens nacionais e internacionais.
+          </p>
+        </div>
 
-    <!-- ===== JAVASCRIPT ===== -->
-    <script>
-        // ===== CONTAGEM REGRESSIVA =====
-        (function() {
-            const dataEvento = new Date("July 26, 2026 12:00:00").getTime();
-            const diasEl = document.getElementById('dias');
-            const horasEl = document.getElementById('horas');
-            const minutosEl = document.getElementById('minutos');
-            const segundosEl = document.getElementById('segundos');
+        <div class="bloco">
+          <h3>Valores — Companhia</h3>
+          <table>
+            <thead>
+              <tr><th scope="col">Duração</th><th scope="col">Valor</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>30 minutos</td><td>R$ 150</td></tr>
+              <tr><td>1 hora</td><td>R$ 250</td></tr>
+              <tr><td>Companhia em eventos / viagens</td><td>A combinar</td></tr>
+            </tbody>
+          </table>
+          <div class="pagamento">
+            <span>Dinheiro</span>
+            <span>PIX</span>
+          </div>
+          <p class="obs" style="margin-top:10px;">
+            Não negocio valores. Deslocamento para fora da região central a combinar.
+          </p>
+        </div>
 
-            function atualizarContador() {
-                const agora = Date.now();
-                const distancia = dataEvento - agora;
+        <div class="bloco">
+          <h3>Massagens — Tabela</h3>
+          <table>
+            <thead>
+              <tr><th scope="col">Serviço</th><th scope="col">Duração</th><th scope="col">Valor</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Relaxante Express</td><td>30 min</td><td>R$ 150</td></tr>
+              <tr><td>Relaxante Completa</td><td>60 min</td><td>R$ 250</td></tr>
+              <tr><td>Terapêutica</td><td>60 min</td><td>R$ 280</td></tr>
+              <tr><td>Premium</td><td>90 min</td><td>R$ 380</td></tr>
+            </tbody>
+          </table>
+          <p class="obs" style="margin-top:10px;">
+            Pagamento em dinheiro ou PIX. Agendamento prévio obrigatório.
+          </p>
+        </div>
 
-                if (distancia <= 0) {
-                    const contador = document.querySelector('.contador');
-                    if (contador) {
-                        contador.innerHTML =
-                            '<h2 style="font-size:clamp(1.8rem,4vw,3rem);">🎉 A CONCENTRAÇÃO COMEÇOU! 🎉</h2>' +
-                            '<p style="opacity:0.8;margin-top:0.4rem;">Encontre-nos no Poli esportivo Betim!</p>';
-                    }
-                    return;
-                }
+        <div class="bloco">
+          <h3>Como funciona</h3>
+          <ul>
+            <li>Chame sendo objetivo e direto — diga o que procura, data e horário.</li>
+            <li>Ambiente sempre reservado e seguro.</li>
+            <li>Fotos: somente as do anúncio.</li>
+            <li>Atendimento somente com agendamento prévio.</li>
+          </ul>
+        </div>
 
-                const dias = Math.floor(distancia / (1000 * 60 * 60 * 24));
-                const horas = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutos = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-                const segundos = Math.floor((distancia % (1000 * 60)) / 1000);
+        <div class="contato">
+          <p>Contato oficial — converse apenas com este número</p>
+          <a href="https://wa.me/5511972000152" target="_blank" rel="noopener noreferrer">+55 11 97200-0152</a>
+        </div>
 
-                if (diasEl) diasEl.textContent = String(dias).padStart(2, '0');
-                if (horasEl) horasEl.textContent = String(horas).padStart(2, '0');
-                if (minutosEl) minutosEl.textContent = String(minutos).padStart(2, '0');
-                if (segundosEl) segundosEl.textContent = String(segundos).padStart(2, '0');
-            }
+        <p class="aviso">
+          Perfil verificado. Cuidado com números fakes. Desconfie de preços muito abaixo do mercado —
+          o barato sai caro. Atendimento somente com agendamento prévio.
+        </p>
+      </div>
+    </div>
+  </section>
 
-            atualizarContador();
-            setInterval(atualizarContador, 1000);
-        })();
+  <div class="divisor" aria-hidden="true"></div>
 
-        // ===== MENU MOBILE =====
-        (function() {
-            const toggle = document.getElementById('menuToggle');
-            const nav = document.getElementById('mainNav');
+  <!-- DEPOIMENTOS -->
+  <section class="depoimentos" aria-labelledby="depo-title">
+    <p class="section-title">Avaliações</p>
+    <h2 id="depo-title" class="section-sub">Depoimentos de Clientes</h2>
 
-            if (toggle && nav) {
-                toggle.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const isOpen = nav.classList.toggle('open');
-                    toggle.setAttribute('aria-expanded', isOpen);
-                    const icon = toggle.querySelector('i');
-                    if (icon) {
-                        icon.className = isOpen ? 'fas fa-times' : 'fas fa-bars';
-                    }
-                });
+    <div class="grid">
+      <article class="depoimento">
+        <div class="conteudo">
+          <div class="estrelas" aria-label="5 de 5 estrelas">★★★★★</div>
+          <p class="texto">“Atendimento impecável, super discreto e educado. O ensaio ficou melhor do que eu esperava. Recomendo demais!”</p>
+          <div class="autor">— Cliente · Ensaio Profissional</div>
+        </div>
+        <div class="overlay" aria-hidden="true">
+          <svg class="cadeado" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>Depoimento verificado</span>
+        </div>
+      </article>
+      <article class="depoimento">
+        <div class="conteudo">
+          <div class="estrelas" aria-label="5 de 5 estrelas">★★★★★</div>
+          <p class="texto">“Contratei a produção de beat e a edição de áudio. Prazo cumprido, qualidade excelente e comunicação clara do início ao fim.”</p>
+          <div class="autor">— Cliente · Beats + Edição de Áudio</div>
+        </div>
+        <div class="overlay" aria-hidden="true">
+          <svg class="cadeado" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>Depoimento verificado</span>
+        </div>
+      </article>
+      <article class="depoimento">
+        <div class="conteudo">
+          <div class="estrelas" aria-label="5 de 5 estrelas">★★★★★</div>
+          <p class="texto">“A massagem terapêutica foi surreal. Ambiente reservado, profissionalismo e muita atenção aos detalhes.”</p>
+          <div class="autor">— Cliente · Massagem Terapêutica</div>
+        </div>
+        <div class="overlay" aria-hidden="true">
+          <svg class="cadeado" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>Depoimento verificado</span>
+        </div>
+      </article>
+      <article class="depoimento">
+        <div class="conteudo">
+          <div class="estrelas" aria-label="5 de 5 estrelas">★★★★★</div>
+          <p class="texto">“Pessoa de confiança, carismática e verdadeiramente discreta. Experiência tranquila e segura do começo ao fim.”</p>
+          <div class="autor">— Cliente · Companhia para Evento</div>
+        </div>
+        <div class="overlay" aria-hidden="true">
+          <svg class="cadeado" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2h-1V6a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V6a3 3 0 0 1 3-3zm0 10a2 2 0 0 1 2 2 2 2 0 0 1-1 1.73V19a1 1 0 0 1-2 0v-2.27A2 2 0 0 1 10 15a2 2 0 0 1 2-2z"/>
+          </svg>
+          <span>Depoimento verificado</span>
+        </div>
+      </article>
+    </div>
+  </section>
 
-                nav.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', function() {
-                        if (window.innerWidth <= 820) {
-                            nav.classList.remove('open');
-                            toggle.setAttribute('aria-expanded', 'false');
-                            const icon = toggle.querySelector('i');
-                            if (icon) icon.className = 'fas fa-bars';
-                        }
-                    });
-                });
+</main>
 
-                document.addEventListener('click', function(e) {
-                    if (window.innerWidth <= 820) {
-                        if (!nav.contains(e.target) && !toggle.contains(e.target)) {
-                            nav.classList.remove('open');
-                            toggle.setAttribute('aria-expanded', 'false');
-                            const icon = toggle.querySelector('i');
-                            if (icon) icon.className = 'fas fa-bars';
-                        }
-                    }
-                });
-            }
-        })();
+<a href="https://wa.me/5511972000152?text=Ol%C3%A1%2C%20vim%20pelo%20site%20MOSCHIAT.COM"
+  class="whatsapp-float" target="_blank" rel="noopener noreferrer"
+  aria-label="Falar no WhatsApp" title="Falar no WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M16.04 3C9.4 3 4.04 8.36 4.04 15c0 2.12.56 4.18 1.6 6L4 29l8.2-2.14c1.76.96 3.74 1.46 5.84 1.46 6.64 0 12-5.36 12-12S22.68 3 16.04 3zm0 21.8c-1.86 0-3.68-.5-5.26-1.44l-.38-.22-4.86 1.27 1.3-4.74-.25-.4A9.77 9.77 0 0 1 6.24 15c0-5.42 4.4-9.8 9.8-9.8 5.4 0 9.8 4.38 9.8 9.8s-4.4 9.8-9.8 9.8zm5.38-7.34c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.87 1.21 3.07c.15.2 2.09 3.2 5.07 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/>
+  </svg>
+</a>
 
-        // ===== MODAL DE NOTÍCIAS =====
-        (function() {
-            const modal = document.getElementById('modalNoticia');
-            const modalTitulo = document.getElementById('modalTitulo');
-            const modalData = modal.querySelector('.modal-data');
-            const modalBody = modal.querySelector('.modal-body');
-            const closeBtn = document.getElementById('modalClose');
+<script>
+(function () {
+  'use strict';
 
-            function abrirModal(titulo, data, conteudoHTML) {
-                modalTitulo.textContent = titulo;
-                modalData.textContent = data;
-                modalBody.innerHTML = conteudoHTML;
-                modal.classList.add('open');
-                document.body.style.overflow = 'hidden';
-                closeBtn.focus();
-            }
+  /* TEMA */
+  var toggle = document.getElementById('themeToggle');
+  var body = document.body;
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
 
-            function fecharModal() {
-                modal.classList.remove('open');
-                document.body.style.overflow = '';
-            }
+  function safeGet(key) { try { return localStorage.getItem(key); } catch (e) { return null; } }
+  function safeSet(key, val) { try { localStorage.setItem(key, val); } catch (e) {} }
 
-            document.querySelectorAll('.leia-mais').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const card = this.closest('.noticia-card');
-                    const titulo = card.dataset.titulo || card.querySelector('h3').textContent;
-                    const data = card.dataset.data || '';
-                    const fullTextDiv = card.querySelector('.full-text');
-                    const conteudoHTML = fullTextDiv.innerHTML;
-                    abrirModal(titulo, data, conteudoHTML);
-                });
-            });
+  function applyTheme(isLight) {
+    body.classList.toggle('light', isLight);
+    toggle.textContent = isLight ? '☀️' : '🌙';
+    toggle.setAttribute('aria-pressed', String(isLight));
+    if (themeMeta) themeMeta.setAttribute('content', isLight ? '#f5f5f5' : '#000000');
+  }
 
-            closeBtn.addEventListener('click', fecharModal);
+  var storedTheme = safeGet('tema');
+  if (storedTheme === 'light') {
+    applyTheme(true);
+  } else if (!storedTheme && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    applyTheme(true);
+  }
 
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modal.classList.contains('open')) {
-                    fecharModal();
-                }
-            });
+  toggle.addEventListener('click', function () {
+    var isLight = !body.classList.contains('light');
+    applyTheme(isLight);
+    safeSet('tema', isLight ? 'light' : 'dark');
+  });
 
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    fecharModal();
-                }
-            });
-        })();
-    </script>
+  /* FALLBACK DE IMAGENS */
+  document.querySelectorAll('img[data-fallback-sibling]').forEach(function (img) {
+    img.addEventListener('error', function () {
+      img.style.display = 'none';
+      var sib = img.nextElementSibling;
+      if (sib && sib.classList.contains('fallback')) sib.style.display = 'flex';
+    });
+  });
+  document.querySelectorAll('img[data-fallback-hide]').forEach(function (img) {
+    img.addEventListener('error', function () { img.style.display = 'none'; });
+  });
+
+  /* SLIDESHOW */
+  var slideshow = document.getElementById('slideshow');
+  if (!slideshow) return;
+
+  var slides = slideshow.querySelectorAll('.slide');
+  var dots = document.querySelectorAll('#slideDots button');
+  var counter = document.getElementById('slideCounter');
+  var prevBtn = document.getElementById('slidePrev');
+  var nextBtn = document.getElementById('slideNext');
+
+  var current = 0;
+  var timer = null;
+  var INTERVAL = 5000;
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function goTo(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach(function (s, i) {
+      s.classList.toggle('active', i === current);
+      s.setAttribute('aria-hidden', String(i !== current));
+    });
+    dots.forEach(function (d, i) {
+      d.classList.toggle('active', i === current);
+      d.setAttribute('aria-selected', String(i === current));
+    });
+    counter.textContent = (current + 1) + ' / ' + slides.length;
+  }
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+  function startAuto() {
+    if (prefersReduced) return;
+    stopAuto();
+    timer = setInterval(next, INTERVAL);
+  }
+  function stopAuto() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+
+  nextBtn.addEventListener('click', function () { next(); startAuto(); });
+  prevBtn.addEventListener('click', function () { prev(); startAuto(); });
+  dots.forEach(function (dot) {
+    dot.addEventListener('click', function () {
+      goTo(parseInt(dot.dataset.index, 10));
+      startAuto();
+    });
+  });
+
+  slideshow.addEventListener('mouseenter', stopAuto);
+  slideshow.addEventListener('mouseleave', startAuto);
+  slideshow.addEventListener('focusin', stopAuto);
+  slideshow.addEventListener('focusout', startAuto);
+
+  var touchStartX = 0;
+  slideshow.addEventListener('touchstart', function (e) {
+    touchStartX = e.changedTouches[0].screenX;
+    stopAuto();
+  }, { passive: true });
+  slideshow.addEventListener('touchend', function (e) {
+    var diff = e.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(diff) > 40) { diff < 0 ? next() : prev(); }
+    startAuto();
+  }, { passive: true });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') { next(); startAuto(); }
+    if (e.key === 'ArrowLeft') { prev(); startAuto(); }
+  });
+
+  goTo(0);
+  startAuto();
+})();
+</script>
+
 </body>
 </html>
