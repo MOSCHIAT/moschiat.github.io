@@ -1,0 +1,2017 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caderno de Avaliação Técnico-Científica: Psicometria e Avaliação Psicológica Organizacional</title>
+    <!-- Tailwind CSS para utilitários de interface -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fontes acadêmicas clássicas (estilo LaTeX / Computer Modern / Georgia + Sans institucional) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- KaTeX para renderização matemática de alta precisão -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+    <style>
+        :root {
+            --bg-workspace: #121316;
+            --bg-toolbar: #1b1d22;
+            --border-subtle: #2d3139;
+            --accent-crimson: #8b1e24;
+            --accent-crimson-hover: #a6242b;
+            --paper-bg: #ffffff;
+            --paper-text: #141518;
+            --paper-muted: #4a4f59;
+            --paper-border: #d1d5db;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--bg-workspace);
+            color: #e5e7eb;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Tipografia Acadêmica LaTeX / ENEM dentro da folha A4 */
+        .font-latex {
+            font-family: 'Crimson Pro', 'Georgia', 'Times New Roman', serif;
+        }
+
+        .font-sans-inst {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-mono-code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Estrutura da Folha A4 Padrão (210mm x 297mm) */
+        .a4-viewport {
+            padding: 5.2rem 1rem 5.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .a4-page {
+            width: 210mm;
+            min-height: 297mm;
+            background-color: var(--paper-bg);
+            color: var(--paper-text);
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
+            padding: 15mm 16mm 16mm 16mm;
+            position: relative;
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: opacity 0.2s ease;
+        }
+
+        .a4-page.active {
+            display: flex;
+            animation: pageFadeIn 0.25s ease-out;
+        }
+
+        @keyframes pageFadeIn {
+            from { opacity: 0.4; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cabeçalho e Rodapé Institucional da Folha A4 */
+        .page-running-header {
+            border-bottom: 1.5px solid #141518;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-size: 7.5pt;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .page-running-footer {
+            border-top: 1px solid #9ca3af;
+            padding-top: 5px;
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 7.5pt;
+            color: #4b5563;
+        }
+
+        /* Layout de Colunas Estilo ENEM / Vestibular */
+        .enem-two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6mm;
+            align-items: start;
+        }
+
+        .enem-column-divider {
+            position: relative;
+        }
+
+        .enem-column-divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 0.5pt;
+            background-color: #d1d5db;
+            transform: translateX(-50%);
+        }
+
+        /* Tabelas Acadêmicas Estilo Booktabs (LaTeX) */
+        .latex-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0 12px 0;
+            font-size: 8pt;
+            line-height: 1.3;
+        }
+
+        .latex-table thead tr {
+            border-top: 1.5px solid #111827;
+            border-bottom: 1px solid #111827;
+            background-color: #f8fafc;
+        }
+
+        .latex-table th {
+            padding: 5px 6px;
+            text-align: left;
+            font-weight: 700;
+            color: #111827;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .latex-table td {
+            padding: 4.5px 6px;
+            border-bottom: 0.5px solid #e5e7eb;
+            vertical-align: top;
+            color: #1f2937;
+        }
+
+        .latex-table tbody tr:last-child {
+            border-bottom: 1.5px solid #111827;
+        }
+
+        /* Caixa de Texto-Base e Questão Padrão ENEM */
+        .question-block {
+            margin-bottom: 10px;
+            break-inside: avoid;
+        }
+
+        .question-header-bar {
+            background-color: #141518;
+            color: #ffffff;
+            padding: 3px 8px;
+            font-size: 8.5pt;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--accent-crimson);
+        }
+
+        .reference-box {
+            background-color: #f9fafb;
+            border: 0.75pt solid #d1d5db;
+            border-left: 2.5pt solid #374151;
+            padding: 7px 9px;
+            margin: 6px 0;
+            font-family: 'Crimson Pro', serif;
+            font-size: 9.6pt;
+            line-height: 1.36;
+            text-align: justify;
+            color: #111827;
+        }
+
+        .reference-citation {
+            display: block;
+            margin-top: 4px;
+            font-size: 7.5pt;
+            font-family: 'Inter', sans-serif;
+            color: #4b5563;
+            text-align: right;
+            font-style: italic;
+        }
+
+        .question-stem {
+            font-family: 'Crimson Pro', serif;
+            font-size: 10pt;
+            line-height: 1.38;
+            text-align: justify;
+            margin: 6px 0 7px 0;
+            color: #0f172a;
+        }
+
+        /* Alternativas Interativas */
+        .option-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 7px;
+            padding: 4px 6px;
+            margin-bottom: 3.5px;
+            border-radius: 4px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: 'Crimson Pro', serif;
+            font-size: 9.6pt;
+            line-height: 1.32;
+            text-align: justify;
+        }
+
+        .option-item:hover {
+            background-color: #f3f4f6;
+            border-color: #d1d5db;
+        }
+
+        .option-bubble {
+            flex-shrink: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 9999px;
+            border: 1.2px solid #374151;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-size: 7.5pt;
+            font-weight: 700;
+            margin-top: 1px;
+            color: #1f2937;
+            background: #ffffff;
+        }
+
+        .option-item.selected {
+            background-color: #fef2f2;
+            border-color: var(--accent-crimson);
+        }
+
+        .option-item.selected .option-bubble {
+            background-color: var(--accent-crimson);
+            border-color: var(--accent-crimson);
+            color: #ffffff;
+        }
+
+        /* Estados após correção (Modo Gabarito Ativo) */
+        .option-item.correct-answer {
+            background-color: #ecfdf5 !important;
+            border-color: #059669 !important;
+        }
+
+        .option-item.correct-answer .option-bubble {
+            background-color: #059669 !important;
+            border-color: #059669 !important;
+            color: #ffffff !important;
+        }
+
+        .option-item.wrong-answer {
+            background-color: #fef2f2 !important;
+            border-color: #dc2626 !important;
+            opacity: 0.9;
+        }
+
+        .option-item.wrong-answer .option-bubble {
+            background-color: #dc2626 !important;
+            border-color: #dc2626 !important;
+            color: #ffffff !important;
+        }
+
+        .feedback-banner {
+            display: none;
+            margin-top: 5px;
+            padding: 6px 8px;
+            border-radius: 4px;
+            font-size: 8.2pt;
+            line-height: 1.35;
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            border-left: 3px solid #059669;
+            color: #1e293b;
+        }
+
+        .feedback-banner.visible {
+            display: block;
+        }
+
+        /* Tipografia do Compêndio Teórico (Páginas 2 a 4) */
+        .compendium-h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 15pt;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #111827;
+            border-bottom: 2px solid var(--accent-crimson);
+            padding-bottom: 5px;
+            margin: 0 0 8px 0;
+        }
+
+        .compendium-h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 10pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--accent-crimson);
+            margin: 10px 0 4px 0;
+            border-bottom: 0.5pt solid #d1d5db;
+            padding-bottom: 2px;
+        }
+
+        .compendium-p {
+            font-family: 'Crimson Pro', serif;
+            font-size: 9.8pt;
+            line-height: 1.38;
+            text-align: justify;
+            margin: 0 0 6px 0;
+            color: #1f2937;
+        }
+
+        .compendium-list {
+            margin: 4px 0 8px 0;
+            padding-left: 16px;
+            font-family: 'Crimson Pro', serif;
+            font-size: 9.6pt;
+            line-height: 1.35;
+            text-align: justify;
+        }
+
+        .compendium-list li {
+            margin-bottom: 3px;
+        }
+
+        .cite-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 7pt;
+            color: #4b5563;
+        }
+
+        /* Responsividade para telas menores que A4 */
+        @media screen and (max-width: 225mm) {
+            .a4-page {
+                width: 100%;
+                min-height: auto;
+                padding: 18px 16px;
+            }
+            .enem-two-columns {
+                grid-template-columns: 1fr;
+            }
+            .enem-column-divider::after {
+                display: none;
+            }
+        }
+
+        /* Regras de Impressão A4 Limpa */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .a4-viewport {
+                padding: 0 !important;
+                display: block !important;
+            }
+            .a4-page {
+                display: flex !important;
+                width: 210mm !important;
+                height: 297mm !important;
+                min-height: 297mm !important;
+                max-height: 297mm !important;
+                margin: 0 !important;
+                padding: 13mm 15mm 14mm 15mm !important;
+                box-shadow: none !important;
+                page-break-after: always;
+                break-after: page;
+                overflow: hidden;
+            }
+            .a4-page:last-child {
+                page-break-after: auto;
+                break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE CONTROLE SUPERIOR (DARK MODE WORKSPACE) -->
+    <header class="no-print fixed top-0 left-0 right-0 z-50 bg-[#181a1f]/95 backdrop-blur-md border-b border-[#2d3139] px-3 sm:px-6 py-2.5 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+            <!-- Identificação Institucional -->
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded bg-[#8b1e24] flex items-center justify-center font-bold text-white text-xs tracking-wider shadow-inner">
+                    A4
+                </div>
+                <div>
+                    <h1 class="text-xs sm:text-sm font-bold text-white tracking-tight leading-none">
+                        CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA
+                    </h1>
+                    <p class="text-[11px] text-gray-400 mt-0.5 hidden sm:block">
+                        Psicometria, SATEPSI & Avaliação Psicológica Organizacional • Padrão ENEM / Vestibular
+                    </p>
+                </div>
+            </div>
+
+            <!-- Controles de Navegação Central -->
+            <div class="flex items-center gap-1.5 sm:gap-2 bg-[#111317] px-2.5 py-1.5 rounded-lg border border-[#2d3139]">
+                <button id="btnPrevTop" onclick="changePage(-1)" class="px-2.5 py-1 rounded text-xs font-semibold bg-[#23262e] hover:bg-[#323642] text-gray-200 disabled:opacity-35 disabled:cursor-not-allowed transition flex items-center gap-1" title="Página Anterior (Seta Esquerda)">
+                    <span>◀</span> <span class="hidden md:inline">Anterior</span>
+                </button>
+
+                <div class="flex items-center gap-1.5 px-2">
+                    <span class="text-xs text-gray-400">Página</span>
+                    <select id="pageSelector" onchange="goToPage(parseInt(this.value))" class="bg-[#1b1d22] text-white text-xs font-bold border border-[#3a3f4b] rounded px-2 py-1 focus:outline-none focus:border-[#8b1e24]">
+                        <option value="1">01 — Capa e Instruções</option>
+                        <option value="2">02 — Compêndio: SATEPSI e Atenção</option>
+                        <option value="3">03 — Compêndio: Inteligência e Personalidade</option>
+                        <option value="4">04 — Compêndio: Projetivos, Memória e STAR</option>
+                        <option value="5">05 — Questões 01 e 02 (SATEPSI & Ética)</option>
+                        <option value="6">06 — Questões 03 e 04 (Atenção e Concentração)</option>
+                        <option value="7">07 — Questões 05 e 06 (Inteligência e BPR-5)</option>
+                        <option value="8">08 — Questões 07 e 08 (Personalidade e Motivos)</option>
+                        <option value="9">09 — Questões 09 e 10 (Gráficos e Expressivos)</option>
+                        <option value="10">10 — Questões 11 e 12 (Memória e Psicomotricidade)</option>
+                        <option value="11">11 — Questões 13 e 14 (Situacionais e STAR)</option>
+                        <option value="12">12 — Gabarito Oficial Comentado</option>
+                        <option value="13">13 — Referências Bibliográficas (38 Fontes)</option>
+                    </select>
+                    <span id="pageTotalLabel" class="text-xs text-gray-400 font-mono">de 13</span>
+                </div>
+
+                <button id="btnNextTop" onclick="changePage(1)" class="px-2.5 py-1 rounded text-xs font-semibold bg-[#8b1e24] hover:bg-[#a6242b] text-white disabled:opacity-35 disabled:cursor-not-allowed transition flex items-center gap-1" title="Próxima Página (Seta Direita)">
+                    <span class="hidden md:inline">Próximo</span> <span>▶</span>
+                </button>
+            </div>
+
+            <!-- Ações de Correção e Impressão -->
+            <div class="flex items-center gap-2">
+                <div id="scoreBadge" class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#1e222a] border border-[#2d3139] text-xs">
+                    <span class="text-gray-400">Respondidas:</span>
+                    <span id="answeredCount" class="font-bold text-white">0/14</span>
+                </div>
+
+                <button id="btnGradeToggle" onclick="toggleGradeMode()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-800 hover:bg-emerald-700 text-white transition shadow cursor-pointer">
+                    Conferir Gabarito
+                </button>
+
+                <button onclick="window.print()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-gray-200 hover:bg-white text-gray-900 transition shadow cursor-pointer hidden sm:flex items-center gap-1" title="Imprimir Caderno em A4">
+                    <span>🖨️</span> <span>Imprimir A4</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ÁREA CENTRAL DE VISUALIZAÇÃO DAS FOLHAS A4 -->
+    <main class="a4-viewport" id="documentContainer">
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 1: CAPA INSTITUCIONAL E INSTRUÇÕES GERAIS PADRÃO ENEM          -->
+        <!-- ===================================================================== -->
+        <section class="a4-page active" data-page="1">
+            <div>
+                <!-- Cabeçalho Institucional Superior -->
+                <div class="border-2 border-gray-900 p-4 mb-5">
+                    <div class="flex justify-between items-center border-b border-gray-400 pb-2 mb-3">
+                        <span class="text-[9pt] font-bold tracking-widest uppercase text-gray-700">EXAME DE PROFICIÊNCIA TÉCNICO-CIENTÍFICA • PSICOMETRIA APLICADA</span>
+                        <span class="text-[9pt] font-mono font-bold bg-gray-900 text-white px-2 py-0.5">CADERNO 01 • BRANCO</span>
+                    </div>
+                    <h1 class="font-latex text-[21pt] font-bold text-center text-gray-950 leading-tight my-2">
+                        AVALIAÇÃO PSICOLÓGICA ORGANIZACIONAL:<br>
+                        <span class="text-[#8b1e24]">MÉTODOS, PSICOMETRIA E APLICABILIDADE SETORIAL</span>
+                    </h1>
+                    <p class="text-center text-[9.5pt] text-gray-700 font-medium mt-2">
+                        Compêndio Teórico Integral (SATEPSI / CFP) &amp; Caderno de Questões Contextualizadas Padrão ENEM / Vestibular
+                    </p>
+                </div>
+
+                <!-- Quadro de Identificação do Candidato -->
+                <div class="border border-gray-800 rounded-sm p-3.5 mb-5 bg-gray-50">
+                    <div class="text-[8pt] font-bold uppercase tracking-wider text-gray-600 mb-2 border-b border-gray-300 pb-1">
+                        IDENTIFICAÇÃO DO EXAMINANDO E PROTOCOLO DE APLICAÇÃO
+                    </div>
+                    <div class="grid grid-cols-12 gap-3 text-[9pt]">
+                        <div class="col-span-8 border-b border-gray-400 pb-1">
+                            <span class="font-bold text-gray-700">CANDIDATO(A):</span>
+                            <span class="font-mono ml-2 text-gray-950 font-semibold">PAULO MARQUES</span>
+                        </div>
+                        <div class="col-span-4 border-b border-gray-400 pb-1">
+                            <span class="font-bold text-gray-700">UNIDADE / ORG.:</span>
+                            <span class="font-mono ml-1 text-gray-950 font-semibold">MOSCHIAT</span>
+                        </div>
+                        <div class="col-span-6 border-b border-gray-400 pb-1">
+                            <span class="font-bold text-gray-700">REGULAMENTAÇÃO:</span>
+                            <span class="ml-1 text-gray-800">Res. CFP nº 31/2022 &amp; nº 06/2019</span>
+                        </div>
+                        <div class="col-span-6 border-b border-gray-400 pb-1">
+                            <span class="font-bold text-gray-700">ESTRUTURA:</span>
+                            <span class="ml-1 text-gray-800">Compêndio + 14 Questões Objetivas (A–E)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instruções Gerais Estilo ENEM -->
+                <div class="border border-gray-900 p-4 mb-5">
+                    <h2 class="text-[10pt] font-extrabold uppercase tracking-wider text-center bg-gray-900 text-white py-1.5 mb-3">
+                        LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES
+                    </h2>
+                    <ol class="font-latex text-[10.2pt] leading-relaxed space-y-2 list-decimal pl-5 text-justify text-gray-900">
+                        <li>Este <strong>CADERNO DE AVALIAÇÃO E ESTUDO</strong> encontra-se diagramado em formato padrão <strong>A4 (210 mm × 297 mm)</strong> e é composto por duas partes articuladas: o <em>Compêndio Técnico-Científico Integral</em> (páginas 02 a 04) e o <em>Caderno de Questões Contextualizadas</em> contendo <strong>14 questões objetivas</strong> de múltipla escolha (páginas 05 a 11), seguidas do <em>Gabarito Comentado</em> (página 12) e das <em>Referências Bibliográficas Completas</em> (página 13).</li>
+                        <li>Cada questão apresenta um <strong>Texto de Referência Exclusivo</strong> fundamentado na literatura psicométrica e normativa vigente, seguido de uma situação-problema aplicada aos contextos industrial, logístico ou corporativo, e cinco alternativas identificadas pelas letras <strong>A, B, C, D e E</strong>, das quais <strong>apenas uma</strong> responde rigorosamente ao comando do enunciado.</li>
+                        <li>A resolução exige leitura analítica minuciosa: atentando para distinções conceituais entre dimensões cognitivas (ex.: Fator $g$, $G_f$ e $G_c$), subtipos atencionais (concentrada, dividida e alternada), parâmetros normativos do SATEPSI e requisitos éticos de aplicação presencial versus remota.</li>
+                        <li>Utilize os botões <strong>"Anterior"</strong> e <strong>"Próximo"</strong> (ou as setas direcionais do teclado $\leftarrow$ / $\rightarrow$) para folhear as páginas. Clique diretamente sobre a alternativa escolhida em cada questão para registrar sua resposta e acione <strong>"Conferir Gabarito"</strong> na barra superior para visualizar seu desempenho e as justificativas técnico-científicas.</li>
+                    </ol>
+                </div>
+
+                <!-- Sumário Analítico das Matrizes Avaliadas -->
+                <div class="border border-gray-400 p-3.5">
+                    <div class="text-[8.5pt] font-bold uppercase tracking-wider text-[#8b1e24] mb-2">
+                        MATRIZ DE REFERÊNCIA E DISTRIBUIÇÃO PROGRAMÁTICA DO CADERNO
+                    </div>
+                    <table class="latex-table mb-0">
+                        <thead>
+                            <tr>
+                                <th style="width: 14%;">Páginas</th>
+                                <th style="width: 34%;">Eixo Temático / Construto</th>
+                                <th style="width: 52%;">Instrumentos Psicológicos e Normativas Abordadas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-mono font-bold">02 – 04</td>
+                                <td><strong>Compêndio Teórico Integral</strong></td>
+                                <td>Texto completo de referência: Panorama Técnico-Científico e Regulatório da Avaliação Psicológica Organizacional.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono font-bold">05 (Q.01–02)</td>
+                                <td><strong>Arcabouço Normativo SATEPSI</strong></td>
+                                <td>Resoluções CFP nº 009/2018, nº 31/2022 e nº 06/2019; vigência de 15 anos; modalidades presencial, informatizada e remota.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono font-bold">06 (Q.03–04)</td>
+                                <td><strong>Atenção e Concentração</strong></td>
+                                <td>AC, D2-R, TEACO-FF, TEADI, TEALT e Bateria Psicológica para Avaliação da Atenção (BPA).</td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono font-bold">07 (Q.05–06)</td>
+                                <td><strong>Raciocínio Lógico e Inteligência</strong></td>
+                                <td>Fator $g$ (Spearman), modelo CHC ($G_f$, $G_c$), G-36, G-38, R-1, R-2, Matrizes Progressivas de Raven e BPR-5 (RA, RV, RN, RE, RM).</td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono font-bold">08 (Q.07–08)</td>
+                                <td><strong>Personalidade e Motivação</strong></td>
+                                <td>Big Five, BFP, NEO PI-R (30 facetas), IFP-II (13 necessidades de Henry Murray) e QUATI (Tipologia Junguiana).</td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono font-bold">09 (Q.09–10)</td>
+                                <td><strong>Técnicas Gráficas e Expressivas</strong></td>
+                                <td>HTP de John Buck (Casa, Árvore, Pessoa), Teste Palográfico (produtividade e ritmo) e Pirâmides Coloridas de Pfister.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono font-bold">10 (Q.11–12)</td>
+                                <td><strong>Memória e Psicomotricidade</strong></td>
+                                <td>Memória Visual, Auditiva, Curto Prazo, Working Memory e Sequências; Coordenação Fina, Velocidade, Destreza e Visomotora.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono font-bold">11 (Q.13–14)</td>
+                                <td><strong>Métodos Situacionais e STAR</strong></td>
+                                <td>Dinâmicas de grupo, Business Games, Work Sample, Entrevista por Competências (STAR) e Triangulação Multimétodo.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-mono font-bold">12 – 13</td>
+                                <td><strong>Gabarito e Referências</strong></td>
+                                <td>Chave oficial comentada com fundamentação psicométrica e lista integral das 38 fontes científicas e normativas.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • PSICOMETRIA ORGANIZACIONAL</span>
+                <span class="font-bold">PÁGINA 01 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 2: COMPÊNDIO TEÓRICO INTEGRAL (PARTE I: SATEPSI E ATENÇÃO)     -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="2">
+            <div>
+                <div class="page-running-header">
+                    <span>TEXTO DE REFERÊNCIA BASE • COMPÊNDIO TEÓRICO INTEGRAL (PARTE I)</span>
+                    <span>SATEPSI &amp; FUNÇÕES ATENCIONAIS</span>
+                </div>
+
+                <h1 class="compendium-h1">
+                    Panorama Técnico-Científico e Regulatório da Avaliação Psicológica Organizacional: Métodos, Psicometria e Aplicabilidade Setorial
+                </h1>
+
+                <p class="compendium-p">
+                    A avaliação psicológica nos contextos organizacional, industrial e de logística constitui uma atividade estratégica para a gestão de pessoas, a prevenção de acidentes de trabalho e a otimização de processos seletivos <span class="cite-tag">[1, 2, 3]</span>. A alocação assertiva de indivíduos em funções de alta complexidade ou risco operacional exige a mensuração objetiva e padronizada de construtos cognitivos, motores, motivacionais e de personalidade <span class="cite-tag">[3, 4]</span>. Para garantir a validade estatística, a eficácia preditiva e a ética dessas mensurações, a prática profissional no Brasil é estritamente regulamentada pelo Conselho Federal de Psicologia (CFP), que fiscaliza e normatiza a qualidade psicométrica dos instrumentos disponíveis no mercado nacional <span class="cite-tag">[2, 5, 6]</span>.
+                </p>
+
+                <h2 class="compendium-h2">1. Arcabouço Normativo e Regulatório do SATEPSI</h2>
+                <p class="compendium-p">
+                    O Sistema de Avaliação de Testes Psicológicos (SATEPSI) foi desenvolvido pelo Conselho Federal de Psicologia com o objetivo primário de avaliar a qualidade técnico-científica dos instrumentos psicológicos para uso profissional no Brasil, estabelecendo requisitos mínimos de validade, precisão e padronização <span class="cite-tag">[1, 5, 7]</span>. Historicamente fundamentado pela Resolução CFP nº 009/2018 e atualmente atualizado e regido pela Resolução CFP nº 31/2022, o SATEPSI divulga continuamente as listas de instrumentos com parecer favorável (autorizados para uso), desfavoráveis ou não avaliados <span class="cite-tag">[5, 6, 8]</span>.
+                </p>
+
+                <table class="latex-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 21%;">Dimensão Regulatória</th>
+                            <th style="width: 41%;">Parâmetro Técnico / Normativo</th>
+                            <th style="width: 38%;">Impacto Prático na Seleção de Pessoal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Validade e Precisão</strong></td>
+                            <td>Exigência de evidências empíricas de validade (de construto, critério e conteúdo) e índices de precisão/fidedignidade (consistência interna e teste-reteste) <span class="cite-tag">[5, 9, 10]</span>.</td>
+                            <td>Impede a utilização de ferramentas pseudocientíficas ou sem fundamentação estatística no contexto organizacional <span class="cite-tag">[1, 2]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Vigência das Normas</strong></td>
+                            <td>Prazo máximo de <strong>15 (quinze) anos</strong> para a renovação dos estudos normativos e de precisão, contados a partir da aprovação pelo Plenário do CFP <span class="cite-tag">[8]</span>.</td>
+                            <td>Garante que as tabelas normativas e percentílicas reflitam as transformações sociodemográficas da população avaliada <span class="cite-tag">[7, 8]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exclusividade Profissional</strong></td>
+                            <td>Uso, comercialização e aplicação restritos a psicólogas e psicólogos devidamente inscritos nos Conselhos Regionais de Psicologia <span class="cite-tag">[2, 9]</span>.</td>
+                            <td>Protege a sociedade contra avaliações inadequadas efetuadas por leigos e assegura a interpretação técnica dos resultados <span class="cite-tag">[2, 3]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Modalidades de Aplicação</strong></td>
+                            <td>Distinção rigorosa entre aplicação presencial (lápis e papel), informatizada e remota (mediada por tecnologia) <span class="cite-tag">[11]</span>.</td>
+                            <td>A aprovação para o formato presencial não autoriza a aplicação remota; o teste deve possuir parecer específico favorável para o meio digital <span class="cite-tag">[11]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Autonomia Profissional</strong></td>
+                            <td>Prerrogativa do psicólogo na escolha dos métodos, técnicas e baterias de teste mais adequados ao objetivo do processo seletivo <span class="cite-tag">[4]</span>.</td>
+                            <td>Permite a customização metodológica para diferentes cargos, desde operacionais de fábrica até executivos de alta gestão <span class="cite-tag">[3, 4]</span>.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="compendium-p">
+                    A regulamentação do SATEPSI estabelece que o uso de testes com parecer desfavorável ou não avaliados constitui falta ética profissional <span class="cite-tag">[5, 7]</span>. Contudo, no contexto de seleção, a legislação permite o uso de fontes complementares de informação — como técnicas situacionais, dinâmicas grupais e questionários ocupacionais não psicológicos —, desde que tais recursos possuam respaldo na literatura científica e não substituam os testes restritos quando estes forem necessários <span class="cite-tag">[9]</span>. A distinção conceitual entre a simples <em>testagem psicológica</em> (aplicação mecânica de provas) e a <em>avaliação psicológica</em> (processo amplo de investigação científica articulada) é o fundamento que garante decisões organizacionais embasadas e juridicamente seguras <span class="cite-tag">[3, 4, 7]</span>.
+                </p>
+
+                <h2 class="compendium-h2">2. Mensuração das Funções Atencionais na Indústria e Logística</h2>
+                <p class="compendium-p">
+                    No ambiente industrial e logístico, as aptidões atencionais representam preditores críticos de segurança operacional, rendimento e precisão de montagem <span class="cite-tag">[12, 13]</span>. Falhas na sustentação do foco, na filtragem de distratores ou na alternância atencional em operadores de máquinas pesadas, condutores de frotas e conferentes de estoque traduzem-se em perdas materiais e elevado risco de acidentes de trabalho <span class="cite-tag">[2, 3]</span>. A psicometria atencional desmembra o construto da atenção em dimensões operacionais específicas, mensuradas por testes com alta sensibilidade discriminativa <span class="cite-tag">[10, 12, 14]</span>.
+                </p>
+                <p class="compendium-p">
+                    A <strong>atenção concentrada</strong> refere-se à capacidade individual de manter o foco perceptivo em uma única tarefa ou conjunto de estímulos durante um período determinado, inibindo ativamente estímulos distratores concorrentes <span class="cite-tag">[12, 14]</span>. Instrumentos como o Teste de Atenção Concentrada (AC) e o TEACO-FF mensuram essa habilidade exigindo o cancelamento de figuras-alvo padronizadas sob severa restrição temporal <span class="cite-tag">[10, 12, 14]</span>. A <strong>atenção dividida</strong>, mensurada pelo TEADI, avalia a capacidade de distribuir os recursos cognitivos simultaneamente entre dois ou mais estímulos ou tarefas independentes <span class="cite-tag">[12, 14, 15]</span>. Por sua vez, a <strong>atenção alternada</strong>, avaliada pelo TEALT, investiga a flexibilidade cognitiva necessária para alternar a orientação atencional entre diferentes regras ou categorias de estímulos de forma rápida e precisa <span class="cite-tag">[12, 14, 15]</span>.
+                </p>
+
+                <table class="latex-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 19%;">Teste Psicológico</th>
+                            <th style="width: 22%;">Dimensão Atencional</th>
+                            <th style="width: 31%;">Mecanismo de Mensuração</th>
+                            <th style="width: 28%;">Aplicabilidade Setorial</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>AC</strong></td>
+                            <td>Atenção Concentrada</td>
+                            <td>Seleção visual rápida de símbolos alvo idênticos entre distratores em tempo fixo.</td>
+                            <td>Linhas de montagem, controle de qualidade visual e inspeção gráfica.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>D2-R</strong></td>
+                            <td>Atenção Seletiva, Concentração e Velocidade</td>
+                            <td>Cancelamento visual de letras <em>d</em> com dois traços em meio a distratores (<em>p</em> e <em>d</em> com traçagem variável).</td>
+                            <td>Operadores de máquinas industriais complexas, motoristas e pilotos.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TEACO-FF</strong></td>
+                            <td>Atenção Concentrada</td>
+                            <td>Identificação e marcação de figuras geométricas-alvo em amostras adultas <span class="cite-tag">[12, 14]</span>.</td>
+                            <td>Setor logístico, operação de empilhadeiras e conferência de inventários.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TEADI</strong></td>
+                            <td>Atenção Dividida</td>
+                            <td>Processamento e marcação simultânea de duas categorias de estímulos visuais <span class="cite-tag">[12, 14, 15]</span>.</td>
+                            <td>Centrais de controle operacional (CCO), monitoramento e tráfego.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TEALT</strong></td>
+                            <td>Atenção Alternada</td>
+                            <td>Mudança sistemática da regra de seleção de alvos a cada linha do protocolo <span class="cite-tag">[12, 14, 15]</span>.</td>
+                            <td>Gestores de produção, supervisores de logística e múltiplos sistemas.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BPA</strong></td>
+                            <td>Concentrada, Dividida e Alternada</td>
+                            <td>Avaliação modular composta por subprovas independentes de AC, AD e AA <span class="cite-tag">[10, 14, 15]</span>.</td>
+                            <td>Avaliações integradas para funções críticas e cargas perigosas.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="compendium-p">
+                    Estudos empíricos de validação convergente demonstram correlações estatisticamente significativas entre o TEACO-FF, o TEADI e o TEALT com os subtestes correspondentes da Bateria Psicológica para Avaliação da Atenção (BPA), confirmando a estabilidade da medição atencional em amostras ocupacionais <span class="cite-tag">[10, 12, 14]</span>. A aplicação combinada dessa bateria permite mapear o perfil de oscilação atencional do trabalhador, identificando vulnerabilidade à fadiga visual, lentificação no tempo de resposta ou dificuldade de alternância sob pressão temporal <span class="cite-tag">[10, 12, 13]</span>.
+                </p>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • COMPÊNDIO TEÓRICO INTEGRAL</span>
+                <span class="font-bold">PÁGINA 02 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 3: COMPÊNDIO TEÓRICO INTEGRAL (PARTE II: INTELIGÊNCIA E PERS.) -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="3">
+            <div>
+                <div class="page-running-header">
+                    <span>TEXTO DE REFERÊNCIA BASE • COMPÊNDIO TEÓRICO INTEGRAL (PARTE II)</span>
+                    <span>RACIOCÍNIO LÓGICO &amp; PERSONALIDADE</span>
+                </div>
+
+                <h2 class="compendium-h2" style="margin-top: 0;">3. Raciocínio Lógico, Inteligência Não Verbal e Modelos de Aptidão Cognitiva</h2>
+                <p class="compendium-p">
+                    A avaliação da inteligência e do raciocínio lógico em processos seletivos fundamenta-se no valor preditivo do Fator Geral de inteligência ($g$), concebido por Charles Spearman, e na taxonomia Cattell-Horn-Carroll (CHC) das aptidões cognitivas <span class="cite-tag">[16, 17, 18]</span>. No ambiente de trabalho, a inteligência fluida ($G_f$) — que compreende a capacidade de resolver problemas inéditos, identificar padrões abstratos e deduzir relações lógicas independentemente da aprendizagem prévia — constitui o principal motor de adaptabilidade e aprendizagem rápida em novos cenários tecnológicos <span class="cite-tag">[16, 17, 19]</span>.
+                </p>
+                <p class="compendium-p">
+                    Os testes não verbais de inteligência são instrumentos essenciais na seleção profissional por reduzirem a interferência de variáveis educacionais e linguísticas no resultado da avaliação <span class="cite-tag">[16, 20]</span>. O Teste G-36 e sua versão expandida, o G-38, foram desenvolvidos no Brasil com base nos princípios das Matrizes Progressivas de Raven e nas normas técnicas da American Psychological Association (APA) <span class="cite-tag">[16, 21, 22]</span>. O G-36 mensura o Fator $g$ por meio de 36 itens organizados em ordem progressiva de dificuldade, avaliando desde a compreensão de identidade simples e analogias com mudança de posição até raciocínio espacial e transformações numéricas abstratas, com limite rígido de aplicação fixado em 30 minutos em contextos seletivos <span class="cite-tag">[21, 22]</span>. Da mesma forma, os testes R-1 e R-2 examinam o raciocínio não verbal; enquanto o R-1 emprega figuras abstratas e geométricas, o R-2 introduz estímulos figurativos concretos da vivência cotidiana, tornando-se uma opção metodológica indicada para a avaliação de trabalhadores com menor escolaridade formal <span class="cite-tag">[16]</span>.
+                </p>
+                <p class="compendium-p">
+                    A Bateria de Provas de Raciocínio (BPR-5), idealizada por Ricardo Primi e Leandro Almeida a partir da Bateria de Provas de Raciocínio Diferencial (BPRD), representa um dos instrumentos psicométricos mais abrangentes para a investigação simultânea da inteligência geral e de habilidades específicas <span class="cite-tag">[23, 24, 25]</span>. Estruturada na Forma A (destinada ao Ensino Fundamental) e Forma B (destinada ao Ensino Médio e Superior), a BPR-5 desmembra o funcionamento cognitivo em cinco subtestes distintos <span class="cite-tag">[23, 25, 26]</span>:
+                </p>
+                <ul class="compendium-list">
+                    <li><strong>Raciocínio Abstrato (RA):</strong> Composto por analogias figurais não verbais, avaliando a capacidade de deduzir regras de transformação visual e integração lógica <span class="cite-tag">[23, 24, 25]</span>.</li>
+                    <li><strong>Raciocínio Verbal (RV):</strong> Mensura o processamento conceitual e a inteligência cristalizada ($G_c$) por meio da resolução de analogias entre pares de palavras <span class="cite-tag">[23, 24, 25]</span>.</li>
+                    <li><strong>Raciocínio Numérico (RN):</strong> Avalia a habilidade quantitativa e o raciocínio indutivo através da descoberta de padrões e sequências lógicas numéricas <span class="cite-tag">[23, 24, 25]</span>.</li>
+                    <li><strong>Raciocínio Espacial (RE):</strong> Examina a capacidade de mentalização visual e rotação tridimensional de objetos bidimensionais <span class="cite-tag">[23, 24, 25]</span>.</li>
+                    <li><strong>Raciocínio Mecânico (RM):</strong> Investiga a compreensão prática de princípios físicos, dinâmica de forças e conhecimento mecânico, sendo altamente preditivo para cargos de manutenção, operação industrial e engenharia <span class="cite-tag">[23, 24, 25]</span>.</li>
+                </ul>
+
+                <table class="latex-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 17%;">Instrumento</th>
+                            <th style="width: 24%;">Construto Dominante</th>
+                            <th style="width: 22%;">Estímulo / Tarefa</th>
+                            <th style="width: 17%;">Aplicação</th>
+                            <th style="width: 20%;">Estrutura Fatorial</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>G-36</strong></td>
+                            <td>Fator Geral ($g$), Analógico, Espacial e Numérico <span class="cite-tag">[21, 22]</span>.</td>
+                            <td>Matrizes lógicas abstratas progressivas <span class="cite-tag">[21, 22]</span>.</td>
+                            <td>Indiv./Coletiva (30 min seleção) <span class="cite-tag">[21, 22]</span>.</td>
+                            <td>Estrutura univariada com alta saturação em $g$ <span class="cite-tag">[21, 22]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>G-38</strong></td>
+                            <td>Raciocínio Geral Não Verbal <span class="cite-tag">[16, 21]</span>.</td>
+                            <td>Complementação de matrizes figurativas <span class="cite-tag">[16, 21]</span>.</td>
+                            <td>Indiv./Coletiva (tempo restrito) <span class="cite-tag">[21]</span>.</td>
+                            <td>Alta precisão e convergência com Raven <span class="cite-tag">[16]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>R-1</strong></td>
+                            <td>Inteligência Não Verbal ($g$) <span class="cite-tag">[10, 16]</span>.</td>
+                            <td>Matrizes e padrões geométricos abstratos <span class="cite-tag">[16]</span>.</td>
+                            <td>Coletiva ou Indiv. ($\approx 30$ min).</td>
+                            <td>Validade convergente com atenção/aptidão <span class="cite-tag">[10, 16]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>R-2</strong></td>
+                            <td>Raciocínio Não Verbal Concreto <span class="cite-tag">[16]</span>.</td>
+                            <td>Figuras ilustrativas concretas do cotidiano <span class="cite-tag">[16]</span>.</td>
+                            <td>Coletiva ou Individual.</td>
+                            <td>Indicado para cargos operacionais / baixa escolaridade <span class="cite-tag">[16]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Matrizes de Raven</strong></td>
+                            <td>Raciocínio Abstrato, Capacidade Edutiva ($G_f$) <span class="cite-tag">[16, 27]</span>.</td>
+                            <td>Séries de matrizes visuais com peça faltante <span class="cite-tag">[16]</span>.</td>
+                            <td>Individual ou Coletiva.</td>
+                            <td>Padrão-ouro internacional em inteligência fluida <span class="cite-tag">[16, 27]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BPR-5 (A e B)</strong></td>
+                            <td>Inteligência Geral e 5 Aptidões (RA, RV, RN, RE, RM) <span class="cite-tag">[23–25]</span>.</td>
+                            <td>Caderno diferencial de escolha múltipla <span class="cite-tag">[24, 25]</span>.</td>
+                            <td>Aprox. 1h 40min (bateria total) <span class="cite-tag">[25, 26]</span>.</td>
+                            <td>Solução univariada explicando $\approx 55\%$ da variância <span class="cite-tag">[17, 19]</span>.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="compendium-p">
+                    Análises fatoriais confirmatórias evidenciam que a BPR-5 oferece tanto uma pontuação geral composta representativa do Fator $g$ quanto um perfil discriminativo das forças e fraquezas cognitivas do avaliado <span class="cite-tag">[17, 19, 24]</span>. Essa versatilidade permite às organizações ajustar os pesos de cada subteste de acordo com o perfil de competências do cargo, priorizando Raciocínio Espacial e Mecânico para funções técnicas ou Raciocínio Verbal e Abstrato para posições de análise e gestão <span class="cite-tag">[23, 24, 25]</span>.
+                </p>
+
+                <h2 class="compendium-h2">4. Avaliação Psicológica da Personalidade, Traços Comportamentais e Estrutura Motivacional</h2>
+                <p class="compendium-p">
+                    A mensuração da personalidade no contexto de seleção profissional visa predizer a adaptação comportamental do indivíduo à cultura corporativa, a estabilidade de suas relações interpessoais, seu estilo de liderança e sua resiliência diante de fatores estressores <span class="cite-tag">[27, 28, 29]</span>. A psicometria moderna da personalidade divide-se entre inventários estatísticos de autorrelato, questionários tipológicos e instrumentos expressivos de base projetiva <span class="cite-tag">[28, 29, 30]</span>.
+                </p>
+                <p class="compendium-p">
+                    O <strong>Modelo dos Cinco Grandes Fatores (Big Five)</strong> consolida-se como a taxonomia mais validada cientificamente para a predição de desempenho ocupacional <span class="cite-tag">[27, 29]</span>. Ferramentas psicométricas como a Bateria Fatorial de Personalidade (BFP) e o NEO PI-R operam sob esse modelo, mensurando cinco dimensões primárias e suas respectivas facetas <span class="cite-tag">[27, 28, 29]</span>: <strong>Neuroticismo</strong> (grau de instabilidade emocional, vulnerabilidade ao estresse, ansiedade, depressão e impulsividade, onde pontuações elevadas sinalizam risco comportamental em ambientes de alta pressão operacional <span class="cite-tag">[27, 31]</span>); <strong>Extroversão</strong> (nível de orientação interpessoal, assertividade, busca por estimulação externa e comunicação <span class="cite-tag">[27]</span>); <strong>Socialização / Amabilidade</strong> (tendência à cooperação, empatia, atitude confiante e altruísmo no trabalho em equipe <span class="cite-tag">[27]</span>); <strong>Realização / Conscienciosidade</strong> (nível de organização, disciplina, persistência, escrupulosidade e orientação para metas <span class="cite-tag">[27]</span>); e <strong>Abertura a Experiências</strong> (interesse por novas ideias, flexibilidade cognitiva, criatividade e tolerância à mudança organizacional <span class="cite-tag">[27]</span>).
+                </p>
+
+                <table class="latex-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 17%;">Instrumento</th>
+                            <th style="width: 26%;">Referencial Teórico</th>
+                            <th style="width: 24%;">Formato do Teste</th>
+                            <th style="width: 33%;">Dimensões e Vetores Mensurados</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>BFP</strong></td>
+                            <td>Cinco Grandes Fatores (Big Five) <span class="cite-tag">[27, 28]</span>.</td>
+                            <td>Inventário de autorrelato em escala Likert <span class="cite-tag">[28]</span>.</td>
+                            <td>Neuroticismo, Extroversão, Socialização, Realização e Abertura <span class="cite-tag">[27]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NEO PI-R</strong></td>
+                            <td>Modelo dos Cinco Grandes Fatores <span class="cite-tag">[29]</span>.</td>
+                            <td>Questionário estruturado de autorrelato <span class="cite-tag">[29]</span>.</td>
+                            <td>5 Grandes Fatores e 30 facetas comportamentais detalhadas <span class="cite-tag">[29]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IFP-II</strong></td>
+                            <td>Necessidades Psicogênicas de Henry Murray <span class="cite-tag">[28, 32]</span>.</td>
+                            <td>100 itens em escala Likert de 7 pontos <span class="cite-tag">[28]</span>.</td>
+                            <td>13 Necessidades Psicogênicas e 3 Fatores de 2ª Ordem (Afetivas, Organização, Controle) <span class="cite-tag">[28]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>QUATI</strong></td>
+                            <td>Tipologia Psicológica Junguiana.</td>
+                            <td>Escolha forçada por pares de afirmações.</td>
+                            <td>Preferências interpessoais, estilos de percepção/julgamento e tipos psicológicos.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pfister</strong></td>
+                            <td>Expressão Projetiva de Cores e Psicodinâmica <span class="cite-tag">[28, 30]</span>.</td>
+                            <td>Montagem de 3 pirâmides com quadrículos coloridos <span class="cite-tag">[28, 30]</span>.</td>
+                            <td>Organização emocional, ansiedade, labilidade afetiva e capacidade de controle <span class="cite-tag">[27, 28, 32]</span>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Palográfico</strong></td>
+                            <td>Expressividade Gráfica e Comportamento <span class="cite-tag">[30]</span>.</td>
+                            <td>Execução repetida de traços verticais sob tempos fixos.</td>
+                            <td>Ritmo de trabalho, produtividade, estabilidade emocional, tônus vital e impulsividade.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="compendium-p">
+                    O <strong>Inventário Fatorial de Personalidade (IFP-II)</strong> fundamenta-se na teoria dos motivos e necessidades psicogênicas de Henry Murray, fornecendo um mapeamento detalhado da estrutura motivacional do candidato <span class="cite-tag">[28, 32]</span>. O teste avalia 13 necessidades essenciais — tais como Afago, Afiliação, Autonomia, Desempenho, Dominância, Exibição, Ordem e Persistência —, agrupadas em três fatores de segunda ordem (Necessidades Afetivas, de Organização e de Controle/Oposição) <span class="cite-tag">[28]</span>. O IFP-II é de elevada utilidade em processos de seleção para posições de liderança e gestão estratégica, nos quais a necessidade de Dominância e Desempenho precisa coexistir com adequado autocontrole e orientação para a cooperação interpessoal <span class="cite-tag">[28, 30]</span>.
+                </p>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • COMPÊNDIO TEÓRICO INTEGRAL</span>
+                <span class="font-bold">PÁGINA 03 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 4: COMPÊNDIO TEÓRICO INTEGRAL (PARTE III: GRÁFICOS, MEM., STAR) -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="4">
+            <div>
+                <div class="page-running-header">
+                    <span>TEXTO DE REFERÊNCIA BASE • COMPÊNDIO TEÓRICO INTEGRAL (PARTE III)</span>
+                    <span>EXPRESSIVOS, NEUROPSICOLOGIA &amp; STAR</span>
+                </div>
+
+                <h2 class="compendium-h2" style="margin-top: 0;">5. Técnicas Gráficas, Expressivas e Projetivas na Avaliação Psicológica</h2>
+                <p class="compendium-p">
+                    As técnicas gráficas, expressivas e projetivas constituem uma classe especial de instrumentos de avaliação da personalidade <span class="cite-tag">[33, 34]</span>. Ao contrário dos inventários de autorrelato, nos quais o examinando responde a perguntas diretas sobre seu comportamento, as técnicas expressivas apresentam estímulos menos estruturados ou tarefas motoras simples <span class="cite-tag">[33, 34, 35]</span>. Essa característica reduz a probabilidade de manipulação consciente das respostas (desejabilidade social), permitindo o acesso a aspectos dinâmicos da personalidade, defesas psíquicas e modos de organização emocional <span class="cite-tag">[33, 34, 35]</span>.
+                </p>
+                <p class="compendium-p">
+                    O <strong>Teste House-Tree-Person (HTP)</strong>, concebido por John N. Buck em 1948 e padronizado no Brasil com normas atualizadas, solicita ao examinando a produção de três desenhos livres em folhas separadas <span class="cite-tag">[33, 34, 35, 36]</span>: <strong>Casa</strong> (projeta os sentimentos em relação ao ambiente familiar, percepção de segurança interna, vínculo com figuras parentais e adaptação às regras do lar/instituição); <strong>Árvore</strong> (reflete elementos mais profundos e inconscientes do desenvolvimento do Ego, sensação de enraizamento, crescimento pessoal e capacidade de buscar recursos no ambiente); e <strong>Pessoa</strong> (mobiliza a projeção da autoimagem, do esquema corporal, da identidade de gênero e da forma de relacionamento social) <span class="cite-tag">[33, 34, 35]</span>. Sua interpretação técnica integra obrigatoriamente a <em>Perspectiva Formal/Expressiva</em> (tamanho, localização espacial, pressão do traço, continuidade da linha e proporcionalidade) e a <em>Perspectiva Projetiva/Conteúdo</em> (rasuras excessivas, omissões, distorções e conteúdos da fase do inquérito posterior) <span class="cite-tag">[33, 34, 37, 38]</span>.
+                </p>
+                <p class="compendium-p">
+                    O <strong>Teste Palográfico</strong> une a análise expressiva do grafismo à precisão estatística por meio da execução de traços verticais repetidos (palos) em intervalos de tempo de 1 minuto, avaliando produtividade total, curva do ritmo de trabalho, oscilação da distância entre palos, inclinação e regularidade do alinhamento (índices de rendimento sob rotina, tolerância à monotonia, tônus vital, emotividade e inibição/impulsividade) <span class="cite-tag">[30]</span>. Já o <strong>Teste das Pirâmides Coloridas de Pfister</strong> investiga a dinâmica afeto-emocional e o estilo cognitivo pelo preenchimento de três esquemas de pirâmides com quadrículos de 10 cores diferentes, combinando a frequência percentual cromática com o arranjo estrutural (formações ordenadas, mantos, móbiles ou tênues) para mensurar autorregulação emocional, ansiedade e controle de impulsos <span class="cite-tag">[27, 28, 30]</span>. A aplicação dessas técnicas exige cruzamento com inventários fatoriais e entrevistas comportamentais <span class="cite-tag">[35, 37, 38]</span>.
+                </p>
+
+                <h2 class="compendium-h2">6. Avaliação Neuropsicológica Operacional: Memória e Habilidades Psicomotoras</h2>
+                <p class="compendium-p">
+                    Em subsetores industriais de elevada automação, mineração, transporte especializado e linhas de montagem contínua, a higidez das funções de memória e o aperfeiçoamento psicomotor são determinantes para manter a continuidade operacional e evitar erros críticos <span class="cite-tag">[14, 28]</span>.
+                </p>
+
+                <table class="latex-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 21%;">Subtipo de Memória</th>
+                            <th style="width: 31%;">Definição Funcional</th>
+                            <th style="width: 25%;">Mecanismo de Testagem</th>
+                            <th style="width: 23%;">Aplicação Ocupacional</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Memória Visual</strong></td>
+                            <td>Retenção e evocação de estampas, mapas, formas e detalhes visuais.</td>
+                            <td>Prancha visual por tempo fixo seguida de identificação em cartões.</td>
+                            <td>Leitura de painéis industriais, mapas e simbologia de risco.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Memória Auditiva</strong></td>
+                            <td>Retenção imediata e evocação de dados informados por via oral.</td>
+                            <td>Repetição de palavras, frases ou sequências numéricas orais.</td>
+                            <td>Ordens de comando por rádio e instruções em locais ruidosos.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Memória de Curto Prazo</strong></td>
+                            <td>Armazenamento temporário por curtos intervalos sem manipulação ativa.</td>
+                            <td>Reprodução imediata de pequenas listas de estímulos isolados.</td>
+                            <td>Tarefas passo a passo de baixa complexidade em linha.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Memória de Trabalho (Working Memory)</strong></td>
+                            <td>Armazenamento e manipulação ativa de informações durante tarefas complexas.</td>
+                            <td>Ordem inversa de sequências numéricas, alfabetização e tarefas <em>n-back</em>.</td>
+                            <td>Centrais de controle logístico e cálculo mental operacional.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Testes de Sequência</strong></td>
+                            <td>Retenção de padrões ordinais de números, letras ou figuras espaciais.</td>
+                            <td>Reprodução exata de sequências crescentes, alternadas ou espaciais.</td>
+                            <td>Programação manual de máquinas CNC e montagem sequencial.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="compendium-p">
+                    Complementarmente, os <strong>testes psicomotores</strong> medem a integridade neuromotora em quatro eixos: <strong>Coordenação Motora Fina</strong> (precisão de pequenos grupos musculares de mãos e dedos, essencial em microcomponentes eletrônicos e instrumentação); <strong>Velocidade Motora</strong> (rapidez bruta de execução de movimento simples em resposta a um sinal, vital para parada de emergência); <strong>Destreza Manual</strong> (agilidade na manipulação de objetos pequenos sob restrição temporal); e <strong>Coordenação Visomotora</strong> (integração fluida entre rastreio visual contínuo e ajuste motor executivo, avaliada por acompanhamento de rotas, pontilhamento ou labirinto gráfico, indispensável para condutores e operadores de empilhadeiras).
+                </p>
+
+                <h2 class="compendium-h2">7. Métodos Situacionais, Entrevistas por Competências e Recomendações Práticas</h2>
+                <p class="compendium-p">
+                    Em conformidade com a regulamentação do CFP, a avaliação psicológica pode ser enriquecida por fontes complementares não privativas <span class="cite-tag">[9]</span>, observando o comportamento humano em cenários análogos ao trabalho: <strong>Trabalho em Equipe</strong> (dinâmicas de grupo com metas compartilhadas); <strong>Resolução de Conflitos</strong> (simulação de negociações difíceis); <strong>Tomada de Decisão</strong> (estudos de caso / <em>business games</em> com dados incompletos e tempo restrito); <strong>Tolerância à Pressão</strong> (simulações com falhas operacionais imprevistas); <strong>Segurança Operacional</strong> (testes de amostragem de trabalho / <em>work sample</em> e protocolos de EPI); e <strong>Entrevista por Competências</strong> (estruturada na metodologia <strong>STAR</strong>: Situação, Tarefa, Ação e Resultado).
+                </p>
+                <p class="compendium-p">
+                    A integração dessas técnicas possibilita a <strong>triangulação dos dados</strong> <span class="cite-tag">[4, 9]</span> (ex.: confrontar alta Socialização na BFP e estabilidade no Pfister com condutas individualistas em dinâmicas de conflito <span class="cite-tag">[27, 28]</span>). Para garantir a higidez técnico-científica, recomenda-se: (i) <em>Mapeamento do Perfil de Cargo</em> <span class="cite-tag">[3, 4, 23]</span>; (ii) <em>Consulta Prévia ao SATEPSI</em> quanto ao parecer favorável, vigência de 15 anos e modalidade presencial ou remota <span class="cite-tag">[5, 8, 11]</span>; (iii) <em>Adoção de Baterias Multimétodo</em> <span class="cite-tag">[12, 23, 28, 33]</span>; (iv) <em>Padronização das Condições de Testagem</em> <span class="cite-tag">[7, 11]</span>; e (v) <em>Elaboração Ética de Documentos Psicológicos</em> conforme a <strong>Resolução CFP nº 06/2019</strong>, assegurando sigilo, limitação ao estritamente necessário e oferta de entrevista de devolutiva <span class="cite-tag">[2, 3, 4, 5, 6]</span>.
+                </p>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • COMPÊNDIO TEÓRICO INTEGRAL</span>
+                <span class="font-bold">PÁGINA 04 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 5: QUESTÕES 01 E 02 (ARCABOUÇO NORMATIVO SATEPSI E ÉTICA)      -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="5">
+            <div>
+                <div class="page-running-header">
+                    <span>CADERNO DE QUESTÕES CONTEXTUALIZADAS • EIXO I: REGULAÇÃO SATEPSI &amp; ÉTICA</span>
+                    <span>QUESTÕES 01 E 02</span>
+                </div>
+
+                <!-- QUESTÃO 01 -->
+                <div class="question-block" id="q-container-1">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 01 • SISTEMA DE AVALIAÇÃO DE TESTES PSICOLÓGICOS (SATEPSI)</span>
+                        <span class="font-mono text-[7.5pt]">RES. CFP Nº 31/2022</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 01 —</strong> O Sistema de Avaliação de Testes Psicológicos (SATEPSI), regulamentado pela Resolução CFP nº 31/2022 (que atualizou a Resolução CFP nº 009/2018), estabelece os requisitos técnico-científicos mínimos para que um instrumento seja considerado apto ao uso profissional no Brasil. Além de exigir evidências empíricas de validade (construto, critério e conteúdo) e índices satisfatórios de fidedignidade, a normativa determina que os estudos normativos e de precisão possuem prazo máximo de vigência de 15 (quinze) anos a contar da aprovação pelo Plenário do CFP, prevenindo a obsolescência das tabelas percentílicas diante de mudanças sociodemográficas. Ademais, a aprovação de um teste para aplicação presencial (lápis e papel) não confere autorização automática para sua administração remota mediada por Tecnologias da Informação e Comunicação (TICs), sendo indispensável parecer favorável específico para a modalidade digital.
+                        <span class="reference-citation">CONSELHO FEDERAL DE PSICOLOGIA. Resolução CFP nº 31/2022; SATEPSI (2022).</span>
+                    </div>
+                    <p class="question-stem">
+                        Durante a estruturação de um processo seletivo nacional para analistas de planejamento logístico, o departamento de Recursos Humanos de uma multinacional solicitou à psicóloga responsável que aplicasse, por videoconferência em candidatos residentes em outros estados, um inventário de personalidade tradicional cujo manual apresenta parecer favorável no SATEPSI exclusivamente para aplicação presencial, com estudos normativos aprovados há 12 anos. Considerando a normativa vigente do Conselho Federal de Psicologia, a conduta tecnicamente correta e eticamente exigida da profissional consiste em:
+                    </p>
+                    <div class="options-container" data-question="1">
+                        <div class="option-item" data-opt="A" onclick="selectOption(1, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>Acionar o inventário via compartilhamento de tela na videoconferência, visto que os estudos normativos ainda se encontram dentro do prazo legal de 15 anos e a validade de construto permanece inalterada no meio digital.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(1, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Vetar a aplicação remota desse instrumento específico, pois a aprovação presencial não autoriza o uso mediado por tecnologia, devendo substituir o teste por outro com parecer favorável específico para modalidade remota ou realizar a testagem presencialmente.</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(1, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>Delegar a aplicação presencial aos analistas de RH das filiais regionais para manter a padronização lápis e papel, reservando para si apenas a correção informatizada e a emissão do laudo psicológico.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(1, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>Aplicar o instrumento remotamente sob supervisão por webcam, aplicando um fator de correção estatística de 10% nos escores brutos para compensar a ausência de normatização digital no SATEPSI.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(1, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>Substituir integralmente a avaliação psicológica por questionários ocupacionais não psicológicos de domínio público, uma vez que o SATEPSI proíbe qualquer tipo de entrevista ou avaliação à distância em processos seletivos.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-1"></div>
+                </div>
+
+                <!-- QUESTÃO 02 -->
+                <div class="question-block" id="q-container-2" style="margin-bottom: 0;">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 02 • TESTAGEM VS. AVALIAÇÃO PSICOLÓGICA E DOCUMENTOS</span>
+                        <span class="font-mono text-[7.5pt]">RES. CFP Nº 06/2019</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 02 —</strong> Na prática profissional da Psicologia Organizacional e do Trabalho, impõe-se a distinção rigorosa entre <em>testagem psicológica</em> — restrita à aplicação mecânica e isolada de escalas ou provas psicométricas — e <em>avaliação psicológica</em>, compreendida como um processo técnico-científico amplo de investigação que articula múltiplas fontes de informação (testes psicológicos aprovados, entrevistas estruturadas, observação situacional e análise do perfil do cargo). Paralelamente, a Resolução CFP nº 06/2019 institui as regras para elaboração de documentos escritos produzidos pela(o) psicóloga(o), determinando o sigilo profissional, a restrição das informações transmitidas ao contratante ao estritamente necessário para a tomada de decisão e o direito inviolável do candidato à entrevista devolutiva.
+                        <span class="reference-citation">CONSELHO FEDERAL DE PSICOLOGIA. Cartilha de Avaliação Psicológica (2022); Resolução CFP nº 06/2019.</span>
+                    </div>
+                    <p class="question-stem">
+                        Ao concluir a avaliação psicológica de candidatos a uma vaga de supervisor de operações portuárias, a diretoria da empresa contratante exige que a psicóloga anexe ao dossiê administrativo do setor de pessoal as folhas de respostas originais dos testes aplicados, os percentis brutos de neuroticismo e a descrição detalhada das defesas inconscientes identificadas no HTP, sob a justificativa de que a empresa custeou o processo. À luz das normas éticas e resoluções do CFP, a psicóloga deve:
+                    </p>
+                    <div class="options-container" data-question="2">
+                        <div class="option-item" data-opt="A" onclick="selectOption(2, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>Entregar cópia integral dos protocolos e escores percentílicos à diretoria, mantendo em seu arquivo pessoal apenas o parecer conclusivo de aptidão ou inaptidão ao cargo.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(2, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Fornecer os protocolos gráficos do HTP por não conterem escores numéricos, retendo exclusivamente os inventários psicométricos objetivos protegidos por direitos autorais das editoras.</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(2, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>Recusar a entrega dos protocolos e dados íntimos brutos, emitindo documento psicológico técnico contendo apenas as conclusões pertinentes às competências exigidas pelo cargo e assegurando a entrevista devolutiva ao candidato.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(2, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>Disponibilizar os escores brutos ao médico do trabalho da empresa no prontuário ocupacional, eximindo-se de realizar entrevista devolutiva caso o candidato seja considerado apto na seleção.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(2, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>Submeter os protocolos brutos à auditoria interna de Compliance da organização mediante assinatura de termo de confidencialidade corporativo pelos gestores de Recursos Humanos.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-2"></div>
+                </div>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • QUESTÕES 01 E 02</span>
+                <span class="font-bold">PÁGINA 05 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 6: QUESTÕES 03 E 04 (TESTES DE ATENÇÃO E CONCENTRAÇÃO)         -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="6">
+            <div>
+                <div class="page-running-header">
+                    <span>CADERNO DE QUESTÕES CONTEXTUALIZADAS • EIXO II: FUNÇÕES ATENCIONAIS</span>
+                    <span>QUESTÕES 03 E 04</span>
+                </div>
+
+                <!-- QUESTÃO 03 -->
+                <div class="question-block" id="q-container-3">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 03 • DISCRIMINAÇÃO PSICOMÉTRICA DOS SUBTIPOS DE ATENÇÃO</span>
+                        <span class="font-mono text-[7.5pt]">AC, D2-R, TEACO-FF, TEADI, TEALT, BPA</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 03 —</strong> A psicometria contemporânea operacionaliza a atenção em subcomponentes funcionais distintos, dotados de validade convergente comprovada entre baterias como a BPA (Bateria Psicológica para Avaliação da Atenção) e instrumentos específicos. Enquanto a <em>atenção concentrada</em> (mensurada pelo AC, TEACO-FF e D2-R) exige a sustentação do foco perceptivo em um estímulo-alvo com inibição ativa de distratores semelhantes sob restrição temporal, a <em>atenção dividida</em> (TEADI) avalia a capacidade de distribuir recursos cognitivos simultaneamente entre duas ou mais fontes/categorias de estímulos independentes. Já a <em>atenção alternada</em> (TEALT) mensura a flexibilidade cognitiva para deslocar o foco atencional e modificar sistematicamente a regra de seleção de alvos a cada nova linha ou etapa da tarefa.
+                        <span class="reference-citation">RUEDA, F. J. M. Bateria Psicológica para Avaliação da Atenção (BPA); TEACO-FF, TEADI e TEALT (2013).</span>
+                    </div>
+                    <p class="question-stem">
+                        Em um Centro de Controle Operacional (CCO) ferroviário e portuário, dois postos de trabalho apresentam demandas cognitivas críticas distintas: no <strong>Posto I</strong>, o operador deve monitorar simultaneamente dois painéis independentes (fluxo telemétrico de velocidade e alertas sonoros/visuais de bloqueio de via), respondendo a ambos sem perder o rastreio paralelo; no <strong>Posto II</strong>, o inspetor de controle de qualidade deve realizar o desengate rápido de critérios, mudando a regra de triagem de peças a cada lote que entra na esteira automatizada. Para maximizar a validade preditiva da seleção, os instrumentos específicos mais indicados para avaliar a demanda atencional predominante dos Postos I e II são, respectivamente:
+                    </p>
+                    <div class="options-container" data-question="3">
+                        <div class="option-item" data-opt="A" onclick="selectOption(3, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>TEACO-FF para o Posto I (sustentação em estímulo único) e Teste AC para o Posto II (cancelamento contínuo de símbolo invariável).</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(3, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>TEADI para o Posto I (processamento simultâneo de duas categorias de estímulos) e TEALT para o Posto II (mudança sistemática da regra de seleção de alvos).</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(3, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>TEALT para o Posto I (alternância entre painéis estáticos) e D2-R para o Posto II (cancelamento exclusivo de letras <em>d</em> com dois traços).</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(3, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>Teste AC para o Posto I (rastreio paralelo de alta velocidade) e TEADI para o Posto II (inibição de distratores gráficos em lotes uniformes).</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(3, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>D2-R para o Posto I (atenção dividida auditivo-visual) e TEACO-FF para o Posto II (flexibilidade cognitiva na troca de regras por linha).</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-3"></div>
+                </div>
+
+                <!-- QUESTÃO 04 -->
+                <div class="question-block" id="q-container-4" style="margin-bottom: 0;">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 04 • ANÁLISE DE DESEMPENHO E FADIGA NO TESTE D2-R E NA BPA</span>
+                        <span class="font-mono text-[7.5pt]">VELOCIDADE VS. PRECISÃO</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 04 —</strong> O Teste D2-R avalia a atenção seletiva, a concentração e a velocidade de processamento visual por meio do cancelamento de letras <em>d</em> acompanhadas de exatamente dois traços (acima, abaixo ou um de cada lado), distribuídas em 14 linhas cronometradas em meio a distratores perceptivamente próximos (letras <em>p</em> com traços variados e letras <em>d</em> com um, três ou quatro traços). Na interpretação psicométrica do D2-R e da BPA, não basta analisar o total de itens processados (velocidade bruta); é imprescindível confrontar esse índice com o percentual de erros (omissões e comissões) e a curva de oscilação entre as linhas iniciais e finais, permitindo diagnosticar impulsividade motora ou queda de vigilância por fadiga atencional.
+                        <span class="reference-citation">BRICKENKAMP, R.; SCHMIDT-ATZERT, L.; LIEPMANN, D. Teste D2-R: Atenção Concentrada (Padronização Brasileira).</span>
+                    </div>
+                    <p class="question-stem">
+                        Na etapa final de seleção para operadores de empilhadeiras retráteis em corredores estreitos de armazenagem vertical, dois candidatos obtiveram os seguintes perfis psicométricos no D2-R e na BPA: o <strong>Candidato X</strong> situou-se no percentil 90 em velocidade de processamento (total de caracteres processados), porém apresentou percentil 15 em precisão, concentrando elevado número de erros por comissão (marcação de letras <em>d</em> com três traços e letras <em>p</em>) nas últimas quatro linhas do protocolo; o <strong>Candidato Y</strong> obteve percentil 65 em velocidade e percentil 85 em precisão, mantendo curva de rendimento estável do início ao fim da prova. Do ponto de vista da segurança operacional, a análise técnica correta indica que:
+                    </p>
+                    <div class="options-container" data-question="4">
+                        <div class="option-item" data-opt="A" onclick="selectOption(4, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>O Candidato X apresenta perfil superior para operação de empilhadeiras, pois o percentil 90 em velocidade compensa estatisticamente as falhas de precisão em ambientes logísticos dinâmicos.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(4, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Os erros por comissão do Candidato X demonstram exclusivamente déficit de acuidade visual periférica, não guardando relação com controle inibitório ou impulsividade atencional.</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(4, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>O Candidato X evidencia estilo de resposta impulsivo e suscetibilidade à fadiga atencional sob pressão temporal, representando risco operacional elevado, ao passo que o Candidato Y demonstra equilíbrio entre rapidez e acurácia sustentada.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(4, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>A estabilidade da curva de rendimento do Candidato Y indica rigidez cognitiva e lentificação psicomotora incompatíveis com a operação de equipamentos de movimentação de cargas.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(4, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>Ambos os candidatos devem ser invalidados no D2-R, pois a média aritmética simples entre velocidade e precisão exige percentil mínimo de 80 em ambos os indicadores isoladamente.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-4"></div>
+                </div>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • QUESTÕES 03 E 04</span>
+                <span class="font-bold">PÁGINA 06 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 7: QUESTÕES 05 E 06 (RACIOCÍNIO LÓGICO E INTELIGÊNCIA)         -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="7">
+            <div>
+                <div class="page-running-header">
+                    <span>CADERNO DE QUESTÕES CONTEXTUALIZADAS • EIXO III: INTELIGÊNCIA E RACIOCÍNIO</span>
+                    <span>QUESTÕES 05 E 06</span>
+                </div>
+
+                <!-- QUESTÃO 05 -->
+                <div class="question-block" id="q-container-5">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 05 • FATOR G, MODELO CHC E TESTES NÃO VERBAIS (G-36, G-38, R-1, R-2, RAVEN)</span>
+                        <span class="font-mono text-[7.5pt]">INTELIGÊNCIA FLUIDA ($G_f$)</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 05 —</strong> Na psicometria da inteligência, o Fator Geral ($g$) proposto por Charles Spearman e a inteligência fluida ($G_f$) do modelo Cattell-Horn-Carroll (CHC) designam a capacidade edutiva de resolver problemas inéditos, apreender relações abstratas e inferir regras lógicas com mínima dependência de conhecimentos escolares prévios. No Brasil, testes não verbais como as Matrizes Progressivas de Raven, o G-36 (36 itens progressivos aplicados em até 30 minutos na seleção), o G-38, o R-1 e o R-2 operacionalizam essa medição. Contudo, enquanto o G-36, o G-38 e o R-1 utilizam matrizes geométricas abstratas, o Teste R-2 emprega estímulos figurativos concretos da vivência cotidiana, sendo especificamente indicado para reduzir vieses de escolarização formal em populações operacionais de base.
+                        <span class="reference-citation">SPEARMAN, C. (1904); CARROLL, J. B. (1993); BOCALANDRO, E. R. Testes G-36, G-38, R-1 e R-2.</span>
+                    </div>
+                    <p class="question-stem">
+                        Uma indústria siderúrgica precisa avaliar o potencial de aprendizagem operacional e resolução de problemas práticos de 120 candidatos ao cargo de auxiliar de aciaria e movimentação de insumos, grupo composto majoritariamente por trabalhadores adultos com Ensino Fundamental incompleto e pouca familiaridade com abstrações geométricas acadêmicas. Para minimizar o viés educacional sem abdicar da mensuração válida do raciocínio não verbal, a escolha metodológica mais adequada dentre os instrumentos listados é o teste:
+                    </p>
+                    <div class="options-container" data-question="5">
+                        <div class="option-item" data-opt="A" onclick="selectOption(5, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>BPR-5 Forma B, por meio do subteste de Raciocínio Verbal (RV), que neutraliza o impacto da baixa escolaridade através de analogias semânticas cotidianas.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(5, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>G-36, visto que suas 36 matrizes de transformações numéricas abstratas prescindem de qualquer adaptação normativa para candidatos sem instrução formal.</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(5, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>R-2, pois utiliza estímulos figurativos concretos do cotidiano para avaliar o raciocínio não verbal, adequando-se a cargos operacionais de menor escolaridade.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(5, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>R-1, dado que substitui matrizes visuais por comandos auditivos concretos, eliminando o efeito da leitura na avaliação da inteligência cristalizada ($G_c$).</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(5, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>G-38, por ser o único instrumento brasileiro fundamentado na teoria bifatorial de Spearman que mensura exclusivamente a inteligência cristalizada ($G_c$) sem saturação em $G_f$.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-5"></div>
+                </div>
+
+                <!-- QUESTÃO 06 -->
+                <div class="question-block" id="q-container-6" style="margin-bottom: 0;">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 06 • AVALIAÇÃO DIFERENCIAL DE APTIDÕES NA BPR-5</span>
+                        <span class="font-mono text-[7.5pt]">RA, RV, RN, RE E RM</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 06 —</strong> A Bateria de Provas de Raciocínio (BPR-5), desenvolvida por Ricardo Primi e Leandro Almeida, estrutura-se nas Formas A (Ensino Fundamental) e B (Ensino Médio e Superior), explicando aproximadamente 55% da variância total por meio de um fator geral univariado, mas decompondo a cognição em cinco aptidões específicas: Raciocínio Abstrato (RA — analogias figurais não verbais), Raciocínio Verbal (RV — analogias entre palavras e inteligência cristalizada $G_c$), Raciocínio Numérico (RN — séries quantitativas), Raciocínio Espacial (RE — rotação mental tridimensional de objetos) e Raciocínio Mecânico (RM — compreensão prática de leis físicas, alavancas, engrenagens e dinâmica de forças).
+                        <span class="reference-citation">PRIMI, R.; ALMEIDA, L. S. Bateria de Provas de Raciocínio (BPR-5): Manual Técnico.</span>
+                    </div>
+                    <p class="question-stem">
+                        Uma montadora automotiva está recrutando técnicos de manutenção industrial eletromecânica com Ensino Técnico completo (nível médio), cuja rotina envolve diagnosticar falhas em sistemas de transmissão por engrenagens, interpretar vistas explodidas tridimensionais de conjuntos hidráulicos e realizar rotações mentais de peças antes da desmontagem em bancada. Ao utilizar a <strong>BPR-5 (Forma B)</strong> para compor o perfil discriminativo dos candidatos, quais dois subtestes específicos devem receber o maior peso preditivo na matriz de decisão?
+                    </p>
+                    <div class="options-container" data-question="6">
+                        <div class="option-item" data-opt="A" onclick="selectOption(6, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>Raciocínio Verbal (RV) e Raciocínio Numérico (RN), pois mensuram diretamente a inteligência cristalizada ($G_c$) e o cálculo diferencial aplicado à engenharia.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(6, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Raciocínio Espacial (RE) e Raciocínio Mecânico (RM), por avaliarem respectivamente a rotação mental tridimensional e a compreensão prática de princípios físicos e dinâmicos.</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(6, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>Raciocínio Abstrato (RA) e Raciocínio Verbal (RV), uma vez que a BPR-5 Forma B veda a ponderação diferenciada dos subtestes técnicos em processos seletivos industriais.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(6, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>Raciocínio Numérico (RN) e Raciocínio Abstrato (RA), dado que o subteste de Raciocínio Mecânico (RM) está disponível exclusivamente na Forma A da bateria.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(6, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>Raciocínio Mecânico (RM) e Raciocínio Verbal (RV), porque a leitura de vistas explodidas depende primordialmente da fluência semântica e não da visualização espacial.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-6"></div>
+                </div>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • QUESTÕES 05 E 06</span>
+                <span class="font-bold">PÁGINA 07 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 8: QUESTÕES 07 E 08 (PERSONALIDADE E ESTRUTURA MOTIVACIONAL)   -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="8">
+            <div>
+                <div class="page-running-header">
+                    <span>CADERNO DE QUESTÕES CONTEXTUALIZADAS • EIXO IV: PERSONALIDADE E MOTIVAÇÃO</span>
+                    <span>QUESTÕES 07 E 08</span>
+                </div>
+
+                <!-- QUESTÃO 07 -->
+                <div class="question-block" id="q-container-7">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 07 • MODELO DOS CINCO GRANDES FATORES (BFP E NEO PI-R)</span>
+                        <span class="font-mono text-[7.5pt]">BIG FIVE &amp; 30 FACETAS</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 07 —</strong> O Modelo dos Cinco Grandes Fatores (Big Five), operacionalizado no Brasil pela Bateria Fatorial de Personalidade (BFP) e pelo Inventário de Personalidade NEO Revisado (NEO PI-R, estruturado em 5 domínios e 30 facetas específicas), constitui o paradigma mais robusto na predição do desempenho ocupacional. Dentre os cinco fatores — Neuroticismo, Extroversão, Socialização (Amabilidade), Realização (Conscienciosidade) e Abertura a Experiências —, estudos meta-analíticos demonstram que <em>Realização</em> (disciplina, organização, senso de dever e persistência) é o preditor mais consistente de produtividade geral, enquanto altos níveis de <em>Neuroticismo</em> (vulnerabilidade ao estresse, ansiedade e impulsividade emocional) correlacionam-se positivamente com erros operacionais e acidentes em ambientes de alta pressão.
+                        <span class="reference-citation">NUNES, C. H. S. S.; HUTZ, C. S.; NUNES, M. F. O. BFP (2010); COSTA, P. T.; McCRAE, R. R. NEO PI-R.</span>
+                    </div>
+                    <p class="question-stem">
+                        Para o cargo de coordenador de controle de tráfego aéreo corporativo e despacho de cargas perigosas — função caracterizada por protocolos regulatórios rígidos, tolerância zero a improvisações procedimentais e necessidade de serenidade diante de emergências climáticas —, o perfil fatorial ideal no NEO PI-R / BFP deve apresentar, prioritariamente:
+                    </p>
+                    <div class="options-container" data-question="7">
+                        <div class="option-item" data-opt="A" onclick="selectOption(7, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>Elevado Neuroticismo (para manter estado constante de hipervigilância ansiosa) combinado com elevada Abertura a Experiências (para flexibilizar normas de segurança).</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(7, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Elevada Realização / Conscienciosidade (organização, escrupulosidade e disciplina procedimental) associada a baixo Neuroticismo (estabilidade emocional e controle do estresse).</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(7, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>Baixa Realização (evitando perfeccionismo paralisante) e elevada Extroversão nas facetas de busca de excitação e impulsividade decisória.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(7, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>Baixa Socialização (priorizando postura autocrática isolada) e elevado Neuroticismo nas facetas de hostilidade e vulnerabilidade afetiva.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(7, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>Elevada Abertura a Experiências nas facetas de fantasia e valores não convencionais, acompanhada de baixa Conscienciosidade para agilizar o despacho de cargas.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-7"></div>
+                </div>
+
+                <!-- QUESTÃO 08 -->
+                <div class="question-block" id="q-container-8" style="margin-bottom: 0;">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 08 • ESTRUTURA MOTIVACIONAL (IFP-II) E TIPOLOGIA JUNGUIANA (QUATI)</span>
+                        <span class="font-mono text-[7.5pt]">MURRAY &amp; JUNG</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 08 —</strong> Diferentemente dos inventários de traços do Big Five, o Inventário Fatorial de Personalidade (IFP-II) fundamenta-se na Teoria das Necessidades Psicogênicas de Henry Murray, avaliando por meio de 100 itens em escala Likert de 7 pontos um conjunto de 13 necessidades motivacionais (Afago, Afiliação, Assistência, Autonomia, Deferência, Denegação, Desempenho, Dominância, Exibição, Heterossexualidade, Intracepção, Mudança, Ordem e Persistência), sintetizadas em três fatores de segunda ordem: <em>Necessidades Afetivas</em>, <em>Necessidades de Organização</em> e <em>Necessidades de Controle/Oposição</em>. Já o QUATI (Questionário de Avaliação Tipológica) baseia-se na tipologia de Carl Gustav Jung, identificando atitudes (Extroversão/Introversão) e funções de percepção (Sensação/Intuição) e julgamento (Pensamento/Sentimento) por escolha forçada.
+                        <span class="reference-citation">LIMA, M. P. et al. IFP-II (2014); ZACHARIAS, J. J. M. QUATI (2003).</span>
+                    </div>
+                    <p class="question-stem">
+                        Ao analisar os resultados do IFP-II de um candidato finalista a gerente industrial responsável por reestruturar uma planta fabril com histórico de conflitos sindicais e baixa produtividade, o psicólogo observa percentis muito elevados em <strong>Dominância</strong> e <strong>Autonomia</strong>, mas percentis extremamente baixos (abaixo do percentil 10) em <strong>Afiliação</strong>, <strong>Deferência</strong> e <strong>Ordem</strong>. Do ponto de vista da psicometria motivacional de Murray aplicada à gestão, esse perfil sugere que o candidato tende a:
+                    </p>
+                    <div class="options-container" data-question="8">
+                        <div class="option-item" data-opt="A" onclick="selectOption(8, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>Demonstrar forte impulsão para comandar e agir de modo independente, porém com baixa disposição para cooperação grupal, acatamento de diretrizes superiores e planejamento metódico.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(8, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Submeter-se passivamente às normas corporativas e buscar aprovação afetiva constante da equipe, evitando assumir posições de comando em cenários de crise.</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(8, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>Apresentar perfil tipológico junguiano puro de Introversão-Sentimento, uma vez que o IFP-II mensura as quatro funções psíquicas descritas por Carl Jung.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(8, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>Priorizar a sistematização burocrática e a manutenção rigorosa da rotina operacional em detrimento da iniciativa de liderança e tomada de decisão autônoma.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(8, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>Manifestar elevada necessidade de Assistência e Afago, indicando dependência emocional que inviabiliza o exercício de qualquer função técnica na indústria.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-8"></div>
+                </div>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • QUESTÕES 07 E 08</span>
+                <span class="font-bold">PÁGINA 08 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 9: QUESTÕES 09 E 10 (TÉCNICAS GRÁFICAS, EXPRESSIVAS E PROJET.) -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="9">
+            <div>
+                <div class="page-running-header">
+                    <span>CADERNO DE QUESTÕES CONTEXTUALIZADAS • EIXO V: TÉCNICAS GRÁFICAS E EXPRESSIVAS</span>
+                    <span>QUESTÕES 09 E 10</span>
+                </div>
+
+                <!-- QUESTÃO 09 -->
+                <div class="question-block" id="q-container-9">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 09 • TÉCNICA PROJETIVA DO DESENHO CASA-ÁRVORE-PESSOA (HTP)</span>
+                        <span class="font-mono text-[7.5pt]">JOHN N. BUCK • FORMAL &amp; CONTEÚDO</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 09 —</strong> Concebido por John N. Buck (1948), o Teste House-Tree-Person (HTP) solicita ao examinando três desenhos livres em folhas separadas: a <em>Casa</em> (que evoca associações referentes ao ambiente doméstico, segurança interna e relação com normas/autoridade), a <em>Árvore</em> (que projeta estratos mais profundos e inconscientes do desenvolvimento do Ego, enraizamento e busca de recursos no meio) e a <em>Pessoa</em> (que mobiliza a autoimagem, o esquema corporal e as relações interpessoais). A interpretação rigorosa exige articular a <em>Perspectiva Formal/Expressiva</em> (tamanho, localização na página, pressão do traço, qualidade da linha e proporção) com a <em>Perspectiva Projetiva/Conteúdo</em> (detalhes, omissões, rasuras e o inquérito posterior padronizado), sendo vedada qualquer conclusão diagnóstica baseada em um único sinal gráfico isolado.
+                        <span class="reference-citation">BUCK, J. N. H-T-P: Técnica Projetiva de Desenho (Padronização Brasileira Vetor Editora).</span>
+                    </div>
+                    <p class="question-stem">
+                        Durante uma avaliação psicológica para ingresso na área de segurança patrimonial armada, um candidato realiza os desenhos do HTP apresentando traçado extremamente leve e interrompido, figuras diminutas confinadas no quadrante superior esquerdo das folhas, omissão recorrente de mãos e pés no desenho da Pessoa e recusa defensiva em responder às perguntas do inquérito posterior. À luz das diretrizes psicométricas e projetivas do HTP, a interpretação tecnicamente fundamentada consiste em:
+                    </p>
+                    <div class="options-container" data-question="9">
+                        <div class="option-item" data-opt="A" onclick="selectOption(9, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>Diagnosticar imediatamente transtorno psicótico grave exclusivamente pela omissão dos pés no desenho da Pessoa, dispensando o cruzamento com testes objetivos de personalidade.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(9, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Interpretar a convergência de indicadores formais (micrografismo, baixa pressão, localização periférica) e de conteúdo (omissão de extremidades e resistência ao inquérito) como hipótese de inibição, insegurança relacional e defensividade, a ser cruzada com a bateria multimétodo.</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(9, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>Concluir que o candidato possui elevada expansividade egóica e agressividade extrovertida, características tipicamente associadas ao traçado leve e ao tamanho diminuto no quadrante esquerdo.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(9, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>Anular o protocolo do HTP porque o inquérito posterior é uma etapa opcional que não integra a padronização aprovada pelo SATEPSI para contextos organizacionais.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(9, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>Atribuir os indicadores gráficos exclusivamente a déficit de coordenação motora fina, uma vez que o HTP não avalia aspectos dinâmicos da autoimagem ou do desenvolvimento do Ego.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-9"></div>
+                </div>
+
+                <!-- QUESTÃO 10 -->
+                <div class="question-block" id="q-container-10" style="margin-bottom: 0;">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 10 • TESTE PALOGRÁFICO E PIRÂMIDES COLORIDAS DE PFISTER</span>
+                        <span class="font-mono text-[7.5pt]">EXPRESSIVIDADE &amp; DINÂMICA AFETIVA</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 10 —</strong> As técnicas expressivas permitem mitigar a desejabilidade social presente nos inventários de autorrelato. No <em>Teste Palográfico</em>, o avaliado executa traços verticais repetidos (palos) durante cinco tempos cronometrados de 1 minuto cada, permitindo mensurar quantitativamente a produtividade total, o Nível de Oscilação Rítmica (NOR), a distância entre palos, a inclinação e a irregularidade do alinhamento — indicadores de rendimento sob rotina, tônus vital, emotividade e controle de impulsos. Complementarmente, o <em>Teste das Pirâmides Coloridas de Pfister</em> avalia a dinâmica afeto-emocional e o estilo cognitivo pela montagem de três pirâmides com quadrículos de 10 cores, articulando a frequência percentual cromática ao aspecto formal (formações ordenadas, mantos, móbiles ou tênues).
+                        <span class="reference-citation">ALVES, I. C. B.; ESTEVES, C. O Teste Palográfico (2004); VILLEMOR-AMARAL, A. E. As Pirâmides Coloridas de Pfister.</span>
+                    </div>
+                    <p class="question-stem">
+                        Na avaliação psicológica de candidatos a operador de sala de controle de usina termelétrica — função que exige alta tolerância à monotonia, constância de rendimento em turnos extensos e regulação emocional estável —, o cruzamento entre o Teste Palográfico e o Pfister revelou: (1) produtividade dentro da média normativa com <strong>NOR (Nível de Oscilação Rítmica) muito baixo</strong> (ritmo altamente regular entre os cinco tempos), alinhamento horizontal estável e pressão firme no Palográfico; e (2) predominância de <strong>formações ordenadas</strong> (tapetes equilibrados e estruturas estratificadas) com equilíbrio entre cores frias e quentes no Pfister. Esse conjunto de achados expressivos indica:
+                    </p>
+                    <div class="options-container" data-question="10">
+                        <div class="option-item" data-opt="A" onclick="selectOption(10, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>Labilidade afetiva acentuada e desorganização cognitiva sob pressão, evidenciadas pelo baixo NOR no Palográfico e pelas formações ordenadas no Pfister.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(10, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Intolerância severa a tarefas rotineiras e tendência a eclosões impulsivas, típicas de candidatos que mantêm alinhamento regular e estruturas estratificadas.</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(10, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>Constância na capacidade produtiva sob rotina, bom tônus energético, estabilidade emocional e adequada capacidade de autorregulação afetivo-cognitiva.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(10, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>Depressão maior com lentificação psicomotora grave, inferida obrigatoriamente sempre que o candidato produz formações ordenadas em detrimento de formações móbiles.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(10, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>Manipulação consciente por desejabilidade social, visto que o Palográfico e o Pfister são inventários estruturados de autorrelato facilmente fraudáveis pelo candidato.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-10"></div>
+                </div>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • QUESTÕES 09 E 10</span>
+                <span class="font-bold">PÁGINA 09 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 10: QUESTÕES 11 E 12 (MEMÓRIA OPERACIONAL E PSICOMOTRICIDADE)  -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="10">
+            <div>
+                <div class="page-running-header">
+                    <span>CADERNO DE QUESTÕES CONTEXTUALIZADAS • EIXO VI: MEMÓRIA E PSICOMOTRICIDADE</span>
+                    <span>QUESTÕES 11 E 12</span>
+                </div>
+
+                <!-- QUESTÃO 11 -->
+                <div class="question-block" id="q-container-11">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 11 • MEMÓRIA DE CURTO PRAZO VS. MEMÓRIA DE TRABALHO (WORKING MEMORY)</span>
+                        <span class="font-mono text-[7.5pt]">NEUROPSICOLOGIA OPERACIONAL</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 11 —</strong> Na avaliação neuropsicológica aplicada a ambientes industriais automatizados e centrais de logística, distingue-se funcionalmente a <em>Memória de Curto Prazo</em> — armazenamento passivo e temporário de pequenas listas de estímulos por breves intervalos sem transformação — da <em>Memória de Trabalho (Working Memory)</em>, sistema executivo que mantém e manipula ativamente múltiplas informações enquanto o sujeito realiza operações cognitivas simultâneas (avaliada por reprodução em ordem inversa, ordenação alfanumérica mental e paradigmas <em>n-back</em>). Já a <em>Memória Visual</em> e a <em>Memória Auditiva</em> referem-se às modalidades sensoriais de retenção de mapas/painéis e comandos verbais via rádio, respectivamente.
+                        <span class="reference-citation">BADDELEY, A. Working Memory; Compêndio de Avaliação Neuropsicológica Operacional (Seção 6).</span>
+                    </div>
+                    <p class="question-stem">
+                        Um controlador de pátio ferroviário recebe via rádio sequências alfanuméricas de vagões em trânsito e precisa, mentalmente e sem apoio de papel imediato, inverter a ordem dos códigos conforme a prioridade de descarga, calcular a lotação remanescente de cada linha e acionar as chaves de desvio correspondentes. Um candidato que apresenta desempenho preservado na repetição direta simples de listas, mas fracassa sistematicamente em tarefas de ordem inversa e <em>n-back</em>, demonstra comprometimento específico na:
+                    </p>
+                    <div class="options-container" data-question="11">
+                        <div class="option-item" data-opt="A" onclick="selectOption(11, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>Memória Visual icônica, responsável exclusivamente pela retenção fotográfica passiva de mapas estáticos de sinalização ferroviária.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(11, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Memória de Curto Prazo passiva, uma vez que a repetição em ordem direta constitui o indicador mais complexo do executivo central.</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(11, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>Memória de Trabalho (<em>Working Memory</em>), cuja função executiva de armazenamento temporário aliado à manipulação ativa das informações é indispensável à tarefa.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(11, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>Memória Auditiva sensorial periférica, caracterizada pela incapacidade absoluta de registrar sons ou palavras emitidas por meio de equipamentos de rádio.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(11, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>Memória Procedimental motora, vinculada apenas ao automatismo muscular de acionamento mecânico das alavancas de desvio sem processamento cognitivo.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-11"></div>
+                </div>
+
+                <!-- QUESTÃO 12 -->
+                <div class="question-block" id="q-container-12" style="margin-bottom: 0;">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 12 • TAXONOMIA DAS APTIDÕES PSICOMOTORAS E COORDENAÇÃO</span>
+                        <span class="font-mono text-[7.5pt]">FINA, VELOCIDADE, DESTREZA E VISOMOTORA</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 12 —</strong> Os testes psicomotores avaliam a integridade neuromotora e a eficiência executiva diante de demandas físicas específicas do trabalho: (1) <em>Coordenação Motora Fina</em>: controle preciso de pequenos grupos musculares de mãos e dedos (microeletrônica, instrumentação); (2) <em>Velocidade Motora</em>: rapidez bruta de reação e execução de um movimento simples em resposta a um estímulo (acionamento imediato de botoeiras de emergência); (3) <em>Destreza Manual</em>: agilidade na manipulação coordenada de pequenos objetos ou ferramentas sob restrição temporal (montagem e embalagem rápida); e (4) <em>Coordenação Visomotora</em>: integração contínua entre o rastreio perceptivo-visual e o ajuste motor dinâmico (testes de labirinto gráfico, pontilhamento e condução veicular).
+                        <span class="reference-citation">FLEISHMAN, E. A. Psychomotor Abilities; Compêndio de Avaliação Psicológica Organizacional (Seção 6).</span>
+                    </div>
+                    <p class="question-stem">
+                        Considere duas funções industriais críticas: a <strong>Função Alfa</strong> consiste na soldagem manual sob lupa de microcomponentes SMD em placas de circuito impresso de precisão; a <strong>Função Beta</strong> consiste na condução de caminhões fora-de-estrada articulados em rampas sinuosas de mineração a céu aberto, exigindo ajuste contínuo da direção em sincronia com a leitura visual do terreno e dos retrovisores. As aptidões psicomotoras centrais que devem ser priorizadas na bateria de avaliação para as Funções Alfa e Beta são, respectivamente:
+                    </p>
+                    <div class="options-container" data-question="12">
+                        <div class="option-item" data-opt="A" onclick="selectOption(12, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>Velocidade Motora bruta para a Função Alfa e Coordenação Motora Fina digital para a Função Beta.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(12, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Coordenação Motora Fina para a Função Alfa e Coordenação Visomotora para a Função Beta.</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(12, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>Destreza Manual bimanual grossa para a Função Alfa e Velocidade Motora simples para a Função Beta.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(12, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>Coordenação Visomotora de rastreio amplo para a Função Alfa e Destreza Manual de embalagem para a Função Beta.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(12, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>Velocidade Motora reflexa para ambas as funções, pois a precisão muscular fina e o rastreio visual são redundantes na ergonomia moderna.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-12"></div>
+                </div>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • QUESTÕES 11 E 12</span>
+                <span class="font-bold">PÁGINA 10 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 11: QUESTÕES 13 E 14 (MÉTODOS SITUACIONAIS, STAR E TRIANGUL.)  -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="11">
+            <div>
+                <div class="page-running-header">
+                    <span>CADERNO DE QUESTÕES CONTEXTUALIZADAS • EIXO VII: MÉTODOS SITUACIONAIS &amp; STAR</span>
+                    <span>QUESTÕES 13 E 14</span>
+                </div>
+
+                <!-- QUESTÃO 13 -->
+                <div class="question-block" id="q-container-13">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 13 • ENTREVISTA POR COMPETÊNCIAS (STAR) E AMOSTRAGEM DE TRABALHO</span>
+                        <span class="font-mono text-[7.5pt]">FONTES COMPLEMENTARES • RES. CFP 009/2018</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 13 —</strong> Conforme previsto nas resoluções do CFP, a avaliação psicológica organizacional pode incorporar fontes complementares não privativas — desde que respaldadas na literatura científica e sem substituir testes restritos quando necessários. Entre essas técnicas destacam-se os testes de amostragem de trabalho (<em>Work Sample</em>), os <em>Business Games</em> (estudos de caso sob pressão temporal e dados incompletos) e a Entrevista Estruturada por Competências baseada na metodologia <strong>STAR</strong> (<em>Situação</em> vivenciada, <em>Tarefa</em> atribuída, <em>Ação</em> efetivamente executada pelo candidato e <em>Resultado</em> mensurável alcançado), que busca evidências comportamentais concretas passadas em vez de respostas hipotéticas idealizadas.
+                        <span class="reference-citation">CONSELHO FEDERAL DE PSICOLOGIA. Resolução CFP nº 009/2018; Compêndio de Avaliação Organizacional (Seção 7).</span>
+                    </div>
+                    <p class="question-stem">
+                        Durante uma entrevista por competências para o cargo de engenheiro de segurança do trabalho, ao ser questionado sobre gestão de crises operacionais, um candidato responde apenas no plano hipotético e normativo: <em>"Se houvesse um vazamento químico na planta, eu certamente seguiria a NR-20, acionaria a brigada e evacuaria o setor com tranquilidade"</em>. De acordo com a técnica da entrevista estruturada baseada na metodologia <strong>STAR</strong>, a intervenção metodológica adequada do avaliador deve ser:
+                    </p>
+                    <div class="options-container" data-question="13">
+                        <div class="option-item" data-opt="A" onclick="selectOption(13, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>Pontuar positivamente a competência de tolerância à pressão, pois o domínio teórico da norma regulamentadora comprova a eficácia comportamental futura em emergências.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(13, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Solicitar que o candidato relate um episódio real específico de sua trajetória profissional, detalhando o contexto (Situação), sua responsabilidade (Tarefa), as condutas concretas tomadas (Ação) e os impactos obtidos (Resultado).</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(13, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>Interromper a entrevista comportamental por considerá-la método privativo ilegal, substituindo-a integralmente por um inventário projetivo de manchas de tinta.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(13, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>Induzir o candidato a admitir falhas graves através de confrontação hostil, verificando se seus escores na entrevista coincidem com a escala de desejabilidade social do IFP-II.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(13, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>Aceitar a resposta condicional como equivalente ao componente "Ação" da matriz STAR, uma vez que candidatos técnicos raramente vivenciam situações reais de risco antes da contratação.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-13"></div>
+                </div>
+
+                <!-- QUESTÃO 14 -->
+                <div class="question-block" id="q-container-14" style="margin-bottom: 0;">
+                    <div class="question-header-bar">
+                        <span>QUESTÃO 14 • TRIANGULAÇÃO MULTIMÉTODO NA SELEÇÃO ORGANIZACIONAL</span>
+                        <span class="font-mono text-[7.5pt]">INTEGRAÇÃO PSICOMÉTRICA &amp; SITUACIONAL</span>
+                    </div>
+                    <div class="reference-box">
+                        <strong>TEXTO DE REFERÊNCIA 14 —</strong> A validade incremental da avaliação psicológica organizacional reside na <em>triangulação multimétodo</em>, procedimento pelo qual o psicólogo confronta convergências e divergências entre instrumentos objetivos de autorrelato (ex.: BFP, NEO PI-R, IFP-II), testes cognitivos e atencionais (ex.: BPR-5, D2-R, BPA), técnicas expressivas/projetivas (ex.: Palográfico, Pfister, HTP) e observações situacionais comportamentais (dinâmicas de grupo e simulações de conflito). Quando um candidato apresenta pontuações elevadas em traços socialmente desejáveis no autorrelato, mas manifesta condutas discrepantes em tarefas não estruturadas ou simulações sob pressão, a análise integrada impede decisões simplistas baseadas em um único instrumento.
+                        <span class="reference-citation">CFP. Cartilha de Avaliação Psicológica (2022); Compêndio Técnico-Científico (Seção 7 e 8).</span>
+                    </div>
+                    <p class="question-stem">
+                        Na etapa conclusiva de seleção para líder de equipe de manutenção ferroviária, o psicólogo analisa os dados de um candidato: na <strong>BFP</strong> (autorrelato), o candidato obteve percentil 95 no fator <em>Socialização</em> (empatia, cooperação e confiança); entretanto, no <strong>Teste de Pfister</strong> apresentou predominância de cores quentes sem contenção formal (estrutura desordenada/móbile com sinais de impulsividade), e na <strong>Dinâmica de Resolução de Conflitos</strong> interrompeu agressivamente os colegas, impondo sua solução sem escuta ativa. Aplicando o princípio da triangulação multimétodo, a conclusão técnica mais consistente é que:
+                    </p>
+                    <div class="options-container" data-question="14">
+                        <div class="option-item" data-opt="A" onclick="selectOption(14, 'A')">
+                            <span class="option-bubble">A</span>
+                            <span>O escore percentil 95 na BFP deve prevalecer absolutamente sobre o Pfister e a dinâmica, pois inventários fatoriais objetivos anulam empiricamente dados expressivos e observacionais.</span>
+                        </div>
+                        <div class="option-item" data-opt="B" onclick="selectOption(14, 'B')">
+                            <span class="option-bubble">B</span>
+                            <span>Há forte indício de viés de desejabilidade social no autorrelato (BFP), uma vez que tanto a técnica expressiva menos estruturada (Pfister) quanto a amostra comportamental real (dinâmica) convergem para impulsividade e dificuldade de cooperação sob pressão.</span>
+                        </div>
+                        <div class="option-item" data-opt="C" onclick="selectOption(14, 'C')">
+                            <span class="option-bubble">C</span>
+                            <span>A divergência entre os instrumentos comprova erro de aplicação do aplicador, exigindo a invalidação legal de toda a bateria e a contratação imediata do candidato em período de experiência.</span>
+                        </div>
+                        <div class="option-item" data-opt="D" onclick="selectOption(14, 'D')">
+                            <span class="option-bubble">D</span>
+                            <span>O candidato possui alta inteligência emocional e perfil cooperativo genuíno, tendo agido de forma agressiva na dinâmica apenas por possuir elevado raciocínio mecânico (RM) na BPR-5.</span>
+                        </div>
+                        <div class="option-item" data-opt="E" onclick="selectOption(14, 'E')">
+                            <span class="option-bubble">E</span>
+                            <span>A triangulação multimétodo recomenda descartar métodos situacionais sempre que contrariarem testes restritos ao psicólogo, para preservar a autonomia profissional prevista pelo SATEPSI.</span>
+                        </div>
+                    </div>
+                    <div class="feedback-banner" id="fb-14"></div>
+                </div>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • QUESTÕES 13 E 14</span>
+                <span class="font-bold">PÁGINA 11 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 12: GABARITO OFICIAL COMENTADO E FUNDAMENTADO                  -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="12">
+            <div>
+                <div class="page-running-header">
+                    <span>CHAVE DE CORREÇÃO OFICIAL • GABARITO COMENTADO E FUNDAMENTAÇÃO</span>
+                    <span>QUESTÕES 01 A 14</span>
+                </div>
+
+                <div class="flex items-center justify-between border-b-2 border-[#8b1e24] pb-1.5 mb-3">
+                    <h1 class="font-latex text-[14pt] font-bold text-gray-950 m-0">
+                        Gabarito Oficial Comentado e Fundamentação Psicométrica
+                    </h1>
+                    <div id="finalScoreSummary" class="text-[8.5pt] font-bold bg-gray-900 text-white px-2.5 py-1 rounded">
+                        Desempenho Atual: <span id="scoreSummaryValue">0 / 14 (0%)</span>
+                    </div>
+                </div>
+
+                <table class="latex-table" style="font-size: 7.6pt; line-height: 1.26;">
+                    <thead>
+                        <tr>
+                            <th style="width: 6%;">Q.</th>
+                            <th style="width: 6%; text-align: center;">Gab.</th>
+                            <th style="width: 22%;">Construto / Tema</th>
+                            <th style="width: 66%;">Fundamentação Técnico-Científica e Normativa</th>
+                        </tr>
+                    </thead>
+                    <tbody id="answerKeyTableBody">
+                        <!-- Preenchido dinamicamente pelo JavaScript para sincronia exata com o feedback interativo -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • GABARITO COMENTADO</span>
+                <span class="font-bold">PÁGINA 12 / 13</span>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- PÁGINA 13: REFERÊNCIAS BIBLIOGRÁFICAS COMPLETAS (38 FONTES)           -->
+        <!-- ===================================================================== -->
+        <section class="a4-page" data-page="13">
+            <div>
+                <div class="page-running-header">
+                    <span>FONTES CIENTÍFICAS, NORMATIVAS E DOCUMENTAIS • BIBLIOGRAFIA INTEGRAL</span>
+                    <span>REFERÊNCIAS [01 – 38]</span>
+                </div>
+
+                <h1 class="font-latex text-[14pt] font-bold text-gray-950 border-b-2 border-[#8b1e24] pb-1 mb-2.5">
+                    Referências Bibliográficas e Normativas Consultadas
+                </h1>
+
+                <p class="font-latex text-[8.8pt] text-gray-700 mb-2 text-justify">
+                    Abaixo encontram-se listadas integralmente as 38 referências técnico-científicas, resoluções do Conselho Federal de Psicologia (CFP), manuais psicométricos e artigos indexados que fundamentam o compêndio teórico e as 14 questões deste caderno:
+                </p>
+
+                <ol class="font-latex text-[7.35pt] leading-[1.28] text-gray-900 pl-5 space-y-0.5 text-justify" style="column-count: 2; column-gap: 6mm;">
+                    <li><strong>[1]</strong> SCIELO. <em>Contribuições do Satepsi para Avaliações Psicológicas Compulsórias (Trânsito, Porte de Arma e Concursos Públicos)</em>. Psicologia: Ciência e Profissão. Disponível em: https://www.scielo.br/j/pcp/a/PkWtrLRfVFh6gD79BznsTBN/</li>
+                    <li><strong>[2]</strong> DIALNET. <em>Por Que Regulamentar o Uso e Acesso aos Testes Psicológicos?</em> Disponível em: https://dialnet.unirioja.es/descarga/articulo/8164953.pdf</li>
+                    <li><strong>[3]</strong> CONSELHO REGIONAL DE PSICOLOGIA 18ª REGIÃO (CRP-MT). <em>Orientação Técnica: Avaliação Psicológica</em>. Disponível em: https://crpmt.org.br/orientacao-tecnica/avaliacao-psicologica</li>
+                    <li><strong>[4]</strong> CONSELHO FEDERAL DE PSICOLOGIA (CFP). <em>Cartilha de Avaliação Psicológica</em>. Brasília: CFP, 2022. Disponível em: https://site.cfp.org.br/wp-content/uploads/2022/08/cartilha_avaliacao_psicologica-2309.pdf</li>
+                    <li><strong>[5]</strong> CONSELHO FEDERAL DE PSICOLOGIA (CFP). <em>Sistema de Avaliação de Testes Psicológicos (SATEPSI)</em>. Disponível em: https://satepsi.cfp.org.br/</li>
+                    <li><strong>[6]</strong> CONSELHO FEDERAL DE PSICOLOGIA (CFP). <em>Legislação | SATEPSI</em>. Disponível em: https://satepsi.cfp.org.br/legislacao.cfm</li>
+                    <li><strong>[7]</strong> AVALIAR PSICOLOGIA. <em>SATEPSI: Entenda melhor</em>. Disponível em: https://www.avaliarpsicologia.com.br/post/satepsi-entenda-melhor</li>
+                    <li><strong>[8]</strong> CONSELHO FEDERAL DE PSICOLOGIA (CFP). <em>Resolução do Exercício Profissional nº 31, de 15 de dezembro de 2022</em>. CRP-SP. Disponível em: http://www.crpsp.org.br/arquivos/Resolucao-do-exercicio-profissional-31-2022-Conselho-federal-de-psicologia-BR.pdf</li>
+                    <li><strong>[9]</strong> CONSELHO FEDERAL DE PSICOLOGIA (CFP). <em>Resolução CFP nº 009, de 25 de abril de 2018</em>. SATEPSI. Disponível em: https://satepsi.cfp.org.br/docs/ResolucaoCFP009-18.pdf</li>
+                    <li><strong>[10]</strong> SCIELO. <em>Bateria Psicológica para Avaliação da Atenção (BPA): desempenho de diferentes faixas etárias</em>. Psico-USF. Disponível em: https://www.scielo.br/j/pusf/a/8pqYN36tQsDYg8PMTqmRscs/?lang=pt</li>
+                    <li><strong>[11]</strong> VICENTE, Aline. <em>Quais testes psicológicos podem ser aplicados online? Guia do SATEPSI</em>. Disponível em: https://www.neuropsicologaalinevicente.com.br/post/quais-testes-psicologicos-podem-ser-aplicados-online-satepsi/</li>
+                    <li><strong>[12]</strong> DIALNET. <em>Teste de Atenção Alternada (TEALT): Diferenças Entre Estados Brasileiros e Faixa Etária</em>. Disponível em: https://dialnet.unirioja.es/descarga/articulo/5392913.pdf</li>
+                    <li><strong>[13]</strong> AVALIAR PSICOLOGIA. <em>Testes Psicológicos de Atenção</em>. Disponível em: https://www.avaliarpsicologia.com.br/post/testes-de-aten%C3%A7%C3%A3o</li>
+                    <li><strong>[14]</strong> SALA, Bianca Maturana. <em>Estudo Piloto de Validação para Ampliação de Faixa-Etária do Teste de Atenção On-Line (AOL)</em>. UNIFESP. Disponível em: https://repositorio.unifesp.br/bitstreams/8bf5c2d3-3d03-44d8-9d11-af7c91d09df2/download</li>
+                    <li><strong>[15]</strong> FSJ / REVISTA TRANSFORMAR. <em>Neuropsicologia da Atenção: da Avaliação à Estimulação</em>. Disponível em: https://www.fsj.edu.br/transformar/index.php/transformar/article/view/494/272</li>
+                    <li><strong>[16]</strong> SCRIBD. <em>Testes Não Verbais de Inteligência: G-36, G-38, R1 e R2</em>. Disponível em: https://pt.scribd.com/document/918422679/Testes-Nao-Verbais-de-Inteligencia-G-36-G-38-MIG-R1-e-R2</li>
+                    <li><strong>[17]</strong> SCIELO. <em>Estudo de validação da bateria de provas de raciocínio (BPR-5)</em>. Psicologia: Teoria e Pesquisa. Disponível em: https://www.scielo.br/j/ptp/a/6rvvQsNBT9ZmgqQz7SyJ5TL/abstract/?lang=pt</li>
+                    <li><strong>[18]</strong> PEPSIC. <em>Bateria de Provas de Raciocínio (BPR-5): Estudo Exploratório em Alunos Universitários</em>. Avaliação Psicológica, 2010. Disponível em: http://pepsic.bvsalud.org/scielo.php?script=sci_arttext&amp;pid=S1677-04712010000200002</li>
+                    <li><strong>[19]</strong> SCIELO. <em>Estudo de validação da bateria de provas de raciocínio (BPR-5) — Texto Completo</em>. Disponível em: https://www.scielo.br/j/ptp/a/6rvvQsNBT9ZmgqQz7SyJ5TL/?lang=pt</li>
+                    <li><strong>[20]</strong> SCRIBD. <em>Bateria de Provas de Raciocínio BPR-5: Fundamentos e Tempo</em>. Disponível em: https://pt.scribd.com/document/847578528/AP1-BPR-5</li>
+                    <li><strong>[21]</strong> SCRIBD. <em>Gabarito e Normas do Teste G-36 de Inteligência</em>. Disponível em: https://pt.scribd.com/document/795746137/G36-GABARITO</li>
+                    <li><strong>[22]</strong> SCRIBD. <em>Teste G-36: Inteligência Não Verbal</em>. Disponível em: https://pt.scribd.com/doc/125470106/g36</li>
+                    <li><strong>[23]</strong> PEPSIC. <em>Normatização da Bateria de Provas de Raciocínio (BPR-5) Usando a Teoria de Resposta ao Item</em>. Avaliação Psicológica, 2022. Disponível em: http://pepsic.bvsalud.org/scielo.php?script=sci_arttext&amp;pid=S1677-04712022000200002</li>
+                    <li><strong>[24]</strong> WIKIHP. <em>Bateria de Provas de Raciocínio Diferencial (BPR-5)</em>. Disponível em: http://wiki.historiadapsicologia.com.br/index.php?title=Bateria_de_Provas_de_Racioc%C3%ADnio_Diferencial_%28BPR-5%29</li>
+                    <li><strong>[25]</strong> SCRIBD. <em>BPR-5: Bateria de Provas de Raciocínio — Estrutura e Subtestes</em>. Disponível em: https://pt.scribd.com/document/150720372/BPR-5-Bateria-de-Provas-de-Raciocinio</li>
+                    <li><strong>[26]</strong> SCRIBD. <em>Bateria de Provas de Raciocínio BPR-05: Aplicação e Cognição</em>. Disponível em: https://pt.scribd.com/document/846837632/BATERIA-DE-PROVAS-DE-RACIOCINIO-BPR-05-01-ALUNOS</li>
+                    <li><strong>[27]</strong> IBAP. <em>Instituto Brasileiro de Avaliação Psicológica — Anais e Mesas-Redondas de Avaliação da Personalidade</em>. Disponível em: https://www.ibapnet.org.br/congresso2013/lista_trabalhos_mesa_redonda.php</li>
+                    <li><strong>[28]</strong> PSYFLOW. <em>Instrumentos Psicológicos: BFP, IFP-II e Pfister</em>. Disponível em: https://www.psiflow.net/instrumentos</li>
+                    <li><strong>[29]</strong> SCRIBD. <em>Inventário de Personalidade e Avaliação (NEO PI-R e Big Five)</em>. Disponível em: https://pt.scribd.com/document/880714387/AVALIAC-A-O-PSICOLO-GICA-DA-PERSONALIDADE-pdf-2</li>
+                    <li><strong>[30]</strong> MANUAL DO PSICOTÉCNICO. <em>Técnicas Expressivas e de Personalidade (Palográfico, Pfister e IFP)</em>. 2ª ed. Disponível em: https://concurseirosnet.files.wordpress.com/2015/03/manual-do-psicotc3a9cnico-2c2aa-edic3a7c3a3o.pdf</li>
+                    <li><strong>[31]</strong> CASA DO PSICOPEDAGOGO. <em>Especificações Técnicas de Baterias Psicométricas</em>. Disponível em: https://www.casadopsicopedagogo.com.br/produto/bpr-5-bateria-de-provas-de-raciocinio-kit/</li>
+                    <li><strong>[32]</strong> SESC-DF. <em>Termo de Referência — Instrumentos de Avaliação Psicológica (IFP-II e Pfister)</em>. Disponível em: https://www.sescdf.com.br/documents/d/guest/2-anexo-i-termo-de-referencia-atualizado-pdf</li>
+                    <li><strong>[33]</strong> IPSY. <em>HTP Casa-Árvore-Pessoa: o que é e quem pode aplicar</em>. Disponível em: https://ipsybr.com.br/htp/</li>
+                    <li><strong>[34]</strong> VETOR EDITORA. <em>Coleção HTP — Técnica da Casa-Árvore-Pessoa</em>. Disponível em: https://www.vetoreditora.com.br/produto/colecao-htp-tecnica-da-casa-arvore-pessoa-71476</li>
+                    <li><strong>[35]</strong> REDALYC. <em>Considerações sobre o Uso do Teste da Casa-Árvore-Pessoa — HTP</em>. Disponível em: https://www.redalyc.org/pdf/3350/335027281016.pdf</li>
+                    <li><strong>[36]</strong> PONTOAZUL IA. <em>HTP: Técnica do Desenho da Casa-Árvore-Pessoa</em>. Disponível em: https://pontoazulia.com.br/instrumento/htp/</li>
+                    <li><strong>[37]</strong> PEPSIC. <em>O uso profissional da Técnica Projetiva do Desenho da Casa-Árvore-Pessoa (HTP): segundo opinião dos psicólogos</em>. Avaliação Psicológica, v. 24. Disponível em: https://pepsic.bvsalud.org/pdf/avp/v24/2175-3431-avp-24-e24891.pdf</li>
+                    <li><strong>[38]</strong> PEPSIC. <em>Propriedades psicométricas do Teste House-Tree-Person (HTP): Análise da produção científica brasileira</em>. Avaliação Psicológica, 2020. Disponível em: http://pepsic.bvsalud.org/scielo.php?script=sci_arttext&amp;pid=S1870-350X2020000200007</li>
+                </ol>
+            </div>
+
+            <div class="page-running-footer">
+                <span>CADERNO DE AVALIAÇÃO TÉCNICO-CIENTÍFICA • REFERÊNCIAS BIBLIOGRÁFICAS</span>
+                <span class="font-bold">PÁGINA 13 / 13</span>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- BARRA DE NAVEGAÇÃO INFERIOR FLUTUANTE (ACESSO RÁPIDO ENTRE PÁGINAS) -->
+    <footer class="no-print fixed bottom-0 left-0 right-0 z-50 bg-[#181a1f]/95 backdrop-blur-md border-t border-[#2d3139] px-4 py-2">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-3">
+            <button id="btnPrevBottom" onclick="changePage(-1)" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-[#252830] hover:bg-[#343844] text-white disabled:opacity-35 disabled:cursor-not-allowed transition flex items-center gap-2 cursor-pointer">
+                <span>←</span> <span>Página Anterior</span>
+            </button>
+
+            <div class="flex items-center gap-1.5 overflow-x-auto py-0.5" id="pageDotsContainer">
+                <!-- Bolinhas de navegação rápida geradas via JS -->
+            </div>
+
+            <button id="btnNextBottom" onclick="changePage(1)" class="px-4 py-1.5 rounded-lg text-xs font-bold bg-[#8b1e24] hover:bg-[#a6242b] text-white disabled:opacity-35 disabled:cursor-not-allowed transition flex items-center gap-2 cursor-pointer">
+                <span>Próxima Página</span> <span>→</span>
+            </button>
+        </div>
+    </footer>
+
+    <script>
+        // Banco de Dados do Gabarito Oficial Comentado (14 Questões)
+        const ANSWER_KEY = {
+            1: {
+                correct: 'B',
+                topic: 'SATEPSI e Modalidade Remota (Res. CFP nº 31/2022)',
+                rationale: 'Pela Resolução CFP nº 31/2022, a aprovação de um teste para aplicação presencial não autoriza seu uso remoto mediado por TICs. Embora as normas estejam dentro do prazo de 15 anos, a aplicação à distância exige parecer favorável específico para o formato digital, devendo o psicólogo substituir o instrumento ou realizar a aplicação presencialmente (e nunca delegar a leigos).'
+            },
+            2: {
+                correct: 'C',
+                topic: 'Sigilo, Documentos Psicológicos (Res. CFP nº 06/2019)',
+                rationale: 'A Resolução CFP nº 06/2019 e o Código de Ética Profissional vedam o fornecimento de protocolos originais de testes, escores brutos ou conteúdos íntimos ao contratante. O documento emitido deve conter apenas informações técnicas estritamente pertinentes ao perfil do cargo, garantindo-se o sigilo dos registros e o direito do candidato à entrevista devolutiva.'
+            },
+            3: {
+                correct: 'B',
+                topic: 'Atenção Dividida (TEADI) vs. Atenção Alternada (TEALT)',
+                rationale: 'O Posto I exige processamento simultâneo de duas fontes independentes de estímulos (atenção dividida, avaliada pelo TEADI). Já o Posto II exige flexibilidade cognitiva para alterar sistematicamente o critério/regra de seleção a cada lote ou linha (atenção alternada, avaliada pelo TEALT).'
+            },
+            4: {
+                correct: 'C',
+                topic: 'Análise Velocidade vs. Precisão no D2-R e BPA',
+                rationale: 'Alta velocidade combinada a muitos erros por comissão nas linhas finais (Candidato X) evidencia impulsividade e queda de vigilância por fadiga atencional, elevando o risco de acidentes com empilhadeiras. O Candidato Y apresenta desempenho equilibrado e estável, preferível em operações críticas.'
+            },
+            5: {
+                correct: 'C',
+                topic: 'Inteligência Não Verbal e Escolaridade (Teste R-2)',
+                rationale: 'Enquanto G-36, G-38 e R-1 empregam matrizes geométricas abstratas, o Teste R-2 utiliza figuras concretas do cotidiano para mensurar o raciocínio não verbal, reduzindo o impacto da baixa escolaridade formal em cargos operacionais de base.'
+            },
+            6: {
+                correct: 'B',
+                topic: 'Aptidões Específicas da BPR-5 (RE e RM)',
+                rationale: 'Na BPR-5 (Forma B), a rotação mental tridimensional de conjuntos hidráulicos é mensurada pelo subteste de Raciocínio Espacial (RE), enquanto a compreensão prática de leis físicas, engrenagens e dinâmica de forças é avaliada pelo Raciocínio Mecânico (RM).'
+            },
+            7: {
+                correct: 'B',
+                topic: 'Modelo Big Five (BFP e NEO PI-R) sob Alta Pressão',
+                rationale: 'Funções críticas com protocolos rígidos exigem alta Realização/Conscienciosidade (disciplina, organização e senso de dever) combinada a baixo Neuroticismo (estabilidade emocional e resiliência ao estresse, minimizando erros por ansiedade ou impulsividade).'
+            },
+            8: {
+                correct: 'A',
+                topic: 'Necessidades Psicogênicas de Murray (IFP-II)',
+                rationale: 'No IFP-II, escores altos em Dominância e Autonomia refletem impulso para liderar e agir com independência; contudo, escores muito baixos em Afiliação, Deferência e Ordem indicam baixa orientação para cooperação grupal, dificuldade em acatar hierarquia e pouco apego ao planejamento metódico.'
+            },
+            9: {
+                correct: 'B',
+                topic: 'Interpretação Formal e Projetiva no HTP (John Buck)',
+                rationale: 'A interpretação do HTP exige integrar aspectos formais (tamanho diminuto, traço leve/interrompido, localização superior esquerda) com aspectos de conteúdo (omissões e resistência ao inquérito), formulando hipóteses de inibição, insegurança e defensividade que devem ser obrigatoriamente cruzadas com outros métodos.'
+            },
+            10: {
+                correct: 'C',
+                topic: 'Palográfico (NOR/Ritmo) e Pirâmides de Pfister',
+                rationale: 'No Palográfico, produtividade média com NOR muito baixo e alinhamento regular demonstram constância produtiva sob rotina e estabilidade emocional. No Pfister, formações ordenadas com equilíbrio cromático confirmam boa capacidade de autorregulação afetivo-cognitiva.'
+            },
+            11: {
+                correct: 'C',
+                topic: 'Memória de Curto Prazo vs. Memória de Trabalho',
+                rationale: 'Manter códigos recebidos enquanto os inverte mentalmente e realiza cálculos simultâneos define a Memória de Trabalho (Working Memory), avaliada por tarefas de ordem inversa e n-back, diferindo da retenção passiva da memória de curto prazo.'
+            },
+            12: {
+                correct: 'B',
+                topic: 'Aptidões Psicomotoras (Fina vs. Visomotora)',
+                rationale: 'A soldagem de microcomponentes sob lupa exige controle preciso de pequenos grupos musculares de mãos e dedos (Coordenação Motora Fina), enquanto a condução de caminhões fora-de-estrada exige sincronia contínua entre rastreio visual e ajuste motor executivo (Coordenação Visomotora).'
+            },
+            13: {
+                correct: 'B',
+                topic: 'Entrevista por Competências (Metodologia STAR)',
+                rationale: 'A metodologia STAR investiga evidências comportamentais passadas reais (Situação, Tarefa, Ação executada e Resultado alcançado), evitando respostas hipotéticas ou meramente normativas sobre o que o candidato supostamente faria.'
+            },
+            14: {
+                correct: 'B',
+                topic: 'Triangulação Multimétodo em Seleção de Pessoal',
+                rationale: 'A discrepância entre um escore extremo de Socialização no autorrelato (BFP) e a convergência de impulsividade/baixa cooperação tanto no Pfister quanto na dinâmica de conflitos aponta para viés de desejabilidade social no questionário objetivo.'
+            }
+        };
+
+        let currentPage = 1;
+        const totalPages = 13;
+        const userAnswers = {};
+        let gradeMode = false;
+
+        // Inicialização da Interface
+        document.addEventListener('DOMContentLoaded', () => {
+            buildPageDots();
+            populateAnswerKeyTable();
+            updateNavigationUI();
+        });
+
+        // Gera os indicadores de página na barra inferior
+        function buildPageDots() {
+            const container = document.getElementById('pageDotsContainer');
+            container.innerHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i < 10 ? `0${i}` : `${i}`;
+                btn.dataset.dot = i;
+                btn.onclick = () => goToPage(i);
+                btn.className = 'w-6 h-6 rounded text-[11px] font-mono font-bold transition cursor-pointer flex items-center justify-center border';
+                container.appendChild(btn);
+            }
+        }
+
+        // Preenche a tabela do gabarito oficial na Página 12
+        function populateAnswerKeyTable() {
+            const tbody = document.getElementById('answerKeyTableBody');
+            tbody.innerHTML = '';
+            for (let q = 1; q <= 14; q++) {
+                const item = ANSWER_KEY[q];
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="font-mono font-bold text-gray-900">${q < 10 ? '0' + q : q}</td>
+                    <td class="text-center"><span class="inline-block w-5 h-5 leading-5 rounded-full bg-gray-900 text-white font-bold text-[7.5pt]">${item.correct}</span></td>
+                    <td><strong>${item.topic}</strong></td>
+                    <td class="font-latex text-[8.4pt] text-justify">${item.rationale}</td>
+                `;
+                tbody.appendChild(tr);
+            }
+        }
+
+        // Navegação entre páginas A4
+        function goToPage(pageNum) {
+            if (pageNum < 1 || pageNum > totalPages) return;
+            currentPage = pageNum;
+
+            document.querySelectorAll('.a4-page').forEach(page => {
+                page.classList.remove('active');
+                if (parseInt(page.dataset.page) === currentPage) {
+                    page.classList.add('active');
+                }
+            });
+
+            updateNavigationUI();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function changePage(delta) {
+            goToPage(currentPage + delta);
+        }
+
+        function updateNavigationUI() {
+            document.getElementById('pageSelector').value = currentPage;
+            document.getElementById('btnPrevTop').disabled = currentPage === 1;
+            document.getElementById('btnNextTop').disabled = currentPage === totalPages;
+            document.getElementById('btnPrevBottom').disabled = currentPage === 1;
+            document.getElementById('btnNextBottom').disabled = currentPage === totalPages;
+
+            document.querySelectorAll('#pageDotsContainer button').forEach(btn => {
+                const p = parseInt(btn.dataset.dot);
+                if (p === currentPage) {
+                    btn.className = 'w-6 h-6 rounded text-[11px] font-mono font-bold transition cursor-pointer flex items-center justify-center bg-[#8b1e24] text-white border-[#8b1e24] shadow';
+                } else {
+                    btn.className = 'w-6 h-6 rounded text-[11px] font-mono font-semibold transition cursor-pointer flex items-center justify-center bg-[#1e2128] text-gray-400 border-[#2f3440] hover:text-white hover:border-gray-500';
+                }
+            });
+        }
+
+        // Atalhos de teclado (Setas Esquerda e Direita)
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+            if (e.key === 'ArrowRight') changePage(1);
+            if (e.key === 'ArrowLeft') changePage(-1);
+        });
+
+        // Seleção de alternativa pelo usuário
+        function selectOption(questionNum, optLetter) {
+            userAnswers[questionNum] = optLetter;
+
+            const container = document.querySelector(`.options-container[data-question="${questionNum}"]`);
+            container.querySelectorAll('.option-item').forEach(el => {
+                el.classList.remove('selected');
+                if (el.dataset.opt === optLetter) {
+                    el.classList.add('selected');
+                }
+            });
+
+            updateScoreMetrics();
+            if (gradeMode) {
+                applyGradingToQuestion(questionNum);
+            }
+        }
+
+        // Atualiza contagem de respondidas e acertos
+        function updateScoreMetrics() {
+            const answered = Object.keys(userAnswers).length;
+            document.getElementById('answeredCount').textContent = `${answered}/14`;
+
+            let correctCount = 0;
+            for (let q = 1; q <= 14; q++) {
+                if (userAnswers[q] && userAnswers[q] === ANSWER_KEY[q].correct) {
+                    correctCount++;
+                }
+            }
+            const pct = Math.round((correctCount / 14) * 100);
+            document.getElementById('scoreSummaryValue').textContent = `${correctCount} / 14 (${pct}%)`;
+        }
+
+        // Ativa ou desativa o Modo de Conferência de Gabarito
+        function toggleGradeMode() {
+            gradeMode = !gradeMode;
+            const btn = document.getElementById('btnGradeToggle');
+
+            if (gradeMode) {
+                btn.textContent = 'Ocultar Gabarito';
+                btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-amber-700 hover:bg-amber-600 text-white transition shadow cursor-pointer';
+                for (let q = 1; q <= 14; q++) {
+                    applyGradingToQuestion(q);
+                }
+            } else {
+                btn.textContent = 'Conferir Gabarito';
+                btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-800 hover:bg-emerald-700 text-white transition shadow cursor-pointer';
+                document.querySelectorAll('.option-item').forEach(el => {
+                    el.classList.remove('correct-answer', 'wrong-answer');
+                });
+                document.querySelectorAll('.feedback-banner').forEach(fb => {
+                    fb.classList.remove('visible');
+                });
+            }
+            updateScoreMetrics();
+        }
+
+        function applyGradingToQuestion(q) {
+            const correctOpt = ANSWER_KEY[q].correct;
+            const userOpt = userAnswers[q];
+            const container = document.querySelector(`.options-container[data-question="${q}"]`);
+            const fb = document.getElementById(`fb-${q}`);
+
+            container.querySelectorAll('.option-item').forEach(el => {
+                el.classList.remove('correct-answer', 'wrong-answer');
+                const opt = el.dataset.opt;
+                if (opt === correctOpt) {
+                    el.classList.add('correct-answer');
+                } else if (userOpt && opt === userOpt && userOpt !== correctOpt) {
+                    el.classList.add('wrong-answer');
+                }
+            });
+
+            const statusText = !userOpt
+                ? `<strong class="text-amber-700">Não respondida • Gabarito Oficial: (${correctOpt}).</strong> `
+                : (userOpt === correctOpt
+                    ? `<strong class="text-emerald-700">Resposta Correta (${correctOpt})!</strong> `
+                    : `<strong class="text-red-700">Você marcou (${userOpt}) • Gabarito Oficial: (${correctOpt}).</strong> `);
+
+            fb.innerHTML = `${statusText}${ANSWER_KEY[q].rationale}`;
+            fb.classList.add('visible');
+        }
+    </script>
+</body>
+</html>
