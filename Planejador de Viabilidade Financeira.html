@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Planejador de Viabilidade Financeira</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --success: #047857;
+      --warning: #b45309;
+      --danger: #b91c1c;
+      --text: #0f172a;
+      --muted: #64748b;
+      --radius: 8px;
+    }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      padding: 32px 20px 64px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .container { max-width: 1120px; margin: 0 auto; }
+
+    /* ---------- Cabeçalho ---------- */
+    header {
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .subtitle { margin: 0; font-size: 14px; color: var(--muted); }
+
+    /* ---------- Abas ---------- */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tab {
+      padding: 10px 14px;
+      margin-bottom: -1px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      font: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active {
+      color: var(--primary);
+      font-weight: 600;
+      border-bottom-color: var(--primary);
+    }
+    .tab:focus-visible { outline: 2px solid var(--primary); outline-offset: -2px; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ---------- Layout ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 24px;
+      align-items: start;
+    }
+    .card {
+      padding: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .card h2 ~ h2 { margin-top: 28px; }
+    h3 { margin: 24px 0 12px; font-size: 14px; font-weight: 600; }
+
+    /* ---------- Formulários ---------- */
+    .input-group { display: grid; gap: 16px; margin-bottom: 20px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #334155;
+    }
+    input[type="number"],
+    input[type="text"],
+    input[type="date"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      font: inherit;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, .12);
+    }
+    textarea { min-height: 110px; resize: vertical; font-family: inherit; }
+
+    .hint { margin: 0 0 20px; font-size: 13px; color: var(--muted); }
+
+    /* ---------- Botões ---------- */
+    button { font: inherit; }
+    .btn-primary {
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      background: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+    .btn-primary:hover { background: var(--primary-hover); border-color: var(--primary-hover); }
+    .btn-secondary {
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-secondary:hover { background: #f1f5f9; }
+    .btn-primary:focus-visible,
+    .btn-secondary:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+    /* ---------- Painel de resultado ---------- */
+    .summary {
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-row.total { background: #f8fafc; }
+    .summary-label { font-size: 13px; color: var(--muted); }
+    .summary-value { font-weight: 600; font-variant-numeric: tabular-nums; }
+    .summary-row.total .summary-value { font-size: 18px; }
+
+    .bar {
+      height: 16px;
+      margin: 0 0 20px;
+      background: #eef2f7;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--primary);
+      transition: width .4s ease;
+    }
+
+    .status {
+      padding: 14px 16px;
+      border: 1px solid;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+    .status strong { display: block; margin-bottom: 2px; font-size: 14px; }
+    .status span { font-weight: 400; }
+    .status-ok      { background: #f0fdf4; border-color: #bbf7d0; color: #166534; }
+    .status-warning { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+    .status-danger  { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+
+    .note {
+      margin-top: 20px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--muted);
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--primary);
+      border-radius: 0 6px 6px 0;
+    }
+    .note strong { display: block; margin-bottom: 2px; color: var(--text); }
+
+    /* ---------- Checklist ---------- */
+    .checklist { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .checklist li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      font-size: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+    .checklist li:hover { border-color: var(--border-strong); border-left-color: var(--primary); }
+    .checklist li:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .checklist li.checked {
+      color: var(--muted);
+      background: #f8fafc;
+      border-left-color: var(--success);
+    }
+    .checklist li.checked span { text-decoration: line-through; }
+
+    .checkbox {
+      position: relative;
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      background: var(--surface);
+      border: 1.5px solid var(--border-strong);
+      border-radius: 4px;
+    }
+    .checklist li.checked .checkbox { background: var(--success); border-color: var(--success); }
+    .checklist li.checked .checkbox::after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 2px;
+      width: 4px;
+      height: 8px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    /* ---------- Calendário ---------- */
+    .month-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    #mesAtual { font-size: 15px; font-weight: 600; text-transform: capitalize; }
+
+    .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 16px; }
+    .calendar-header {
+      padding: 6px 0;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .calendar-day {
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+    .calendar-day:hover { background: #f8fafc; border-color: var(--primary); }
+    .calendar-day:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
+    .calendar-day.selected {
+      color: var(--primary);
+      font-weight: 600;
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+    .calendar-day.past {
+      color: #cbd5e1;
+      background: #f8fafc;
+      border-color: #f1f5f9;
+      cursor: default;
+    }
+    .calendar-day.placeholder { background: transparent; border: none; cursor: default; }
+
+    /* ---------- Despesas ---------- */
+    .panel {
+      margin-top: 24px;
+      padding: 20px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .panel h3 { margin-top: 0; }
+
+    .expense-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .expense-name { font-size: 14px; font-weight: 500; }
+    .expense-meta { margin-top: 2px; font-size: 12px; color: var(--muted); }
+
+    .btn-ghost {
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: color .15s, border-color .15s;
+    }
+    .btn-ghost:hover { color: var(--danger); border-color: var(--danger); }
+
+    .feedback {
+      display: none;
+      margin-top: 20px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #166534;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 6px;
+    }
+    .feedback strong { display: block; margin-bottom: 2px; }
+
+    /* ---------- Responsivo ---------- */
+    @media (max-width: 960px) {
+      .grid { grid-template-columns: 1fr; }
+      .row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Planejador de Viabilidade Financeira</h1>
+      <p class="subtitle">Descubra se você pode morar sozinho com segurança</p>
+    </header>
+
+    <div class="tabs" role="tablist" aria-label="Navegação das abas">
+      <button class="tab active" data-tab="calculadora" role="tab" aria-selected="true">Calculadora</button>
+      <button class="tab" data-tab="checklist" role="tab" aria-selected="false">Checklist</button>
+      <button class="tab" data-tab="calendario" role="tab" aria-selected="false">Calendário de gastos</button>
+      <button class="tab" data-tab="formulario" role="tab" aria-selected="false">Dados pessoais</button>
+    </div>
+
+    <!-- ABA 1: CALCULADORA -->
+    <div class="tab-content active" id="calculadora" role="tabpanel">
+      <div class="grid">
+        <div class="card">
+          <h2>Suas finanças</h2>
+          <div class="input-group">
+            <div>
+              <label for="salario">Salário líquido mensal (R$)</label>
+              <input id="salario" type="number" value="1518" min="0" step="0.01" aria-label="Salário líquido mensal" />
+            </div>
+            <div>
+              <label for="preset">Preset de cidade</label>
+              <select id="preset" aria-label="Preset de cidade">
+                <option value="personal">Personalizar valores</option>
+                <option value="barata">Cidade barata</option>
+                <option value="media" selected>Cidade média</option>
+                <option value="cara">Cidade cara (capital)</option>
+              </select>
+            </div>
+          </div>
+
+          <h2>Moradia</h2>
+          <div class="input-group">
+            <div class="row">
+              <div>
+                <label for="aluguel">Aluguel (R$)</label>
+                <input id="aluguel" type="number" value="700" aria-label="Aluguel" />
+              </div>
+              <div>
+                <label for="cond">Condomínio / IPTU (R$)</label>
+                <input id="cond" type="number" value="140" aria-label="Condomínio e IPTU" />
+              </div>
+            </div>
+          </div>
+
+          <h2>Contas fixas</h2>
+          <div class="input-group">
+            <div class="row">
+              <div>
+                <label for="contas">Luz, água e gás (R$)</label>
+                <input id="contas" type="number" value="180" aria-label="Luz, água e gás" />
+              </div>
+              <div>
+                <label for="tel">Internet e celular (R$)</label>
+                <input id="tel" type="number" value="120" aria-label="Internet e celular" />
+              </div>
+            </div>
+          </div>
+
+          <h2>Alimentação e outros</h2>
+          <div class="input-group">
+            <div>
+              <label for="comida">Alimentação mensal (R$)</label>
+              <input id="comida" type="number" value="380" aria-label="Alimentação mensal" />
+            </div>
+            <div class="row">
+              <div>
+                <label for="transp">Transporte (R$)</label>
+                <input id="transp" type="number" value="140" aria-label="Transporte" />
+              </div>
+              <div>
+                <label for="limpeza">Limpeza e lavanderia (R$)</label>
+                <input id="limpeza" type="number" value="50" aria-label="Limpeza e lavanderia" />
+              </div>
+            </div>
+            <div>
+              <label for="outros">Gastos pessoais, lazer, saúde e imprevistos (R$)</label>
+              <input id="outros" type="number" value="120" aria-label="Gastos pessoais e imprevistos" />
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button class="btn-primary" id="calcular" style="flex: 1;" aria-label="Calcular viabilidade">Calcular viabilidade</button>
+            <button class="btn-secondary" id="reset" aria-label="Resetar valores">Resetar</button>
+          </div>
+        </div>
+
+        <aside class="card" aria-live="polite">
+          <h2>Resultado</h2>
+
+          <div class="summary">
+            <div class="summary-row">
+              <span class="summary-label">Salário líquido</span>
+              <span class="summary-value" id="salarioRes">R$ 1.518,00</span>
+            </div>
+            <div class="summary-row">
+              <span class="summary-label">Total de despesas</span>
+              <span class="summary-value" id="despesasRes">R$ 0,00</span>
+            </div>
+            <div class="summary-row total">
+              <span class="summary-label">Saldo restante</span>
+              <span class="summary-value" id="saldoRes">R$ 0,00</span>
+            </div>
+          </div>
+
+          <div class="bar" aria-hidden="true">
+            <div class="bar-fill" id="barraGastos" style="width: 0%;">0%</div>
+          </div>
+
+          <div id="statusAvaliacao" class="status status-ok">
+            <strong>Aguardando cálculo</strong>
+            <span>Preencha os valores e clique em calcular.</span>
+          </div>
+
+          <div class="note">
+            <strong>Fundo de emergência</strong>
+            Tenha sempre o equivalente a pelo menos 3 meses de despesas. Isso evita endividamento em imprevistos.
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- ABA 2: CHECKLIST -->
+    <div class="tab-content" id="checklist" role="tabpanel">
+      <div class="card">
+        <h2>Checklist: preparação para morar sozinho</h2>
+        <p class="hint">Clique nos itens para marcá-los como concluídos (Enter ou Espaço para teclado).</p>
+
+        <h3>Antes de alugar</h3>
+        <ul class="checklist" id="checklist1">
+          <li data-id="1" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Pesquisar imóveis em diferentes bairros e comparar valores</span></li>
+          <li data-id="2" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Verificar documentação necessária (CPF, RG, comprovante de renda)</span></li>
+          <li data-id="3" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Entender custos iniciais (caução, fiador, seguro-fiança, primeiro aluguel)</span></li>
+          <li data-id="4" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Visitar imóveis pessoalmente e verificar estado de conservação</span></li>
+          <li data-id="5" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Calcular tempo e custo de deslocamento entre trabalho e casa</span></li>
+        </ul>
+
+        <h3>Planejamento financeiro</h3>
+        <ul class="checklist" id="checklist2">
+          <li data-id="6" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Criar orçamento mensal detalhado com todas as despesas</span></li>
+          <li data-id="7" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Separar fundo de emergência (mínimo de 3 meses de despesas)</span></li>
+          <li data-id="8" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Verificar estabilidade do trabalho e contrato</span></li>
+          <li data-id="9" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Pesquisar preços de supermercados, feiras e farmácias próximas</span></li>
+          <li data-id="10" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Considerar renda extra ou divisão de moradia se necessário</span></li>
+        </ul>
+
+        <h3>Após alugar</h3>
+        <ul class="checklist" id="checklist3">
+          <li data-id="11" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Fazer vistoria detalhada e registrar fotos do estado do imóvel</span></li>
+          <li data-id="12" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Contratar serviços (luz, água, gás, internet)</span></li>
+          <li data-id="13" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Comprar itens essenciais (cama, geladeira, fogão, utensílios)</span></li>
+          <li data-id="14" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Organizar mudança e limpeza do imóvel</span></li>
+          <li data-id="15" tabindex="0" role="button" aria-pressed="false"><div class="checkbox" aria-hidden="true"></div><span>Atualizar endereço em documentos e cadastros</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ABA 3: CALENDÁRIO -->
+    <div class="tab-content" id="calendario" role="tabpanel">
+      <div class="card">
+        <h2>Calendário de gastos mensais</h2>
+        <p class="hint">Planeje quando cada despesa vence no mês. Clique em um dia para pré-preencher o formulário.</p>
+
+        <div class="month-nav">
+          <button id="mesAnterior" class="btn-secondary" aria-label="Mês anterior">← Mês anterior</button>
+          <div id="mesAtual" aria-live="polite"></div>
+          <button id="mesProximo" class="btn-secondary" aria-label="Próximo mês">Próximo mês →</button>
+        </div>
+
+        <div class="calendar" id="calendario-grid" role="grid" aria-label="Calendário de despesas"></div>
+
+        <div class="panel">
+          <h3>Adicionar despesa</h3>
+          <div class="input-group" style="margin-bottom: 0;">
+            <div>
+              <label for="despesaNome">Nome da despesa</label>
+              <input type="text" id="despesaNome" placeholder="Ex.: Aluguel" aria-label="Nome da despesa" />
+            </div>
+            <div class="row">
+              <div>
+                <label for="despesaValor">Valor (R$)</label>
+                <input type="number" id="despesaValor" placeholder="0,00" step="0.01" aria-label="Valor da despesa" />
+              </div>
+              <div>
+                <label for="despesaDia">Dia de vencimento</label>
+                <input type="number" id="despesaDia" placeholder="5" min="1" max="31" aria-label="Dia de vencimento" />
+              </div>
+            </div>
+            <button class="btn-primary" id="adicionarDespesa" aria-label="Adicionar despesa">Adicionar despesa</button>
+          </div>
+        </div>
+
+        <h3>Despesas cadastradas (mês selecionado)</h3>
+        <div id="listaDespesas" style="display: grid; gap: 8px;" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <!-- ABA 4: FORMULÁRIO -->
+    <div class="tab-content" id="formulario" role="tabpanel">
+      <div class="card">
+        <h2>Dados pessoais e planejamento</h2>
+        <p class="hint">Preencha para ter uma visão completa do seu planejamento.</p>
+
+        <div class="input-group">
+          <div>
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" placeholder="Seu nome" />
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="idade">Idade</label>
+              <input type="number" id="idade" placeholder="25" />
+            </div>
+            <div>
+              <label for="profissao">Profissão</label>
+              <input type="text" id="profissao" placeholder="Ex.: Analista" />
+            </div>
+          </div>
+
+          <div>
+            <label for="cidade">Cidade desejada para morar</label>
+            <input type="text" id="cidade" placeholder="Ex.: Betim, MG" />
+          </div>
+
+          <div>
+            <label for="dataMudanca">Data prevista para mudança</label>
+            <input type="date" id="dataMudanca" />
+          </div>
+
+          <div>
+            <label for="tipoMoradia">Tipo de moradia desejada</label>
+            <select id="tipoMoradia">
+              <option>Kitnet / Studio</option>
+              <option>Apartamento 1 quarto</option>
+              <option>Apartamento 2 quartos</option>
+              <option>Casa</option>
+              <option>República / Dividir aluguel</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="observacoes">Observações e metas</label>
+            <textarea id="observacoes" placeholder="Ex.: Quero economizar R$ 3.000 antes de mudar..."></textarea>
+          </div>
+
+          <button class="btn-primary" id="salvarDados">Salvar dados</button>
+        </div>
+
+        <div id="dadosSalvos" class="feedback">
+          <strong>Dados salvos com sucesso</strong>
+          Suas informações estão armazenadas localmente no navegador.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // --- Config e utilitários ---
+    const LS_PREFIX = 'vsf_';
+    const LS_CHECKLIST = LS_PREFIX + 'checklist';
+    const LS_DESPESAS = LS_PREFIX + 'despesas';
+    const LS_DADOS = LS_PREFIX + 'dadosFormulario';
+
+    const $ = (id) => document.getElementById(id);
+    const fmt = v => 'R$ ' + Number(v).toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+
+    function safeParse(key, fallback) {
+      try {
+        const v = localStorage.getItem(key);
+        if (!v) return fallback;
+        return JSON.parse(v);
+      } catch (e) {
+        console.warn('Erro ao parsear', key, e);
+        return fallback;
+      }
+    }
+
+    // --- Presets de cidades ---
+    const presets = {
+      barata: {aluguel:500, cond:80, contas:120, tel:100, comida:340, transp:100, limpeza:40, outros:80},
+      media: {aluguel:700, cond:140, contas:180, tel:120, comida:380, transp:140, limpeza:50, outros:120},
+      cara: {aluguel:1500, cond:250, contas:250, tel:180, comida:480, transp:200, limpeza:70, outros:180}
+    };
+
+    // --- Estado ---
+    let mesAtual = new Date();
+
+    (function migrateOldDespesas() {
+      try {
+        const oldKey = 'despesas';
+        if (localStorage.getItem(oldKey) && !localStorage.getItem(LS_DESPESAS)) {
+          const old = JSON.parse(localStorage.getItem(oldKey) || '[]');
+          const migrated = (old || []).map(d => Object.assign({mes: mesAtual.getMonth(), ano: mesAtual.getFullYear()}, d));
+          localStorage.setItem(LS_DESPESAS, JSON.stringify(migrated));
+        }
+      } catch (e) {
+        // ignora
+      }
+    })();
+
+    let despesasMensais = safeParse(LS_DESPESAS, []);
+    const checklistStorage = safeParse(LS_CHECKLIST, {});
+    const dadosFormulario = safeParse(LS_DADOS, {});
+
+    // --- Sistema de abas ---
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        const target = $(tab.dataset.tab);
+        if (target) target.classList.add('active');
+      });
+    });
+
+    // Preset select
+    $('preset').addEventListener('change', e => {
+      if (e.target.value === 'personal') return;
+      const p = presets[e.target.value];
+      $('aluguel').value = p.aluguel;
+      $('cond').value = p.cond;
+      $('contas').value = p.contas;
+      $('tel').value = p.tel;
+      $('comida').value = p.comida;
+      $('transp').value = p.transp;
+      $('limpeza').value = p.limpeza;
+      $('outros').value = p.outros;
+    });
+
+    // --- Calculadora ---
+    function calcular() {
+      const salario = Number($('salario').value) || 0;
+      const aluguel = Number($('aluguel').value) || 0;
+      const cond = Number($('cond').value) || 0;
+      const contas = Number($('contas').value) || 0;
+      const tel = Number($('tel').value) || 0;
+      const comida = Number($('comida').value) || 0;
+      const transp = Number($('transp').value) || 0;
+      const limpeza = Number($('limpeza').value) || 0;
+      const outros = Number($('outros').value) || 0;
+
+      const total = aluguel + cond + contas + tel + comida + transp + limpeza + outros;
+      const saldo = salario - total;
+
+      let percentGasto;
+      if (salario <= 0) {
+        percentGasto = 0;
+      } else {
+        percentGasto = Number(((total / salario) * 100).toFixed(1));
+      }
+      percentGasto = clamp(percentGasto, 0, 100);
+
+      $('salarioRes').textContent = fmt(salario);
+      $('despesasRes').textContent = fmt(total);
+      $('saldoRes').textContent = fmt(saldo);
+      $('saldoRes').style.color = saldo >= 0 ? 'var(--success)' : 'var(--danger)';
+
+      $('barraGastos').style.width = percentGasto + '%';
+      $('barraGastos').textContent = percentGasto + '%';
+      $('barraGastos').style.background = percentGasto < 70 ? 'var(--success)' : percentGasto < 90 ? 'var(--warning)' : 'var(--danger)';
+
+      const statusDiv = $('statusAvaliacao');
+
+      if (salario <= 0) {
+        statusDiv.className = 'status status-danger';
+        statusDiv.innerHTML = '<strong>Salário inválido</strong><span>Informe um salário positivo para avaliar a viabilidade.</span>';
+        return;
+      }
+
+      if (saldo >= salario * 0.15) {
+        statusDiv.className = 'status status-ok';
+        statusDiv.innerHTML = '<strong>Viável e saudável</strong><span>Você terá uma sobra confortável para emergências e lazer. Continue assim.</span>';
+      } else if (saldo >= 0) {
+        statusDiv.className = 'status status-warning';
+        statusDiv.innerHTML = '<strong>Viável, com atenção</strong><span>Cabe no orçamento, mas a sobra é pequena. Evite gastos extras e monte um fundo de emergência.</span>';
+      } else {
+        statusDiv.className = 'status status-danger';
+        statusDiv.innerHTML = '<strong>Não viável</strong><span>As despesas excedem a renda. Considere dividir o aluguel, reduzir custos ou aumentar a renda.</span>';
+      }
+    }
+
+    $('calcular').addEventListener('click', calcular);
+    $('reset').addEventListener('click', () => {
+      $('salario').value = 1518;
+      $('preset').value = 'media';
+      const p = presets.media;
+      $('aluguel').value = p.aluguel;
+      $('cond').value = p.cond;
+      $('contas').value = p.contas;
+      $('tel').value = p.tel;
+      $('comida').value = p.comida;
+      $('transp').value = p.transp;
+      $('limpeza').value = p.limpeza;
+      $('outros').value = p.outros;
+      calcular();
+    });
+
+    // --- Checklist ---
+    document.querySelectorAll('.checklist li').forEach(item => {
+      const id = item.dataset.id;
+      if (checklistStorage[id]) {
+        item.classList.add('checked');
+        item.setAttribute('aria-pressed', 'true');
+      } else {
+        item.setAttribute('aria-pressed', 'false');
+      }
+
+      function toggle() {
+        item.classList.toggle('checked');
+        const checked = item.classList.contains('checked');
+        checklistStorage[id] = checked;
+        localStorage.setItem(LS_CHECKLIST, JSON.stringify(checklistStorage));
+        item.setAttribute('aria-pressed', checked ? 'true' : 'false');
+      }
+
+      item.addEventListener('click', toggle);
+      item.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          toggle();
+        }
+      });
+    });
+
+    // --- Calendário ---
+    function renderCalendario() {
+      const ano = mesAtual.getFullYear();
+      const mes = mesAtual.getMonth();
+
+      $('mesAtual').textContent = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(mesAtual);
+
+      const grid = $('calendario-grid');
+      grid.innerHTML = '';
+
+      ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].forEach(dia => {
+        const header = document.createElement('div');
+        header.className = 'calendar-header';
+        header.textContent = dia;
+        grid.appendChild(header);
+      });
+
+      const primeiroDia = new Date(ano, mes, 1).getDay();
+      const ultimoDia = new Date(ano, mes + 1, 0).getDate();
+      const hoje = new Date();
+
+      for (let i = 0; i < primeiroDia; i++) {
+        const empty = document.createElement('div');
+        empty.className = 'calendar-day placeholder';
+        empty.setAttribute('aria-hidden', 'true');
+        grid.appendChild(empty);
+      }
+
+      for (let dia = 1; dia <= ultimoDia; dia++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'calendar-day';
+        dayDiv.textContent = dia;
+        dayDiv.setAttribute('tabindex', '0');
+        dayDiv.setAttribute('role', 'button');
+        dayDiv.dataset.dia = dia;
+        dayDiv.dataset.mes = mes;
+        dayDiv.dataset.ano = ano;
+        dayDiv.setAttribute('aria-label', `Dia ${dia} de ${new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(mesAtual)}`);
+
+        const dataAtual = new Date(ano, mes, dia);
+        if (dataAtual < hoje && dataAtual.toDateString() !== hoje.toDateString()) {
+          dayDiv.classList.add('past');
+        }
+
+        const despesasDoDia = despesasMensais.filter(d => Number(d.dia) === dia && Number(d.mes) === mes && Number(d.ano) === ano);
+        if (despesasDoDia.length > 0) {
+          dayDiv.classList.add('selected');
+          dayDiv.title = despesasDoDia.map(d => `${d.nome}: ${fmt(d.valor)}`).join('\n');
+        }
+
+        const onActivate = () => {
+          if (dayDiv.classList.contains('past')) return;
+          $('despesaDia').value = dia;
+          $('despesaNome').focus();
+        };
+        dayDiv.addEventListener('click', onActivate);
+        dayDiv.addEventListener('keydown', (ev) => {
+          if (ev.key === 'Enter' || ev.key === ' ') {
+            ev.preventDefault();
+            onActivate();
+          }
+        });
+
+        grid.appendChild(dayDiv);
+      }
+
+      renderListaDespesas();
+    }
+
+    function renderListaDespesas() {
+      const lista = $('listaDespesas');
+      const mes = mesAtual.getMonth();
+      const ano = mesAtual.getFullYear();
+      const despesasDoMes = despesasMensais.filter(d => Number(d.mes) === mes && Number(d.ano) === ano);
+
+      if (despesasDoMes.length === 0) {
+        lista.innerHTML = '<div style="color: var(--muted); text-align: center; padding: 24px; font-size: 14px;">Nenhuma despesa cadastrada neste mês.</div>';
+        return;
+      }
+
+      lista.innerHTML = despesasDoMes
+        .sort((a, b) => a.dia - b.dia)
+        .map((d) => `
+          <div class="expense-item">
+            <div>
+              <div class="expense-name">${escapeHtml(d.nome)}</div>
+              <div class="expense-meta">Dia ${d.dia} · ${fmt(d.valor)}</div>
+            </div>
+            <button class="btn-ghost" data-remove-day="${d.dia}" data-remove-mes="${d.mes}" data-remove-ano="${d.ano}" aria-label="Remover despesa do dia ${d.dia}">Remover</button>
+          </div>
+        `).join('');
+    }
+
+    // Segurança: escapar HTML simples para nomes de despesas
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text).replace(/[&<>"'`=\/]/g, function (s) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;',
+          '/': '&#x2F;',
+          '`': '&#x60;',
+          '=': '&#x3D;'
+        }[s];
+      });
+    }
+
+    // Remoção via delegação
+    $('listaDespesas').addEventListener('click', (ev) => {
+      const btn = ev.target.closest('button[data-remove-day]');
+      if (!btn) return;
+      const dia = Number(btn.dataset.removeDay);
+      const mes = Number(btn.dataset.removeMes);
+      const ano = Number(btn.dataset.removeAno);
+
+      if (!confirm(`Remover todas as despesas do dia ${dia}/${mes + 1}/${ano}?`)) return;
+
+      despesasMensais = despesasMensais.filter(d => !(Number(d.dia) === dia && Number(d.mes) === mes && Number(d.ano) === ano));
+      localStorage.setItem(LS_DESPESAS, JSON.stringify(despesasMensais));
+      renderCalendario();
+    });
+
+    // Adicionar despesa
+    $('adicionarDespesa').addEventListener('click', () => {
+      const nome = $('despesaNome').value.trim();
+      const valor = Number($('despesaValor').value);
+      const dia = Number($('despesaDia').value);
+
+      if (!nome || !(valor > 0) || dia < 1 || dia > 31) {
+        alert('Preencha todos os campos corretamente.');
+        return;
+      }
+
+      const item = { nome, valor: Number(valor), dia: Number(dia), mes: mesAtual.getMonth(), ano: mesAtual.getFullYear() };
+      despesasMensais.push(item);
+      localStorage.setItem(LS_DESPESAS, JSON.stringify(despesasMensais));
+
+      $('despesaNome').value = '';
+      $('despesaValor').value = '';
+      $('despesaDia').value = '';
+
+      renderCalendario();
+    });
+
+    // Navegação de meses
+    $('mesAnterior').addEventListener('click', () => {
+      mesAtual.setMonth(mesAtual.getMonth() - 1);
+      renderCalendario();
+    });
+
+    $('mesProximo').addEventListener('click', () => {
+      mesAtual.setMonth(mesAtual.getMonth() + 1);
+      renderCalendario();
+    });
+
+    // --- Formulário ---
+    if (dadosFormulario && Object.keys(dadosFormulario).length) {
+      $('nome').value = dadosFormulario.nome || '';
+      $('idade').value = dadosFormulario.idade || '';
+      $('profissao').value = dadosFormulario.profissao || '';
+      $('cidade').value = dadosFormulario.cidade || '';
+      $('dataMudanca').value = dadosFormulario.dataMudanca || '';
+      $('tipoMoradia').value = dadosFormulario.tipoMoradia || 'Kitnet / Studio';
+      $('observacoes').value = dadosFormulario.observacoes || '';
+    }
+
+    $('salvarDados').addEventListener('click', () => {
+      const dados = {
+        nome: $('nome').value,
+        idade: $('idade').value,
+        profissao: $('profissao').value,
+        cidade: $('cidade').value,
+        dataMudanca: $('dataMudanca').value,
+        tipoMoradia: $('tipoMoradia').value,
+        observacoes: $('observacoes').value
+      };
+
+      localStorage.setItem(LS_DADOS, JSON.stringify(dados));
+
+      const feedback = $('dadosSalvos');
+      feedback.style.display = 'block';
+      setTimeout(() => { feedback.style.display = 'none'; }, 3000);
+    });
+
+    // Inicialização
+    calcular();
+    renderCalendario();
+
+  })();
+  </script>
+</body>
+</html>
